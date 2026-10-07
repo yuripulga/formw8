@@ -1,0 +1,322 @@
+{
+  "common": {
+    "title": "FormW8",
+    "subtitle": "Seu assistente para preencher os formulários fiscais {bold}W-8BEN{/bold} e {bold}W-8BEN-E{/bold} da IRS de graça",
+    "switchLanguage": "Idioma",
+    "themeLight": "Claro",
+    "themeDark": "Escuro",
+    "next": "Próximo passo",
+    "back": "Voltar",
+    "backToHome": "← Voltar para a Home",
+    "learnMore": "Por que pedimos esta informação?",
+    "whyAskThis": "Por que pedimos seu nome?",
+    "sanitizedNotice": "Ajustado automaticamente para o padrão americano:",
+    "copyValue": "Copiar valor",
+    "copied": "Copiado!",
+    "copyAll": "Copiar resumo completo",
+    "allCopied": "Resumo copiado!",
+    "downloadPdf": "Baixar PDF Preenchido",
+    "generatingPdf": "Gerando PDF...",
+    "copyPasteGuide": "Ver Guia para Plataformas",
+    "restart": "Começar novamente",
+    "clearData": "Limpar meus dados do navegador",
+    "dataClearedNotice": "Seus dados foram removidos da memória do navegador.",
+    "close": "Fechar"
+  },
+  "cookies": {
+    "question": "Aceita o uso de cookies?",
+    "learnMore": "Saiba mais",
+    "accept": "Aceito"
+  },
+  "footer": {
+    "tagline": "Gerador simplificado de formulários fiscais {bold}W-8BEN{/bold} e {bold}W-8BEN-E{/bold} da IRS.",
+    "disclaimer": "Ferramenta gratuita sem vínculo com nenhuma instituição ou governo.",
+    "openSourceAppeal": "Projeto open-source feito para ajudar a todos. Se te ajudou, apoie com um Pix",
+    "copyright": "Todos os direitos reservados.",
+    "poweredBy": "Powered by",
+    "links": {
+      "designSystem": "Design System",
+      "irsOfficial": "IRS.gov",
+      "privacy": "Privacidade",
+      "supportPix": "Apoiar com Pix"
+    },
+    "keywords": [
+      "Trabalhe na Gringa",
+      "Salário da Gringa",
+      "Trabalhar para o Exterior",
+      "Trabalhe para os EUA",
+      "Receber em Dólar no Brasil",
+      "Contrato PJ Exterior",
+      "Deel W-8BEN",
+      "Rippling W-8BEN-E",
+      "Upwork 0% Withholding",
+      "Remote.com Formulário Fiscal",
+      "Google AdSense Impostos EUA",
+      "Apple Developer & Steam W-8",
+      "Foreign Source 0% Retenção",
+      "Exportação de Serviços TI & Design"
+    ],
+    "relatedSearches": [
+      { "text": "Trabalhar na gringa: como evitar os 30% de imposto", "faqId": "payment-withheld-30" },
+      { "text": "Salário da gringa: como receber em dólar sem desconto", "faqId": "what-is-w8" },
+      { "text": "Trabalhar para os EUA: Pessoa Física ou PJ?", "faqId": "diff-pf-pj" },
+      { "text": "Como preencher o formulário W-8 na Deel", "faqId": "what-is-w8" },
+      { "text": "O que preencher no Foreign TIN (CPF ou CNPJ)", "faqId": "foreign-tax-id" },
+      { "text": "Qual opção marcar no Chapter 3 e Chapter 4 PJ", "faqId": "chapter-3-4-pj" },
+      { "text": "Qual a validade do formulário W-8BEN", "faqId": "validity-period" },
+      { "text": "Como emitir W-8BEN-E para MEI e SLU", "faqId": "mei-slu-pj" },
+      { "text": "Brasil tem tratado de bitributação com EUA?", "faqId": "brazil-us-tax-treaty" },
+      { "text": "Como preencher impostos EUA no AdSense e YouTube", "faqId": "google-adsense-youtube" }
+    ]
+  },
+  "wizard": {
+    "badgeTitle": "Guia W-8",
+    "stepCounter": "Passo {{current}} de {{total}}",
+    "noDataSavedCallout": "Preenchimento\n100% gratuito",
+    "stepName": {
+      "question": "Olá, qual o seu {highlight}nome{/highlight}?",
+      "subtitle": "Evite a retenção de 30% nos seus pagamentos internacionais em menos de 1 minuto",
+      "subtitles": {
+        "variantA": "Evite a retenção de 30% nos seus pagamentos internacionais em menos de 1 minuto",
+        "variantB": "Preencha e baixe seu formulário oficial pronto para prestadores internacionais",
+        "variantC": "Preencha em minutos e baixe seu formulário oficial pronto, de graça"
+      },
+      "placeholder": "Nome, como consta no seu documento de identificação",
+      "explanation": ""
+    },
+    "stepEntityType": {
+      "question": "Como você recebe pagamentos do exterior?",
+      "subtitle": "",
+      "optionPF": "Pessoa Física (CPF)",
+      "descriptionPF": "Formulário W-8BEN para quem não tem empresa.",
+      "optionPJ": "Empresa no Brasil (CNPJ)",
+      "descriptionPJ": "Formulário W-8BEN-E para quem tem CNPJ (SLU, LTDA, MEI).",
+      "helpLink": "Não sei essa resposta",
+      "helpTitle": "Qual a diferença de impostos no Brasil?",
+      "helpPF": "• Pessoa Física (CPF): Paga Carnê-Leão no Brasil com imposto de até 27,5% sobre o valor recebido.",
+      "helpPJ": "• Empresa (CNPJ): Paga imposto no Brasil pelo Simples Nacional ou Lucro Presumido (geralmente 6% a 15%).",
+      "explanation": ""
+    },
+    "stepSummary": {
+      "thankYou": "Obrigado, {{name}}!",
+      "selectionPF": "Você escolheu Pessoa Física (Formulário W-8BEN).",
+      "selectionPJ": "Você escolheu Empresa (Formulário W-8BEN-E)."
+    },
+    "stepTaxAndAddress": {
+      "question": "Seus dados fiscais e endereço",
+      "subtitle": "",
+      "taxIdLabelPF": "Seu CPF",
+      "taxIdPlaceholderPF": "000.000.000-00",
+      "taxIdOrCompanyLabelPJ": "CNPJ ou Razão Social da empresa",
+      "taxIdOrCompanyPlaceholderPJ": "Digite o CNPJ ou o nome da empresa",
+      "taxIdLabelPJ": "CNPJ da empresa",
+      "taxIdPlaceholderPJ": "00.000.000/0001-00",
+      "companyNameLabel": "Razão Social",
+      "companyNamePlaceholder": "Nome registrado no CNPJ",
+      "addressStreetLabel": "Endereço (Rua e Número)",
+      "addressStreetPlaceholder": "Ex: Av. Paulista, 1000",
+      "addressCityLabel": "Cidade",
+      "addressCityPlaceholder": "Ex: São Paulo",
+      "addressStateLabel": "Estado (UF)",
+      "addressStatePlaceholder": "Ex: SP",
+      "addressZipLabel": "CEP",
+      "addressZipPlaceholder": "00000-000",
+      "cepSearching": "Buscando CEP...",
+      "cepFound": "Endereço preenchido!",
+      "cnpjSearching": "Buscando dados do CNPJ...",
+      "cnpjFound": "Dados da empresa preenchidos!",
+      "manualAddressToggle": "Preencher endereço manualmente",
+      "explanation": "O CPF ou CNPJ é inserido no campo Foreign Tax Identifying Number (FTIN)."
+    },
+    "stepConfirmation": {
+      "question": "Pronto! Seu formulário está gerado",
+      "subtitle": "Baixe o PDF preenchido ou consulte o mapa de campos abaixo.",
+      "pdfAction": "Baixar PDF Preenchido",
+      "pdfActionDesc": "Documento pronto para assinar e enviar.",
+      "previewTitle": "Visualização do PDF Preenchido",
+      "previewSubtitle": "Documento preenchido no padrão americano da IRS em tempo real.",
+      "openInNewTab": "Abrir PDF em nova aba",
+      "officialFormLabel": "Modelo do Formulário",
+      "formTypePF": "W-8BEN (Pessoa Física)",
+      "formTypePJ": "W-8BEN-E (Pessoa Jurídica)",
+      "mappingTitle": "Onde inserir cada informação",
+      "mappingSubtitle": "",
+      "tableLine": "Linha / Campo IRS",
+      "tableMeaning": "O que significa",
+      "tablePlatform": "Campo na Plataforma",
+      "tableValue": "Seu Dado Preenchido",
+      "line1Label": "{highlight}1.{/highlight} Legal Name",
+      "line1Meaning": "Nome civil ou Razão Social sem acentos",
+      "line1Platform": "Legal Name / Full Name",
+      "line2Label": "{highlight}2.{/highlight} Country of Citizenship / Incorporation",
+      "line2Meaning": "País de cidadania ou constituição da empresa",
+      "line2Platform": "Country of Tax Residence",
+      "line3Label": "{highlight}3.{/highlight} Permanent Residence Address",
+      "line3Meaning": "Endereço físico permanente no Brasil",
+      "line3Platform": "Permanent Address (Street, City, State, ZIP)",
+      "lineTaxIdLabelPF": "{highlight}6a.{/highlight} Foreign Tax Identifying Number (FTIN)",
+      "lineTaxIdMeaningPF": "Seu CPF brasileiro",
+      "lineTaxIdPlatformPF": "Foreign Tax ID / TIN",
+      "lineTaxIdLabelPJ": "{highlight}9b.{/highlight} Foreign Tax Identifying Number (FTIN)",
+      "lineTaxIdMeaningPJ": "O CNPJ da sua empresa brasileira",
+      "lineTaxIdPlatformPJ": "Foreign Tax ID / Company TIN",
+      "lineChapter3Label": "{highlight}4.{/highlight} Chapter 3 Classification (Entity Type)",
+      "lineChapter3Meaning": "Classificação da entidade jurídica",
+      "lineChapter3Platform": "Entity Type (Corporation)",
+      "lineChapter4Label": "{highlight}5.{/highlight} Chapter 4 FATCA Status",
+      "lineChapter4Meaning": "Status operacional FATCA",
+      "lineChapter4Platform": "FATCA Status (Active NFFE)",
+      "lineTreatyLabel": "{highlight}Part III.{/highlight} Claim of Tax Treaty Benefits",
+      "lineTreatyMeaning": "Isenção fiscal (0% Withholding)",
+      "lineTreatyPlatform": "Tax Treaty Benefits (N/A / None)",
+      "lineSignLabel": "{highlight}Part III / XXX.{/highlight} Certification & Signature",
+      "lineSignMeaning": "Assinatura do responsável e data no formato americano (MM-DD-YYYY)",
+      "lineSignPlatform": "Digital Signature & Date"
+    },
+    "validation": {
+      "nameRequired": "Digite seu nome completo para continuar.",
+      "taxIdRequired": "Preencha o CPF ou CNPJ.",
+      "taxIdInvalidPF": "CPF inválido. Verifique os números digitados.",
+      "taxIdInvalidPJ": "CNPJ inválido. Verifique os números digitados.",
+      "companyNameRequired": "Preencha a Razão Social da empresa.",
+      "addressRequired": "Preencha o endereço (rua e número).",
+      "cityRequired": "Preencha a cidade.",
+      "stateRequired": "Preencha o estado (UF).",
+      "stateInvalid": "Informe uma UF válida com 2 letras (ex: SP).",
+      "zipRequired": "Preencha o CEP.",
+      "zipInvalid": "CEP inválido. Deve conter 8 dígitos."
+    }
+  },
+  "faq": {
+    "badge": "Perguntas Frequentes & Guia Fiscal",
+    "title": "Tudo sobre os Formulários {highlight}W-8BEN{/highlight} e {highlight}W-8BEN-E{/highlight}",
+    "subtitle": "Tire suas dúvidas sobre conformidade fiscal internacional, IRS, retenção de impostos e plataformas de pagamento.",
+    "items": [
+      {
+        "id": "what-is-w8",
+        "question": "O que é o formulário W-8 (W-8BEN e W-8BEN-E) e para que serve?",
+        "answer": "O formulário W-8 é um documento exigido pela Receita Federal dos Estados Unidos (IRS) para pessoas físicas e jurídicas estrangeiras que prestam serviços ou recebem pagamentos de fontes americanas. Ele certifica formalmente que você é um não residente fiscal nos EUA, evitando a retenção na fonte (withholding tax) de até 30% sobre os seus pagamentos."
+      },
+      {
+        "id": "independent-disclaimer",
+        "question": "O FormW8 tem vínculo com o governo dos EUA, Receita Federal ou plataformas?",
+        "answer": "Não. O FormW8 é um projeto independente e 100% gratuito criado para ajudar pessoas que têm dificuldades em preencher esses formulários fiscais. Não temos nenhum vínculo governamental com o IRS, Receita Federal ou plataformas externas (como Deel, Rippling, Upwork ou Remote). O usuário é o único responsável pela veracidade e exatidão dos dados preenchidos."
+      },
+      {
+        "id": "official-irs-links",
+        "question": "Onde encontro os modelos e instruções oficiais da IRS (Receita Federal dos EUA)?",
+        "answer": "Os formulários e manuais de instruções oficiais são disponibilizados gratuitamente diretamente no site oficial da IRS: [Form W-8BEN (Pessoa Física)](https://www.irs.gov/forms-pubs/about-form-w-8-ben), [Instruções do W-8BEN](https://www.irs.gov/instructions/iw8ben), [Form W-8BEN-E (Pessoa Jurídica)](https://www.irs.gov/forms-pubs/about-form-w-8-ben-e) e [Instruções do W-8BEN-E](https://www.irs.gov/instructions/iw8bene)."
+      },
+      {
+        "id": "diff-pf-pj",
+        "question": "Qual a diferença entre o formulário W-8BEN e o W-8BEN-E?",
+        "answer": "O W-8BEN é para Pessoa Física (quem recebe pelo CPF) — confira o [Guia W-8BEN Pessoa Física](/w8ben-pessoa-fisica). O W-8BEN-E é para Pessoa Jurídica (empresas brasileiras que recebem pelo CNPJ) — confira o [Guia W-8BEN-E Pessoa Jurídica](/w8bene-pessoa-juridica)."
+      },
+      {
+        "id": "platforms-requirement",
+        "question": "Por que plataformas como Deel, Rippling, Remote, Upwork e Husky pedem o W-8?",
+        "answer": "Empresas e plataformas sediadas nos EUA são obrigadas pela legislação fiscal americana (Internal Revenue Code) a recolher e manter em arquivo o formulário W-8 de todos os seus fornecedores estrangeiros antes de processar qualquer pagamento. Sem o W-8, a plataforma é legalmente compelida a reter 30% do valor bruto do pagamento. Veja o passo a passo para as principais plataformas: [Deel](/plataformas/deel), [Rippling](/plataformas/rippling), [Upwork](/plataformas/upwork) e [Remote](/plataformas/remote)."
+      },
+      {
+        "id": "foreign-tax-id",
+        "question": "O que devo preencher no campo Foreign Tax Identifying Number (FTIN)?",
+        "answer": "No Brasil, o Foreign TIN é o seu documento fiscal nacional: o seu CPF (para Pessoa Física no W-8BEN) ou o CNPJ da sua empresa (para Pessoa Jurídica no W-8BEN-E). Não é necessário solicitar um número de identificação fiscal americano (ITIN ou EIN) para a prestação de serviços remotos."
+      },
+      {
+        "id": "chapter-3-4-pj",
+        "question": "Como preencher Chapter 3 e Chapter 4 no W-8BEN-E para empresas brasileiras (SLU/LTDA)?",
+        "answer": "Para empresas prestadoras de serviços (como desenvolvimento de software, design, consultoria, tradução e marketing), a classificação padrão da IRS é 'Corporation' na Linha 4 (Chapter 3) e 'Active NFFE' (Non-Financial Foreign Entity ativa) na Linha 5 (Chapter 4 FATCA), pois a maior parte da receita bruta provém de serviços operacionais ativos. Confira o passo a passo completo no [Guia W-8BEN-E PJ](/w8bene-pessoa-juridica)."
+      },
+      {
+        "id": "address-rules",
+        "question": "O que colocar no endereço de residência permanente no formulário W-8?",
+        "answer": "Informe o endereço completo onde você reside (Pessoa Física) ou a sede da sua empresa no Brasil (Pessoa Jurídica). A IRS não aceita Caixa Postal (P.O. Box) nem endereços de terceiros ou 'in-care-of'. O FormW8 higieniza automaticamente todos os acentos para o padrão ASCII internacional para evitar rejeições cadastrais."
+      },
+      {
+        "id": "tax-treaty-withholding",
+        "question": "O Brasil tem tratado de bitributação com os EUA? Como funciona a retenção?",
+        "answer": "O Brasil não possui um tratado abrangente de bitributação para serviços com os EUA. No entanto, serviços executados remotamente a partir do território brasileiro são classificados como 'Foreign Source Income' (renda de fonte estrangeira), qualificando-se para 0% de retenção na fonte (withholding tax) perante a legislação tributária americana."
+      },
+      {
+        "id": "validity-period",
+        "question": "Qual é a validade do formulário W-8?",
+        "answer": "O formulário W-8 é válido a partir do ano em que for assinado até o dia 31 de dezembro do terceiro ano civil subsequente (aproximadamente 3 anos completos). Caso ocorra qualquer alteração nos seus dados fiscais (mudança de nome/razão social, endereço, tipo de empresa ou residência), um novo formulário deverá ser gerado."
+      },
+      {
+        "id": "signature-method",
+        "question": "Como assinar e enviar o formulário W-8 preenchido?",
+        "answer": "Você pode assinar o PDF gerado digitalmente através de plataformas como Adobe Acrobat, DocuSign, Apple Preview ou na própria plataforma de contratação (como [Deel](/plataformas/deel), [Rippling](/plataformas/rippling) ou [Remote](/plataformas/remote)), ou imprimir, assinar de próprio punho e escanear. A data deve ser indicada no padrão americano (MM-DD-YYYY)."
+      },
+      {
+        "id": "ascii-sanitization",
+        "question": "Por que nomes e endereços no W-8 não podem ter acentos (á, ç, õ)?",
+        "answer": "Os sistemas do IRS e os bancos de dados americanos processam informações fiscais na codificação ASCII básica (sem acentuações ou caracteres especiais). O FormW8 realiza a conversão e higienização automática em tempo real para assegurar 100% de aceitação sem rejeições ou corrupção de caracteres."
+      },
+      {
+        "id": "privacy-security",
+        "question": "O FormW8 armazena meus dados pessoais ou fiscais?",
+        "answer": "Não. O FormW8 é uma ferramenta com arquitetura 100% client-side (executada no seu navegador) e política Zero-Data. Nenhuma informação pessoal, CPF, CNPJ ou endereço é transmitida para servidores nem salva em bancos de dados. Todos os dados permanecem estritamente na memória temporária do seu navegador."
+      },
+      {
+        "id": "payment-withheld-30",
+        "question": "Por que meu pagamento na Deel, Rippling ou Upwork foi retido em 30%?",
+        "answer": "A legislação fiscal dos Estados Unidos (Internal Revenue Code Capítulo 3) obriga qualquer pagador americano a aplicar uma retenção automática na fonte (withholding tax) de 30% caso o contratado internacional não apresente um formulário W-8BEN ou W-8BEN-E válido. Assim que o formulário correto é enviado e aprovado no sistema da plataforma, a retenção é cancelada (0% de withholding) para serviços executados a partir do Brasil. Veja nossos guias para [Deel](/plataformas/deel), [Rippling](/plataformas/rippling), [Upwork](/plataformas/upwork) e [Remote](/plataformas/remote)."
+      },
+      {
+        "id": "google-adsense-youtube",
+        "question": "Como preencher o formulário fiscal dos EUA no Google AdSense e YouTube?",
+        "answer": "No painel do Google AdSense / YouTube Studio, acesse Pagamentos > Gerenciar configurações fiscais dos EUA. Selecione o tipo de conta (Individual para W-8BEN com CPF, ou Entidade Jurídica para W-8BEN-E com CNPJ). Indique 'Não' para residência nos EUA, informe o seu Foreign TIN (CPF ou CNPJ) e marque 0% de retenção para serviços de publicidade e produção de conteúdo executados fora do território americano. Veja o passo a passo completo no [Guia Google AdSense & YouTube](/plataformas/google-adsense)."
+      },
+      {
+        "id": "apple-developer-stripe",
+        "question": "Como preencher W-8BEN ou W-8BEN-E no Apple Developer e Stripe?",
+        "answer": "No App Store Connect (Acordos, Impostos e Bancos) e no Stripe Express, o formulário tributário americano é obrigatório antes da liberação de repasses. Para desenvolvedores individuais, preencha o W-8BEN com o CPF; para empresas com CNPJ, utilize o W-8BEN-E marcando 'Corporation' (Chapter 3) e 'Active NFFE' (Chapter 4 FATCA) com seu endereço cadastral idêntico ao do cadastro fiscal. Consulte o [Guia Apple Developer](/plataformas/apple-developer), o [Guia GitHub Sponsors](/plataformas/github-sponsors) e o [Guia Stripe & Paddle](/plataformas/stripe)."
+      },
+      {
+        "id": "game-dev-steam-epic",
+        "question": "Como criadores de jogos preenchem o W-8 na Steam Direct e Epic Games Store?",
+        "answer": "Ao registrar um jogo na Valve (Steamworks) ou na Epic Games Store, você será direcionado ao questionário fiscal da IRS. Preencha o formulário W-8BEN (se desenvolvedor individual via CPF) ou W-8BEN-E (se estúdio/empresa com CNPJ). O Foreign TIN é o seu CPF ou CNPJ brasileiro, garantindo a qualificação imediata para recebimento dos royalties e vendas globais. Acesse o [Guia Steam Direct para Desenvolvedores](/plataformas/steam)."
+      },
+      {
+        "id": "mei-slu-pj",
+        "question": "Sou MEI ou SLU no Brasil: posso preencher o formulário W-8BEN-E?",
+        "answer": "Sim. Tanto o MEI (Microempreendedor Individual) quanto a SLU (Sociedade Limitada Unipessoal) e a LTDA possuem CNPJ próprio e são formalmente elegíveis para o formulário W-8BEN-E. No campo Chapter 3 Status, classifique como 'Corporation' e no Chapter 4 FATCA marque 'Active NFFE'. Entenda todos os detalhes no [Guia W-8BEN-E para Pessoa Jurídica](/w8bene-pessoa-juridica)."
+      },
+      {
+        "id": "rejection-troubleshooting",
+        "question": "O que fazer se o meu formulário W-8 for rejeitado pela plataforma?",
+        "answer": "As 3 causas mais comuns de rejeição são: (1) Presença de acentos ou caracteres especiais no nome ou endereço (resolvido automaticamente pelo conversor ASCII do FormW8); (2) Data de assinatura no formato brasileiro DD/MM/AAAA em vez do padrão americano MM-DD-YYYY; (3) Inconsistência entre o nome do titular da conta bancária e a Razão Social/Nome informado na Linha 1. Revise esses três pontos, gere um novo PDF no FormW8 e faça o reenvio."
+      }
+    ]
+  },
+  "designSystem": {
+    "title": "Design System & Guia de Estilos",
+    "subtitle": "Catálogo de cores, tipografia, temas e componentes interativos do FormW8",
+    "colorsTitle": "Paleta de Cores e Temas",
+    "typographyTitle": "Tipografia",
+    "componentsTitle": "Componentes Interativos",
+    "buttonsTitle": "Botões Principais e Secundários",
+    "badgesTitle": "Alertas e Notificações",
+    "optionCardsTitle": "Cartões Selecionáveis (OptionCards)",
+    "drawersTitle": "Gaveta Didática de Contexto",
+    "sanitizerTitle": "Sanitizador ASCII em Tempo Real",
+    "sanitizerDescription": "Digite um endereço ou nome com acentos em português para visualizar a conversão instantânea para o padrão aceito no W-8 americano:",
+    "sanitizerInputLabel": "Entrada com Acentuação (Input):",
+    "sanitizerOutputLabel": "Resultado Sanitizado (ASCII Clean):",
+    "appBackgroundLabel": "Superfície do App (App Surface)",
+    "cardSurfaceLabel": "Superfície de Card (Card Surface)",
+    "primaryAccentLabel": "Cor Primária (Primary Accent)",
+    "alertTintLabel": "Alerta de Sanitização (Alert Tint)"
+  },
+  "supportModal": {
+    "title": "Apoie o Projeto FormW8",
+    "badge": "Projeto Independente & Gratuito",
+    "description": "O FormW8 foi desenvolvido para ajudar qualquer pessoa a desatar a burocracia fiscal internacional sem pagar nada e sem intermediários.",
+    "appeal": "Se esta ferramenta te ajudou a economizar tempo ou evitou que você tivesse 30% retidos nos EUA, qualquer contribuição via Pix para manter a infraestrutura no ar é muito bem-vinda!",
+    "pixKeyLabel": "Chave Pix (Chave Aleatória)",
+    "copyPixKey": "Copiar Chave Pix",
+    "pixCopied": "Chave Pix Copiada!",
+    "closeButton": "Continuar"
+  }
+}
+

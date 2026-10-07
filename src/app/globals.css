@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-primary: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --bg-app: #f9fafb;
+    --bg-card: #ffffff;
+    --bg-input: #ffffff;
+    --bg-drawer: #f1f5f9;
+    --border-color: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --border-focus: #15803d;
+    --text-heading: #1e293b; /* Preto suave / carvão com leve saturação azulada (Slate-800) */
+    --text-body: #475569;    /* Texto de leitura balanceado e suave (Slate-600) */
+    --text-muted: #64748b;   /* Legendas e secundários (Slate-500) */
+    --primary-bg: #15803d;   /* Verde esmeralda escuro elegante */
+    --primary-hover: #166534;/* Verde escuro profundo */
+    --primary-active: #14532d;
+    --primary-text: #ffffff; /* Branco puro de alto contraste */
+    --brand-highlight: #FFE600; /* Cor primária do marcador de texto (amarelo padrão, dinâmico) */
+    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+    --shadow-btn: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-glow: none;
+  }
+
+  .dark {
+    --bg-app: #09090b;
+    --bg-card: #121215;
+    --bg-input: #18181b;
+    --bg-drawer: #1e222a;
+    --border-color: #27272a;
+    --border-hover: #3f3f46;
+    --border-focus: #16a34a;
+    --text-heading: #f1f5f9; /* Branco suave ligeiramente azulado (Slate-100) */
+    --text-body: #cbd5e1;    /* Texto de leitura claro no escuro (Slate-300) */
+    --text-muted: #94a3b8;   /* Legendas no escuro (Slate-400) */
+    --primary-bg: #16a34a;   /* Verde esmeralda sólido no tema escuro */
+    --primary-hover: #15803d;
+    --primary-active: #166534;
+    --primary-text: #ffffff; /* Branco puro de alto contraste */
+    --brand-highlight: #FFE600;
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --shadow-btn: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-glow: none;
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-body);
+    font-family: var(--font-primary, 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+    min-height: 100vh;
+  }
+
+  /* Smooth Theme Transition across all semantic surfaces and text */
+  html,
+  body,
+  .bg-app-surface,
+  .bg-card-surface,
+  .bg-input-surface,
+  .bg-drawer-surface,
+  .border-theme,
+  .text-heading-theme,
+  .text-body-theme,
+  .text-muted-theme,
+  header,
+  footer,
+  main,
+  button,
+  input {
+    transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 350ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 350ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+
+@layer components {
+  /* Global Unified App Container */
+  .app-container {
+    width: 100%;
+    max-width: 56rem; /* max-w-4xl (896px) - Expanded unified standard width */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+
+  @media (min-width: 640px) {
+    .app-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .app-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Semantic Design System Component Classes */
+  .bg-app-surface { background-color: var(--bg-app); }
+  .bg-card-surface { background-color: var(--bg-card); }
+  .bg-input-surface { background-color: var(--bg-input); }
+  .bg-drawer-surface { background-color: var(--bg-drawer); }
+  .border-theme { border-color: var(--border-color); }
+  .text-heading-theme { color: var(--text-heading); }
+  .text-body-theme { color: var(--text-body); }
+  .text-muted-theme { color: var(--text-muted); }
+
+  /* Button Primitives */
+  .btn-brand-primary {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    box-shadow: var(--shadow-btn);
+  }
+  .btn-brand-primary:hover {
+    background-color: var(--primary-hover);
+  }
+
+  .btn-brand-secondary {
+    background-color: var(--bg-drawer);
+    color: var(--text-heading);
+    border: 1px solid var(--border-color);
+  }
+  .btn-brand-secondary:hover {
+    background-color: var(--bg-input);
+    border-color: var(--border-hover);
+  }
+
+  .btn-brand-ghost {
+    background-color: transparent;
+    color: var(--text-muted);
+  }
+  .btn-brand-ghost:hover {
+    background-color: var(--bg-drawer);
+    color: var(--text-heading);
+  }
+
+  .btn-brand-outline {
+    background-color: var(--bg-card);
+    color: var(--text-heading);
+    border: 1px solid var(--border-color);
+  }
+  .btn-brand-outline:hover {
+    background-color: var(--bg-drawer);
+    border-color: var(--border-hover);
+  }
+
+  /* Card Primitive */
+  .card-brand {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Input Primitive */
+  .input-brand {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    color: var(--text-heading);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  .input-brand:focus {
+    outline: none;
+    border-color: var(--brand-highlight, #FFE600);
+    box-shadow: 0 0 0 1px var(--brand-highlight, #FFE600), 0 0 8px rgba(255, 230, 0, 0.25);
+  }
+  .dark .input-brand:focus {
+    border-color: var(--brand-highlight, #FFE600);
+    box-shadow: 0 0 0 1px var(--brand-highlight, #FFE600), 0 0 10px rgba(255, 230, 0, 0.22);
+  }
+
+
+  /* OptionCard Primitive */
+  .option-card-brand {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    color: var(--text-heading);
+  }
+  .option-card-brand:hover {
+    background-color: var(--bg-drawer);
+    border-color: var(--border-hover);
+  }
+  .option-card-brand-selected {
+    background-color: var(--bg-drawer);
+    border: 1px solid var(--border-focus);
+    border-radius: 1rem;
+    color: var(--text-heading);
+    box-shadow: 0 0 0 1px var(--border-focus);
+  }
+
+  /* Drawer Primitive */
+  .drawer-brand {
+    background-color: var(--bg-drawer);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+  }
+
+  /* SEO Keyword Slider Marquee */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee-slow {
+    display: flex;
+    width: max-content;
+    animation: marquee 110s linear infinite;
+  }
+
+  .animate-marquee-slow:hover {
+    animation-play-state: paused;
+  }
+
+  /* Step Slide & Fade Animations */
+  @keyframes slideInFromRight {
+    0% {
+      opacity: 0;
+      transform: translateX(28px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-28px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-step-next {
+    animation: slideInFromRight 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-step-prev {
+    animation: slideInFromLeft 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fadeIn {
+    animation: slideInFromRight 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Handwritten System Font */
+  .font-handwritten {
+    font-family: 'Chalkboard SE', 'Bradley Hand', 'Segoe Print', 'Comic Sans MS', 'Marker Felt', cursive, sans-serif;
+  }
+
+  /* Authentic 2D Bouncing Screensaver Physics (Zero Libs, GPU Composited) */
+  @keyframes screensaverBounceX {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(100vw - 100%));
+    }
+  }
+
+  @keyframes screensaverBounceY {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(calc(100vh - 100%));
+    }
+  }
+
+  .animate-screensaver-x {
+    animation: screensaverBounceX 24s linear infinite alternate;
+    will-change: transform;
+  }
+
+  .animate-screensaver-y {
+    animation: screensaverBounceY 17s linear infinite alternate;
+    will-change: transform;
+  }
+}

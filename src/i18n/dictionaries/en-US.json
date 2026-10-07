@@ -1,0 +1,320 @@
+{
+  "common": {
+    "title": "FormW8",
+    "subtitle": "Your assistant to fill out IRS Form {bold}W-8BEN{/bold} and {bold}W-8BEN-E{/bold} for free",
+    "switchLanguage": "Language",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "next": "Next step",
+    "back": "Back",
+    "backToHome": "← Back to Home",
+    "learnMore": "Why do we ask for this information?",
+    "whyAskThis": "Why do we need your name?",
+    "sanitizedNotice": "Automatically formatted for US compliance standard:",
+    "copyValue": "Copy value",
+    "copied": "Copied!",
+    "copyAll": "Copy full summary",
+    "allCopied": "Summary copied!",
+    "downloadPdf": "Download Filled PDF",
+    "generatingPdf": "Generating PDF...",
+    "copyPasteGuide": "View Platform Guide",
+    "restart": "Start over",
+    "clearData": "Clear my data from browser",
+    "dataClearedNotice": "Your data has been removed from browser memory.",
+    "close": "Close"
+  },
+  "cookies": {
+    "question": "Accept the use of cookies?",
+    "learnMore": "Learn more",
+    "accept": "Accept"
+  },
+  "footer": {
+    "tagline": "Simplified generator for IRS Form {bold}W-8BEN{/bold} and {bold}W-8BEN-E{/bold}.",
+    "disclaimer": "Free tool with no affiliation to any institution or government.",
+    "openSourceAppeal": "Open-source project built to help everyone. If this helped you, support with Pix",
+    "copyright": "All rights reserved.",
+    "poweredBy": "Powered by",
+    "links": {
+      "designSystem": "Design System",
+      "irsOfficial": "IRS.gov",
+      "privacy": "Privacy",
+      "supportPix": "Support via Pix"
+    },
+    "keywords": [
+      "Remote Work for US Companies",
+      "US Contractor Tax Form",
+      "Work Abroad US Clients",
+      "Avoid 30% Withholding Tax",
+      "Deel W-8BEN",
+      "Rippling W-8BEN-E",
+      "Upwork 0% Withholding",
+      "Remote.com Tax Compliance",
+      "Google AdSense US Tax Info",
+      "Apple Developer & Steam W-8",
+      "Foreign Source 0% Withholding",
+      "Brazilian Entity W-8BEN-E"
+    ],
+    "relatedSearches": [
+      { "text": "How to avoid 30% tax withholding on US platforms", "faqId": "payment-withheld-30" },
+      { "text": "US remote salary: how to receive without deductions", "faqId": "what-is-w8" },
+      { "text": "Work for US clients: Individual (CPF) vs Entity (CNPJ)", "faqId": "diff-pf-pj" },
+      { "text": "How to fill out Form W-8 on Deel & Rippling", "faqId": "what-is-w8" },
+      { "text": "What to enter for Foreign TIN (CPF / CNPJ)", "faqId": "foreign-tax-id" },
+      { "text": "Chapter 3 Status for Brazilian Entities (Corporation)", "faqId": "chapter-3-4-pj" },
+      { "text": "How long is Form W-8BEN valid", "faqId": "validity-period" },
+      { "text": "How to issue W-8BEN-E for Brazilian entities", "faqId": "mei-slu-pj" },
+      { "text": "Does Brazil have a tax treaty with the US?", "faqId": "brazil-us-tax-treaty" },
+      { "text": "How to submit US tax info in AdSense & YouTube", "faqId": "google-adsense-youtube" }
+    ]
+  },
+  "wizard": {
+    "badgeTitle": "W-8 Guide",
+    "stepCounter": "Step {{current}} of {{total}}",
+    "noDataSavedCallout": "100% Free\nand fast",
+    "stepName": {
+      "question": "Hello, what is your {highlight}name{/highlight}?",
+      "subtitle": "Avoid 30% tax withholding on your international payments in under 1 minute",
+      "subtitles": {
+        "variantA": "Avoid 30% tax withholding on your international payments in under 1 minute",
+        "variantB": "Fill and download your official tax form ready for international contractors",
+        "variantC": "Fill in minutes and download your official tax form ready, for free"
+      },
+      "placeholder": "Name, as shown on your official ID document",
+      "explanation": ""
+    },
+    "stepEntityType": {
+      "question": "How do you receive international payments?",
+      "subtitle": "",
+      "optionPF": "Individual (CPF)",
+      "descriptionPF": "Form W-8BEN for individuals without a company.",
+      "optionPJ": "Company in Brazil (CNPJ)",
+      "descriptionPJ": "Form W-8BEN-E for companies (SLU, LTDA, MEI).",
+      "helpLink": "I don't know this answer",
+      "helpTitle": "What is the tax difference in Brazil?",
+      "helpPF": "• Individual (CPF): Taxes via Carnê-Leão in Brazil at progressive rates up to 27.5%.",
+      "helpPJ": "• Company (CNPJ): Taxes via Simples Nacional or Lucro Presumido in Brazil (typically 6% to 15%).",
+      "explanation": ""
+    },
+    "stepSummary": {
+      "thankYou": "Thank you, {{name}}!",
+      "selectionPF": "You selected Individual (Form W-8BEN).",
+      "selectionPJ": "You selected Company (Form W-8BEN-E)."
+    },
+    "stepTaxAndAddress": {
+      "question": "Tax details and address",
+      "subtitle": "",
+      "taxIdLabelPF": "Your CPF",
+      "taxIdPlaceholderPF": "000.000.000-00",
+      "taxIdOrCompanyLabelPJ": "Company CNPJ or Legal Name",
+      "taxIdOrCompanyPlaceholderPJ": "Enter company CNPJ or registered name",
+      "taxIdLabelPJ": "Company CNPJ",
+      "taxIdPlaceholderPJ": "00.000.000/0001-00",
+      "companyNameLabel": "Company Legal Name",
+      "companyNamePlaceholder": "Registered legal entity name",
+      "addressStreetLabel": "Street Address (Street & Number)",
+      "addressStreetPlaceholder": "e.g. Av. Paulista, 1000",
+      "addressCityLabel": "City",
+      "addressCityPlaceholder": "e.g. Sao Paulo",
+      "addressStateLabel": "State",
+      "addressStatePlaceholder": "e.g. SP",
+      "addressZipLabel": "Postal Code (CEP)",
+      "addressZipPlaceholder": "00000-000",
+      "cepSearching": "Searching ZIP...",
+      "cepFound": "Address auto-filled!",
+      "cnpjSearching": "Fetching CNPJ data...",
+      "cnpjFound": "Company data autofilled!",
+      "manualAddressToggle": "Enter address manually",
+      "explanation": "Your CPF or CNPJ is entered in the Foreign Tax Identifying Number (FTIN) field."
+    },
+    "stepConfirmation": {
+      "question": "All done! Your form is ready",
+      "subtitle": "Download the filled PDF or check the field mapping below.",
+      "pdfAction": "Download Filled PDF",
+      "pdfActionDesc": "Document ready to sign and submit.",
+      "previewTitle": "Pre-Filled PDF Preview",
+      "previewSubtitle": "Document filled to US compliance standard in real time.",
+      "openInNewTab": "Open PDF in new tab",
+      "officialFormLabel": "Form Model",
+      "formTypePF": "W-8BEN (Individual)",
+      "formTypePJ": "W-8BEN-E (Entity)",
+      "mappingTitle": "Where to enter each information",
+      "mappingSubtitle": "",
+      "tableLine": "Line / IRS Field",
+      "tableMeaning": "What it Means",
+      "tablePlatform": "Platform Field",
+      "tableValue": "Your Filled Value",
+      "line1Label": "{highlight}1.{/highlight} Legal Name",
+      "line1Meaning": "Full individual name or registered entity name without accents",
+      "line1Platform": "Legal Name / Full Name",
+      "line2Label": "{highlight}2.{/highlight} Country of Citizenship / Incorporation",
+      "line2Meaning": "Country of citizenship or company jurisdiction",
+      "line2Platform": "Country of Tax Residence",
+      "line3Label": "{highlight}3.{/highlight} Permanent Residence Address",
+      "line3Meaning": "Permanent physical address in Brazil",
+      "line3Platform": "Permanent Address (Street, City, State, ZIP)",
+      "lineTaxIdLabelPF": "{highlight}6a.{/highlight} Foreign Tax Identifying Number (FTIN)",
+      "lineTaxIdMeaningPF": "Your Brazilian CPF number",
+      "lineTaxIdPlatformPF": "Foreign Tax ID / TIN",
+      "lineTaxIdLabelPJ": "{highlight}9b.{/highlight} Foreign Tax Identifying Number (FTIN)",
+      "lineTaxIdMeaningPJ": "Your Brazilian company CNPJ number",
+      "lineTaxIdPlatformPJ": "Foreign Tax ID / Company TIN",
+      "lineChapter3Label": "{highlight}4.{/highlight} Chapter 3 Classification (Entity Type)",
+      "lineChapter3Meaning": "Legal entity classification",
+      "lineChapter3Platform": "Entity Type (Corporation)",
+      "lineChapter4Label": "{highlight}5.{/highlight} Chapter 4 FATCA Status",
+      "lineChapter4Meaning": "FATCA operational status",
+      "lineChapter4Platform": "FATCA Status (Active NFFE)",
+      "lineTreatyLabel": "{highlight}Part III.{/highlight} Claim of Tax Treaty Benefits",
+      "lineTreatyMeaning": "Tax treaty exemption (0% Withholding)",
+      "lineTreatyPlatform": "Tax Treaty Benefits (N/A / None)",
+      "lineSignLabel": "{highlight}Part III / XXX.{/highlight} Certification & Signature",
+      "lineSignMeaning": "Authorized signature and date in US format (MM-DD-YYYY)",
+      "lineSignPlatform": "Digital Signature & Date"
+    },
+    "validation": {
+      "nameRequired": "Enter your full name to continue.",
+      "taxIdRequired": "Enter your CPF or CNPJ.",
+      "taxIdInvalidPF": "Invalid CPF. Please verify the digits entered.",
+      "taxIdInvalidPJ": "Invalid CNPJ. Please verify the digits entered.",
+      "companyNameRequired": "Enter your company legal name.",
+      "addressRequired": "Enter your street address (street and number).",
+      "cityRequired": "Enter your city.",
+      "stateRequired": "Enter your state.",
+      "stateInvalid": "Enter a valid 2-letter state code (e.g. SP).",
+      "zipRequired": "Enter your postal code (CEP).",
+      "zipInvalid": "Invalid ZIP code. Must contain 8 digits."
+    }
+  },
+  "faq": {
+    "badge": "Frequently Asked Questions & Tax Guide",
+    "title": "Everything About Form {highlight}W-8BEN{/highlight} & {highlight}W-8BEN-E{/highlight}",
+    "subtitle": "Get clear answers regarding international tax compliance, IRS requirements, withholding tax, and contractor platforms.",
+    "items": [
+      {
+        "id": "what-is-w8",
+        "question": "What is Form W-8 (W-8BEN & W-8BEN-E) and what is its purpose?",
+        "answer": "Form W-8 is a document required by the US Internal Revenue Service (IRS) for foreign individuals and business entities receiving income from US sources. It formally certifies non-US tax residency status, preventing default withholding tax of up to 30% from being withheld at the source on your compensation."
+      },
+      {
+        "id": "independent-disclaimer",
+        "question": "Is FormW8 affiliated with the US government, IRS, or contractor platforms?",
+        "answer": "No. FormW8 is an independent and 100% free community project created to help users navigate complex US tax forms. We have no affiliation with the IRS, tax authorities, or platforms (such as Deel, Rippling, Upwork, or Remote). Users are solely responsible for the accuracy and completeness of their submissions."
+      },
+      {
+        "id": "official-irs-links",
+        "question": "Where can I find the official IRS forms and instructions?",
+        "answer": "Official forms and detailed instructions are published directly on the official IRS.gov portal: [Form W-8BEN (Individuals)](https://www.irs.gov/forms-pubs/about-form-w-8-ben), [Instructions for Form W-8BEN](https://www.irs.gov/instructions/iw8ben), [Form W-8BEN-E (Entities)](https://www.irs.gov/forms-pubs/about-form-w-8-ben-e), and [Instructions for Form W-8BEN-E](https://www.irs.gov/instructions/iw8bene)."
+      },
+      {
+        "id": "diff-pf-pj",
+        "question": "What is the difference between Form W-8BEN and Form W-8BEN-E?",
+        "answer": "Form W-8BEN is intended for Individuals (freelancers contracting via individual tax ID) — check our [W-8BEN Guide for Individuals](/w8ben-pessoa-fisica). Form W-8BEN-E is exclusively for Legal Entities (corporations, LLCs, and incorporated businesses) — check our [W-8BEN-E Guide for Entities](/w8bene-pessoa-juridica)."
+      },
+      {
+        "id": "platforms-requirement",
+        "question": "Why do platforms like Deel, Rippling, Remote, Upwork, and Husky require Form W-8?",
+        "answer": "US-based companies and contractor platforms are mandated by US federal tax law (Internal Revenue Code) to collect and maintain certified W-8 forms for all non-US contractors prior to disbursing funds. Without a valid W-8 on file, platforms are legally required to withhold 30% of your gross earnings. See our platform guides: [Deel](/plataformas/deel), [Rippling](/plataformas/rippling), [Upwork](/plataformas/upwork), and [Remote](/plataformas/remote)."
+      },
+      {
+        "id": "foreign-tax-id",
+        "question": "What should I enter for Foreign Tax Identifying Number (FTIN)?",
+        "answer": "For Brazilian contractors, your Foreign TIN is your national tax identification number: your CPF (for individuals on W-8BEN) or your company CNPJ (for entities on W-8BEN-E). You do not need to apply for a US tax ID (such as an ITIN or EIN) to provide remote international services."
+      },
+      {
+        "id": "chapter-3-4-pj",
+        "question": "How should Brazilian companies (SLU/LTDA) classify Chapter 3 and Chapter 4 on W-8BEN-E?",
+        "answer": "For service-providing companies (software development, design, consulting, translation, marketing), standard IRS classification is 'Corporation' on Line 4 (Chapter 3) and 'Active NFFE' (Active Non-Financial Foreign Entity) on Line 5 (Chapter 4 FATCA), because gross income is derived primarily from active business operations rather than passive investments. See details in the [W-8BEN-E Entity Guide](/w8bene-pessoa-juridica)."
+      },
+      {
+        "id": "address-rules",
+        "question": "What should I enter for permanent residence address on Form W-8?",
+        "answer": "Enter your full permanent home address (for individuals) or your registered company headquarters in Brazil (for legal entities). The IRS strictly disallows P.O. Boxes, forwarding addresses, or 'in-care-of' addresses. FormW8 automatically sanitizes all accents into clean ASCII to prevent rejection."
+      },
+      {
+        "id": "tax-treaty-withholding",
+        "question": "Does Brazil have a double taxation treaty with the US? How does 0% withholding work?",
+        "answer": "Brazil does not have a comprehensive double tax treaty for services with the US. However, services performed entirely from Brazil for US clients are legally categorized as 'Foreign Source Income', qualifying for 0% US withholding tax at the source under the Internal Revenue Code."
+      },
+      {
+        "id": "validity-period",
+        "question": "How long is a completed W-8 form valid?",
+        "answer": "A signed Form W-8 is valid starting from the year signed through December 31st of the third consecutive calendar year (roughly 3 full calendar years). If any key information changes (such as company name, permanent address, entity type, or tax residency), a new form must be generated immediately."
+      },
+      {
+        "id": "signature-method",
+        "question": "How should I sign and submit the filled W-8 form?",
+        "answer": "You can sign the generated PDF digitally via tools such as Adobe Acrobat, DocuSign, Apple Preview, or directly within your onboarding platform (such as [Deel](/plataformas/deel), [Rippling](/plataformas/rippling), or [Remote](/plataformas/remote)), or alternatively print, wet-sign, and scan. The date must strictly follow the US format month-day-year (MM-DD-YYYY)."
+      },
+      {
+        "id": "ascii-sanitization",
+        "question": "Why can't names and addresses contain special characters or accents (á, ç, õ)?",
+        "answer": "IRS processing systems and US compliance databases strictly adhere to standard 7-bit ASCII encoding. Accented characters or special symbols (such as ç, ã, é, º, ª) can cause data corruption or rejection in IRS systems. FormW8 automatically sanitizes all inputs into standardized ASCII without losing information."
+      },
+      {
+        "id": "privacy-security",
+        "question": "Does FormW8 store my personal or tax data on servers?",
+        "answer": "No. FormW8 is built on a 100% client-side, Zero-Data Retention architecture. All processing, sanitization, public CEP/CNPJ auto-completion, and PDF generation occur exclusively inside your web browser memory. No personal, financial, or tax data is transmitted to or stored on any server or database."
+      },
+      {
+        "id": "payment-withheld-30",
+        "question": "Why was my payment on Deel, Rippling, or Upwork withheld at 30%?",
+        "answer": "US tax legislation (Internal Revenue Code Chapter 3) mandates US payers to enforce a default 30% backup withholding tax if an international contractor does not provide a certified Form W-8BEN or W-8BEN-E. Once your valid form is verified by the platform, withholding is set to 0% for services performed outside the United States. Check our setup guides for [Deel](/plataformas/deel), [Rippling](/plataformas/rippling), [Upwork](/plataformas/upwork), and [Remote.com](/plataformas/remote)."
+      },
+      {
+        "id": "google-adsense-youtube",
+        "question": "How do I complete the US tax form for Google AdSense and YouTube?",
+        "answer": "In your Google AdSense or YouTube Studio dashboard, navigate to Payments > Manage tax info. Select your account type (Individual for W-8BEN or Legal Entity for W-8BEN-E), confirm non-US residency, enter your Foreign TIN (national tax ID), and certify 0% withholding for digital services and content creation performed abroad. Follow the step-by-step walkthrough in our [Google AdSense & YouTube Guide](/plataformas/google-adsense)."
+      },
+      {
+        "id": "apple-developer-stripe",
+        "question": "How do I fill out Form W-8 for Apple Developer and Stripe Express?",
+        "answer": "In App Store Connect (Agreements, Tax, and Banking) and Stripe Express, a certified W-8 is required before funds can be disbursed. Individual developers complete W-8BEN using their personal tax ID; incorporated businesses submit W-8BEN-E with 'Corporation' (Chapter 3) and 'Active NFFE' (Chapter 4 FATCA) using exact matching legal addresses. See our [Apple Developer Guide](/plataformas/apple-developer), [GitHub Sponsors Guide](/plataformas/github-sponsors), and [Stripe & Paddle Guide](/plataformas/stripe)."
+      },
+      {
+        "id": "game-dev-steam-epic",
+        "question": "How do indie game developers complete the W-8 on Steam Direct and Epic Games?",
+        "answer": "When onboarding a game on Steamworks (Valve) or the Epic Games Store, you will be prompted through the IRS tax interview. Select W-8BEN (for solo developers) or W-8BEN-E (for studios/companies). Entering your native Foreign Tax ID ensures exemption from 30% default withholding on global sales and royalties. See our [Steam Direct Developer Guide](/plataformas/steam)."
+      },
+      {
+        "id": "mei-slu-pj",
+        "question": "Can solo entities, LLCs, or micro-businesses fill out Form W-8BEN-E?",
+        "answer": "Yes. Any legally registered entity outside the US with a corporate tax identifier (such as Brazilian SLU, LTDA, MEI, or foreign LLC equivalents) is eligible for Form W-8BEN-E. Classify entity type as 'Corporation' under Chapter 3 and 'Active NFFE' under Chapter 4 FATCA. Learn more in the [W-8BEN-E Entity Guide](/w8bene-pessoa-juridica)."
+      },
+      {
+        "id": "rejection-troubleshooting",
+        "question": "What should I do if my W-8 form is rejected by a platform?",
+        "answer": "The 3 most common rejection reasons are: (1) Accented or non-ASCII characters in names or street addresses (automatically fixed by FormW8 ASCII sanitizer); (2) Date formatted as DD/MM/YYYY instead of US standard MM-DD-YYYY; (3) Mismatch between legal name on tax form and bank account beneficiary. Verify these three fields, re-generate on FormW8, and re-upload."
+      }
+    ]
+  },
+  "designSystem": {
+    "title": "Design System & Style Guide",
+    "subtitle": "Color palette, typography, themes, and interactive components catalog",
+    "colorsTitle": "Color Palette & Themes",
+    "typographyTitle": "Typography",
+    "componentsTitle": "Interactive Components",
+    "buttonsTitle": "Primary & Secondary Buttons",
+    "badgesTitle": "Alerts & Notifications",
+    "optionCardsTitle": "Selectable Option Cards",
+    "drawersTitle": "Didactic Context Drawer",
+    "sanitizerTitle": "Real-Time ASCII Sanitizer",
+    "sanitizerDescription": "Type an address or name with Portuguese accents to preview real-time conversion to US standard ASCII:",
+    "sanitizerInputLabel": "Accented Input:",
+    "sanitizerOutputLabel": "Sanitizer Output (ASCII Clean):",
+    "appBackgroundLabel": "App Surface",
+    "cardSurfaceLabel": "Card Surface",
+    "primaryAccentLabel": "Primary Accent",
+    "alertTintLabel": "Sanitizer Alert Tint"
+  },
+  "supportModal": {
+    "title": "Support the FormW8 Project",
+    "badge": "Independent & Free Project",
+    "description": "FormW8 was developed to help anyone navigate US tax form bureaucracy for free and with zero intermediaries.",
+    "appeal": "If this tool saved you time or prevented a 30% tax withholding from US sources, any voluntary contribution via Pix to help keep the infrastructure running is warmly welcomed!",
+    "pixKeyLabel": "Pix Key (Random Key)",
+    "copyPixKey": "Copy Pix Key",
+    "pixCopied": "Pix Key Copied!",
+    "closeButton": "Continue"
+  }
+}
+
