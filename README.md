@@ -19,7 +19,7 @@
 
 **Fill and download official IRS tax forms in seconds. No bureaucracy, no indecipherable legalese, and 100% privacy.**
 
-[🌐 Live Production Site](https://formw8.com.br) • [📖 Technical Specification](docs/TECHNICAL_SPEC.md) • [🤝 Contributing Guide](CONTRIBUTING.md) • [🇧🇷 Versão em Português](#-versão-em-português)
+[🌐 Live Production Site](https://formw8.com.br) • [📖 Technical Specification](docs/TECHNICAL_SPEC.md) • [🤝 Contributing Guide](CONTRIBUTING.md) • [🇧🇷 Documentação em Português](#-documentação-completa-em-português)
 
 </div>
 
@@ -134,29 +134,101 @@ Contributions are welcome! Please check our [Contributing Guidelines (CONTRIBUTI
 
 ---
 
-## 🇧🇷 Versão em Português
+## 🇧🇷 Documentação Completa em Português
 
 <details>
-<summary><b>Clique para expandir a documentação em Português</b></summary>
+<summary><b>Clique aqui para expandir toda a documentação traduzida em Português</b></summary>
 
 <br />
 
-### Por que o FormW8 existe?
-Profissionais brasileiros (desenvolvedores, designers, freelancers e criadores de conteúdo) que prestam serviços para o exterior precisam emitir o **W-8BEN** (Pessoa Física) ou **W-8BEN-E** (Pessoa Jurídica/SLU/LTDA) para evitar a retenção indevida de **30% de imposto americano** na fonte. O FormW8 traduz todo o processo para uma linguagem simples e gera o PDF oficial em menos de 1 minuto.
+### 🎯 Por que o FormW8 existe?
 
-### Arquitetura Zero-Data & Privacidade
-- **100% Client-Side:** Nenhum dado pessoal (Nome, CPF, CNPJ, Endereço) é transmitido ou salvo em servidores.
-- **Sanitização ASCII em tempo real:** Remove acentos automaticamente para conformidade com o IRS.
-- **Motor em PDF nativo:** Preenchimento local dos PDFs oficiais da IRS via `pdf-lib`.
+Profissionais brasileiros (desenvolvedores, designers, freelancers e criadores de conteúdo) que prestam serviços para empresas dos EUA (via Deel, Rippling, Upwork, Remote, Google AdSense, Apple Developer, Steam, GitHub Sponsors, Stripe, etc.) precisam preencher os formulários fiscais **W-8BEN** (Pessoa Física) ou **W-8BEN-E** (Pessoa Jurídica/SLU/LTDA).
 
-### Licença
-Distribuído sob a [Licença MIT](LICENSE).
+O processo tradicional do IRS é confuso, intimidador e repleto de jargões técnicos:
+- **30% de retenção indevida na fonte** quando preenchido incorretamente.
+- Dúvidas sobre onde colocar CPF/CNPJ (FTIN) e como acionar a isenção de tratado (*Tax Treaty Exemption*).
+- Falta de ferramentas transparentes que não exijam cadastro ou coletem dados fiscais confidenciais.
+
+O **FormW8** resolve isso com uma experiência em 4 passos rápidos em linguagem simples, entregando o PDF oficial preenchido e um guia "Copiar & Colar" para plataformas que exigem digitação manual.
+
+---
+
+### 🔒 Arquitetura Zero-Data & Privacidade Absoluta
+
+- **100% Client-Side:** Nenhum dado pessoal (Nome, CPF, CNPJ, Endereço, CEP) é enviado para servidores ou bancos de dados externos.
+- **Sanitização ASCII em Tempo Real:** Remoção automática de caracteres acentuados (`á, ç, õ` → `a, c, o`) para conformidade estrita com o padrão ASCII exigido pelo IRS e pelas plataformas internacionais.
+- **Motor de PDF Nativo:** Preenchimento dos arquivos PDF oficiais e autênticos do IRS (`fw8ben.pdf` e `fw8bene.pdf`) diretamente na memória do navegador usando `pdf-lib`.
+
+---
+
+### 🚀 Funcionalidades Principais
+
+- [x] **Assistente Guiado (Wizard):** Fluxo acolhedor em 4 etapas diretas.
+- [x] **Suporte Dual (Pessoa Física e Pessoa Jurídica):**
+  - **W-8BEN:** Para profissionais autônomos e freelancers (Pessoa Física).
+  - **W-8BEN-E:** Para empresas SLU/LTDA com classificação correta de Corporation e Chapter 4 FATCA Status (Active NFFE).
+- [x] **Autopreenchimento de Endereço & CNPJ:** Consulta pública direta via BrasilAPI (CEP e CNPJ) com revelação progressiva dos campos.
+- [x] **Saída Dupla:**
+  1. Download do PDF oficial autenticado pronto para assinatura digital ou manuscrita.
+  2. Guia interativo de Copiar & Colar campo a campo com destaques das linhas do formulário oficial.
+- [x] **Acessibilidade e i18n Completo:** Suporte nativo a Português (`pt-BR`) e Inglês (`en-US`), tema claro/escuro nativo sem flicker.
+- [x] **Hub SEO Completo:** Guias específicos e respostas para plataformas como Deel, Rippling, Upwork, Remote, Apple Developer, Steam, Google AdSense, GitHub Sponsors e Stripe.
+
+---
+
+### 🛠️ Stack Tecnológica
+
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router, React 19, Server Components & Static Site Generation)
+- **Linguagem:** [TypeScript](https://www.typescriptlang.org/) (Modo Estrito)
+- **Estilização:** [Tailwind CSS](https://tailwindcss.com/) com Design System customizado e tokens semânticos
+- **Manipulação de PDF:** [`pdf-lib`](https://pdf-lib.js.org/)
+- **Ícones:** [`lucide-react`](https://lucide.dev/)
+- **Validação:** [`Zod`](https://zod.dev/)
+
+---
+
+### 💻 Como Rodar Localmente
+
+#### 1. Clonar o repositório
+```bash
+git clone https://github.com/yuripulga/formw8.git
+cd formw8
+```
+
+#### 2. Instalar dependências
+```bash
+npm install
+```
+
+#### 3. Iniciar o servidor de desenvolvimento
+```bash
+npm run dev
+```
+Acesse a aplicação em [http://localhost:48721](http://localhost:48721).
+
+#### 4. Gerar build de produção
+```bash
+npm run build
+```
+
+---
+
+### 🤝 Como Contribuir
+
+Contribuições da comunidade são muito bem-vindas! Se você deseja sugerir novos recursos, corrigir bugs ou adicionar novos idiomas, consulte nosso [Guia de Contribuição (CONTRIBUTING.md)](CONTRIBUTING.md).
+
+---
+
+### ⚖️ Aviso Legal (Disclaimer)
+
+O **FormW8** é uma ferramenta de código aberto independente, educacional e auxiliar. Não possui qualquer vínculo com o *Internal Revenue Service (IRS)* dos Estados Unidos, com a *Secretaria da Receita Federal do Brasil* ou com as plataformas de pagamento mencionadas. O uso desta ferramenta não substitui a consulta a contadores ou advogados tributaristas qualificados.
 
 </details>
 
 ---
 
-## 🦄 About the Creator & Quimera.biz
+## 🦉 About the Creator & Quimera.biz
 
 **FormW8** was built with ❤️ by **[Yuri Pauluci](https://github.com/yuripulga)** as an initiative backed by **[Quimera.biz](https://quimera.biz)**.
 
