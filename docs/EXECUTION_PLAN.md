@@ -241,12 +241,10 @@
 - [x] Badge de Like com Pincelada Highlight no Passo 4 ([`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):
   - Inserção de ícone sólido de Like (`ThumbsUp` com traço e preenchimento vetoriais precisos) sobre a pincelada orgânica marca-texto amarelo (`#FFE600`) em coluna dedicada à esquerda do título e subtítulo da tela de conclusão do formulário gerado.
   - Passo 3 mantido com layout limpo e padronizado.
-- [x] Governança Open-Source & Documentação de Lançamento:
-  - Adicionado arquivo oficial [`LICENSE`](file:///Users/yuripauluci/Documents/git/formw8/LICENSE) sob licença **MIT** permissiva.
-  - Criado [`README.md`](file:///Users/yuripauluci/Documents/git/formw8/README.md) completo com badges, visão do projeto, arquitetura Zero-Data, stack técnica, guia passo a passo local e disclaimer legal.
-  - Criado [`CONTRIBUTING.md`](file:///Users/yuripauluci/Documents/git/formw8/CONTRIBUTING.md) com diretrizes de contribuição, i18n e fluxo de PRs.
-  - Criado [`SECURITY.md`](file:///Users/yuripauluci/Documents/git/formw8/SECURITY.md) para política de divulgação responsável e privacidade.
-- [x] Repositório preparado e pronto para o commit inicial.
+- [x] Deploy em Produção Realizado com Sucesso no Firebase Hosting:
+  - Configuração estática do Next.js (`output: "export"`) gerando 23 rotas SSG pré-renderizadas.
+  - Arquivos de configuração de infraestrutura criados ([`firebase.json`](file:///Users/yuripauluci/Documents/git/formw8/firebase.json) e [`.firebaserc`](file:///Users/yuripauluci/Documents/git/formw8/.firebaserc)) apontando para o projeto `formw8-4796e`.
+  - Deploy finalizado com sucesso. URL de Produção ativa: **https://formw8-4796e.web.app** (e domínios personalizados vinculados).
 
 
 

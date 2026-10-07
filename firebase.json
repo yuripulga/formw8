@@ -1,0 +1,65 @@
+{
+  "hosting": {
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/deel",
+        "destination": "/plataformas/deel.html"
+      },
+      {
+        "source": "/rippling",
+        "destination": "/plataformas/rippling.html"
+      },
+      {
+        "source": "/upwork",
+        "destination": "/plataformas/upwork.html"
+      },
+      {
+        "source": "/remote",
+        "destination": "/plataformas/remote.html"
+      },
+      {
+        "source": "/google-adsense",
+        "destination": "/plataformas/google-adsense.html"
+      },
+      {
+        "source": "/apple-developer",
+        "destination": "/plataformas/apple-developer.html"
+      },
+      {
+        "source": "/steam",
+        "destination": "/plataformas/steam.html"
+      },
+      {
+        "source": "/github-sponsors",
+        "destination": "/plataformas/github-sponsors.html"
+      },
+      {
+        "source": "/stripe",
+        "destination": "/plataformas/stripe.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|woff|woff2|ttf|pdf)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      }
+    ]
+  }
+}

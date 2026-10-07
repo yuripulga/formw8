@@ -1,6 +1,6 @@
 import OpenGraphImage from "./opengraph-image";
 
-export const runtime = "edge";
+export const dynamic = "force-static";
 export const alt = "FormW8 - Gerador de Formulários Fiscais W-8BEN e W-8BEN-E";
 export const size = {
   width: 1200,
