@@ -134,6 +134,17 @@ Contributions are welcome! Please check our [Contributing Guidelines (CONTRIBUTI
 
 ---
 
+## 🦉 About the Creator & Quimera.biz
+
+**FormW8** was built with ❤️ by **[Yuri Pauluci](https://github.com/yuripulga)** as an initiative backed by **[Quimera.biz](https://quimera.biz)**.
+
+### Why this was built:
+As remote work and international contracts expanded across Latin America, thousands of talented professionals encountered the same friction: confusing tax forms, contradictory instructions, and unnecessary withholding fees. FormW8 was conceived to make international tax compliance accessible, private, and painless for everyone.
+
+**[Quimera.biz](https://quimera.biz)** creates high-performance digital products, thoughtful software tools, and design-engineered experiences that empower people and independent builders worldwide.
+
+---
+
 ## 🇧🇷 Documentação Completa em Português
 
 <details>
@@ -214,6 +225,30 @@ npm run build
 
 ---
 
+### 📁 Estrutura de Pastas
+
+```
+formw8/
+├── docs/                      # Especificações técnicas e plano de execução
+│   ├── TECHNICAL_SPEC.md      # Regras fiscais, IRC 1441/1442 e tratados
+│   ├── EXECUTION_PLAN.md      # Acompanhamento de entregas e roadmap
+│   └── TONE_OF_VOICE.md       # Diretrizes de redação e copywriting
+├── public/                    # Assets estáticos e modelos de PDF oficiais da IRS
+│   ├── fw8ben.pdf             # Template oficial W-8BEN
+│   └── fw8bene.pdf            # Template oficial W-8BEN-E
+├── src/
+│   ├── app/                   # Next.js App Router (Páginas, SEO e Layouts)
+│   ├── components/            # Componentes reutilizáveis e Primitivos de UI
+│   ├── context/               # State Machine do Wizard e Contextos React
+│   ├── i18n/                  # Dicionários de tradução (pt-BR e en-US)
+│   └── lib/                   # Utilitários, sanitizador ASCII, PDF Engine e APIs
+├── CONTRIBUTING.md            # Guia de contribuição para a comunidade
+├── SECURITY.md                # Política de segurança e reporte de vulnerabilidades
+└── LICENSE                    # Licença de código aberto MIT
+```
+
+---
+
 ### 🤝 Como Contribuir
 
 Contribuições da comunidade são muito bem-vindas! Se você deseja sugerir novos recursos, corrigir bugs ou adicionar novos idiomas, consulte nosso [Guia de Contribuição (CONTRIBUTING.md)](CONTRIBUTING.md).
@@ -224,15 +259,15 @@ Contribuições da comunidade são muito bem-vindas! Se você deseja sugerir nov
 
 O **FormW8** é uma ferramenta de código aberto independente, educacional e auxiliar. Não possui qualquer vínculo com o *Internal Revenue Service (IRS)* dos Estados Unidos, com a *Secretaria da Receita Federal do Brasil* ou com as plataformas de pagamento mencionadas. O uso desta ferramenta não substitui a consulta a contadores ou advogados tributaristas qualificados.
 
-</details>
-
 ---
 
-## 🦉 About the Creator & Quimera.biz
+### 🦉 Sobre o Criador & Quimera.biz
 
-**FormW8** was built with ❤️ by **[Yuri Pauluci](https://github.com/yuripulga)** as an initiative backed by **[Quimera.biz](https://quimera.biz)**.
+O **FormW8** foi construído com ❤️ por **[Yuri Pauluci](https://github.com/yuripulga)** como uma iniciativa apoiada pela **[Quimera.biz](https://quimera.biz)**.
 
-### Why this was built:
-As remote work and international contracts expanded across Latin America, thousands of talented professionals encountered the same friction: confusing tax forms, contradictory instructions, and unnecessary withholding fees. FormW8 was conceived to make international tax compliance accessible, private, and painless for everyone.
+#### Por que este projeto foi criado:
+Com a expansão do trabalho remoto e de contratos internacionais em toda a América Latina, milhares de profissionais talentosos enfrentam a mesma fricção: formulários fiscais confusos, instruções contraditórias e retenções indevidas de impostos. O FormW8 foi concebido para tornar a conformidade fiscal internacional acessível, privada e indolor para todos.
 
-**[Quimera.biz](https://quimera.biz)** creates high-performance digital products, thoughtful software tools, and design-engineered experiences that empower people and independent builders worldwide.
+A **[Quimera.biz](https://quimera.biz)** cria produtos digitais de alta performance, ferramentas de software conscientes e experiências pensadas para empoderar pessoas e criadores independentes em todo o mundo.
+
+</details>
