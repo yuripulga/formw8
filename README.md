@@ -6,7 +6,7 @@
 █████╗  ██║   ██║██████╔╝██╔████╔██║██║ █╗ ██║╚█████╔╝
 ██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██║███╗██║██╔══██╗
 ██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║╚███╔███╔╝╚█████╔╝
-╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚══╝╚══╝  ╚════╝ 
+╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚══╝╚══╝  ╚════╝ by quimera.biz
 ```
 
 ### Zero-Friction US Tax Form Translator & Generator for W-8BEN & W-8BEN-E
@@ -19,7 +19,7 @@
 
 **Fill and download official IRS tax forms in seconds. No bureaucracy, no indecipherable legalese, and 100% privacy.**
 
-[🌐 Live Production Site](https://formw8.com.br) • [📖 Technical Specification](docs/TECHNICAL_SPEC.md) • [🤝 Contributing Guide](CONTRIBUTING.md) • [🇧🇷 Documentação em Português](#-documentação-completa-em-português)
+[🌐 Live Production Site](https://formw8-4796e.web.app) • [📖 Technical Specification](docs/TECHNICAL_SPEC.md) • [🤝 Contributing Guide](CONTRIBUTING.md) • [🇧🇷 Documentação em Português](#-documentação-completa-em-português)
 
 </div>
 
