@@ -23,22 +23,41 @@
     "dataClearedNotice": "Your data has been removed from browser memory.",
     "close": "Close"
   },
+  "search": {
+    "buttonText": "Search...",
+    "placeholder": "Search platforms, tax questions, or form models...",
+    "noResults": "No results found for",
+    "shortcutHint": "to navigate",
+    "selectHint": "to open",
+    "escHint": "to close",
+    "categories": {
+      "platforms": "International Platforms",
+      "guides": "Form Models & Tax Guides",
+      "faq": "Frequently Asked Questions (FAQ)"
+    }
+  },
   "cookies": {
-    "question": "Accept the use of cookies?",
-    "learnMore": "Learn more",
-    "accept": "Accept"
+    "title": "Privacy & Cookies",
+    "description": "We use cookies and anonymous metrics to keep this tool free and improve your experience.",
+    "accept": "Got it",
+    "learnMore": "Learn more"
   },
   "footer": {
     "tagline": "Simplified generator for IRS Form {bold}W-8BEN{/bold} and {bold}W-8BEN-E{/bold}.",
     "disclaimer": "Free tool with no affiliation to any institution or government.",
-    "openSourceAppeal": "Open-source project built to help everyone. If this helped you, support with Pix",
+    "openSourceAppeal": "{openSource}Open-source{/openSource} project built to help everyone. If this helped you, support with Pix",
     "copyright": "All rights reserved.",
     "poweredBy": "Powered by",
     "links": {
-      "designSystem": "Design System",
-      "irsOfficial": "IRS.gov",
-      "privacy": "Privacy",
       "supportPix": "Support via Pix"
+    },
+    "documents": {
+      "generatorHome": "W-8BEN / W-8BEN-E Generator",
+      "pfGuide": "W-8BEN Guide (Individual)",
+      "pjGuide": "W-8BEN-E Guide (Entity)",
+      "irsHome": "Official IRS.gov Portal",
+      "irsW8Ben": "W-8BEN Instructions (IRS)",
+      "irsW8BenE": "W-8BEN-E Instructions (IRS)"
     },
     "keywords": [
       "Remote Work for US Companies",
@@ -64,7 +83,9 @@
       { "text": "How long is Form W-8BEN valid", "faqId": "validity-period" },
       { "text": "How to issue W-8BEN-E for Brazilian entities", "faqId": "mei-slu-pj" },
       { "text": "Does Brazil have a tax treaty with the US?", "faqId": "brazil-us-tax-treaty" },
-      { "text": "How to submit US tax info in AdSense & YouTube", "faqId": "google-adsense-youtube" }
+      { "text": "How to submit US tax info in AdSense & YouTube", "faqId": "google-adsense-youtube" },
+      { "text": "Why did Deel reject my Disregarded Entity W-8BEN-E?", "faqId": "disregarded-entity-mistake" },
+      { "text": "Simples Nacional Fator R: pay 6% on software exports", "faqId": "fator-r-simples-exportacao" }
     ]
   },
   "wizard": {
@@ -79,7 +100,7 @@
         "variantB": "Fill and download your official tax form ready for international contractors",
         "variantC": "Fill in minutes and download your official tax form ready, for free"
       },
-      "placeholder": "Name, as shown on your official ID document",
+      "placeholder": "Name, matching your official ID document",
       "explanation": ""
     },
     "stepEntityType": {
@@ -91,8 +112,8 @@
       "descriptionPJ": "Form W-8BEN-E for companies (SLU, LTDA, MEI).",
       "helpLink": "I don't know this answer",
       "helpTitle": "What is the tax difference in Brazil?",
-      "helpPF": "• Individual (CPF): Taxes via Carnê-Leão in Brazil at progressive rates up to 27.5%.",
-      "helpPJ": "• Company (CNPJ): Taxes via Simples Nacional or Lucro Presumido in Brazil (typically 6% to 15%).",
+      "helpPF": "• Individual (CPF): Taxes via Carnê-Leão in Brazil at progressive rates up to 27.5% on gross revenue (typically viable only for low monthly revenue).",
+      "helpPJ": "• Company (CNPJ): Taxes via Simples Nacional (Annex III with Factor R) or Lucro Presumido, reducing effective tax rate to 6% - 15% with full PIS/COFINS exemption on software/service export.",
       "explanation": ""
     },
     "stepSummary": {
@@ -137,8 +158,36 @@
       "officialFormLabel": "Form Model",
       "formTypePF": "W-8BEN (Individual)",
       "formTypePJ": "W-8BEN-E (Entity)",
-      "mappingTitle": "Where to enter each information",
+      "mappingTitle": "Fill out the form manually",
       "mappingSubtitle": "",
+      "showAllFields": "View all ({count})",
+      "hideAllFields": "Collapse fields",
+      "platformSelectorTitle": "Adapt Guide for your platform:",
+      "platforms": {
+        "irs": "IRS Standard (PDF)",
+        "deel": "Deel",
+        "rippling": "Rippling",
+        "upwork": "Upwork",
+        "google": "Google / AdSense",
+        "steam": "Steam (Valve)"
+      },
+      "platformHints": {
+        "irs": "Official mapping with lines and checkboxes from the US Internal Revenue Service (IRS) form.",
+        "deel": "Deel uses the online Substitute W-8 form.",
+        "rippling": "On Rippling, complete your Contractor Tax Documents choosing Corporation and Active NFFE.",
+        "upwork": "On Upwork, add your details in the W-8BEN Tax Information tab within payment settings.",
+        "google": "On Google AdSense / Play Console, complete the US tax questionnaire certifying no physical activities in the US.",
+        "steam": "On Steamworks, complete Valve's tax interview as a Corporation / Foreign Source."
+      },
+      "exchangeTitle": "Next Step: Where to receive your USD payments?",
+      "exchangeSubtitle": "Compare the most popular and secure FX providers used by international tech contractors for lowest currency exchange fees:",
+      "exchangeHuskyTag": "Top Pick for Tech Entities",
+      "exchangeHuskyDesc": "Fast USD business account opening, native Deel/Rippling integration, and instant conversion to local currency via Pix.",
+      "exchangeHiglobeTag": "Lowest Fixed Cost",
+      "exchangeHiglobeDesc": "Low flat fee per transfer, US ACH account receipt, and 24/7 instant local payouts.",
+      "exchangeWiseTag": "Best for Individuals",
+      "exchangeWiseDesc": "Ideal for solo contractors and occasional payouts with multi-currency banking details (USD, EUR, GBP).",
+      "exchangeLearnMore": "Visit Website",
       "tableLine": "Line / IRS Field",
       "tableMeaning": "What it Means",
       "tablePlatform": "Platform Field",
@@ -189,6 +238,8 @@
     "badge": "Frequently Asked Questions & Tax Guide",
     "title": "Everything About Form {highlight}W-8BEN{/highlight} & {highlight}W-8BEN-E{/highlight}",
     "subtitle": "Get clear answers regarding international tax compliance, IRS requirements, withholding tax, and contractor platforms.",
+    "searchPlaceholder": "Filter tax questions by keyword...",
+    "noFaqResults": "No questions found for this search.",
     "items": [
       {
         "id": "what-is-w8",
@@ -284,6 +335,21 @@
         "id": "rejection-troubleshooting",
         "question": "What should I do if my W-8 form is rejected by a platform?",
         "answer": "The 3 most common rejection reasons are: (1) Accented or non-ASCII characters in names or street addresses (automatically fixed by FormW8 ASCII sanitizer); (2) Date formatted as DD/MM/YYYY instead of US standard MM-DD-YYYY; (3) Mismatch between legal name on tax form and bank account beneficiary. Verify these three fields, re-generate on FormW8, and re-upload."
+      },
+      {
+        "id": "disregarded-entity-mistake",
+        "question": "Why does ChatGPT recommend 'Disregarded Entity' and Deel rejects it?",
+        "answer": "ChatGPT frequently translates 'single-member company' (such as Brazilian SLU or solo entity) literally to the US term 'Disregarded Entity' (Single-Member LLC). Under IRS classification rules, foreign limited entities are treated as autonomous corporate bodies and must be classified as 'Corporation' under Line 4 (Chapter 3) and 'Active NFFE' under Line 5 (Chapter 4 FATCA). Checking Disregarded Entity triggers a request for a US SSN/ITIN and leads to compliance rejection on platforms like Deel and Rippling."
+      },
+      {
+        "id": "fator-r-simples-exportacao",
+        "question": "How does tax optimization (Fator R) work for remote tech contractors in Brazil?",
+        "answer": "Brazilian software engineers and designers operating via a corporate entity (Simples Nacional) can leverage 'Fator R' by maintaining a payroll/pró-labore of 28% or more of gross revenue. This reduces their Brazilian effective tax rate from ~15.5% (Annex V) to ~6% (Annex III). Combined with constitutional exemptions on PIS, COFINS, and ISS on service exports, contractors save thousands of dollars annually."
+      },
+      {
+        "id": "special-rates-conditions",
+        "question": "What should be filled in 'Special rates and conditions' (Part III of W-8BEN-E or Part II of W-8BEN)?",
+        "answer": "For international contractors and developers performing services entirely outside the US, Part III (W-8BEN-E) and Part II (W-8BEN) can be left blank. Because the work is physically executed in Brazil or another foreign territory, the income constitutes non-US 'Foreign Source Income' and is exempt from US federal tax withholding by IRS statutory definition."
       }
     ]
   },

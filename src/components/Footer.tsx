@@ -6,9 +6,29 @@ import { useI18n } from "@/i18n/context";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BrandLogo } from "@/components/ui/BrandLogo";
-import { HighlightedText } from "@/components/ui/HighlightedText";
 import { SupportModal } from "@/components/SupportModal";
-import { Heart } from "lucide-react";
+import { Heart, ExternalLink } from "lucide-react";
+
+function renderOpenSourceText(text: string) {
+  const parts = text.split(/(\{openSource\}[\s\S]*?\{\/openSource\})/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("{openSource}") && part.endsWith("{/openSource}")) {
+      const content = part.replace("{openSource}", "").replace("{/openSource}", "");
+      return (
+        <a
+          key={i}
+          href="https://github.com/yuripulga/formw8"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 decoration-current hover:text-heading-theme transition-colors font-bold"
+        >
+          {content}
+        </a>
+      );
+    }
+    return part;
+  });
+}
 
 export function Footer() {
   const { t } = useI18n();
@@ -17,7 +37,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="pt-6 pb-2 space-y-4">
+      <footer className="pt-6 pb-2 space-y-5">
         {/* Top Row: Logo & Post-it on Left, Support & Controls on Right */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 text-center sm:text-left">
           {/* Left: Brand & Disclaimer Post-it */}
@@ -48,7 +68,7 @@ export function Footer() {
           <div className="flex flex-col items-center gap-2.5 self-center sm:self-start pt-1">
             {t.footer.openSourceAppeal ? (
               <p className="font-handwritten text-heading-theme text-[13px] sm:text-[14px] font-bold leading-snug -rotate-2 text-center max-w-[190px] select-none opacity-100">
-                {t.footer.openSourceAppeal}
+                {renderOpenSourceText(t.footer.openSourceAppeal)}
               </p>
             ) : null}
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -69,8 +89,30 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Form Models & Direct Documentation Links (Our Own Created Pages + Official IRS) */}
+        <nav aria-label="Guias e Documentos Oficiais" className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-muted-theme">
+          <Link href="/" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
+            {t.footer.documents.generatorHome}
+          </Link>
+          <Link href="/w8ben-pessoa-fisica" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
+            {t.footer.documents.pfGuide}
+          </Link>
+          <Link href="/w8bene-pessoa-juridica" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
+            {t.footer.documents.pjGuide}
+          </Link>
+          <a
+            href="https://www.irs.gov"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors inline-flex items-center gap-1"
+          >
+            <span>{t.footer.documents.irsHome}</span>
+            <ExternalLink className="w-3 h-3 shrink-0" />
+          </a>
+        </nav>
+
         {/* Bottom Row: Centered Copyright & Powered by Quimera.biz */}
-        <div className="text-center text-[12px] sm:text-[11px] text-body-theme dark:text-zinc-300 font-medium opacity-100 space-y-1 pt-2 pb-2">
+        <div className="text-center text-[12px] sm:text-[11px] text-body-theme dark:text-zinc-300 font-medium opacity-100 space-y-1 pt-1 pb-2">
           <p>
             © {currentYear} {t.common.title}. {t.footer.copyright}
           </p>
@@ -108,5 +150,3 @@ export function Footer() {
     </>
   );
 }
-
-

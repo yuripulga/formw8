@@ -48,9 +48,12 @@
 * **Processamento e Preview de PDF:** Client-side filling e renderização interativa ao vivo via `pdf-lib` (`src/lib/pdf-engine.ts` e `src/components/PDFPreviewViewer.tsx`).
 * **Sanitizador Regex ASCII:** Módulo de sanitização (`src/lib/sanitizer.ts`) com suíte de testes unitários (`src/lib/sanitizer.test.ts`).
 * **Programmatic SEO & Schema.org JSON-LD:**
-  * Rotas estáticas dedicadas por plataforma (`/plataformas/[slug]` e rewrites para `/deel`, `/rippling`, `/upwork`, `/remote`, `/google-adsense`, `/apple-developer`, `/steam`, `/github-sponsors`, `/stripe`).
+  * 13 rotas estáticas dedicadas por plataforma (`/plataformas/deel`, `/plataformas/rippling`, `/plataformas/upwork`, `/plataformas/remote`, `/plataformas/google-adsense`, `/plataformas/apple-developer`, `/plataformas/steam`, `/plataformas/github-sponsors`, `/plataformas/stripe`, `/plataformas/payoneer`, `/plataformas/fiverr`, `/plataformas/turing`, `/plataformas/toptal`).
   * Páginas pilares (`/w8ben-pessoa-fisica`, `/w8bene-pessoa-juridica`).
-  * Geração dinâmica de `sitemap.xml`, `robots.txt` e `manifest.webmanifest`.
-  * Metadados e Schemas estruturados completos: `FAQPage`, `WebApplication`, `HowTo` e `Organization`.
+  * Geração estática de `sitemap.xml`, `robots.txt` e `manifest.webmanifest`.
+  * Metadados e Schemas estruturados completos: `FAQPage`, `WebApplication`, `HowTo`, `BreadcrumbList` e `Organization`.
+* **Configuração Centralizada de Afiliados & Câmbio:**
+  * Módulo `src/config/affiliates.ts` para injeção limpa de links e cupons personalizados via variáveis de ambiente (`NEXT_PUBLIC_*`) com diretrizes `rel="noopener noreferrer sponsored"`.
+
 
 

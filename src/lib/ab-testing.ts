@@ -120,6 +120,61 @@ export function trackExperimentExposure(experimentId: string, variantId: string)
 }
 
 /**
+ * Dispatches an event to Google Analytics / GTag when an affiliate partner link is clicked.
+ */
+export function trackAffiliateClick(partnerName: string): void {
+  if (typeof window === "undefined") return;
+
+  try {
+    const win = window as unknown as {
+      gtag?: (command: string, eventName: string, params: Record<string, unknown>) => void;
+      dataLayer?: Array<Record<string, unknown>>;
+    };
+
+    if (typeof win.gtag === "function") {
+      win.gtag("event", "select_content", {
+        content_type: "affiliate_partner",
+        item_id: partnerName,
+      });
+    } else if (Array.isArray(win.dataLayer)) {
+      win.dataLayer.push({
+        event: "affiliate_click",
+        partner_name: partnerName,
+      });
+    }
+  } catch {
+    // Fail silently
+  }
+}
+
+/**
+ * Dispatches an event when a wizard step is completed or PDF is generated.
+ */
+export function trackWizardEvent(action: string, category: string = "wizard"): void {
+  if (typeof window === "undefined") return;
+
+  try {
+    const win = window as unknown as {
+      gtag?: (command: string, eventName: string, params: Record<string, unknown>) => void;
+      dataLayer?: Array<Record<string, unknown>>;
+    };
+
+    if (typeof win.gtag === "function") {
+      win.gtag("event", action, {
+        event_category: category,
+      });
+    } else if (Array.isArray(win.dataLayer)) {
+      win.dataLayer.push({
+        event: action,
+        event_category: category,
+      });
+    }
+  } catch {
+    // Fail silently
+  }
+}
+
+/**
  * React hook for consuming an A/B test experiment with hydration-safe state.
  */
 export function useABTest<T extends string>(experiment: ABExperiment<T>): {

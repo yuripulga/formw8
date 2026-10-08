@@ -18,6 +18,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/plataformas/steam",
     "/plataformas/github-sponsors",
     "/plataformas/stripe",
+    "/plataformas/payoneer",
+    "/plataformas/fiverr",
+    "/plataformas/turing",
+    "/plataformas/toptal",
     "/w8ben-pessoa-fisica",
     "/w8bene-pessoa-juridica",
   ];

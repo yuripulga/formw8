@@ -25,7 +25,8 @@ import { HighlightedText } from "@/components/ui/HighlightedText";
 import { PDFPreviewViewer } from "@/components/PDFPreviewViewer";
 import { SupportModal } from "@/components/SupportModal";
 import { TurnstileProtection } from "@/components/ui/TurnstileProtection";
-import { useABTest, ABExperiment } from "@/lib/ab-testing";
+import { useABTest, ABExperiment, trackAffiliateClick, trackWizardEvent } from "@/lib/ab-testing";
+import { AFFILIATE_CONFIG } from "@/config/affiliates";
 
 const subtitleExperiment: ABExperiment<"variantA" | "variantB" | "variantC"> = {
   id: "step1_subtitle_v1",
@@ -47,6 +48,10 @@ import {
   RotateCcw,
   ThumbsUp,
   Heart,
+  ExternalLink,
+  TrendingUp,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 export default function Home() {
@@ -75,6 +80,10 @@ export default function Home() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [highlightedFields, setHighlightedFields] = useState<Record<string, boolean>>({});
+  const [selectedPlatform, setSelectedPlatform] = useState<
+    "irs" | "deel" | "rippling" | "upwork" | "google" | "steam"
+  >("irs");
+  const [showAllFields, setShowAllFields] = useState<boolean>(false);
 
   const handleCopy = (key: string, val: string) => {
     if (!val) return;
@@ -205,6 +214,7 @@ export default function Home() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
+      trackWizardEvent("pdf_download_success", "conversion");
       // Abre o modal de agradecimento e apoio voluntário Pix
       setShowSupportModal(true);
     } catch (err) {
@@ -322,7 +332,7 @@ export default function Home() {
           {step === 1 && (
             <div className="space-y-4 sm:space-y-6">
               <div className="space-y-2.5 text-center sm:text-left">
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-heading-theme tracking-tight leading-[1.08]">
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-heading-theme tracking-tight leading-[1.1]">
                   <HighlightedText text={t.wizard.stepName.question} />
                 </h1>
                 {(() => {
@@ -473,7 +483,8 @@ export default function Home() {
                           : t.wizard.stepTaxAndAddress.explanation
                       }
                       error={errors.taxId}
-                      isSuccess={Boolean(highlightedFields.taxId)}
+                      isLoading={isSearchingCnpj}
+                      isSuccess={Boolean(highlightedFields.taxId) && !isSearchingCnpj}
                       icon={<FileText className="w-5 h-5" />}
                       autoFocus
                     />
@@ -523,7 +534,8 @@ export default function Home() {
                       isSearchingCep ? t.wizard.stepTaxAndAddress.cepSearching : undefined
                     }
                     error={errors.addressZip}
-                    isSuccess={Boolean(highlightedFields.addressZip)}
+                    isLoading={isSearchingCep}
+                    isSuccess={Boolean(highlightedFields.addressZip) && !isSearchingCep}
                     icon={<MapPin className="w-5 h-5" />}
                   />
 
@@ -664,7 +676,7 @@ export default function Home() {
                 <PDFPreviewViewer formData={formData} />
               </div>
 
-              {/* Educational Field Guide - Clean floating cards */}
+              {/* Educational Field Guide - Clean floating cards with Platform Selector */}
               <div className="space-y-4 pt-2">
                 <div className="space-y-1">
                   <div className="text-xs font-bold uppercase tracking-wider text-muted-theme">
@@ -677,8 +689,52 @@ export default function Home() {
                   </h3>
                 </div>
 
-                <div className="space-y-3">
-                  {[
+                {/* Interactive Platform Selector */}
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    {(
+                      [
+                        { id: "irs", label: t.wizard.stepConfirmation.platforms.irs },
+                        { id: "deel", label: t.wizard.stepConfirmation.platforms.deel },
+                        { id: "rippling", label: t.wizard.stepConfirmation.platforms.rippling },
+                        { id: "upwork", label: t.wizard.stepConfirmation.platforms.upwork },
+                        { id: "google", label: t.wizard.stepConfirmation.platforms.google },
+                        { id: "steam", label: t.wizard.stepConfirmation.platforms.steam },
+                      ] as const
+                    ).map((p) => {
+                      const isActive = selectedPlatform === p.id;
+                      return (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => setSelectedPlatform(p.id)}
+                          style={{
+                            backgroundColor: isActive
+                              ? "var(--brand-highlight, #FFE600)"
+                              : undefined,
+                          }}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                            isActive
+                              ? "text-slate-900 shadow-xs scale-100"
+                              : "bg-card-surface border border-theme text-body-theme hover:text-heading-theme active:scale-95"
+                          }`}
+                        >
+                          {p.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Contextual Platform Guidance Banner */}
+                  <div className="p-3 rounded-xl bg-app-surface border border-theme/60 text-xs text-muted-theme leading-relaxed flex items-start gap-2">
+                    <span className="shrink-0 text-sm">💡</span>
+                    <span>{t.wizard.stepConfirmation.platformHints[selectedPlatform]}</span>
+                  </div>
+                </div>
+
+                {/* Field Cards */}
+                {(() => {
+                  const mappingFields = [
                     {
                       id: "name",
                       line: t.wizard.stepConfirmation.line1Label,
@@ -735,46 +791,179 @@ export default function Home() {
                       meaning: t.wizard.stepConfirmation.lineSignMeaning,
                       value: sanitizedUserName || sanitizedCompanyName,
                     },
-                  ].map((item) => (
-                    <div
-                      key={item.id}
-                      className="p-4 rounded-xl bg-card-surface border border-theme space-y-1.5 text-xs shadow-xs"
-                    >
-                      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2">
-                        <HighlightedText
-                          text={item.line}
-                          className="text-[13px] sm:text-[14px] font-bold text-heading-theme shrink-0"
-                        />
-                        <span className="text-[11px] sm:text-xs text-muted-theme text-left sm:text-right font-normal leading-relaxed">
-                          {item.meaning}
-                        </span>
-                      </div>
-                      <div className="pt-1 flex items-center justify-between gap-2 bg-app-surface px-3 py-2 rounded-lg border border-theme/40">
-                        <span className="font-mono font-bold text-heading-theme break-all">
-                          {item.value}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => handleCopy(item.id, item.value)}
-                          className="shrink-0 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-muted-theme hover:text-heading-theme hover:bg-card-surface active:scale-95 transition-all py-1.5 px-2.5 rounded-lg border border-theme/50 cursor-pointer min-h-[36px] sm:min-h-[auto]"
-                          title={t.common.copyValue}
-                          aria-label={`${t.common.copyValue}: ${item.line}`}
+                  ];
+
+                  const displayedFields = showAllFields ? mappingFields : [mappingFields[0]];
+
+                  return (
+                    <div className="space-y-3 pt-1">
+                      {displayedFields.map((item) => (
+                        <div
+                          key={item.id}
+                          className="p-4 rounded-xl bg-card-surface border border-theme space-y-1.5 text-xs shadow-xs"
                         >
-                          {copiedField === item.id ? (
-                            <>
-                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                              <span className="text-emerald-500 font-semibold">{t.common.copied}</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3.5 h-3.5 shrink-0" />
-                              <span>{t.common.copyValue}</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
+                          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2">
+                            <HighlightedText
+                              text={item.line}
+                              className="text-[13px] sm:text-[14px] font-bold text-heading-theme shrink-0"
+                            />
+                            <span className="text-[11px] sm:text-xs text-muted-theme text-left sm:text-right font-normal leading-relaxed">
+                              {item.meaning}
+                            </span>
+                          </div>
+                          <div className="pt-1 flex items-center justify-between gap-2 bg-app-surface px-3 py-2 rounded-lg border border-theme/40">
+                            <span className="font-mono font-bold text-heading-theme break-all">
+                              {item.value}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy(item.id, item.value)}
+                              className="shrink-0 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-muted-theme hover:text-heading-theme hover:bg-card-surface active:scale-95 transition-all py-1.5 px-2.5 rounded-lg border border-theme/50 cursor-pointer min-h-[36px] sm:min-h-[auto]"
+                              title={t.common.copyValue}
+                              aria-label={`${t.common.copyValue}: ${item.line}`}
+                            >
+                              {copiedField === item.id ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                                  <span className="text-emerald-500 font-semibold">{t.common.copied}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5 shrink-0" />
+                                  <span>{t.common.copyValue}</span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+
+                      {mappingFields.length > 1 && (
+                        <div className="pt-1 flex justify-center">
+                          <button
+                            type="button"
+                            onClick={() => setShowAllFields(!showAllFields)}
+                            className="inline-flex items-center gap-2 text-xs font-bold text-heading-theme hover:text-emerald-600 dark:hover:text-emerald-400 bg-card-surface border border-theme px-4 py-2.5 rounded-xl shadow-xs transition-all active:scale-95 cursor-pointer"
+                          >
+                            <span>
+                              {showAllFields
+                                ? t.wizard.stepConfirmation.hideAllFields
+                                : t.wizard.stepConfirmation.showAllFields.replace(
+                                    "{count}",
+                                    String(mappingFields.length)
+                                  )}
+                            </span>
+                            {showAllFields ? (
+                              <ChevronUp className="w-3.5 h-3.5 shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-3.5 h-3.5 shrink-0" />
+                            )}
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  ))}
+                  );
+                })()}
+
+                {/* Post-Completion Next Step: Where to Receive USD */}
+                <div className="pt-6 space-y-3.5">
+                  <div className="space-y-1">
+                    <h3 className="text-base sm:text-lg font-bold text-heading-theme">
+                      {t.wizard.stepConfirmation.exchangeTitle}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-muted-theme leading-relaxed">
+                      {t.wizard.stepConfirmation.exchangeSubtitle}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {/* Husky */}
+                    <div className="p-4 rounded-xl bg-card-surface border border-theme flex flex-col justify-between space-y-3 shadow-xs hover:border-emerald-500/50 transition-colors">
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-sm text-heading-theme">Husky</span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                            {t.wizard.stepConfirmation.exchangeHuskyTag}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-theme leading-relaxed">
+                          {t.wizard.stepConfirmation.exchangeHuskyDesc}
+                        </p>
+                      </div>
+                      <a
+                        href={AFFILIATE_CONFIG.husky.url}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        onClick={() => trackAffiliateClick("husky")}
+                        className={`inline-flex items-center justify-center gap-1.5 text-xs font-bold py-2 px-3 rounded-xl transition-all cursor-pointer active:scale-95 ${
+                          AFFILIATE_CONFIG.husky.isAffiliate
+                            ? "btn-brand-primary"
+                            : "btn-brand-outline"
+                        }`}
+                      >
+                        <span>{t.wizard.stepConfirmation.exchangeLearnMore}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+
+                    {/* Higlobe */}
+                    <div className="p-4 rounded-xl bg-card-surface border border-theme flex flex-col justify-between space-y-3 shadow-xs hover:border-blue-500/50 transition-colors">
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-sm text-heading-theme">Higlobe</span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                            {t.wizard.stepConfirmation.exchangeHiglobeTag}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-theme leading-relaxed">
+                          {t.wizard.stepConfirmation.exchangeHiglobeDesc}
+                        </p>
+                      </div>
+                      <a
+                        href={AFFILIATE_CONFIG.higlobe.url}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        onClick={() => trackAffiliateClick("higlobe")}
+                        className={`inline-flex items-center justify-center gap-1.5 text-xs font-bold py-2 px-3 rounded-xl transition-all cursor-pointer active:scale-95 ${
+                          AFFILIATE_CONFIG.higlobe.isAffiliate
+                            ? "btn-brand-primary"
+                            : "btn-brand-outline"
+                        }`}
+                      >
+                        <span>{t.wizard.stepConfirmation.exchangeLearnMore}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+
+                    {/* Wise */}
+                    <div className="p-4 rounded-xl bg-card-surface border border-theme flex flex-col justify-between space-y-3 shadow-xs hover:border-amber-500/50 transition-colors">
+                      <div className="space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-sm text-heading-theme">Wise</span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                            {t.wizard.stepConfirmation.exchangeWiseTag}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-theme leading-relaxed">
+                          {t.wizard.stepConfirmation.exchangeWiseDesc}
+                        </p>
+                      </div>
+                      <a
+                        href={AFFILIATE_CONFIG.wise.url}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        onClick={() => trackAffiliateClick("wise")}
+                        className={`inline-flex items-center justify-center gap-1.5 text-xs font-bold py-2 px-3 rounded-xl transition-all cursor-pointer active:scale-95 ${
+                          AFFILIATE_CONFIG.wise.isAffiliate
+                            ? "btn-brand-primary"
+                            : "btn-brand-outline"
+                        }`}
+                      >
+                        <span>{t.wizard.stepConfirmation.exchangeLearnMore}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -786,7 +975,7 @@ export default function Home() {
             <div className="flex sm:hidden justify-center items-center w-full">
               {step < 4 ? (
                 <div className="flex flex-col items-center gap-1 text-center">
-                  <span className="text-[10px] font-medium tracking-wider text-muted-theme/70 uppercase whitespace-nowrap">
+                  <span className="text-[10px] font-medium tracking-wider text-muted-theme uppercase whitespace-nowrap">
                     {t.wizard.stepCounter
                       .replace("{{current}}", String(step))
                       .replace("{{total}}", String(totalSteps))}
@@ -822,12 +1011,12 @@ export default function Home() {
                     <span>{t.common.back}</span>
                   </Button>
                 ) : (
-                  <div className="relative flex items-center gap-1.5 -rotate-3 text-muted-theme/85 select-none transition-transform hover:-rotate-1 cursor-default">
-                    <span className="font-handwritten text-[13px] sm:text-[14px] font-bold leading-tight tracking-tight whitespace-pre-line text-left">
+                  <div className="relative flex items-center gap-1.5 -rotate-3 text-muted-theme select-none transition-transform hover:-rotate-1 cursor-default">
+                    <span className="font-handwritten text-[13px] sm:text-[14px] font-normal leading-tight tracking-tight whitespace-pre-line text-left">
                       {t.wizard.noDataSavedCallout}
                     </span>
                     <svg
-                      className="w-7 h-7 sm:w-8 sm:h-8 text-muted-theme/75 shrink-0 transform -rotate-12 translate-y-[-4px]"
+                      className="w-7 h-7 sm:w-8 sm:h-8 text-muted-theme shrink-0 transform -rotate-12 translate-y-[-4px]"
                       viewBox="0 0 36 36"
                       fill="none"
                       stroke="currentColor"
@@ -847,7 +1036,7 @@ export default function Home() {
               <div className="hidden sm:flex flex-col items-center justify-center shrink-0">
                 {step < 4 ? (
                   <div className="w-28 sm:w-32 flex flex-col items-center gap-1 text-center">
-                    <span className="text-[10px] font-medium tracking-wider text-muted-theme/70 uppercase whitespace-nowrap">
+                    <span className="text-[10px] font-medium tracking-wider text-muted-theme uppercase whitespace-nowrap">
                       {t.wizard.stepCounter
                         .replace("{{current}}", String(step))
                         .replace("{{total}}", String(totalSteps))}

@@ -12,13 +12,13 @@
     --bg-drawer: #f1f5f9;
     --border-color: #e2e8f0;
     --border-hover: #cbd5e1;
-    --border-focus: #15803d;
+    --border-focus: #16a34a;
     --text-heading: #1e293b; /* Preto suave / carvão com leve saturação azulada (Slate-800) */
     --text-body: #475569;    /* Texto de leitura balanceado e suave (Slate-600) */
-    --text-muted: #64748b;   /* Legendas e secundários (Slate-500) */
-    --primary-bg: #15803d;   /* Verde esmeralda escuro elegante */
-    --primary-hover: #166534;/* Verde escuro profundo */
-    --primary-active: #14532d;
+    --text-muted: #7d8a9c;   /* Legendas e secundários azul-ardósia suave */
+    --primary-bg: #16a34a;   /* Verde esmeralda idêntico ao tema escuro */
+    --primary-hover: #15803d;
+    --primary-active: #166534;
     --primary-text: #ffffff; /* Branco puro de alto contraste */
     --brand-highlight: #FFE600; /* Cor primária do marcador de texto (amarelo padrão, dinâmico) */
     --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
@@ -54,26 +54,16 @@
     min-height: 100vh;
   }
 
-  /* Smooth Theme Transition across all semantic surfaces and text */
-  html,
-  body,
-  .bg-app-surface,
-  .bg-card-surface,
-  .bg-input-surface,
-  .bg-drawer-surface,
-  .border-theme,
-  .text-heading-theme,
-  .text-body-theme,
-  .text-muted-theme,
-  header,
-  footer,
-  main,
-  button,
-  input {
-    transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 350ms cubic-bezier(0.4, 0, 0.2, 1),
-                color 350ms cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Smooth Theme Transition only when toggling themes or explicitly requested */
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *:before,
+  html.theme-transitioning *:after {
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-delay: 0s !important;
   }
 }
 

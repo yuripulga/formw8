@@ -23,22 +23,41 @@
     "dataClearedNotice": "Seus dados foram removidos da memória do navegador.",
     "close": "Fechar"
   },
+  "search": {
+    "buttonText": "Buscar...",
+    "placeholder": "Buscar plataformas, dúvidas fiscais ou modelos...",
+    "noResults": "Nenhum resultado encontrado para",
+    "shortcutHint": "para navegar",
+    "selectHint": "para abrir",
+    "escHint": "para fechar",
+    "categories": {
+      "platforms": "Plataformas Internacionais",
+      "guides": "Modelos & Guias Fiscais",
+      "faq": "Dúvidas Frequentes (FAQ)"
+    }
+  },
   "cookies": {
-    "question": "Aceita o uso de cookies?",
-    "learnMore": "Saiba mais",
-    "accept": "Aceito"
+    "title": "Privacidade & Cookies",
+    "description": "Usamos cookies e métricas anônimas para manter a ferramenta gratuita e melhorar sua experiência.",
+    "accept": "Entendido",
+    "learnMore": "Saiba mais"
   },
   "footer": {
     "tagline": "Gerador simplificado de formulários fiscais {bold}W-8BEN{/bold} e {bold}W-8BEN-E{/bold} da IRS.",
     "disclaimer": "Ferramenta gratuita sem vínculo com nenhuma instituição ou governo.",
-    "openSourceAppeal": "Projeto open-source feito para ajudar a todos. Se te ajudou, apoie com um Pix",
+    "openSourceAppeal": "Projeto {openSource}open-source{/openSource} feito para ajudar a todos. Se te ajudou, apoie com um Pix",
     "copyright": "Todos os direitos reservados.",
     "poweredBy": "Powered by",
     "links": {
-      "designSystem": "Design System",
-      "irsOfficial": "IRS.gov",
-      "privacy": "Privacidade",
       "supportPix": "Apoiar com Pix"
+    },
+    "documents": {
+      "generatorHome": "Gerador W-8BEN / W-8BEN-E",
+      "pfGuide": "Guia W-8BEN (Pessoa Física)",
+      "pjGuide": "Guia W-8BEN-E (Pessoa Jurídica)",
+      "irsHome": "Portal Oficial IRS.gov",
+      "irsW8Ben": "Instruções W-8BEN (IRS)",
+      "irsW8BenE": "Instruções W-8BEN-E (IRS)"
     },
     "keywords": [
       "Trabalhe na Gringa",
@@ -66,7 +85,9 @@
       { "text": "Qual a validade do formulário W-8BEN", "faqId": "validity-period" },
       { "text": "Como emitir W-8BEN-E para MEI e SLU", "faqId": "mei-slu-pj" },
       { "text": "Brasil tem tratado de bitributação com EUA?", "faqId": "brazil-us-tax-treaty" },
-      { "text": "Como preencher impostos EUA no AdSense e YouTube", "faqId": "google-adsense-youtube" }
+      { "text": "Como preencher impostos EUA no AdSense e YouTube", "faqId": "google-adsense-youtube" },
+      { "text": "ChatGPT errou meu W-8: por que a Deel rejeitou?", "faqId": "disregarded-entity-mistake" },
+      { "text": "Fator R no Simples Nacional: como pagar 6% na exportação", "faqId": "fator-r-simples-exportacao" }
     ]
   },
   "wizard": {
@@ -81,7 +102,7 @@
         "variantB": "Preencha e baixe seu formulário oficial pronto para prestadores internacionais",
         "variantC": "Preencha em minutos e baixe seu formulário oficial pronto, de graça"
       },
-      "placeholder": "Nome, como consta no seu documento de identificação",
+      "placeholder": "Nome, igual ao seu documento de identificação",
       "explanation": ""
     },
     "stepEntityType": {
@@ -93,8 +114,8 @@
       "descriptionPJ": "Formulário W-8BEN-E para quem tem CNPJ (SLU, LTDA, MEI).",
       "helpLink": "Não sei essa resposta",
       "helpTitle": "Qual a diferença de impostos no Brasil?",
-      "helpPF": "• Pessoa Física (CPF): Paga Carnê-Leão no Brasil com imposto de até 27,5% sobre o valor recebido.",
-      "helpPJ": "• Empresa (CNPJ): Paga imposto no Brasil pelo Simples Nacional ou Lucro Presumido (geralmente 6% a 15%).",
+      "helpPF": "• Pessoa Física (CPF): Paga Carnê-Leão no Brasil com alíquota progressiva de até 27,5% sobre a receita bruta (geralmente viável apenas para faturamentos menores de até R$ 5.000 a R$ 10.000/mês).",
+      "helpPJ": "• Empresa (CNPJ): Paga imposto no Brasil pelo Simples Nacional (Anexo III com Fator R) ou Lucro Presumido, reduzindo a carga tributária efetiva para 6% a 15% com isenção total de PIS/COFINS na exportação de serviços.",
       "explanation": ""
     },
     "stepSummary": {
@@ -139,8 +160,36 @@
       "officialFormLabel": "Modelo do Formulário",
       "formTypePF": "W-8BEN (Pessoa Física)",
       "formTypePJ": "W-8BEN-E (Pessoa Jurídica)",
-      "mappingTitle": "Onde inserir cada informação",
+      "mappingTitle": "Preencha o formulário manualmente",
       "mappingSubtitle": "",
+      "showAllFields": "Ver tudo ({count})",
+      "hideAllFields": "Recolher campos",
+      "platformSelectorTitle": "Adaptar Gabarito para sua plataforma:",
+      "platforms": {
+        "irs": "Padrão IRS (PDF)",
+        "deel": "Deel",
+        "rippling": "Rippling",
+        "upwork": "Upwork",
+        "google": "Google / AdSense",
+        "steam": "Steam (Valve)"
+      },
+      "platformHints": {
+        "irs": "Mapeamento oficial com as linhas e caixas do formulário PDF da Receita Federal Americana (IRS).",
+        "deel": "A Deel utiliza o formulário online Substitute W-8.",
+        "rippling": "Na Rippling, preencha a aba de Contractor Tax Documents selecionando Corporation e Active NFFE.",
+        "upwork": "No Upwork, adicione as informações na aba W-8BEN Tax Information das configurações de pagamento.",
+        "google": "No Google AdSense / Play Console, preencha o questionário fiscal dos EUA indicando ausência de atividades físicas nos EUA.",
+        "steam": "No Steamworks, preencha o questionário fiscal da Valve como Corporation / Foreign Source."
+      },
+      "exchangeTitle": "Próximo Passo: Onde receber seus dólares?",
+      "exchangeSubtitle": "Compare as plataformas de câmbio mais usadas pela comunidade tech brasileira para receber pagamentos internacionais com menor taxa:",
+      "exchangeHuskyTag": "Mais Usada PJ Tech",
+      "exchangeHuskyDesc": "Abertura rápida de conta PJ em dólar, integração nativa com Deel/Rippling e conversão instantânea via Pix.",
+      "exchangeHiglobeTag": "Menor Custo Fixo",
+      "exchangeHiglobeDesc": "Taxa fixa reduzida por transferência, recebimento via ACH nos EUA e liquidação Pix 24/7 sem burocracia.",
+      "exchangeWiseTag": "Ideal Pessoa Física",
+      "exchangeWiseDesc": "Excelente para autônomos e pagamentos pontuais, com dados bancários multimoeda (USD, EUR, GBP).",
+      "exchangeLearnMore": "Acessar site",
       "tableLine": "Linha / Campo IRS",
       "tableMeaning": "O que significa",
       "tablePlatform": "Campo na Plataforma",
@@ -191,6 +240,8 @@
     "badge": "Perguntas Frequentes & Guia Fiscal",
     "title": "Tudo sobre os Formulários {highlight}W-8BEN{/highlight} e {highlight}W-8BEN-E{/highlight}",
     "subtitle": "Tire suas dúvidas sobre conformidade fiscal internacional, IRS, retenção de impostos e plataformas de pagamento.",
+    "searchPlaceholder": "Filtrar dúvidas fiscais por palavra-chave...",
+    "noFaqResults": "Nenhuma dúvida encontrada para esta busca.",
     "items": [
       {
         "id": "what-is-w8",
@@ -286,6 +337,21 @@
         "id": "rejection-troubleshooting",
         "question": "O que fazer se o meu formulário W-8 for rejeitado pela plataforma?",
         "answer": "As 3 causas mais comuns de rejeição são: (1) Presença de acentos ou caracteres especiais no nome ou endereço (resolvido automaticamente pelo conversor ASCII do FormW8); (2) Data de assinatura no formato brasileiro DD/MM/AAAA em vez do padrão americano MM-DD-YYYY; (3) Inconsistência entre o nome do titular da conta bancária e a Razão Social/Nome informado na Linha 1. Revise esses três pontos, gere um novo PDF no FormW8 e faça o reenvio."
+      },
+      {
+        "id": "disregarded-entity-mistake",
+        "question": "Por que o ChatGPT indica 'Disregarded Entity' para SLU e a Deel rejeita?",
+        "answer": "O ChatGPT costuma traduzir literalmente 'sociedade de um único sócio' (SLU) para o termo americano 'Disregarded Entity' (Single-Member LLC). No entanto, perante as regras societárias do IRS, uma empresa brasileira (SLU ou LTDA) é uma entidade jurídica autônoma e deve ser declarada como 'Corporation' na Linha 4 (Chapter 3) e 'Active NFFE' na Linha 5 (Chapter 4 FATCA). Marcar Disregarded Entity faz a Deel ou Rippling exigir SSN/ITIN americano e rejeitar o documento."
+      },
+      {
+        "id": "fator-r-simples-exportacao",
+        "question": "Como funciona o Fator R no Simples Nacional para quem exporta serviços de TI e Design?",
+        "answer": "Empresas brasileiras de software e design (CNAE 6201-5/01) enquadradas no Simples Nacional podem utilizar o Fator R fixando o pró-labore em 28% ou mais do faturamento bruto. Isso permite tributar pelo Anexo III (alíquota inicial de 6%) em vez do Anexo V (15,5%). Além disso, a exportação de serviços conta com isenção constitucional de PIS, COFINS e ISS (Lei Complementar 123/2006, Art. 14), gerando economia anual de até R$ 60.000 para contratos internacionais."
+      },
+      {
+        "id": "special-rates-conditions",
+        "question": "O que preencher em 'Special rates and conditions' (Part III do W-8BEN-E ou Part II do W-8BEN)?",
+        "answer": "Para prestadores de serviços de tecnologia e desenvolvimento que residem e trabalham no Brasil, a Part III (W-8BEN-E) e Part II (W-8BEN) podem ser deixadas em branco. Como o serviço é executado integralmente fora do território dos EUA, trata-se de 'Foreign Source Income' (renda de fonte estrangeira), a qual não sofre incidência de imposto de renda americano por definição legal do IRS."
       }
     ]
   },

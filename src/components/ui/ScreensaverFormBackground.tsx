@@ -18,7 +18,7 @@ export function ScreensaverFormBackground() {
   return (
     <div
       className={`fixed inset-0 pointer-events-none overflow-hidden z-0 select-none transition-opacity duration-700 ease-in-out ${
-        isVisible ? "opacity-30 dark:opacity-25" : "opacity-0"
+        isVisible ? "opacity-[0.13]" : "opacity-0"
       }`}
       aria-hidden="true"
     >

@@ -290,4 +290,128 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
       },
     ],
   },
+  payoneer: {
+    slug: "payoneer",
+    name: "Payoneer",
+    title: "Como Preencher o Formulário Fiscal W-8 no Payoneer (Brasil)",
+    metaDescription: "Guia completo para preencher o W-8BEN ou W-8BEN-E no Payoneer e evitar retenção de 30% em recebimentos internacionais no Brasil.",
+    category: "Gateways de Câmbio & Pagamento",
+    defaultEntityType: "PJ",
+    summary: "O Payoneer solicita o envio do formulário W-8 no Centro de Verificação para liberar recebimentos de marketplaces e clientes internacionais sediados nos EUA.",
+    instructions: [
+      {
+        title: "1. Acesse o Centro de Verificação do Payoneer",
+        description: "No menu superior, vá em 'Configurações' > 'Centro de Verificação' e localize a solicitação de 'Formulário Fiscal dos EUA (W-8)'.",
+      },
+      {
+        title: "2. Escolha entre Pessoa Física ou Jurídica",
+        description: "Se sua conta Payoneer for individual, preencha o W-8BEN com CPF. Se for conta empresa, preencha o W-8BEN-E com CNPJ.",
+      },
+      {
+        title: "3. Digite o Foreign Tax ID",
+        description: "Informe seu CPF ou CNPJ completo no campo correspondente a documento fiscal emitido pelo governo brasileiro.",
+      },
+      {
+        title: "4. Envie o formulário gerado",
+        description: "Faça upload do PDF oficial gerado pelo FormW8 ou assine digitalmente na tela do Payoneer.",
+      },
+    ],
+    faq: [
+      {
+        question: "O Payoneer bloqueia saques se o W-8 não for enviado?",
+        answer: "Sim. A conta pode ter limites reduzidos ou transferências temporariamente retidas até a comprovação de não-residência nos EUA.",
+      },
+    ],
+  },
+  fiverr: {
+    slug: "fiverr",
+    name: "Fiverr",
+    title: "Formulário Fiscal W-8BEN no Fiverr para Prestadores Brasileiros",
+    metaDescription: "Aprenda a preencher o formulário W-8BEN no Fiverr com seu CPF brasileiro e evite descontos fiscais automáticos nos seus saques.",
+    category: "Freelance & Redes de Talentos",
+    defaultEntityType: "PF",
+    summary: "O Fiverr exige que todos os prestadores e freelancers declarem seu status de não cidadão americano através do formulário eletrônico W-8BEN.",
+    instructions: [
+      {
+        title: "1. Acesse W-9 / W-8BEN Declaration no Fiverr",
+        description: "No painel do Fiverr, vá em 'Billing and Payments' > 'Tax Information' ou acesse o banner de declaração fiscal.",
+      },
+      {
+        title: "2. Confirme que é 'Non-US Person'",
+        description: "Selecione que você não é cidadão nem residente fiscal nos Estados Unidos.",
+      },
+      {
+        title: "3. Preencha seus dados cadastrais",
+        description: "Insira seu nome completo civil, endereço residencial no Brasil e CPF no campo 'Tax ID'.",
+      },
+    ],
+    faq: [
+      {
+        question: "Preciso pagar imposto americano no Fiverr?",
+        answer: "Não. Como prestador residente no Brasil preenchendo o W-8BEN, seus ganhos sofrem 0% de retenção na fonte nos EUA.",
+      },
+    ],
+  },
+  turing: {
+    slug: "turing",
+    name: "Turing",
+    title: "Como Preencher o W-8BEN-E na Turing para Desenvolvedores de Software",
+    metaDescription: "Guia tributário para engenheiros de software e desenvolvedores contratados pela Turing emitirem o W-8BEN-E via CNPJ (SLU/LTDA).",
+    category: "Contratos Internacionais & Folha Global",
+    defaultEntityType: "PJ",
+    summary: "A Turing exige que desenvolvedores contratados via PJ enviem o formulário W-8BEN-E aprovado para processar os pagamentos quinzenais ou mensais.",
+    instructions: [
+      {
+        title: "1. Acesse a área de Onboarding Financeiro na Turing",
+        description: "No portal do desenvolvedor da Turing, navegue até a seção 'Banking & Tax Compliance'.",
+      },
+      {
+        title: "2. Selecione W-8BEN-E para empresa brasileira",
+        description: "Para desenvolvedores atuando com CNPJ (Simples Nacional / Lucro Presumido), utilize o modelo de entidade jurídica.",
+      },
+      {
+        title: "3. Chapter 3: Corporation | Chapter 4: Active NFFE",
+        description: "Indique Corporation como classificação societária e Active NFFE para empresas de serviços de software e desenvolvimento.",
+      },
+      {
+        title: "4. Insira o CNPJ no campo Foreign TIN",
+        description: "Preencha os 14 dígitos do CNPJ da sua empresa de TI.",
+      },
+    ],
+    faq: [
+      {
+        question: "Desenvolvedor na Turing pode receber como Pessoa Física?",
+        answer: "A Turing aceita W-8BEN (PF), porém a tributação brasileira via Carnê-Leão chega a 27,5%, enquanto como PJ no Simples Nacional com Fator R a alíquota fica em cerca de 6%.",
+      },
+    ],
+  },
+  toptal: {
+    slug: "toptal",
+    name: "Toptal",
+    title: "Formulário Fiscal W-8BEN / W-8BEN-E na Toptal para Contractors",
+    metaDescription: "Instruções passo a passo para desenvolvedores e designers na Toptal preencherem o formulário fiscal dos EUA sem retenção de impostos.",
+    category: "Freelance & Redes de Talentos",
+    defaultEntityType: "PJ",
+    summary: "A Toptal solicita a comprovação do formulário W-8 durante a ativação do perfil de talentos da rede para habilitar faturamento em moeda estrangeira.",
+    instructions: [
+      {
+        title: "1. Acesse o portal Toptal Talent Payments",
+        description: "Vá em 'Settings' > 'Payment Details' > 'Tax Verification'.",
+      },
+      {
+        title: "2. Escolha o formulário adequado",
+        description: "Selecione W-8BEN para prestação individual ou W-8BEN-E para faturamento corporativo.",
+      },
+      {
+        title: "3. Preencha seu Foreign TIN",
+        description: "Insira seu CPF ou CNPJ e envie o formulário sanitizado em caracteres ASCII.",
+      },
+    ],
+    faq: [
+      {
+        question: "Quanto tempo dura a validade do W-8 na Toptal?",
+        answer: "Conforme a legislação do IRS, o formulário W-8 é válido pelo ano de assinatura mais os 3 anos subsequentes.",
+      },
+    ],
+  },
 };

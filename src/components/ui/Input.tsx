@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, forwardRef, ReactNode } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -7,6 +7,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   icon?: ReactNode;
   isSuccess?: boolean;
+  isLoading?: boolean;
   reserveHelperSpace?: boolean;
 }
 
@@ -18,6 +19,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error,
       icon,
       isSuccess,
+      isLoading,
       reserveHelperSpace = false,
       className = "",
       ...props
@@ -41,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <div className="relative flex items-center">
           {icon && (
-            <div className="absolute left-4 text-muted-theme pointer-events-none">
+            <div className="absolute left-4 text-zinc-400/60 dark:text-zinc-500/50 pointer-events-none transition-colors">
               {icon}
             </div>
           )}
@@ -50,11 +52,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             aria-invalid={Boolean(error)}
             aria-describedby={error ? errorId : helperText ? helperId : undefined}
-            className={`w-full px-4 py-3 input-brand placeholder-slate-400 dark:placeholder-slate-500 text-base font-medium transition-all duration-300 ${
+            className={`w-full px-4 py-3 input-brand placeholder:text-zinc-400/45 dark:placeholder:text-zinc-500/35 text-base font-medium transition-all duration-300 ${
               icon ? "pl-11" : ""
             } ${
+              isSuccess || isLoading
+                ? "pr-11"
+                : ""
+            } ${
               isSuccess
-                ? "pr-11 !border-emerald-500 !ring-1 !ring-emerald-500/25 dark:!border-emerald-400 dark:!ring-emerald-400/25"
+                ? "!border-emerald-500 !ring-1 !ring-emerald-500/25 dark:!border-emerald-400 dark:!ring-emerald-400/25"
                 : ""
             } ${
               error
@@ -63,11 +69,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             } ${className}`}
             {...props}
           />
-          {isSuccess && (
+          {isLoading ? (
+            <div className="absolute right-4 text-emerald-600 dark:text-emerald-400 pointer-events-none animate-fadeIn">
+              <Loader2 className="w-5 h-5 animate-spin" />
+            </div>
+          ) : isSuccess ? (
             <div className="absolute right-4 text-emerald-600 dark:text-emerald-400 pointer-events-none animate-fadeIn transition-opacity">
               <CheckCircle2 className="w-5 h-5" />
             </div>
-          )}
+          ) : null}
         </div>
         {/* Helper & Error container */}
         {(helperText || error || reserveHelperSpace) ? (

@@ -64,6 +64,29 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Início",
+            item: "https://formw8.com.br",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Guias de Plataformas",
+            item: "https://formw8.com.br/#platforms",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: platform.name,
+            item: `https://formw8.com.br/plataformas/${platform.slug}`,
+          },
+        ],
+      },
+      {
         "@type": "HowTo",
         name: platform.title,
         description: platform.metaDescription,

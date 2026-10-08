@@ -81,7 +81,15 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   };
 
   const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.add("theme-transitioning");
+      setThemeState(newTheme);
+      setTimeout(() => {
+        document.documentElement.classList.remove("theme-transitioning");
+      }, 350);
+    } else {
+      setThemeState(newTheme);
+    }
   };
 
   const value = {

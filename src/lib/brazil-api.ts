@@ -248,17 +248,32 @@ export async function fetchAddressByCep(cep: string): Promise<CepAddressResult |
 }
 
 /**
- * Fetches Brazilian company legal data by CNPJ.
- * Primary provider: BrasilAPI
- * Secondary provider: Minha Receita
+ * Fetches Brazilian company legal data by CNPJ with multi-provider failover.
+ * Primary: BrasilAPI
+ * Fallback 1: Minha Receita
+ * Fallback 2: CNPJ.ws
  */
 export async function fetchCompanyByCnpj(cnpj: string): Promise<CnpjCompanyResult | null> {
   const rawCnpj = cnpj.replace(/\D/g, "");
   if (rawCnpj.length !== 14) return null;
 
+  // Helper with AbortController timeout
+  const fetchWithTimeout = async (url: string, ms = 4500) => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), ms);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      return res;
+    } catch (e) {
+      clearTimeout(timeoutId);
+      throw e;
+    }
+  };
+
   // 1. Try BrasilAPI
   try {
-    const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${rawCnpj}`);
+    const res = await fetchWithTimeout(`https://brasilapi.com.br/api/cnpj/v1/${rawCnpj}`);
     if (res.ok) {
       const data = await res.json();
       
@@ -279,25 +294,33 @@ export async function fetchCompanyByCnpj(cnpj: string): Promise<CnpjCompanyResul
       let city = safeString(data.municipio);
       let state = safeString(data.uf).toUpperCase();
 
+      // Safe isolated CEP enrichment (never breaks CNPJ result on failure)
       if (rawCepFromCnpj) {
-        const cepResult = await fetchAddressByCep(rawCepFromCnpj);
-        if (cepResult) {
-          if (cepResult.street) baseStreet = cepResult.street;
-          if (cepResult.city) city = cepResult.city;
-          if (cepResult.state) state = cepResult.state;
+        try {
+          const cepResult = await fetchAddressByCep(rawCepFromCnpj);
+          if (cepResult) {
+            if (cepResult.street) baseStreet = cepResult.street;
+            if (cepResult.city) city = cepResult.city;
+            if (cepResult.state) state = cepResult.state;
+          }
+        } catch {
+          // Ignore inner CEP error
         }
       }
 
       const fullStreet = formatFullStreetAddress(baseStreet || bairro, num, comp, baseStreet ? bairro : undefined);
+      const companyName = safeString(data.razao_social) || safeString(data.nome_fantasia);
 
-      return {
-        companyName: safeString(data.razao_social) || safeString(data.nome_fantasia) || undefined,
-        tradeName: safeString(data.nome_fantasia) || undefined,
-        street: fullStreet || undefined,
-        city: city || undefined,
-        state: state || undefined,
-        zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
-      };
+      if (companyName) {
+        return {
+          companyName,
+          tradeName: safeString(data.nome_fantasia) || undefined,
+          street: fullStreet || undefined,
+          city: city || undefined,
+          state: state || undefined,
+          zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
+        };
+      }
     }
   } catch {
     // Failover to secondary provider
@@ -305,7 +328,7 @@ export async function fetchCompanyByCnpj(cnpj: string): Promise<CnpjCompanyResul
 
   // 2. Fallback to Minha Receita
   try {
-    const res = await fetch(`https://minhareceita.org/${rawCnpj}`);
+    const res = await fetchWithTimeout(`https://minhareceita.org/${rawCnpj}`);
     if (res.ok) {
       const data = await res.json();
       
@@ -326,28 +349,77 @@ export async function fetchCompanyByCnpj(cnpj: string): Promise<CnpjCompanyResul
       let city = safeString(data.municipio);
       let state = safeString(data.uf).toUpperCase();
 
+      // Safe isolated CEP enrichment
       if (rawCepFromCnpj) {
-        const cepResult = await fetchAddressByCep(rawCepFromCnpj);
-        if (cepResult) {
-          if (cepResult.street) baseStreet = cepResult.street;
-          if (cepResult.city) city = cepResult.city;
-          if (cepResult.state) state = cepResult.state;
+        try {
+          const cepResult = await fetchAddressByCep(rawCepFromCnpj);
+          if (cepResult) {
+            if (cepResult.street) baseStreet = cepResult.street;
+            if (cepResult.city) city = cepResult.city;
+            if (cepResult.state) state = cepResult.state;
+          }
+        } catch {
+          // Ignore inner CEP error
         }
       }
 
       const fullStreet = formatFullStreetAddress(baseStreet || bairro, num, comp, baseStreet ? bairro : undefined);
+      const companyName = safeString(data.razao_social) || safeString(data.nome_fantasia);
 
-      return {
-        companyName: safeString(data.razao_social) || safeString(data.nome_fantasia) || undefined,
-        tradeName: safeString(data.nome_fantasia) || undefined,
-        street: fullStreet || undefined,
-        city: city || undefined,
-        state: state || undefined,
-        zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
-      };
+      if (companyName) {
+        return {
+          companyName,
+          tradeName: safeString(data.nome_fantasia) || undefined,
+          street: fullStreet || undefined,
+          city: city || undefined,
+          state: state || undefined,
+          zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
+        };
+      }
     }
   } catch {
-    // Both failed
+    // Failover to third provider
+  }
+
+  // 3. Fallback to CNPJ.ws
+  try {
+    const res = await fetchWithTimeout(`https://publica.cnpj.ws/cnpj/${rawCnpj}`);
+    if (res.ok) {
+      const data = await res.json();
+      const estab = data.estabelecimento || {};
+      const companyName = safeString(data.razao_social) || safeString(estab.nome_fantasia);
+
+      const rawCepFromCnpj = estab.cep ? String(estab.cep).replace(/\D/g, "") : "";
+      const type = safeString(estab.tipo_logradouro);
+      const rawLogr = safeString(estab.logradouro);
+      const num = safeString(estab.numero);
+      const comp = safeString(estab.complemento);
+      const bairro = safeString(estab.bairro);
+      const city = safeString(estab.cidade?.nome);
+      const state = safeString(estab.estado?.sigla).toUpperCase();
+
+      let baseStreet = "";
+      if (type && rawLogr && !rawLogr.toLowerCase().startsWith(type.toLowerCase())) {
+        baseStreet = `${type} ${rawLogr}`.trim();
+      } else if (rawLogr) {
+        baseStreet = rawLogr;
+      }
+
+      const fullStreet = formatFullStreetAddress(baseStreet || bairro, num, comp, baseStreet ? bairro : undefined);
+
+      if (companyName) {
+        return {
+          companyName,
+          tradeName: safeString(estab.nome_fantasia) || undefined,
+          street: fullStreet || undefined,
+          city: city || undefined,
+          state: state || undefined,
+          zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
+        };
+      }
+    }
+  } catch {
+    // All failed
   }
 
   return null;
