@@ -44,6 +44,30 @@
         "destination": "/plataformas/stripe.html"
       },
       {
+        "source": "/payoneer",
+        "destination": "/plataformas/payoneer.html"
+      },
+      {
+        "source": "/fiverr",
+        "destination": "/plataformas/fiverr.html"
+      },
+      {
+        "source": "/turing",
+        "destination": "/plataformas/turing.html"
+      },
+      {
+        "source": "/toptal",
+        "destination": "/plataformas/toptal.html"
+      },
+      {
+        "source": "/w8ben-pessoa-fisica",
+        "destination": "/w8ben-pessoa-fisica.html"
+      },
+      {
+        "source": "/w8bene-pessoa-juridica",
+        "destination": "/w8bene-pessoa-juridica.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
