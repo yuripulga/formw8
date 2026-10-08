@@ -321,8 +321,8 @@ export default function Home() {
           {/* Step 1: User Name Onboarding */}
           {step === 1 && (
             <div className="space-y-4 sm:space-y-6">
-              <div className="space-y-2 text-center sm:text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-heading-theme tracking-tight leading-[1.1]">
+              <div className="space-y-2.5 text-center sm:text-left">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-heading-theme tracking-tight leading-[1.08]">
                   <HighlightedText text={t.wizard.stepName.question} />
                 </h1>
                 {(() => {
@@ -344,6 +344,8 @@ export default function Home() {
               <div className="pt-1.5 sm:pt-2">
                 <Input
                   type="text"
+                  id="user-name-input"
+                  aria-label={t.wizard.stepName.question}
                   value={formData.userName || ""}
                   onChange={(e) => {
                     setUserName(e.target.value);
@@ -383,7 +385,11 @@ export default function Home() {
                 ) : null}
               </div>
 
-              <div className="grid grid-cols-1 gap-2.5 pt-0">
+              <div
+                role="radiogroup"
+                aria-label={t.wizard.stepEntityType.question.replace("{{name}}", sanitizedUserName || formData.userName || "")}
+                className="grid grid-cols-1 gap-2.5 pt-0"
+              >
                 <OptionCard
                   title={t.wizard.stepEntityType.optionPF}
                   description={t.wizard.stepEntityType.descriptionPF}
@@ -750,18 +756,18 @@ export default function Home() {
                         <button
                           type="button"
                           onClick={() => handleCopy(item.id, item.value)}
-                          className="shrink-0 inline-flex items-center gap-1 text-[10.5px] sm:text-[11px] font-medium text-muted-theme hover:text-heading-theme transition-colors cursor-pointer"
+                          className="shrink-0 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-muted-theme hover:text-heading-theme hover:bg-card-surface active:scale-95 transition-all py-1.5 px-2.5 rounded-lg border border-theme/50 cursor-pointer min-h-[36px] sm:min-h-[auto]"
                           title={t.common.copyValue}
-                          aria-label={t.common.copyValue}
+                          aria-label={`${t.common.copyValue}: ${item.line}`}
                         >
                           {copiedField === item.id ? (
                             <>
-                              <Check className="w-3 h-3 text-emerald-500" />
+                              <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                               <span className="text-emerald-500 font-semibold">{t.common.copied}</span>
                             </>
                           ) : (
                             <>
-                              <Copy className="w-3 h-3" />
+                              <Copy className="w-3.5 h-3.5 shrink-0" />
                               <span>{t.common.copyValue}</span>
                             </>
                           )}
@@ -774,48 +780,13 @@ export default function Home() {
             </div>
           )}
 
-          {/* Bottom Navigation Line: Voltar (Left), Compact Progress + Step Counter (Center), Avançar/Começar Novamente (Right) */}
-          <div className={`${step === 1 ? "pt-1 sm:pt-1.5" : "pt-4"} flex items-center justify-between gap-2 sm:gap-4`}>
-            {/* Left Action: Voltar (Steps > 1) or Callout (Step === 1) */}
-            <div className="min-w-[100px] flex justify-start items-center shrink-0">
-              {step > 1 ? (
-                <Button
-                  onClick={handlePrevStep}
-                  variant="ghost"
-                  size="sm"
-                  aria-label={t.common.back}
-                  className="whitespace-nowrap"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>{t.common.back}</span>
-                </Button>
-              ) : (
-                <div className="relative flex items-center gap-1.5 -rotate-3 text-muted-theme/85 select-none transition-transform hover:-rotate-1 cursor-default">
-                  <span className="font-handwritten text-[13px] sm:text-[14px] font-bold leading-tight tracking-tight whitespace-pre-line text-left">
-                    {t.wizard.noDataSavedCallout}
-                  </span>
-                  <svg
-                    className="w-7 h-7 sm:w-8 sm:h-8 text-muted-theme/75 shrink-0 transform -rotate-12 translate-y-[-4px]"
-                    viewBox="0 0 36 36"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M 4 28 C 12 28, 22 22, 28 8" />
-                    <path d="M 20 8 L 28 8 L 28 16" transform="rotate(-25 28 8)" />
-                  </svg>
-                </div>
-              )}
-            </div>
-
-            {/* Center: Step Counter + Compact Progress Bar (Steps 1-3) or Solid Support Button (Step 4) */}
-            <div className="flex flex-col items-center justify-center shrink-0">
+          {/* Bottom Navigation Container */}
+          <div className={`${step === 1 ? "pt-1 sm:pt-1.5" : "pt-4"} space-y-3 sm:space-y-0`}>
+            {/* Mobile Only (< sm): Centered Step Counter / Support Button Row */}
+            <div className="flex sm:hidden justify-center items-center w-full">
               {step < 4 ? (
-                <div className="w-28 sm:w-32 flex flex-col items-center gap-1 text-center">
-                  <span className="text-[10px] font-medium tracking-wider text-muted-theme/70 uppercase">
+                <div className="flex flex-col items-center gap-1 text-center">
+                  <span className="text-[10px] font-medium tracking-wider text-muted-theme/70 uppercase whitespace-nowrap">
                     {t.wizard.stepCounter
                       .replace("{{current}}", String(step))
                       .replace("{{total}}", String(totalSteps))}
@@ -827,37 +798,99 @@ export default function Home() {
                   type="button"
                   onClick={() => setShowSupportModal(true)}
                   style={{ backgroundColor: "var(--brand-highlight, #FFE600)" }}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-[#1e293b] hover:opacity-90 transition-opacity cursor-pointer shadow-xs whitespace-nowrap"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-900 shadow-xs active:scale-95 transition-transform cursor-pointer whitespace-nowrap"
                 >
-                  <Heart className="w-3.5 h-3.5 fill-[#1e293b] stroke-[#1e293b]" />
+                  <Heart className="w-3.5 h-3.5 fill-slate-900 stroke-slate-900" />
                   <span>{t.footer.links.supportPix}</span>
                 </button>
               )}
             </div>
 
-            {/* Right Action: Avançar (Steps 1-3) or Começar Novamente (Step 4) */}
-            <div className="min-w-[140px] flex justify-end shrink-0">
-              {step < 4 ? (
-                <Button
-                  onClick={handleNextStep}
-                  variant="primary"
-                  size="md"
-                  className="whitespace-nowrap"
-                >
-                  <span>{t.common.next}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              ) : (
-                <Button
-                  onClick={resetWizard}
-                  variant="outline"
-                  size="md"
-                  className="whitespace-nowrap gap-1.5"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  <span>{t.common.restart}</span>
-                </Button>
-              )}
+            {/* Navigation Buttons Row (Voltar à esquerda, Avançar à direita) */}
+            <div className="flex items-center justify-between gap-4">
+              {/* Left Action: Voltar (Steps > 1) or Callout (Step === 1) */}
+              <div className="flex-1 sm:min-w-[140px] flex justify-start items-center min-w-0">
+                {step > 1 ? (
+                  <Button
+                    onClick={handlePrevStep}
+                    variant="ghost"
+                    size="sm"
+                    aria-label={t.common.back}
+                    className="whitespace-nowrap px-3 sm:px-4"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>{t.common.back}</span>
+                  </Button>
+                ) : (
+                  <div className="relative flex items-center gap-1.5 -rotate-3 text-muted-theme/85 select-none transition-transform hover:-rotate-1 cursor-default">
+                    <span className="font-handwritten text-[13px] sm:text-[14px] font-bold leading-tight tracking-tight whitespace-pre-line text-left">
+                      {t.wizard.noDataSavedCallout}
+                    </span>
+                    <svg
+                      className="w-7 h-7 sm:w-8 sm:h-8 text-muted-theme/75 shrink-0 transform -rotate-12 translate-y-[-4px]"
+                      viewBox="0 0 36 36"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M 4 28 C 12 28, 22 22, 28 8" />
+                      <path d="M 20 8 L 28 8 L 28 16" transform="rotate(-25 28 8)" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+
+              {/* Desktop Only (>= sm): Center Step Counter */}
+              <div className="hidden sm:flex flex-col items-center justify-center shrink-0">
+                {step < 4 ? (
+                  <div className="w-28 sm:w-32 flex flex-col items-center gap-1 text-center">
+                    <span className="text-[10px] font-medium tracking-wider text-muted-theme/70 uppercase whitespace-nowrap">
+                      {t.wizard.stepCounter
+                        .replace("{{current}}", String(step))
+                        .replace("{{total}}", String(totalSteps))}
+                    </span>
+                    <ProgressBar currentStep={step} totalSteps={totalSteps} />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setShowSupportModal(true)}
+                    style={{ backgroundColor: "var(--brand-highlight, #FFE600)" }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-900 shadow-xs active:scale-95 transition-transform cursor-pointer whitespace-nowrap"
+                  >
+                    <Heart className="w-3.5 h-3.5 fill-slate-900 stroke-slate-900" />
+                    <span>{t.footer.links.supportPix}</span>
+                  </button>
+                )}
+              </div>
+
+              {/* Right Action: Avançar (Steps 1-3) or Começar Novamente (Step 4) */}
+              <div className="flex-1 sm:min-w-[140px] flex justify-end shrink-0 min-w-0">
+                {step < 4 ? (
+                  <Button
+                    onClick={handleNextStep}
+                    variant="primary"
+                    size="md"
+                    className="whitespace-nowrap px-4 sm:px-5"
+                  >
+                    <span>{t.common.next}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={resetWizard}
+                    variant="outline"
+                    size="md"
+                    className="whitespace-nowrap gap-1.5 px-3 sm:px-4"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    <span>{t.common.restart}</span>
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -40,10 +40,10 @@ function renderFaqAnswer(text: string) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-0.5 font-bold text-heading-theme underline underline-offset-2 decoration-muted-theme/60 hover:opacity-80 transition-opacity"
+          className="inline-flex items-center gap-0.5 font-bold text-heading-theme underline underline-offset-2 decoration-muted-theme/60 opacity-100 sm:hover:opacity-80 transition-opacity"
         >
           <span>{label}</span>
-          <ExternalLink className="w-3 h-3 opacity-70 inline" />
+          <ExternalLink className="w-3 h-3 opacity-100 sm:opacity-70 inline" />
         </a>
       );
     }
@@ -128,10 +128,12 @@ export function FAQSection() {
               className="rounded-2xl border border-theme dark:border-white/[0.06] bg-card-surface transition-all duration-200 overflow-hidden"
             >
               <button
+                id={`faq-btn-${item.id}`}
                 type="button"
                 onClick={() => toggleItem(item.id)}
                 aria-expanded={isOpen}
-                className="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left transition-colors hover:bg-slate-900/[0.02] dark:hover:bg-white/[0.02]"
+                aria-controls={`faq-answer-${item.id}`}
+                className="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-left transition-colors hover:bg-slate-900/[0.02] dark:hover:bg-white/[0.02] cursor-pointer"
               >
                 <span className="font-semibold text-sm sm:text-base text-heading-theme">
                   {item.question}
@@ -146,7 +148,7 @@ export function FAQSection() {
               <div
                 id={`faq-answer-${item.id}`}
                 role="region"
-                aria-labelledby={`faq-question-${item.id}`}
+                aria-labelledby={`faq-btn-${item.id}`}
                 className={`px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-muted-theme leading-relaxed border-t border-theme/40 dark:border-white/[0.04] ${
                   isOpen ? "block animate-fade-in" : "hidden"
                 }`}

@@ -171,18 +171,10 @@ export function LampPullCord() {
   return (
     <aside
       ref={containerRef}
-      className="fixed top-0 right-1.5 sm:right-3 md:right-4 z-50 pointer-events-none select-none"
+      className="fixed top-0 right-14 sm:right-3 md:right-4 z-50 pointer-events-none select-none"
       aria-label="Controle de Luz e Tema"
     >
-      <div
-        className="relative w-14 sm:w-16 h-36 pointer-events-auto cursor-grab active:cursor-grabbing"
-        onMouseEnter={handleMouseEnter}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        title={tooltipTitle}
-      >
+      <div className="relative w-14 sm:w-16 h-36 pointer-events-none">
         <svg
           className="w-full h-full overflow-visible pointer-events-none"
           viewBox="0 0 80 150"
@@ -218,8 +210,26 @@ export function LampPullCord() {
             strokeDasharray={isDragging ? "none" : "2 3"}
           />
 
-          {/* Pull Pendant / Acorn Bell Knob */}
-          <g transform={`translate(${bobX}, ${bobY})`}>
+          {/* Pull Pendant / Acorn Bell Knob - ONLY interactive hit target */}
+          <g
+            transform={`translate(${bobX}, ${bobY})`}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+            onMouseEnter={handleMouseEnter}
+            className="pointer-events-auto cursor-grab active:cursor-grabbing"
+            style={{ touchAction: "none" }}
+          >
+            {/* Tightly constrained hit target strictly over the acorn knob */}
+            <circle
+              cx="0"
+              cy="10"
+              r="14"
+              fill="transparent"
+              className="cursor-grab active:cursor-grabbing"
+            />
+
             {/* Glow / Active Halo when pulled past threshold */}
             {isTriggered && (
               <circle
@@ -228,7 +238,7 @@ export function LampPullCord() {
                 r="16"
                 fill="var(--brand-highlight, #FFE600)"
                 opacity="0.4"
-                className="animate-pulse"
+                className="animate-pulse pointer-events-none"
               />
             )}
 
@@ -237,7 +247,7 @@ export function LampPullCord() {
               cx="0"
               cy="2"
               r="2.5"
-              className="fill-slate-500 dark:fill-zinc-400"
+              className="fill-slate-500 dark:fill-zinc-400 pointer-events-none"
             />
 
             {/* Pendant Body (Classic Lamp Switch Knob) */}
@@ -250,7 +260,7 @@ export function LampPullCord() {
                 isTriggered
                   ? "stroke-slate-900"
                   : "fill-slate-700 dark:fill-zinc-300 stroke-slate-800 dark:stroke-zinc-200"
-              } transition-colors duration-150 drop-shadow-sm`}
+              } transition-colors duration-150 drop-shadow-sm pointer-events-none`}
               strokeWidth="0.75"
             />
 
@@ -264,6 +274,7 @@ export function LampPullCord() {
               strokeWidth="0.85"
               strokeLinecap="round"
               opacity="0.6"
+              className="pointer-events-none"
             />
 
             {/* Bottom Accent Dot */}
@@ -271,7 +282,7 @@ export function LampPullCord() {
               cx="0"
               cy="18.5"
               r="1.2"
-              className="fill-slate-900 dark:fill-zinc-900"
+              className="fill-slate-900 dark:fill-zinc-900 pointer-events-none"
             />
           </g>
         </svg>

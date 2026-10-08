@@ -14,7 +14,7 @@ export function Header() {
     <header className="flex items-center justify-between pb-6 sm:pb-8">
       <Link
         href="/"
-        className="flex items-center gap-3 group transition-opacity hover:opacity-90 cursor-pointer min-w-0"
+        className="flex items-center gap-3 group transition-opacity opacity-100 sm:hover:opacity-90 cursor-pointer min-w-0"
         aria-label={t.common.title}
       >
         <BrandLogo size="md" className="shrink-0" />

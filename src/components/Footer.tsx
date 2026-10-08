@@ -33,10 +33,10 @@ export function Footer() {
             {t.footer.disclaimer ? (
               <div
                 style={{ backgroundColor: "var(--brand-highlight, #FFE600)" }}
-                className="relative w-52 sm:w-60 p-3 sm:p-3.5 rounded-xs rounded-br-lg shadow-[2px_4px_12px_rgba(0,0,0,0.14)] -rotate-1 hover:rotate-0 transition-transform duration-200 select-none cursor-default mt-1"
+                className="relative w-52 sm:w-60 p-3 sm:p-3.5 rounded-xs rounded-br-lg shadow-[2px_4px_12px_rgba(0,0,0,0.14)] -rotate-1 hover:rotate-0 transition-transform duration-200 select-none cursor-default mt-1 opacity-100"
               >
-                {/* Subtle top sticky tape / glue strip hint */}
-                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-12 h-3 bg-white/30 backdrop-blur-[1px] rounded-xs shadow-2xs rotate-1" />
+                {/* Solid top sticky tape / glue strip hint */}
+                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-12 h-3 bg-white dark:bg-zinc-200 rounded-xs shadow-2xs rotate-1" />
                 <p className="font-handwritten text-[#0f172a] text-[15px] sm:text-[16px] font-bold leading-tight tracking-tight text-center">
                   {t.footer.disclaimer}
                 </p>
@@ -47,7 +47,7 @@ export function Footer() {
           {/* Right: Open-Source Appeal, Support Button & Theme/Language Controls */}
           <div className="flex flex-col items-center gap-2.5 self-center sm:self-start pt-1">
             {t.footer.openSourceAppeal ? (
-              <p className="font-handwritten text-heading-theme text-[13px] sm:text-[14px] font-bold leading-snug -rotate-2 text-center max-w-[190px] select-none">
+              <p className="font-handwritten text-heading-theme text-[13px] sm:text-[14px] font-bold leading-snug -rotate-2 text-center max-w-[190px] select-none opacity-100">
                 {t.footer.openSourceAppeal}
               </p>
             ) : null}
@@ -56,9 +56,9 @@ export function Footer() {
                 type="button"
                 onClick={() => setShowSupportModal(true)}
                 style={{ backgroundColor: "var(--brand-highlight, #FFE600)" }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#1e293b] hover:opacity-90 transition-opacity cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-900 shadow-xs active:scale-95 transition-transform cursor-pointer"
               >
-                <Heart className="w-3.5 h-3.5 fill-[#1e293b] stroke-[#1e293b]" />
+                <Heart className="w-3.5 h-3.5 fill-slate-900 stroke-slate-900" />
                 <span>{t.footer.links.supportPix}</span>
               </button>
               <div className="flex items-center gap-2">
@@ -70,7 +70,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Row: Centered Copyright & Powered by Quimera.biz */}
-        <div className="text-center text-[11px] text-muted-theme space-y-0.5 pt-1 pb-2">
+        <div className="text-center text-[12px] sm:text-[11px] text-body-theme dark:text-zinc-300 font-medium opacity-100 space-y-1 pt-2 pb-2">
           <p>
             © {currentYear} {t.common.title}. {t.footer.copyright}
           </p>
@@ -80,7 +80,7 @@ export function Footer() {
               href="https://quimera.biz"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-block font-bold text-[#1e293b] isolate px-1 hover:opacity-90 transition-opacity"
+              className="relative inline-block font-bold text-[#1e293b] isolate px-1 opacity-100 sm:hover:opacity-90 transition-opacity"
             >
               <svg
                 className="absolute -inset-x-[3px] inset-y-0 w-[calc(100%+6px)] h-full z-0 pointer-events-none select-none"

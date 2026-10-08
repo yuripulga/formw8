@@ -70,7 +70,7 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
       </div>
 
       {/* Section 4: Footer (Positioned below FAQ with design system padding) */}
-      <div>
+      <div className="relative z-10">
         <Container className="pt-4 pb-2 sm:pb-3">
           <Footer />
         </Container>

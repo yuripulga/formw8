@@ -24,10 +24,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    const generatedId = React.useId();
+    const inputId = props.id || generatedId;
+    const errorId = `${inputId}-error`;
+    const helperId = `${inputId}-helper`;
+
     return (
       <div className="space-y-1 w-full">
         {label && (
-          <label className="block text-xs font-bold uppercase tracking-wider text-muted-theme">
+          <label
+            htmlFor={inputId}
+            className="block text-xs font-bold uppercase tracking-wider text-muted-theme cursor-pointer"
+          >
             {label}
           </label>
         )}
@@ -39,6 +47,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
           <input
             ref={ref}
+            id={inputId}
+            aria-invalid={Boolean(error)}
+            aria-describedby={error ? errorId : helperText ? helperId : undefined}
             className={`w-full px-4 py-3 input-brand placeholder-slate-400 dark:placeholder-slate-500 text-base font-medium transition-all duration-300 ${
               icon ? "pl-11" : ""
             } ${
@@ -62,11 +73,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {(helperText || error || reserveHelperSpace) ? (
           <div className={`${reserveHelperSpace ? "min-h-[1.25rem]" : ""} text-xs leading-relaxed flex items-center pt-0.5`}>
             {error ? (
-              <p className="text-red-500 dark:text-red-400 font-semibold animate-fadeIn flex items-center gap-1">
+              <p id={errorId} className="text-red-500 dark:text-red-400 font-semibold animate-fadeIn flex items-center gap-1">
                 <span>{error}</span>
               </p>
             ) : helperText ? (
-              <p className="text-muted-theme animate-fadeIn">{helperText}</p>
+              <p id={helperId} className="text-muted-theme animate-fadeIn">{helperText}</p>
             ) : null}
           </div>
         ) : null}

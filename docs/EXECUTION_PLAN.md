@@ -241,10 +241,14 @@
 - [x] Badge de Like com Pincelada Highlight no Passo 4 ([`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):
   - Inserção de ícone sólido de Like (`ThumbsUp` com traço e preenchimento vetoriais precisos) sobre a pincelada orgânica marca-texto amarelo (`#FFE600`) em coluna dedicada à esquerda do título e subtítulo da tela de conclusão do formulário gerado.
   - Passo 3 mantido com layout limpo e padronizado.
-- [x] Deploy em Produção Realizado com Sucesso no Firebase Hosting:
-  - Configuração estática do Next.js (`output: "export"`) gerando 23 rotas SSG pré-renderizadas.
-  - Arquivos de configuração de infraestrutura criados ([`firebase.json`](file:///Users/yuripauluci/Documents/git/formw8/firebase.json) e [`.firebaserc`](file:///Users/yuripauluci/Documents/git/formw8/.firebaserc)) apontando para o projeto `formw8-4796e`.
-  - Deploy finalizado com sucesso. URL de Produção ativa: **https://formw8-4796e.web.app** (e domínios personalizados vinculados).
+- [x] Auditoria Completa de Código, Acessibilidade (WCAG 2.1 AA), SEO e Responsividade Mobile:
+  - **Canetas Marca-texto no Mobile (`HighlighterPenDecoration`):** Refatoração com aceleração por GPU (`translate3d(x, y, 0)`). Ao tocar em qualquer caneta (ex: Rosa no slot 2), a caneta selecionada desliza suavemente na diagonal no eixo Y e X diretamente até a posição `(0, 0)`, enquanto as demais canetas recolhem deslizando para fora pela direita, eliminando qualquer salto visual ou reordenação abrupta no DOM.
+  - **Área de Clique Delimitada na Cordinha (`LampPullCord`):** Cordinha mantida em seu tamanho visual original completo (`h-36`), com container transparente em `pointer-events-none` e os eventos de toque e arraste restritos exclusivamente ao pingente/acorn knob inferior (`r="14"`), eliminando a caixa invisível gigante ao redor da cordinha.
+  - **Stacking Context & Botões 100% Sólidos no Rodapé:** Seção do rodapé em [`<AppShell />`](file:///Users/yuripauluci/Documents/git/formw8/src/components/layout/AppShell.tsx) com `relative z-10`, impedindo que os fundos fixos (`<CloudBackground />` e `<ScreensaverFormBackground />`) atravessem ou lavem o rodapé; botões de Apoiar Pix, Tema e Idioma com fundos 100% sólidos (`bg-white dark:bg-zinc-800`, `bg-[#FFE600]`) e zero classes de opacidade.
+  - **Tipografia do Passo 1:** Título aumentado com impacto visual imersivo (`text-4xl sm:text-6xl md:text-7xl font-black`).
+  - **Barra de Navegação Inferior no Mobile:** Contador de passos e barra de progresso centralizados em linha própria superior, mantendo botões de Voltar e Avançar separados na linha de baixo sem overlap ou quebras em telas de 320px.
+  - **Acessibilidade Completa:** Vinculação estrita de `id`, `htmlFor`, `aria-describedby` e `aria-invalid` nos inputs, `aria-label` no Step 1, `role="radiogroup"` no Step 2, e `id`/`aria-controls`/`aria-labelledby` no FAQ.
+  - **SEO Viewport & Alinhamento ASCII Art:** Configuração de `export const viewport` em `layout.tsx` e alinhamento do `by quimera.biz` na arte ASCII do `README.md`.
 
 
 
