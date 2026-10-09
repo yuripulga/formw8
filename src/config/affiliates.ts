@@ -30,10 +30,12 @@ export const AFFILIATE_CONFIG = {
   },
   higlobe: {
     name: "Higlobe",
-    url:
-      process.env.NEXT_PUBLIC_HIGLOBE_AFFILIATE_URL ||
-      "https://higlobe.com",
-    isAffiliate: Boolean(process.env.NEXT_PUBLIC_HIGLOBE_AFFILIATE_URL),
+    url: process.env.NEXT_PUBLIC_HIGLOBE_AFFILIATE_URL || "https://higlobe.com",
+    isAffiliate: Boolean(
+      process.env.NEXT_PUBLIC_HIGLOBE_AFFILIATE_URL &&
+        process.env.NEXT_PUBLIC_HIGLOBE_AFFILIATE_URL !== "https://higlobe.com" &&
+        process.env.NEXT_PUBLIC_HIGLOBE_AFFILIATE_URL !== "https://higlobe.com/"
+    ),
     couponCode: process.env.NEXT_PUBLIC_HIGLOBE_COUPON || "",
     taglineKey: "platforms.exchangeComparison.higlobeTagline",
     spreadKey: "platforms.exchangeComparison.higlobeSpread",
@@ -41,10 +43,12 @@ export const AFFILIATE_CONFIG = {
   },
   wise: {
     name: "Wise",
-    url:
-      process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL ||
-      "https://wise.com",
-    isAffiliate: Boolean(process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL),
+    url: process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL || "https://wise.com",
+    isAffiliate: Boolean(
+      process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL &&
+        process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL !== "https://wise.com" &&
+        process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL !== "https://wise.com/"
+    ),
     couponCode: process.env.NEXT_PUBLIC_WISE_COUPON || "",
     taglineKey: "platforms.exchangeComparison.wiseTagline",
     spreadKey: "platforms.exchangeComparison.wiseSpread",
@@ -52,10 +56,12 @@ export const AFFILIATE_CONFIG = {
   },
   nomad: {
     name: "Nomad Global",
-    url:
-      process.env.NEXT_PUBLIC_NOMAD_AFFILIATE_URL ||
-      "https://nomadglobal.com",
-    isAffiliate: Boolean(process.env.NEXT_PUBLIC_NOMAD_AFFILIATE_URL),
+    url: process.env.NEXT_PUBLIC_NOMAD_AFFILIATE_URL || "https://nomadglobal.com",
+    isAffiliate: Boolean(
+      process.env.NEXT_PUBLIC_NOMAD_AFFILIATE_URL &&
+        process.env.NEXT_PUBLIC_NOMAD_AFFILIATE_URL !== "https://nomadglobal.com" &&
+        process.env.NEXT_PUBLIC_NOMAD_AFFILIATE_URL !== "https://nomadglobal.com/"
+    ),
     couponCode: process.env.NEXT_PUBLIC_NOMAD_COUPON || "",
     taglineKey: "platforms.exchangeComparison.nomadTagline",
     spreadKey: "platforms.exchangeComparison.nomadSpread",

@@ -677,15 +677,15 @@ export default function Home() {
               </div>
 
               {/* Educational Field Guide - Clean floating cards with Platform Selector */}
-              <div className="space-y-4 pt-2">
+              <div className="space-y-4 pt-6 sm:pt-8">
                 <div className="space-y-1">
-                  <div className="text-xs font-bold uppercase tracking-wider text-muted-theme">
-                    {t.wizard.stepConfirmation.officialFormLabel}: {isPJ
-                      ? t.wizard.stepConfirmation.formTypePJ
-                      : t.wizard.stepConfirmation.formTypePF}
-                  </div>
                   <h3 className="text-base sm:text-lg font-bold text-heading-theme">
-                    {t.wizard.stepConfirmation.mappingTitle}
+                    {t.wizard.stepConfirmation.mappingTitle.replace(
+                      "{formType}",
+                      isPJ
+                        ? t.wizard.stepConfirmation.formTypePJ
+                        : t.wizard.stepConfirmation.formTypePF
+                    )}
                   </h3>
                 </div>
 
@@ -800,9 +800,9 @@ export default function Home() {
                       {displayedFields.map((item) => (
                         <div
                           key={item.id}
-                          className="p-4 rounded-xl bg-card-surface border border-theme space-y-1.5 text-xs shadow-xs"
+                          className="p-3.5 sm:p-4 rounded-xl bg-card-surface border border-theme space-y-2 text-xs shadow-xs"
                         >
-                          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2">
                             <HighlightedText
                               text={item.line}
                               className="text-[13px] sm:text-[14px] font-bold text-heading-theme shrink-0"
@@ -811,14 +811,14 @@ export default function Home() {
                               {item.meaning}
                             </span>
                           </div>
-                          <div className="pt-1 flex items-center justify-between gap-2 bg-app-surface px-3 py-2 rounded-lg border border-theme/40">
-                            <span className="font-mono font-bold text-heading-theme break-all">
+                          <div className="flex items-center justify-between gap-3 bg-app-surface px-3 py-2 rounded-lg border border-theme/40 min-h-[42px]">
+                            <span className="font-mono font-bold text-heading-theme break-all text-xs sm:text-sm">
                               {item.value}
                             </span>
                             <button
                               type="button"
                               onClick={() => handleCopy(item.id, item.value)}
-                              className="shrink-0 inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-muted-theme hover:text-heading-theme hover:bg-card-surface active:scale-95 transition-all py-1.5 px-2.5 rounded-lg border border-theme/50 cursor-pointer min-h-[36px] sm:min-h-[auto]"
+                              className="shrink-0 inline-flex items-center gap-1.5 text-xs font-medium text-muted-theme hover:text-heading-theme active:scale-95 transition-colors cursor-pointer select-none py-1 px-1.5 rounded"
                               title={t.common.copyValue}
                               aria-label={`${t.common.copyValue}: ${item.line}`}
                             >

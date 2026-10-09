@@ -31,9 +31,9 @@ export function ScreensaverFormBackground() {
               src={imageSrc}
               alt="Formulário Fiscal W-8BEN-E"
               fill
-              sizes="(max-width: 768px) 180px, 200px"
+              sizes="(max-width: 768px) 150px, 200px"
               className="object-contain p-1.5"
-              priority
+              loading="lazy"
             />
           </div>
         </div>

@@ -34,7 +34,7 @@ export function CloudBackground() {
           src="/images/starry-night-bg.jpg"
           alt="Céu estrelado à noite no fundo"
           fill
-          priority
+          loading="lazy"
           sizes="100vw"
           className="object-cover object-center"
         />

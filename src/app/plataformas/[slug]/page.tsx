@@ -111,6 +111,11 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
     ],
   };
 
+  // Extract parenthesized text into top badge if present, and clean the h1 title
+  const titleMatch = platform.title.match(/^(.*?)\s*\((.*?)\)$/);
+  const mainTitle = titleMatch ? titleMatch[1].trim() : platform.title;
+  const guideBadge = titleMatch ? titleMatch[2].trim() : "Guia Fiscal para Brasileiros";
+
   return (
     <AppShell showFaq={false}>
       <script
@@ -122,10 +127,10 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
         {/* Page Hero */}
         <div className="space-y-3 text-center sm:text-left">
           <div className="text-xs font-bold uppercase tracking-wider text-muted-theme">
-            {platform.category}
+            {guideBadge}
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-heading-theme tracking-tight leading-tight">
-            {platform.title}
+            {mainTitle}
           </h1>
           <p className="text-sm text-muted-theme leading-relaxed">
             {platform.summary}

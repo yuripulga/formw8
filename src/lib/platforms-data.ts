@@ -94,7 +94,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   upwork: {
     slug: "upwork",
     name: "Upwork",
-    title: "Como Preencher o W-8BEN no Upwork para Freelancers Brasileiros",
+    title: "Como Preencher o W-8BEN no Upwork (Guia para Freelancers Brasileiros)",
     metaDescription: "Evite a retenção automática de 30% no Upwork. Veja como preencher seu W-8BEN no Upwork com CPF ou CNPJ e desbloquear seus saques.",
     category: "Freelance & Redes de Talentos",
     defaultEntityType: "PF",
@@ -152,7 +152,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   "google-adsense": {
     slug: "google-adsense",
     name: "Google AdSense & YouTube",
-    title: "Como Preencher o Formulário Fiscal dos EUA no Google AdSense e YouTube",
+    title: "Como Preencher o Formulário Fiscal dos EUA no Google AdSense e YouTube (Guia Fiscal Brasil)",
     metaDescription: "Guia completo para preencher as informações fiscais dos EUA no Google AdSense e YouTube Studio (W-8BEN / W-8BEN-E) e evitar desconto de 30%.",
     category: "Criadores & Publicidade Digital",
     defaultEntityType: "PF",
@@ -185,7 +185,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   "apple-developer": {
     slug: "apple-developer",
     name: "Apple Developer Program",
-    title: "Formulário Fiscal W-8BEN / W-8BEN-E para Apple Developer Program",
+    title: "Formulário Fiscal W-8BEN / W-8BEN-E para Apple Developer Program (Guia App Store)",
     metaDescription: "Como preencher o formulário tributário dos EUA no App Store Connect para desenvolvedores e empresas do Brasil receberem vendas de aplicativos.",
     category: "Desenvolvedores de Apps & Games",
     defaultEntityType: "PJ",
@@ -214,7 +214,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   steam: {
     slug: "steam",
     name: "Steam Direct (Valve)",
-    title: "Formulário Fiscal W-8 na Steam Direct para Desenvolvedores Brasileiros",
+    title: "Formulário Fiscal W-8 na Steam Direct para Desenvolvedores (Guia Steamworks)",
     metaDescription: "Guia para desenvolvedores de jogos no Brasil preencherem o W-8BEN / W-8BEN-E na Valve Steamworks e receberem royalties sem retenção indevida.",
     category: "Desenvolvedores de Apps & Games",
     defaultEntityType: "PJ",
@@ -243,7 +243,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   "github-sponsors": {
     slug: "github-sponsors",
     name: "GitHub Sponsors & Stripe",
-    title: "Como Preencher o W-8BEN no GitHub Sponsors e Stripe Express",
+    title: "Como Preencher o W-8BEN no GitHub Sponsors e Stripe Express (Guia Open Source)",
     metaDescription: "Receba patrocínios no GitHub Sponsors sem retenção de 30% da IRS. Guia prático de preenchimento do formulário fiscal W-8BEN.",
     category: "Open Source & Desenvolvedores",
     defaultEntityType: "PF",
@@ -268,7 +268,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   stripe: {
     slug: "stripe",
     name: "Stripe & Paddle",
-    title: "Formulário Fiscal W-8 para Stripe e Paddle no Brasil",
+    title: "Formulário Fiscal W-8 para Stripe e Paddle no Brasil (Guia Gateways)",
     metaDescription: "Como preencher o formulário W-8BEN e W-8BEN-E no Stripe Connect, Stripe Express e Paddle para produtos digitais e SaaS.",
     category: "Gateways de Câmbio & Pagamento",
     defaultEntityType: "PJ",
@@ -293,7 +293,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   payoneer: {
     slug: "payoneer",
     name: "Payoneer",
-    title: "Como Preencher o Formulário Fiscal W-8 no Payoneer (Brasil)",
+    title: "Como Preencher o Formulário Fiscal W-8 no Payoneer (Guia de Verificação)",
     metaDescription: "Guia completo para preencher o W-8BEN ou W-8BEN-E no Payoneer e evitar retenção de 30% em recebimentos internacionais no Brasil.",
     category: "Gateways de Câmbio & Pagamento",
     defaultEntityType: "PJ",
@@ -326,7 +326,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   fiverr: {
     slug: "fiverr",
     name: "Fiverr",
-    title: "Formulário Fiscal W-8BEN no Fiverr para Prestadores Brasileiros",
+    title: "Formulário Fiscal W-8BEN no Fiverr para Prestadores Brasileiros (Guia Freelance)",
     metaDescription: "Aprenda a preencher o formulário W-8BEN no Fiverr com seu CPF brasileiro e evite descontos fiscais automáticos nos seus saques.",
     category: "Freelance & Redes de Talentos",
     defaultEntityType: "PF",
@@ -355,7 +355,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   turing: {
     slug: "turing",
     name: "Turing",
-    title: "Como Preencher o W-8BEN-E na Turing para Desenvolvedores de Software",
+    title: "Como Preencher o W-8BEN-E na Turing para Desenvolvedores de Software (Guia PJ Tech)",
     metaDescription: "Guia tributário para engenheiros de software e desenvolvedores contratados pela Turing emitirem o W-8BEN-E via CNPJ (SLU/LTDA).",
     category: "Contratos Internacionais & Folha Global",
     defaultEntityType: "PJ",
@@ -388,7 +388,7 @@ export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
   toptal: {
     slug: "toptal",
     name: "Toptal",
-    title: "Formulário Fiscal W-8BEN / W-8BEN-E na Toptal para Contractors",
+    title: "Formulário Fiscal W-8BEN / W-8BEN-E na Toptal para Contractors (Guia Global Talent)",
     metaDescription: "Instruções passo a passo para desenvolvedores e designers na Toptal preencherem o formulário fiscal dos EUA sem retenção de impostos.",
     category: "Freelance & Redes de Talentos",
     defaultEntityType: "PJ",

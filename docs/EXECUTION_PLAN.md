@@ -159,4 +159,37 @@
 - [x] **Metadados Open-Source no [`package.json`](file:///Users/yuripauluci/Documents/git/formw8/package.json) e [`.env.example`](file:///Users/yuripauluci/Documents/git/formw8/.env.example):**
   - Versão `1.0.0`, repositório, keywords, bugs, homepage e variáveis de ambiente documentadas para forks da comunidade.
 
+---
+
+## 📢 Fase 15: OpenGraph Social Preview, Monetização Programática & Patrocínios (CONCLUÍDO)
+- [x] **Preview de Compartilhamento Social & WhatsApp ([`public/og-image.png`](file:///Users/yuripauluci/Documents/git/formw8/public/og-image.png) e [`src/app/layout.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/layout.tsx)):**
+  - Criação de imagem PNG estática de alta fidelidade (1200x630) com a marca FormW8, slogan e badges de conformidade.
+  - Configuração de tags explícitas `og:image` e `twitter:image` apontando para URL absoluta `https://formw8.com.br/og-image.png` garantindo renderização instantânea no WhatsApp, Telegram, LinkedIn, Twitter e Slack.
+- [x] **Botões de Afiliados Estritos ([`src/config/affiliates.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/config/affiliates.ts) e [`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):**
+  - Validação estrita de `isAffiliate`: apenas plataformas com link de indicação real e ativo (ex: Husky) renderizam botão `btn-brand-primary`. Plataformas com links genéricos ou institucionais renderizam estritamente como `btn-brand-outline`.
+- [x] **Slots de Anúncios Programáticos ([`src/components/ui/ProgrammaticAdSlot.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/ui/ProgrammaticAdSlot.tsx)):**
+  - Componente de anúncio Google AdSense assíncrono com reserva de espaço sem Cumulative Layout Shift (CLS).
+  - Fallback elegante convidando fintechs e contabilidades a anunciarem caso AdSense não esteja configurado.
+- [x] **Canal de Patrocínio Direto no Rodapé ([`src/components/Footer.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/Footer.tsx)):**
+  - Link de contato dedicado para parcerias e anúncios fixos (`t.footer.links.sponsorContact`) com 100% de paridade i18n (`pt-BR.json` e `en-US.json`).
+
+---
+
+## ⚡ Fase 16: Refinamentos de UI no Passo 4, Badges Contextuais e Otimização PageSpeed Mobile (CONCLUÍDO)
+- [x] **Simplificação e Agrupamento do Passo 4 ([`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):**
+  - Remoção da linha redundante "Modelo do Formulário: ...".
+  - Modelo do formulário (`W-8BEN` / `W-8BEN-E`) integrado diretamente entre parênteses ao lado do título da seção ("Preencha o formulário manualmente (W-8BEN-E (Pessoa Jurídica))").
+- [x] **Alinhamento & Botão de Cópia sem Borda ([`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):**
+  - Remoção de bordas/outline do botão de cópia, transformando em botão de texto e ícone minimalista.
+  - Alinhamento vertical perfeito (`min-h-[42px]`, `items-center justify-between`) entre o valor cadastral e a ação de cópia.
+- [x] **Badges Contextuais nos Guias de Plataforma ([`src/app/plataformas/[slug]/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/plataformas/[slug]/page.tsx) e [`src/lib/platforms-data.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/platforms-data.ts)):**
+  - Extração do subtítulo entre parênteses para a badge superior acima do `h1` (ex: "Guia Fiscal para Brasileiros", "Guia Freelance", "Guia App Store", "Guia Steamworks") no lugar do texto genérico da categoria.
+  - `h1` limpo e direto sem repetição dos parênteses.
+- [x] **Otimizações Críticas de Performance Mobile (PageSpeed Insights):**
+  - **Eliminação de CSS `@import` Render-Blocking:** Removido `@import url(...)` do [`globals.css`](file:///Users/yuripauluci/Documents/git/formw8/src/app/globals.css), usando pré-conexão direta e tags `<link rel="preconnect">` no `<head>` de [`layout.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/layout.tsx).
+  - **Compressão de Imagens de Fundo:** `clouds-bg.jpg` e `starry-night-bg.jpg` comprimidos e otimizados com redução de 72% no peso total (de 1.25 MB para 354 KB).
+  - **Lazy Loading de Assets Decorativos:** Removida prioridade de carregamento inicial da imagem do modo escuro em [`CloudBackground.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/ui/CloudBackground.tsx) e do formulário flutuante em [`ScreensaverFormBackground.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/ui/ScreensaverFormBackground.tsx), liberando largura de banda celular e otimizando o LCP e FCP no mobile.
+
+
+
 

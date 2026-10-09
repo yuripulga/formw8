@@ -101,6 +101,12 @@ export function Footer() {
             {t.footer.documents.pjGuide}
           </Link>
           <a
+            href="mailto:info@quimera.biz?subject=Parceria%20e%20Patrocinio%20FormW8"
+            className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors font-semibold"
+          >
+            {t.footer.links.sponsorContact}
+          </a>
+          <a
             href="https://www.irs.gov"
             target="_blank"
             rel="noopener noreferrer"

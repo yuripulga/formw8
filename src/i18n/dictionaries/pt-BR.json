@@ -45,6 +45,12 @@
     "accept": "Entendido",
     "learnMore": "Saiba mais"
   },
+  "ads": {
+    "adLabel": "Publicidade",
+    "sponsorBadge": "Anuncie no FormW8",
+    "sponsorPrompt": "Quer anunciar sua fintech, banco de câmbio ou contabilidade para milhares de profissionais que recebem em dólar?",
+    "contactUs": "Fale com nossa equipe"
+  },
   "footer": {
     "tagline": "Gerador simplificado de formulários fiscais {bold}W-8BEN{/bold} e {bold}W-8BEN-E{/bold} da IRS.",
     "disclaimer": "Ferramenta gratuita sem vínculo com nenhuma instituição ou governo.",
@@ -52,7 +58,8 @@
     "copyright": "Todos os direitos reservados.",
     "poweredBy": "Powered by",
     "links": {
-      "supportPix": "Apoiar com Pix"
+      "supportPix": "Apoiar com Pix",
+      "sponsorContact": "Anuncie / Parcerias"
     },
     "documents": {
       "generatorHome": "Gerador W-8BEN / W-8BEN-E",
@@ -163,7 +170,7 @@
       "officialFormLabel": "Modelo do Formulário",
       "formTypePF": "W-8BEN (Pessoa Física)",
       "formTypePJ": "W-8BEN-E (Pessoa Jurídica)",
-      "mappingTitle": "Preencha o formulário manualmente",
+      "mappingTitle": "Preencha manualmente o formulário {formType}",
       "mappingSubtitle": "",
       "showAllFields": "Ver tudo ({count})",
       "hideAllFields": "Recolher campos",
@@ -182,11 +189,19 @@
         "rippling": "Na Rippling, preencha a aba de Contractor Tax Documents selecionando Corporation e Active NFFE.",
         "upwork": "No Upwork, adicione as informações na aba W-8BEN Tax Information das configurações de pagamento.",
         "google": "No Google AdSense / Play Console, preencha o questionário fiscal dos EUA indicando ausência de atividades físicas nos EUA.",
-        "steam": "No Steamworks, preencha o questionário fiscal da Valve como Corporation / Foreign Source."
+        "steam": "No Steamworks, preencha o questionário fiscal da Valve como Corporation / Foreign Source.",
+        "remote": "Na Remote.com, complete a certificação W-8 em Tax Compliance com dados sem acentos.",
+        "apple": "No App Store Connect, configure as informações tributárias em Agreements, Tax, and Banking.",
+        "github": "No GitHub Sponsors / Stripe Express, preencha o W-8BEN para liberação de repasses.",
+        "stripe": "No Stripe / Paddle, complete o formulário W-8 na aba de compliance fiscal.",
+        "payoneer": "No Centro de Verificação do Payoneer, envie ou assine o formulário fiscal correspondente.",
+        "fiverr": "No painel do Fiverr, complete a declaração fiscal W-8BEN confirmando que é Non-US Person.",
+        "turing": "No portal da Turing, selecione W-8BEN-E para empresa brasileira com Active NFFE.",
+        "toptal": "No portal de pagamentos da Toptal, preencha o formulário e Foreign TIN."
       },
       "exchangeTitle": "Próximo Passo: Onde receber seus dólares?",
       "exchangeSubtitle": "Compare as plataformas de câmbio mais usadas pela comunidade tech brasileira para receber pagamentos internacionais com menor taxa:",
-      "exchangeHuskyTag": "Mais Usada PJ Tech",
+      "exchangeHuskyTag": "Mais Usada PJ",
       "exchangeHuskyDesc": "Abertura rápida de conta PJ em dólar, integração nativa com Deel/Rippling e conversão instantânea via Pix.",
       "exchangeHiglobeTag": "Menor Custo Fixo",
       "exchangeHiglobeDesc": "Taxa fixa reduzida por transferência, recebimento via ACH nos EUA e liquidação Pix 24/7 sem burocracia.",

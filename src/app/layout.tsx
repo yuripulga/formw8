@@ -82,12 +82,22 @@ export const metadata: Metadata = {
     title: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
     description:
       "Gere seu formulário fiscal da IRS preenchido e certificado em menos de 1 minuto. 100% gratuito, sem cadastro e com processamento local no navegador.",
+    images: [
+      {
+        url: "https://formw8.com.br/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
     description:
       "Gere seu formulário fiscal da IRS preenchido e certificado em menos de 1 minuto. 100% client-side e seguro.",
+    images: ["https://formw8.com.br/og-image.png"],
   },
   robots: {
     index: true,

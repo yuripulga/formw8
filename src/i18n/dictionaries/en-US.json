@@ -45,6 +45,12 @@
     "accept": "Got it",
     "learnMore": "Learn more"
   },
+  "ads": {
+    "adLabel": "Sponsored",
+    "sponsorBadge": "Advertise on FormW8",
+    "sponsorPrompt": "Want to promote your fintech, exchange banking, or accounting firm to thousands of contractors receiving USD?",
+    "contactUs": "Get in touch"
+  },
   "footer": {
     "tagline": "Simplified generator for IRS Form {bold}W-8BEN{/bold} and {bold}W-8BEN-E{/bold}.",
     "disclaimer": "Free tool with no affiliation to any institution or government.",
@@ -52,7 +58,8 @@
     "copyright": "All rights reserved.",
     "poweredBy": "Powered by",
     "links": {
-      "supportPix": "Support via Pix"
+      "supportPix": "Support via Pix",
+      "sponsorContact": "Advertise / Partnerships"
     },
     "documents": {
       "generatorHome": "W-8BEN / W-8BEN-E Generator",
@@ -161,7 +168,7 @@
       "officialFormLabel": "Form Model",
       "formTypePF": "W-8BEN (Individual)",
       "formTypePJ": "W-8BEN-E (Entity)",
-      "mappingTitle": "Fill out the form manually",
+      "mappingTitle": "Manually fill out form {formType}",
       "mappingSubtitle": "",
       "showAllFields": "View all ({count})",
       "hideAllFields": "Collapse fields",
@@ -180,11 +187,19 @@
         "rippling": "On Rippling, complete your Contractor Tax Documents choosing Corporation and Active NFFE.",
         "upwork": "On Upwork, add your details in the W-8BEN Tax Information tab within payment settings.",
         "google": "On Google AdSense / Play Console, complete the US tax questionnaire certifying no physical activities in the US.",
-        "steam": "On Steamworks, complete Valve's tax interview as a Corporation / Foreign Source."
+        "steam": "On Steamworks, complete Valve's tax interview as a Corporation / Foreign Source.",
+        "remote": "On Remote.com, complete your W-8 certification in Tax Compliance using ASCII-sanitized details.",
+        "apple": "On App Store Connect, set up tax information in Agreements, Tax, and Banking.",
+        "github": "On GitHub Sponsors / Stripe Express, complete W-8BEN to unlock payouts.",
+        "stripe": "On Stripe / Paddle, submit your W-8 form in the compliance tab.",
+        "payoneer": "In Payoneer's Verification Center, submit or e-sign the required W-8 form.",
+        "fiverr": "On Fiverr dashboard, complete the W-8BEN tax declaration certifying Non-US Person status.",
+        "turing": "On Turing portal, select W-8BEN-E with Active NFFE status for Brazilian corporate entities.",
+        "toptal": "On Toptal payments portal, complete the form and input your Foreign TIN."
       },
       "exchangeTitle": "Next Step: Where to receive your USD payments?",
       "exchangeSubtitle": "Compare the most popular and secure FX providers used by international tech contractors for lowest currency exchange fees:",
-      "exchangeHuskyTag": "Top Pick for Tech Entities",
+      "exchangeHuskyTag": "Top Pick for PJ",
       "exchangeHuskyDesc": "Fast USD business account opening, native Deel/Rippling integration, and instant conversion to local currency via Pix.",
       "exchangeHiglobeTag": "Lowest Fixed Cost",
       "exchangeHiglobeDesc": "Low flat fee per transfer, US ACH account receipt, and 24/7 instant local payouts.",
