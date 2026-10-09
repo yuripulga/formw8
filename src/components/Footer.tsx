@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useI18n } from "@/i18n/context";
+import { SPONSOR_MAILTO } from "@/config/contact";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BrandLogo } from "@/components/ui/BrandLogo";
@@ -101,7 +102,7 @@ export function Footer() {
             {t.footer.documents.pjGuide}
           </Link>
           <a
-            href="mailto:info@quimera.biz?subject=Parceria%20e%20Patrocinio%20FormW8"
+            href={SPONSOR_MAILTO}
             className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors font-semibold"
           >
             {t.footer.links.sponsorContact}

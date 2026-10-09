@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useI18n } from "@/i18n/context";
+import { SPONSOR_MAILTO } from "@/config/contact";
 
 interface ProgrammaticAdSlotProps {
   slotId?: string;
@@ -56,7 +57,7 @@ export function ProgrammaticAdSlot({
         <p className="text-xs text-muted-theme">
           {t.ads.sponsorPrompt}{" "}
           <a
-            href="mailto:info@quimera.biz?subject=Parceria%20e%20Patrocinio%20FormW8"
+            href={SPONSOR_MAILTO}
             className="font-bold text-heading-theme underline underline-offset-2 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
           >
             {t.ads.contactUs}

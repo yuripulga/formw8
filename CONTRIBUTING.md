@@ -53,7 +53,9 @@ Open [http://localhost:48721](http://localhost:48721) in your browser.
 3. **Static Analysis & Type Safety:**
    Before submitting your Pull Request, ensure that TypeScript and build checks pass cleanly:
    ```bash
-   npx tsc --noEmit
+   npm run typecheck
+   npm run lint
+   npm test
    npm run build
    ```
 
@@ -79,6 +81,6 @@ Nenhum dado pessoal (Nome, CPF, CNPJ, Endereço) pode ser persistido ou enviado 
 ### 📐 Padrões de Código
 * **i18n Obrigatório:** Nunca utilize textos fixos na interface; utilize sempre os dicionários `pt-BR.json` e `en-US.json`.
 * **Design System:** Utilize as classes do Tailwind e variáveis de tema padronizadas.
-* **Verificação:** Rode `npx tsc --noEmit` e `npm run build` antes de abrir o PR.
+* **Verificação:** Rode `npm run typecheck`, `npm run lint`, `npm test` e `npm run build` antes de abrir o PR.
 
 </details>

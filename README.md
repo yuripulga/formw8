@@ -130,7 +130,7 @@ Contributions are welcome! Please check our [Contributing Guidelines (CONTRIBUTI
 
 ## ⚖️ Legal Disclaimer
 
-**FormW8** is an independent, open-source educational utility. It has no affiliation with the *Internal Revenue Service (IRS)*, the *Receita Federal do Brasil*, or any third-party payout platforms mentioned. Using this tool does not constitute formal legal, accounting, or tax advice.
+**FormW8** is an independent, open-source educational utility. It has no affiliation with the *Internal Revenue Service (IRS)*, the *Receita Federal do Brasil*, or any third-party payout platforms mentioned. Using this tool does not constitute formal legal, accounting, or tax advice. The generated forms are signed under penalty of perjury: you are solely responsible for reviewing every field, and for confirming your tax classification (e.g. Corporation, Active or Passive NFFE) with a qualified accountant. The software is provided "as is", without warranty of any kind (see the MIT [LICENSE](LICENSE)).
 
 ---
 
@@ -257,7 +257,7 @@ Contribuições da comunidade são muito bem-vindas! Se você deseja sugerir nov
 
 ### ⚖️ Aviso Legal (Disclaimer)
 
-O **FormW8** é uma ferramenta de código aberto independente, educacional e auxiliar. Não possui qualquer vínculo com o *Internal Revenue Service (IRS)* dos Estados Unidos, com a *Secretaria da Receita Federal do Brasil* ou com as plataformas de pagamento mencionadas. O uso desta ferramenta não substitui a consulta a contadores ou advogados tributaristas qualificados.
+O **FormW8** é uma ferramenta de código aberto independente, educacional e auxiliar. Não possui qualquer vínculo com o *Internal Revenue Service (IRS)* dos Estados Unidos, com a *Secretaria da Receita Federal do Brasil* ou com as plataformas de pagamento mencionadas. O uso desta ferramenta não substitui a consulta a contadores ou advogados tributaristas qualificados. Os formulários gerados são assinados sob pena de perjúrio: você é o único responsável por revisar cada campo e por confirmar sua classificação fiscal (ex.: Corporation, Active ou Passive NFFE) com um contador. O software é fornecido "como está", sem garantias (veja a [LICENSE](LICENSE) MIT).
 
 ---
 
