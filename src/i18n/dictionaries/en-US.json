@@ -21,7 +21,12 @@
     "restart": "Start over",
     "clearData": "Clear my data from browser",
     "dataClearedNotice": "Your data has been removed from browser memory.",
-    "close": "Close"
+    "close": "Close",
+    "clearSearch": "Clear search",
+    "lampAriaLabel": "Light and Theme Switcher",
+    "highlighterSelector": "Highlighter Color Picker",
+    "selectColor": "Select color {{name}}",
+    "activateColor": "Activate highlight {{name}}"
   },
   "search": {
     "buttonText": "Search...",
@@ -39,12 +44,6 @@
       "faq": "Frequently Asked Questions (FAQ)"
     }
   },
-  "cookies": {
-    "title": "Privacy & Cookies",
-    "description": "We use cookies and anonymous metrics to keep this tool free and improve your experience.",
-    "accept": "Got it",
-    "learnMore": "Learn more"
-  },
   "ads": {
     "adLabel": "Sponsored",
     "sponsorBadge": "Advertise on FormW8",
@@ -52,6 +51,7 @@
     "contactUs": "Get in touch"
   },
   "footer": {
+    "navLabel": "Official Guides and Documents",
     "tagline": "Simplified generator for IRS Form {bold}W-8BEN{/bold} and {bold}W-8BEN-E{/bold}.",
     "disclaimer": "Free tool with no affiliation to any institution or government.",
     "openSourceAppeal": "{openSource}Open-source{/openSource} project built to help everyone. If this helped you, support with Pix",
@@ -73,7 +73,9 @@
       "Remote Work for US Companies",
       "US Contractor Tax Form",
       "Work Abroad US Clients",
-      "Avoid 30% Withholding Tax",
+      "Work for US Clients",
+      "Get Paid in USD",
+      "International Contractor Contract",
       "Deel W-8BEN",
       "Rippling W-8BEN-E",
       "Upwork 0% Withholding",
@@ -81,7 +83,7 @@
       "Google AdSense US Tax Info",
       "Apple Developer & Steam W-8",
       "Foreign Source 0% Withholding",
-      "Brazilian Entity W-8BEN-E"
+      "Exporting Tech & Design Services"
     ],
     "relatedSearches": [
       { "text": "How to avoid 30% tax withholding on US platforms", "faqId": "payment-withheld-30" },
@@ -117,18 +119,29 @@
       "question": "How do you receive international payments?",
       "subtitle": "",
       "optionPF": "Individual (CPF)",
-      "descriptionPF": "Form W-8BEN for individuals without a company.",
-      "optionPJ": "Company in Brazil (CNPJ)",
-      "descriptionPJ": "Form W-8BEN-E for companies (SLU, LTDA, MEI).",
+      "descriptionPF": "Form W-8BEN for freelancers and independent contractors without a company.",
+      "optionMei": "MEI (Brazilian Microentrepreneur)",
+      "descriptionMei": "Form W-8BEN via CPF. International platforms treat MEIs as individuals in the US.",
+      "optionPJ": "Company in Brazil (SLU, LTDA)",
+      "descriptionPJ": "Form W-8BEN-E for companies with CNPJ.",
+      "segmentSectionTitle": "Company Classification (Chapter 4)",
+      "segmentHoldingTitle": "Holding / Passive Income",
+      "segmentHoldingSubtitle": "Over 50% of revenue comes from investments, interest, dividends, or rent. Requires declaring U.S. owners (Part XXVI).",
+      "segmentServicesTitle": "Service Provider",
+      "segmentServicesSubtitle": "Software development, design, marketing, or consulting with active operational revenue. Standard classification for Deel & Upwork.",
+      "passiveNffeAlert": "Important: For Passive NFFE, IRS Form W-8BEN-E requires certifying whether the company has Substantial U.S. Owners (Part XXVI). The document will be generated with Passive NFFE selected.",
+      "pjCorporationNotice": "Automatic classification as Corporation (standard for Brazilian SLU and LTDA entities). For other corporate structures, consult your accountant.",
       "helpLink": "I don't know this answer",
-      "helpTitle": "What is the tax difference in Brazil?",
-      "helpPF": "• Individual (CPF): Taxes via Carnê-Leão in Brazil at progressive rates up to 27.5% on gross revenue (typically viable only for low monthly revenue).",
-      "helpPJ": "• Company (CNPJ): Taxes via Simples Nacional (Annex III with Factor R) or Lucro Presumido, reducing effective tax rate to 6% - 15% with full PIS/COFINS exemption on software/service export.",
+      "helpTitle": "What is the difference between Individual, MEI, and Company?",
+      "helpPF": "• Individual (CPF): Taxes via Carnê-Leão in Brazil at progressive rates up to 27.5% on gross revenue (recommended for lower revenue).",
+      "helpMei": "• MEI: The IRS and platforms like Deel treat MEI as an individual in the US (W-8BEN with CPF). In Brazil, you continue issuing your municipal invoice normally.",
+      "helpPJ": "• Company SLU / LTDA (CNPJ): Taxes in Brazil via Simples Nacional or Lucro Presumido (6% to 15% on exports). Generates Form W-8BEN-E as Corporation.",
       "explanation": ""
     },
     "stepSummary": {
       "thankYou": "Thank you, {{name}}!",
       "selectionPF": "You selected Individual (Form W-8BEN).",
+      "selectionMei": "You selected MEI (Form W-8BEN via CPF).",
       "selectionPJ": "You selected Company (Form W-8BEN-E)."
     },
     "stepTaxAndAddress": {
@@ -136,6 +149,7 @@
       "subtitle": "",
       "taxIdLabelPF": "Your CPF",
       "taxIdPlaceholderPF": "000.000.000-00",
+      "meiTaxIdHelper": "For MEI, enter your CPF — this is the identifier accepted by the IRS and Deel for MEI owners.",
       "taxIdOrCompanyLabelPJ": "Company CNPJ or Legal Name",
       "taxIdOrCompanyPlaceholderPJ": "Enter company CNPJ or registered name",
       "taxIdLabelPJ": "Company CNPJ",
@@ -155,11 +169,16 @@
       "cnpjSearching": "Fetching CNPJ data...",
       "cnpjFound": "Company data autofilled!",
       "manualAddressToggle": "Enter address manually",
-      "explanation": "Your CPF or CNPJ is entered in the Foreign Tax Identifying Number (FTIN) field."
+      "privacyNotice": "When entering CNPJ or ZIP code, your browser queries public Brazilian APIs (ViaCEP/BrasilAPI) to autocomplete your address. 100% manual entry is always supported.",
+      "explanation": "Your CPF or CNPJ goes into the Foreign Tax Identifying Number (FTIN) field, labeled as TIN or Foreign TIN on platforms like Deel."
     },
     "stepConfirmation": {
       "question": "All done! Your form is ready",
       "subtitle": "Download the filled PDF or check the field mapping below.",
+      "meiInfoTitle": "Note regarding your MEI status",
+      "meiInfoDesc": "Your Form W-8BEN was generated with your CPF. International platforms (Deel, Upwork, Remote) treat Brazilian MEI as an individual (Disregarded Entity). In Brazil, you can continue issuing your invoices through your MEI CNPJ normally.",
+      "passiveNffeInfoTitle": "Note regarding Passive NFFE status",
+      "passiveNffeInfoDesc": "Your Form W-8BEN-E was filled with Passive NFFE certification (Line 5 and Part XXVI). If your company has Substantial U.S. Owners, consult your accountant to list their details in Part XXX.",
       "pdfAction": "Download Filled PDF",
       "pdfActionDesc": "Document ready to sign and submit.",
       "previewTitle": "Pre-Filled PDF Preview",
@@ -168,6 +187,14 @@
       "officialFormLabel": "Form Model",
       "formTypePF": "W-8BEN (Individual)",
       "formTypePJ": "W-8BEN-E (Entity)",
+      "fatcaNoticeTitle": "FATCA Tax Classification: Active NFFE",
+      "fatcaNoticeText": "Your Form W-8BEN-E is pre-filled with standard Chapter 4 FATCA status: Active NFFE (operating business with over 50% active operational revenue). If your company is an investment holding or earns over 50% passive income, consult your accountant for Passive NFFE classification.",
+      "fatcaQuestionTitle": "Company FATCA Classification (Chapter 4)",
+      "fatcaQuestionSubtitle": "Confirm the nature of your company's revenue for accurate IRS classification:",
+      "fatcaOptionActiveTitle": "Active NFFE (Recommended for Tech, Services & Consulting)",
+      "fatcaOptionActiveDesc": "Over 50% of gross revenue comes from active service provision or software development.",
+      "fatcaOptionPassiveTitle": "Passive NFFE (Holdings & Financial Assets)",
+      "fatcaOptionPassiveDesc": "Over 50% of gross revenue is passive (dividends, interest, financial investments, or passive royalties).",
       "mappingTitle": "Manually fill out form {formType}",
       "mappingSubtitle": "",
       "showAllFields": "View all ({count})",
@@ -234,6 +261,9 @@
       "lineTreatyLabel": "{highlight}Part III.{/highlight} Claim of Tax Treaty Benefits",
       "lineTreatyMeaning": "Tax treaty exemption (0% Withholding)",
       "lineTreatyPlatform": "Tax Treaty Benefits (N/A / None)",
+      "countryValue": "Brazil",
+      "chapter3Value": "Corporation",
+      "chapter4Value": "Active NFFE",
       "lineSignLabel": "{highlight}Part III / XXX.{/highlight} Certification & Signature",
       "lineSignMeaning": "Authorized signature and date in US format (MM-DD-YYYY)",
       "lineSignPlatform": "Digital Signature & Date"
@@ -243,6 +273,8 @@
       "taxIdRequired": "Enter your CPF or CNPJ.",
       "taxIdInvalidPF": "Invalid CPF. Please verify the digits entered.",
       "taxIdInvalidPJ": "Invalid CNPJ. Please verify the digits entered.",
+      "taxIdCnpjInPfError": "You entered a CNPJ. For Individual or MEI, enter your 11-digit CPF.",
+      "taxIdCpfInPjError": "You entered a CPF. For Company, enter your 14-digit CNPJ.",
       "companyNameRequired": "Enter your company legal name.",
       "addressRequired": "Enter your street address (street and number).",
       "cityRequired": "Enter your city.",
@@ -322,7 +354,7 @@
       {
         "id": "privacy-security",
         "question": "Does FormW8 store my personal or tax data on servers?",
-        "answer": "No. FormW8 is built on a 100% client-side, Zero-Data Retention architecture. All processing, sanitization, public CEP/CNPJ auto-completion, and PDF generation occur exclusively inside your web browser memory. No personal, financial, or tax data is transmitted to or stored on any server or database."
+        "answer": "No. FormW8 is built on a 100% client-side, Zero-Data architecture. We operate zero storage servers and zero databases. All PDF generation and ASCII sanitization happen strictly in your browser memory. Only when you choose to input a CNPJ or ZIP code, your browser queries public Brazilian open directories (ViaCEP, BrasilAPI, Minha Receita) to autocomplete your address. 100% manual, offline filling is always available."
       },
       {
         "id": "payment-withheld-30",

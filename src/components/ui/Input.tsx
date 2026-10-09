@@ -8,6 +8,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactNode;
   isSuccess?: boolean;
   isLoading?: boolean;
+  highlighted?: boolean;
   reserveHelperSpace?: boolean;
 }
 
@@ -20,6 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       icon,
       isSuccess,
       isLoading,
+      highlighted,
       reserveHelperSpace = false,
       className = "",
       ...props
@@ -59,6 +61,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 ? "pr-11"
                 : ""
             } ${
+              highlighted
+                ? "!border-emerald-500 !ring-2 !ring-emerald-500/30 dark:!border-emerald-400"
+                : ""
+            } ${
               isSuccess
                 ? "!border-emerald-500 !ring-1 !ring-emerald-500/25 dark:!border-emerald-400 dark:!ring-emerald-400/25"
                 : ""
@@ -79,9 +85,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
           ) : null}
         </div>
-        {/* Helper & Error container */}
+        {/* Helper & Error container with aria-live */}
         {(helperText || error || reserveHelperSpace) ? (
-          <div className={`${reserveHelperSpace ? "min-h-[1.25rem]" : ""} text-xs leading-relaxed flex items-center pt-0.5`}>
+          <div
+            aria-live="polite"
+            className={`${reserveHelperSpace ? "min-h-[1.25rem]" : ""} text-xs leading-relaxed flex items-center pt-0.5`}
+          >
             {error ? (
               <p id={errorId} className="text-red-500 dark:text-red-400 font-semibold animate-fadeIn flex items-center gap-1">
                 <span>{error}</span>

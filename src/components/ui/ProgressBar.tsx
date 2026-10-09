@@ -24,7 +24,7 @@ export function ProgressBar({ currentStep, totalSteps, className = "" }: Progres
               }}
               className={`h-full flex-1 rounded-full transition-all duration-300 ${
                 isCompleted
-                  ? "shadow-xs"
+                  ? "shadow-sm"
                   : "bg-slate-200/80 dark:bg-zinc-800/80"
               }`}
             />

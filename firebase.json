@@ -1,86 +1,144 @@
 {
   "hosting": {
     "public": "out",
+    "cleanUrls": true,
+    "trailingSlash": false,
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
+    "redirects": [
+      {
+        "source": "/w8ben",
+        "destination": "/w8ben-pessoa-fisica",
+        "type": 301
+      },
+      {
+        "source": "/w8bene",
+        "destination": "/w8bene-pessoa-juridica",
+        "type": 301
+      },
       {
         "source": "/deel",
-        "destination": "/plataformas/deel.html"
+        "destination": "/plataformas/deel",
+        "type": 301
       },
       {
         "source": "/rippling",
-        "destination": "/plataformas/rippling.html"
+        "destination": "/plataformas/rippling",
+        "type": 301
       },
       {
         "source": "/upwork",
-        "destination": "/plataformas/upwork.html"
+        "destination": "/plataformas/upwork",
+        "type": 301
       },
       {
         "source": "/remote",
-        "destination": "/plataformas/remote.html"
+        "destination": "/plataformas/remote",
+        "type": 301
       },
       {
         "source": "/google-adsense",
-        "destination": "/plataformas/google-adsense.html"
+        "destination": "/plataformas/google-adsense",
+        "type": 301
       },
       {
         "source": "/apple-developer",
-        "destination": "/plataformas/apple-developer.html"
+        "destination": "/plataformas/apple-developer",
+        "type": 301
       },
       {
         "source": "/steam",
-        "destination": "/plataformas/steam.html"
+        "destination": "/plataformas/steam",
+        "type": 301
       },
       {
         "source": "/github-sponsors",
-        "destination": "/plataformas/github-sponsors.html"
+        "destination": "/plataformas/github-sponsors",
+        "type": 301
       },
       {
         "source": "/stripe",
-        "destination": "/plataformas/stripe.html"
+        "destination": "/plataformas/stripe",
+        "type": 301
       },
       {
         "source": "/payoneer",
-        "destination": "/plataformas/payoneer.html"
+        "destination": "/plataformas/payoneer",
+        "type": 301
       },
       {
         "source": "/fiverr",
-        "destination": "/plataformas/fiverr.html"
+        "destination": "/plataformas/fiverr",
+        "type": 301
       },
       {
         "source": "/turing",
-        "destination": "/plataformas/turing.html"
+        "destination": "/plataformas/turing",
+        "type": 301
       },
       {
         "source": "/toptal",
-        "destination": "/plataformas/toptal.html"
-      },
-      {
-        "source": "/w8ben-pessoa-fisica",
-        "destination": "/w8ben-pessoa-fisica.html"
-      },
-      {
-        "source": "/w8bene-pessoa-juridica",
-        "destination": "/w8bene-pessoa-juridica.html"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
+        "destination": "/plataformas/toptal",
+        "type": 301
       }
     ],
-    "cleanUrls": true,
-    "trailingSlash": false,
     "headers": [
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|woff|woff2|ttf|pdf)",
+        "source": "**",
+        "headers": [
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.adtrafficquality.google https://www.googletagservices.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https://brasilapi.com.br https://minhareceita.org https://publica.cnpj.ws https://viacep.com.br https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://*.google.com; frame-src 'self' https://googleads.g.doubleclick.net https://*.googlesyndication.com https://tpc.googlesyndication.com https://*.adtrafficquality.google https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=63072000; includeSubDomains; preload"
+          }
+        ]
+      },
+      {
+        "source": "_next/static/**",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=31536000"
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "forms/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400, stale-while-revalidate=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400, stale-while-revalidate=604800"
           }
         ]
       }

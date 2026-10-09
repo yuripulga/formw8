@@ -11,7 +11,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2.5 rounded-xl bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 border border-slate-300 dark:border-zinc-700 shadow-xs active:scale-95 transition-transform cursor-pointer"
+      className="p-2.5 rounded-xl bg-white dark:bg-zinc-800 text-slate-900 dark:text-zinc-100 border border-slate-300 dark:border-zinc-700 shadow-sm active:scale-95 transition-transform cursor-pointer"
       title={theme === "dark" ? t.common.themeLight : t.common.themeDark}
       aria-label={theme === "dark" ? t.common.themeLight : t.common.themeDark}
     >

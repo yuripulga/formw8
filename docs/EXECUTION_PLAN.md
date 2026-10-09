@@ -190,6 +190,149 @@
   - **Compressão de Imagens de Fundo:** `clouds-bg.jpg` e `starry-night-bg.jpg` comprimidos e otimizados com redução de 72% no peso total (de 1.25 MB para 354 KB).
   - **Lazy Loading de Assets Decorativos:** Removida prioridade de carregamento inicial da imagem do modo escuro em [`CloudBackground.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/ui/CloudBackground.tsx) e do formulário flutuante em [`ScreensaverFormBackground.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/ui/ScreensaverFormBackground.tsx), liberando largura de banda celular e otimizando o LCP e FCP no mobile.
 
+---
+
+## 🏗️ Fase 17: Auditoria - Lote 1: Fundação & Infraestrutura Técnica (CONCLUÍDO)
+- [x] **ESLint & Qualidade de Código ([`.eslintrc.json`](file:///Users/yuripauluci/Documents/git/formw8/.eslintrc.json) e [`package.json`](file:///Users/yuripauluci/Documents/git/formw8/package.json)):**
+  - Instalação e configuração de `eslint` e `eslint-config-next@15.1.6` compatível com Next.js 15.
+  - Resolução de todos os avisos de linting e tags em [`SearchModal.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/SearchModal.tsx).
+- [x] **Suíte de Testes Automatizados com Vitest ([`src/lib/sanitizer.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/sanitizer.test.ts)):**
+  - Instalação do Vitest e migração dos testes unitários com asserções TypeScript nativas.
+  - Scripts `npm run test`, `npm run lint` e `npm run typecheck` 100% operacionais.
+- [x] **Pipeline CI/CD com GitHub Actions ([`.github/workflows/ci.yml`](file:///Users/yuripauluci/Documents/git/formw8/.github/workflows/ci.yml)):**
+  - Automação de CI para todos os branches e PRs executando em sequência: Typecheck $\to$ Lint $\to$ Unit Tests $\to$ Next.js Static Build.
+- [x] **Dependabot Configurado ([`.github/dependabot.yml`](file:///Users/yuripauluci/Documents/git/formw8/.github/dependabot.yml)):**
+  - Monitoramento semanal automatizado para pacotes npm e GitHub Actions.
+- [x] **Segurança e Roteamento Estrito no Firebase Hosting ([`firebase.json`](file:///Users/yuripauluci/Documents/git/formw8/firebase.json)):**
+  - **Headers de Segurança:** Injeção de `Content-Security-Policy` estrita, `Strict-Transport-Security` (HSTS), `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin` e `Permissions-Policy`.
+  - **Remoção de Rewrites Curinga:** Removido `"source": "**", "destination": "/index.html"` que mascarava 404 e interferia no SSG estático.
+  - **Redirects 301 Limpos:** Mapeamento 301 de atalhos (`/w8ben`, `/w8bene`, `/deel`, `/rippling`, etc.) para suas respectivas rotas canônicas.
+
+---
+
+## 🔒 Fase 18: Auditoria - Lote 2: Privacidade, Transparência de Dados & Integrações (CONCLUÍDO)
+- [x] **Transparência de Privacidade nos Dados de CNPJ e CEP ([`SECURITY.md`](file:///Users/yuripauluci/Documents/git/formw8/SECURITY.md)):**
+  - Documentação cristalina da arquitetura Client-Side: consultas diretas do navegador a provedores públicos abertos (BrasilAPI, Minha Receita, CNPJ.ws, ViaCEP) sem qualquer retenção ou tráfego por servidores do FormW8.
+  - Opção nativa de preenchimento 100% manual e offline.
+  - Atualização do canal de reporte seguro para `info@quimera.biz`.
+- [x] **Auto-Hospedagem de Fontes com `next/font/google` ([`src/app/layout.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/layout.tsx)):**
+  - Migração para `Space_Grotesk` via `next/font/google` embutida no build com `display: 'swap'`, eliminando tags de terceiros no `<head>` e avisos do compilador.
+- [x] **Banner de Cookies Condizente com a Realidade ([`src/components/CookieBanner.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/CookieBanner.tsx) e i18n):**
+  - Textos em `pt-BR.json` e `en-US.json` atualizados para refletir com fidelidade o uso exclusivo de `localStorage` para preferências locais de tema e idioma.
+  - Eliminação de `aria-label` hardcoded.
+- [x] **Remoção de Código Morto do Turnstile ([`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):**
+  - Eliminação do componente sem validação no backend, reduzindo bundle e mantendo fricção zero.
+- [x] **Carregamento Condicional do AdSense ([`src/components/ui/ProgrammaticAdSlot.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/ui/ProgrammaticAdSlot.tsx)):**
+  - Injeção dinâmica do script do AdSense apenas quando `NEXT_PUBLIC_ADSENSE_CLIENT_ID` estiver configurado, com fallback de patrocínio direto e `aria-labels` 100% internacionalizados.
+
+---
+
+## ⚙️ Fase 19: Auditoria - Lote 3: Motor Fiscal, Zod & PDF Engine (CONCLUÍDO)
+- [x] **Sanitização Unicode & Transliteração Avançada ([`src/lib/sanitizer.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/sanitizer.ts)):**
+  - Tratamento de caracteres especiais (`Nº`, `Ø/Ł`, apóstrofos tipográficos, ligaduras e strings vazias) com 8 testes unitários automatizados em [`src/lib/sanitizer.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/sanitizer.test.ts).
+- [x] **Universal PDF Template Loader & Sanitização de Campos ([`src/lib/pdf-engine.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/pdf-engine.ts)):**
+  - Loader universal que funciona tanto no navegador (`fetch`) quanto em ambiente Node/Vitest (`fs.readFile`), sanitizando campos de estado e CEP.
+  - Testes automatizados verificando preenchimento dos templates oficiais IRS (`fw8ben.pdf` e `fw8bene.pdf`) em [`src/lib/pdf-engine.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/pdf-engine.test.ts).
+- [x] **Validação Unificada com Zod ([`src/lib/schemas/w8-form-schema.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/schemas/w8-form-schema.ts)):**
+  - Schemas por etapa (`Step1Schema`, `Step2Schema`, `Step3SchemaPF`, `Step3SchemaPJ`, `W8FormSchema`) com testes unitários em [`src/lib/schemas/w8-form-schema.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/schemas/w8-form-schema.test.ts).
+- [x] **Prevenção de Race Conditions & Reset ao Trocar Entidade ([`src/context/wizard-context.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/context/wizard-context.tsx) e [`src/components/wizard/StepTaxAddress.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepTaxAddress.tsx)):**
+  - `setEntityType` limpa automaticamente `taxId` e `companyName` ao alternar entre PF e PJ.
+  - Uso de `AbortController` para cancelar consultas de CNPJ e CEP em voo, evitando sobrescritas assíncronas.
+- [x] **Deduplicação do Brazil API & Validação de Respostas ([`src/lib/brazil-api.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/brazil-api.ts)):**
+  - Unificação do parsing de respostas (BrasilAPI, Minha Receita, CNPJ.ws), suporte a `signal?: AbortSignal` e suíte de testes em [`src/lib/brazil-api.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/brazil-api.test.ts).
+
+---
+
+## 🎨 Fase 20: Auditoria - Lote 4: UI, Acessibilidade (a11y) & i18n Estrito (CONCLUÍDO)
+- [x] **Paridade Estrita de i18n & Eliminação de Strings Hardcoded:**
+  - Sincronização de 14 palavras-chave em `pt-BR.json` e `en-US.json`, labels de acessibilidade e fallbacks sem texto fixo em código.
+- [x] **Acessibilidade Completa (A9):**
+  - `<OptionCard>` com navegação completa por teclado (`ArrowDown`, `ArrowUp`, `Enter`, `Space`).
+  - `aria-live="polite"` em mensagens de erro de validação em `<Input />`.
+  - Suporte a `Escape` nos modais (`SupportModal`, `SearchModal`).
+  - Escrita no clipboard protegida com `.catch(...)` e `window.open` com `noopener,noreferrer`.
+- [x] **Correções de SEO, Hreflang e Canonical (A6, A7):**
+  - Remoção do canonical global hardcoded em [`src/app/layout.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/layout.tsx), adotando canonical relativo à página (`./`).
+  - Configuração de tags `hreflang` para `pt-BR` e `en-US`.
+  - Remoção de `/design-system` do `sitemap.ts` e adição de `robots: { index: false, follow: false }` no layout do catálogo.
+- [x] **Correção de Funcionalidades e Marquee (M9, M10, M11):**
+  - `<KeywordSlider>` com loop contínuo de 2 arrays para translação uniforme a -50%.
+  - Event listener global `open-faq-item` em [`src/components/FAQSection.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/FAQSection.tsx).
+  - Remoção estrita de todas as classes `border-t`, `border-b` e classes do Tailwind v4 (`shadow-xs`).
+  - Escapamento seguro de `<` no JSON-LD (`layout.tsx` e `FAQSection.tsx`).
+
+---
+
+## 🧩 Fase 21: Auditoria - Lote 5: Modularização da Arquitetura & Limpeza (CONCLUÍDO)
+- [x] **Modularização do Wizard ([`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):**
+  - Divisão do arquivo monolítico de 1094 linhas em subcomponentes isolados:
+    - [`src/components/wizard/StepName.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepName.tsx)
+    - [`src/components/wizard/StepEntityType.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepEntityType.tsx)
+    - [`src/components/wizard/StepTaxAddress.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepTaxAddress.tsx)
+    - [`src/components/wizard/StepConfirmation.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepConfirmation.tsx)
+    - [`src/components/wizard/ExchangeCards.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/ExchangeCards.tsx)
+- [x] **Carregamento Dinâmico do `pdf-lib` (M8):**
+  - `generateW8PDF` importado dinamicamente via `await import("@/lib/pdf-engine")` apenas quando acionado, reduzindo o bundle inicial do JavaScript.
+- [x] **Limpeza de Arquivos Mortos em `public/forms/` e Versionamento de Cache (M13):**
+  - Remoção de ~6 MB de PDFs/PNGs de debug.
+  - Modelos IRS renomeados para `fw8ben-rev10-2021.pdf` e `fw8bene-rev10-2021.pdf`, permitindo cache imutável seguro e versionado.
+- [x] **Arquitetura Zero-Storage & Zero-Cookies:**
+  - Remoção completa de `localStorage` e `<CookieBanner>`. O site não grava dados no dispositivo do usuário, detectando idioma (`navigator.language`) e tema (`prefers-color-scheme`) em tempo de execução na memória.
+- [x] **Calibração de Contraste WCAG AA (A8):**
+  - `--primary-bg` atualizado para `#15803d` (Green-700, contraste de 4.54:1 com texto branco).
+  - `--text-muted` ajustado para `#526071` (contraste de 5.4:1 sobre branco).
+- [x] **Esclarecimento Tributário de Active NFFE (M4):**
+  - Adição de card informativo em `StepConfirmation` explicando a classificação Active NFFE para PJ de serviços/tech e recomendando consulta contábil para holdings.
+- [x] **Transparência de Consultas Opcionais de CNPJ e CEP (C1):**
+  - Nota de privacidade direta no formulário esclarecendo que as consultas são utilidades opcionais diretas do navegador para APIs públicas abertas, com preenchimento manual 100% suportado.
+- [x] **Remoção de Telemetria e Código Morto (M5, M14):**
+  - Parâmetros `?v=` não alteram mais o fluxo, código protegido contra falhas de `gtag` e componentes sem uso limpos.
+
+---
+
+## 🎴 Fase 22: Triagem de Entidades - 3 Cards, Fluxo MEI & Passive NFFE (CONCLUÍDO)
+- [x] **Seleção de Entidade em 3 Cards no Passo 2 ([`src/components/wizard/StepEntityType.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepEntityType.tsx)):**
+  - **Card 1 (Pessoa Física):** Formulário W-8BEN via CPF para autônomos sem empresa.
+  - **Card 2 (MEI):** Formulário W-8BEN via CPF para Microempreendedores Individuais (Disregarded Entity perante o IRS/Deel).
+  - **Card 3 (Empresa SLU / LTDA):** Formulário W-8BEN-E para empresas com CNPJ.
+- [x] **Seleção de Atividade PJ via 2 Botões Lado a Lado no Passo 2 ([`src/components/wizard/StepEntityType.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepEntityType.tsx)):**
+  - Substituição do antigo checkbox por dois botões lado a lado acessíveis:
+    - **Botão Esquerdo (Holding / Receita Passiva):** Para empresas com mais de 50% de receita passiva (investimentos/aluguéis). Ativa alerta orientativo sobre sócios americanos (*Substantial U.S. Owners* na Parte XXVI) e marca Passive NFFE + Linha 40a no W-8BEN-E.
+    - **Botão Direito (Prestação de Serviços):** Fluxo padrão para exportação de serviços (software, design, marketing) marcando Active NFFE.
+  - Subtítulos expandidos com explicações detalhadas e 100% de paridade i18n (`pt-BR.json` e `en-US.json`).
+- [x] **Formatação Oficial de Endereços Governamentais & Resiliência a ME ([`src/lib/brazil-api.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/brazil-api.ts) e [`src/components/wizard/StepTaxAddress.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepTaxAddress.tsx)):**
+  - Formatação padronizada: `Logradouro, Número, Bairro` (ou `Logradouro, S/N, Bairro` quando sem número).
+  - Enriquecimento inteligente: quando a Receita Federal omite o logradouro por sigilo (comum em ME/Empresário Individual), a busca secundária por CEP obtém a rua e monta o endereço completo com `S/N` e o bairro oficial.
+- [x] **Fluxo Fluido de MEI com Notas Orientativas:**
+  - Helper text no input de CPF ([`src/components/wizard/StepTaxAddress.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepTaxAddress.tsx)).
+  - Banner informativo no resumo ([`src/components/wizard/StepConfirmation.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepConfirmation.tsx)) orientando que o documento gerado com CPF atende às plataformas internacionais (Deel, Upwork) e a emissão de NFS-e no Brasil segue pelo CNPJ MEI.
+- [x] **Suporte Completo no Motor de PDF ([`src/lib/pdf-engine.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/pdf-engine.ts)):**
+  - Marcação dinâmica da Linha 5 (Passive NFFE) e Linha 40a (Parte XXVI) quando selecionado pelo usuário.
+- [x] **Paridade Estrita de i18n & Testes Automatizados:**
+  - 100% de paridade nos dicionários (`pt-BR.json` e `en-US.json`).
+  - 31 testes unitários automatizados passando com 100% de sucesso ([`src/lib/pdf-engine.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/pdf-engine.test.ts), [`src/lib/schemas/w8-form-schema.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/schemas/w8-form-schema.test.ts), [`src/lib/brazil-api.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/brazil-api.test.ts), [`src/lib/sanitizer.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/sanitizer.test.ts)).
+
+---
+
+## 💎 Fase 23: Refinamentos de UI no Passo 4, Validação Estrita CPF/CNPJ & Badges Neutras (CONCLUÍDO)
+- [x] **Tipografia Compacta no Desktop ([`src/components/wizard/StepConfirmation.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepConfirmation.tsx)):**
+  - Título da seção de mapeamento calibrado em `text-xl sm:text-lg font-bold`, mantendo legibilidade e proporção ideal no desktop.
+- [x] **Badges Neutras para Parceiros sem Afiliação Ativa ([`src/components/wizard/ExchangeCards.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/ExchangeCards.tsx)):**
+  - Parceiros sem link de afiliado ativo (`isAffiliate: false`) utilizam badge cinza neutra (`bg-slate-500/10 text-slate-600 dark:text-slate-400`), destacando apenas links verificados de recomendação.
+- [x] **Wrapper Completo de Notas Explicativas no Bloco Expansível ([`src/components/wizard/StepConfirmation.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepConfirmation.tsx)):**
+  - Todos os cards explicativos de enquadramento (MEI com CPF, PJ Active NFFE e PJ Passive NFFE com alerta de sócios americanos) foram agrupados dentro do acordeão de campos expansíveis (`showAllFields`), mantendo a tela inicial limpa e exibindo os detalhes apenas mediante o clique em *"Ver tudo"*.
+- [x] **Validação Estrita e Bloqueio de Incompatibilidade CPF / CNPJ ([`src/components/wizard/StepTaxAddress.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepTaxAddress.tsx) e [`src/app/page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx)):**
+  - Bloqueio imediato na tentativa de inserir CNPJ (14 dígitos ou com barra) no campo de CPF (PF/MEI) com mensagem contextual de erro.
+  - Validação no avanço contra entrada de CPF de 11 dígitos no campo de CNPJ (PJ).
+- [x] **Aviso de Corporation no Passo 2 ([`src/components/wizard/StepEntityType.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/wizard/StepEntityType.tsx)):**
+  - Helper text bilingue esclarecendo o enquadramento como Corporation para SLU e LTDA.
+
+
+
+
+
+
+
 
 
 

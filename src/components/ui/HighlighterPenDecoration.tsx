@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useI18n } from "@/i18n/context";
 
 export type HighlighterColorId = "yellow" | "green" | "pink" | "orange" | "cyan";
 
@@ -68,7 +69,7 @@ function SingleHighlighterSvg({
       viewBox="0 0 220 46"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-[155px] sm:w-[195px] h-auto drop-shadow-xs"
+      className="w-[155px] sm:w-[195px] h-auto drop-shadow-sm"
     >
       {/* 1. Ponta Chanfrada (Chisel Tip) */}
       <path
@@ -169,12 +170,7 @@ function SingleHighlighterSvg({
 /**
  * HighlighterPenDecoration
  * Seletor interativo de 5 cores neon de marca-texto em SVG.
- * As canetas estão encostadas e empilhadas no canto inferior direito.
- * - Em repouso: a selecionada fica estendida; as outras ficam recuadas à direita.
- * - Ao passar o mouse no wrapper (group hover): todas as canetas avançam metade do caminho
- *   para a esquerda, revelando todo o conjunto harmoniosamente.
- * - Ao passar o mouse sobre uma caneta específica: ela avança completamente.
- * - Ao clicar: ativa a cor e altera a variável `--brand-highlight` em tempo real.
+ * 100% em memória, zero-storage.
  */
 export function HighlighterPenDecoration() {
   const [selectedColor, setSelectedColor] = useState<HighlighterColorId>("yellow");
@@ -182,33 +178,12 @@ export function HighlighterPenDecoration() {
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const [pendingColor, setPendingColor] = useState<HighlighterColorId | null>(null);
 
-  // Carrega preferência persistida no navegador e aplica a cor na variável CSS
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("formw8_highlight_color") as HighlighterColorId | null;
-      if (saved && HIGHLIGHTER_COLORS.some((c) => c.id === saved)) {
-        setSelectedColor(saved);
-        const config = HIGHLIGHTER_COLORS.find((c) => c.id === saved);
-        if (config) {
-          document.documentElement.style.setProperty("--brand-highlight", config.hex);
-        }
-      }
-    } catch {
-      // ignore local storage errors
-    }
-  }, []);
-
   const handleSelectColor = (colorId: HighlighterColorId) => {
     setSelectedColor(colorId);
     setIsMobileExpanded(false);
     const config = HIGHLIGHTER_COLORS.find((c) => c.id === colorId);
-    if (config) {
+    if (config && typeof document !== "undefined") {
       document.documentElement.style.setProperty("--brand-highlight", config.hex);
-      try {
-        localStorage.setItem("formw8_highlight_color", colorId);
-      } catch {
-        // ignore
-      }
     }
   };
 
@@ -229,27 +204,21 @@ export function HighlighterPenDecoration() {
   }, [selectedColor]);
 
   const handleMobileSelectColor = (colorId: HighlighterColorId) => {
-    // 1. Immediately apply the color in CSS variable and localStorage
     const config = HIGHLIGHTER_COLORS.find((c) => c.id === colorId);
-    if (config) {
+    if (config && typeof document !== "undefined") {
       document.documentElement.style.setProperty("--brand-highlight", config.hex);
-      try {
-        localStorage.setItem("formw8_highlight_color", colorId);
-      } catch {
-        // ignore
-      }
     }
 
-    // 2. Trigger diagonal glide to (0,0) and slide-out for others
     setPendingColor(colorId);
     setIsMobileExpanded(false);
 
-    // 3. Once the smooth transition reaches (0,0) (340ms), update selectedColor
     setTimeout(() => {
       setSelectedColor(colorId);
       setPendingColor(null);
     }, 340);
   };
+
+  const { t } = useI18n();
 
   return (
     <>
@@ -264,7 +233,7 @@ export function HighlighterPenDecoration() {
 
       {/* 1. Mobile Version (< sm): Positioned at top-right. Pens glide smoothly on X and Y axes with zero snapping */}
       <aside
-        aria-label="Seletor de cor de destaque marca-texto"
+        aria-label={t.common.highlighterSelector}
         className="fixed top-2 -right-24 z-50 select-none sm:hidden w-[160px] h-[220px] pointer-events-none"
       >
         {HIGHLIGHTER_COLORS.map((pen) => {
@@ -280,16 +249,14 @@ export function HighlighterPenDecoration() {
           let targetZIndex = 10;
 
           if (isMobileExpanded) {
-            // All 5 pens visible in their slots
             targetX = slotIndex === 0 ? 0 : 12;
             targetY = slotIndex * 40;
             targetOpacity = 1;
             targetZIndex = slotIndex === 0 ? 25 : 15;
           } else {
-            // Collapsed: ONLY the target (chosen/selected) pen glides to (0, 0)
             if (isTarget) {
               targetX = 0;
-              targetY = 0; // Glides smoothly to top slot!
+              targetY = 0;
               targetOpacity = 1;
               targetZIndex = 30;
             } else {
@@ -305,6 +272,9 @@ export function HighlighterPenDecoration() {
             : isMobileExpanded
             ? `${slotIndex * 30}ms`
             : `${(4 - slotIndex) * 20}ms`;
+
+          const selectLabel = t.common.selectColor.replace("{{name}}", pen.name);
+          const activateTitle = t.common.activateColor.replace("{{name}}", pen.name);
 
           return (
             <button
@@ -322,15 +292,15 @@ export function HighlighterPenDecoration() {
                 }
               }}
               aria-pressed={isSelected}
-              aria-label={`Selecionar cor ${pen.name}`}
-              title={`Ativar destaque ${pen.name}`}
+              aria-label={selectLabel}
+              title={activateTitle}
               style={{
                 transform: `translate3d(${targetX}px, ${targetY}px, 0)`,
                 opacity: targetOpacity,
                 zIndex: targetZIndex,
                 transitionDelay,
               }}
-              className="absolute top-0 right-0 p-0 border-none bg-transparent cursor-pointer transition-all duration-300 ease-out focus:outline-hidden active:scale-95 pointer-events-auto"
+              className="absolute top-0 right-0 p-0 border-none bg-transparent cursor-pointer transition-all duration-300 ease-out focus:outline-none active:scale-95 pointer-events-auto"
             >
               <SingleHighlighterSvg
                 tipMain={pen.hex}
@@ -345,7 +315,7 @@ export function HighlighterPenDecoration() {
 
       {/* 2. Desktop & Tablet Version (>= sm): Classic 5 stacked highlighters at bottom-right */}
       <aside
-        aria-label="Seletor de cor de destaque marca-texto"
+        aria-label={t.common.highlighterSelector}
         className="hidden sm:flex fixed bottom-3 -right-24 md:-right-28 z-40 select-none flex-col -space-y-1.5 group p-2 pr-0 pointer-events-auto"
       >
         {HIGHLIGHTER_COLORS.map((pen) => {
@@ -358,6 +328,9 @@ export function HighlighterPenDecoration() {
             ? "!translate-x-0 !opacity-100 z-30"
             : "translate-x-16 group-hover:translate-x-8 opacity-80 group-hover:opacity-95 z-10";
 
+          const selectLabel = t.common.selectColor.replace("{{name}}", pen.name);
+          const activateTitle = t.common.activateColor.replace("{{name}}", pen.name);
+
           return (
             <button
               key={`desk-${pen.id}`}
@@ -366,9 +339,9 @@ export function HighlighterPenDecoration() {
               onMouseEnter={() => setHoveredColor(pen.id)}
               onMouseLeave={() => setHoveredColor(null)}
               aria-pressed={isSelected}
-              aria-label={`Selecionar cor ${pen.name}`}
-              title={`Ativar destaque ${pen.name}`}
-              className={`p-0 border-none bg-transparent cursor-pointer transition-all duration-300 ease-out transform focus:outline-hidden active:scale-98 ${translateClass}`}
+              aria-label={selectLabel}
+              title={activateTitle}
+              className={`p-0 border-none bg-transparent cursor-pointer transition-all duration-300 ease-out transform focus:outline-none active:scale-98 ${translateClass}`}
             >
               <SingleHighlighterSvg
                 tipMain={pen.hex}

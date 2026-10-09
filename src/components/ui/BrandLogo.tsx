@@ -47,7 +47,7 @@ export function BrandLogo({ size = "md", className = "" }: BrandLogoProps) {
           />
         </svg>
         <span
-          className={`font-black tracking-tight text-[#1e293b] relative z-10 inline-block ${textPaddingClasses[size]}`}
+          className={`font-black tracking-tight text-slate-900 relative z-10 inline-block ${textPaddingClasses[size]}`}
         >
           W8
         </span>

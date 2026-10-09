@@ -47,7 +47,7 @@ export function HighlightedText({
       tokens.push(
         <span
           key={`hl-${keyIdx++}`}
-          className={`relative inline-block px-1 mx-0.5 font-black text-[#1e293b] isolate ${highlightClassName}`}
+          className={`relative inline-block px-1 mx-0.5 font-black text-slate-900 isolate ${highlightClassName}`}
         >
           <svg
             className="absolute -inset-x-[3px] inset-y-0 w-[calc(100%+6px)] h-full z-0 pointer-events-none select-none"

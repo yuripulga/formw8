@@ -26,8 +26,8 @@ export function KeywordSlider({
 
   if (keywords.length === 0) return null;
 
-  // Duplicar a lista para permitir loop contínuo e infinito
-  const displayKeywords = [...keywords, ...keywords, ...keywords];
+  // Duplicar a lista em 2 cópias perfeitas para loop contínuo a 50%
+  const displayKeywords = [...keywords, ...keywords];
 
   const handleClickItem = (faqId?: string) => {
     if (!faqId) return;
@@ -58,7 +58,7 @@ export function KeywordSlider({
               key={`${text}-${idx}`}
               type="button"
               onClick={() => handleClickItem(faqId)}
-              className={`text-[11px] sm:text-xs whitespace-nowrap transition-colors select-none text-left ${
+              className={`text-xs whitespace-nowrap transition-colors select-none text-left ${
                 faqId
                   ? "text-muted-theme hover:text-heading-theme hover:underline cursor-pointer font-medium"
                   : "text-muted-theme hover:text-heading-theme font-normal cursor-default"

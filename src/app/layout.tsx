@@ -67,10 +67,10 @@ export const metadata: Metadata = {
     shortcut: "/icon.svg",
   },
   alternates: {
-    canonical: "https://formw8.com.br",
+    canonical: "./",
     languages: {
-      "pt-BR": "https://formw8.com.br",
-      "en-US": "https://formw8.com.br",
+      "pt-BR": "/",
+      "x-default": "/",
     },
   },
   openGraph: {
@@ -186,18 +186,14 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('formw8_theme');if(t==='dark'){document.documentElement.classList.add('dark')}else{document.documentElement.classList.remove('dark')}}catch(e){}})()`,
-          }}
-        />
-        <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
         />
       </head>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useI18n } from "@/i18n/context";
 import { ChevronDown, ExternalLink, Search, X } from "lucide-react";
@@ -69,6 +69,27 @@ export function FAQSection() {
     }));
   };
 
+  useEffect(() => {
+    const handleOpenFaqItem = (e: Event) => {
+      const customEvent = e as CustomEvent<{ id: string }>;
+      const id = customEvent.detail?.id;
+      if (id) {
+        setOpenItems((prev) => ({ ...prev, [id]: true }));
+        setTimeout(() => {
+          const el = document.getElementById(`faq-btn-${id}`);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }, 100);
+      }
+    };
+
+    window.addEventListener("open-faq-item", handleOpenFaqItem);
+    return () => {
+      window.removeEventListener("open-faq-item", handleOpenFaqItem);
+    };
+  }, []);
+
   const filteredItems = useMemo(() => {
     const clean = faqSearchQuery.trim().toLowerCase();
     if (!clean) return t.faq.items;
@@ -98,7 +119,7 @@ export function FAQSection() {
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
       />
 
       {/* Section Header */}
@@ -119,14 +140,14 @@ export function FAQSection() {
               value={faqSearchQuery}
               onChange={(e) => setFaqSearchQuery(e.target.value)}
               placeholder={t.faq.searchPlaceholder}
-              className="w-full pl-10 pr-9 py-2 text-xs rounded-xl bg-card-surface border border-theme text-heading-theme placeholder:text-muted-theme/60 focus:outline-none focus:border-emerald-500 shadow-2xs font-medium"
+              className="w-full pl-10 pr-9 py-2 text-xs rounded-xl bg-card-surface border border-theme text-heading-theme placeholder:text-muted-theme/60 focus:outline-none focus:border-emerald-500 font-medium"
             />
             {faqSearchQuery && (
               <button
                 type="button"
                 onClick={() => setFaqSearchQuery("")}
                 className="absolute right-3 p-0.5 text-muted-theme hover:text-heading-theme transition-colors cursor-pointer"
-                aria-label="Limpar busca"
+                aria-label={t.common.clearSearch}
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -172,11 +193,11 @@ export function FAQSection() {
                   id={`faq-answer-${item.id}`}
                   role="region"
                   aria-labelledby={`faq-btn-${item.id}`}
-                  className={`px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-muted-theme leading-relaxed border-t border-theme/40 dark:border-white/[0.04] ${
-                    isOpen ? "block animate-fade-in" : "hidden"
+                  className={`px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-muted-theme leading-relaxed ${
+                    isOpen ? "block animate-fadeIn" : "hidden"
                   }`}
                 >
-                  <p className="pt-3">{renderFaqAnswer(item.answer)}</p>
+                  <p className="pt-2">{renderFaqAnswer(item.answer)}</p>
                 </div>
               </div>
             );

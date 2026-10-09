@@ -33,15 +33,19 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
 
   // Focus input when modal opens
   useEffect(() => {
     if (isOpen) {
+      previousActiveElement.current = document.activeElement as HTMLElement | null;
       setQuery("");
       setSelectedIndex(0);
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 50);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
@@ -97,6 +101,31 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       )
     : allItems.slice(0, 8); // Default suggestions when query is empty
 
+  const handleSelect = React.useCallback(
+    (url: string) => {
+      onClose();
+      if (url.startsWith("/#")) {
+        const targetId = url.replace("/#", "");
+        if (targetId.startsWith("faq-")) {
+          const faqId = targetId.replace("faq-", "");
+          window.dispatchEvent(new CustomEvent("open-faq-item", { detail: { id: faqId } }));
+        }
+        const elem =
+          document.getElementById(targetId) ||
+          document.getElementById(`faq-btn-${targetId.replace("faq-", "")}`);
+        if (elem) {
+          elem.scrollIntoView({ behavior: "smooth" });
+          elem.click();
+        } else {
+          router.push(url);
+        }
+      } else {
+        router.push(url);
+      }
+    },
+    [onClose, router]
+  );
+
   // Handle keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
@@ -105,6 +134,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       if (e.key === "Escape") {
         e.preventDefault();
         onClose();
+        return;
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
         setSelectedIndex((prev) =>
@@ -121,28 +151,40 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         if (selected) {
           handleSelect(selected.url);
         }
+      } else if (e.key === "Tab" && modalRef.current) {
+        const focusables = Array.from(
+          modalRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+
+        if (focusables.length === 0) return;
+
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last?.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first?.focus();
+          }
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, filteredItems, selectedIndex, onClose]);
-
-  const handleSelect = (url: string) => {
-    onClose();
-    if (url.startsWith("/#")) {
-      const targetId = url.replace("/#", "");
-      const elem = document.getElementById(targetId);
-      if (elem) {
-        elem.scrollIntoView({ behavior: "smooth" });
-        elem.click();
-      } else {
-        router.push(url);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      if (previousActiveElement.current) {
+        previousActiveElement.current.focus();
       }
-    } else {
-      router.push(url);
-    }
-  };
+    };
+  }, [isOpen, filteredItems, selectedIndex, onClose, handleSelect]);
 
   if (!isOpen) return null;
 
@@ -151,15 +193,17 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label={t.search.placeholder}
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm animate-fadeIn"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-xl rounded-2xl bg-card-surface border border-theme shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-in zoom-in-95 duration-200"
+        ref={modalRef}
+        tabIndex={-1}
+        className="w-full max-w-xl rounded-2xl bg-card-surface border border-theme shadow-2xl overflow-hidden flex flex-col max-h-[80vh] animate-fadeIn focus:outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Header Input */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-theme/60 bg-app-surface">
+        <div className="flex items-center gap-3 px-4 py-3.5 bg-app-surface">
           <Search className="w-4 h-4 text-muted-theme shrink-0" />
           <input
             ref={inputRef}
@@ -181,7 +225,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
               <X className="w-3.5 h-3.5" />
             </button>
           )}
-          <kbd className="text-[10px] font-mono font-semibold bg-card-surface px-1.5 py-0.5 rounded border border-theme text-muted-theme">
+          <kbd className="text-xs font-mono font-semibold bg-card-surface px-1.5 py-0.5 rounded border border-theme text-muted-theme">
             ESC
           </kbd>
         </div>
@@ -191,7 +235,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {filteredItems.length === 0 ? (
             <div className="py-12 text-center text-xs text-muted-theme space-y-1">
               <p>
-                {t.search.noResults} <span className="font-bold text-heading-theme">"{query}"</span>
+                {t.search.noResults} <span className="font-bold text-heading-theme">&ldquo;{query}&rdquo;</span>
               </p>
             </div>
           ) : (
@@ -230,11 +274,11 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       <span className="text-xs font-bold text-heading-theme truncate">
                         {item.title}
                       </span>
-                      <span className="text-[10px] font-semibold text-muted-theme uppercase tracking-wider px-1.5 py-0.5 rounded bg-app-surface border border-theme/40 shrink-0">
+                      <span className="text-xs font-semibold text-muted-theme uppercase tracking-wider px-1.5 py-0.5 rounded bg-app-surface border border-theme shrink-0">
                         {t.search.categories[item.category]}
                       </span>
                     </div>
-                    <p className="text-[11px] text-muted-theme truncate font-normal leading-relaxed">
+                    <p className="text-xs text-muted-theme truncate font-normal leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -248,19 +292,19 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         </div>
 
         {/* Search Footer Shortcuts */}
-        <div className="px-4 py-2.5 bg-app-surface border-t border-theme/60 flex items-center justify-between text-[11px] text-muted-theme">
+        <div className="px-4 py-2.5 bg-app-surface flex items-center justify-between text-xs text-muted-theme">
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1">
-              <kbd className="px-1 py-0.5 bg-card-surface rounded border border-theme text-[10px] font-mono font-semibold text-heading-theme">
+              <kbd className="px-1 py-0.5 bg-card-surface rounded border border-theme text-xs font-mono font-semibold text-heading-theme">
                 ↑
               </kbd>
-              <kbd className="px-1 py-0.5 bg-card-surface rounded border border-theme text-[10px] font-mono font-semibold text-heading-theme">
+              <kbd className="px-1 py-0.5 bg-card-surface rounded border border-theme text-xs font-mono font-semibold text-heading-theme">
                 ↓
               </kbd>
               <span>{t.search.shortcutHint}</span>
             </span>
             <span className="inline-flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-card-surface rounded border border-theme text-[10px] font-mono font-semibold text-heading-theme">
+              <kbd className="px-1.5 py-0.5 bg-card-surface rounded border border-theme text-xs font-mono font-semibold text-heading-theme">
                 ↵
               </kbd>
               <span>{t.search.selectHint}</span>

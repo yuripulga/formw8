@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useI18n } from "@/i18n/context";
+import { SPONSOR_MAILTO } from "@/config/contact";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BrandLogo } from "@/components/ui/BrandLogo";
@@ -53,11 +54,11 @@ export function Footer() {
             {t.footer.disclaimer ? (
               <div
                 style={{ backgroundColor: "var(--brand-highlight, #FFE600)" }}
-                className="relative w-52 sm:w-60 p-3 sm:p-3.5 rounded-xs rounded-br-lg shadow-[2px_4px_12px_rgba(0,0,0,0.14)] -rotate-1 hover:rotate-0 transition-transform duration-200 select-none cursor-default mt-1 opacity-100"
+                className="relative w-52 sm:w-60 p-3 sm:p-3.5 rounded-sm rounded-br-lg shadow-[2px_4px_12px_rgba(0,0,0,0.14)] -rotate-1 hover:rotate-0 transition-transform duration-200 select-none cursor-default mt-1 opacity-100"
               >
                 {/* Solid top sticky tape / glue strip hint */}
-                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-12 h-3 bg-white dark:bg-zinc-200 rounded-xs shadow-2xs rotate-1" />
-                <p className="font-handwritten text-[#0f172a] text-[15px] sm:text-[16px] font-bold leading-tight tracking-tight text-center">
+                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-12 h-3 bg-white dark:bg-zinc-200 rounded-sm shadow-sm rotate-1" />
+                <p className="font-handwritten text-slate-900 text-sm sm:text-base font-bold leading-tight tracking-tight text-center">
                   {t.footer.disclaimer}
                 </p>
               </div>
@@ -67,7 +68,7 @@ export function Footer() {
           {/* Right: Open-Source Appeal, Support Button & Theme/Language Controls */}
           <div className="flex flex-col items-center gap-2.5 self-center sm:self-start pt-1">
             {t.footer.openSourceAppeal ? (
-              <p className="font-handwritten text-heading-theme text-[13px] sm:text-[14px] font-bold leading-snug -rotate-2 text-center max-w-[190px] select-none opacity-100">
+              <p className="font-handwritten text-heading-theme text-xs sm:text-sm font-bold leading-snug -rotate-2 text-center max-w-[190px] select-none opacity-100">
                 {renderOpenSourceText(t.footer.openSourceAppeal)}
               </p>
             ) : null}
@@ -76,7 +77,7 @@ export function Footer() {
                 type="button"
                 onClick={() => setShowSupportModal(true)}
                 style={{ backgroundColor: "var(--brand-highlight, #FFE600)" }}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-900 shadow-xs active:scale-95 transition-transform cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-900 shadow-sm active:scale-95 transition-transform cursor-pointer"
               >
                 <Heart className="w-3.5 h-3.5 fill-slate-900 stroke-slate-900" />
                 <span>{t.footer.links.supportPix}</span>
@@ -90,7 +91,7 @@ export function Footer() {
         </div>
 
         {/* Form Models & Direct Documentation Links (Our Own Created Pages + Official IRS) */}
-        <nav aria-label="Guias e Documentos Oficiais" className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-muted-theme">
+        <nav aria-label={t.footer.navLabel} className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-muted-theme">
           <Link href="/" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
             {t.footer.documents.generatorHome}
           </Link>
@@ -101,7 +102,7 @@ export function Footer() {
             {t.footer.documents.pjGuide}
           </Link>
           <a
-            href="mailto:info@quimera.biz?subject=Parceria%20e%20Patrocinio%20FormW8"
+            href={SPONSOR_MAILTO}
             className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors font-semibold"
           >
             {t.footer.links.sponsorContact}
@@ -118,7 +119,7 @@ export function Footer() {
         </nav>
 
         {/* Bottom Row: Centered Copyright & Powered by Quimera.biz */}
-        <div className="text-center text-[12px] sm:text-[11px] text-body-theme dark:text-zinc-300 font-medium opacity-100 space-y-1 pt-1 pb-2">
+        <div className="text-center text-xs text-body-theme dark:text-zinc-300 font-medium opacity-100 space-y-1 pt-1 pb-2">
           <p>
             © {currentYear} {t.common.title}. {t.footer.copyright}
           </p>
@@ -128,7 +129,7 @@ export function Footer() {
               href="https://quimera.biz"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-block font-bold text-[#1e293b] isolate px-1 opacity-100 sm:hover:opacity-90 transition-opacity"
+              className="relative inline-block font-bold text-slate-900 isolate px-1 opacity-100 sm:hover:opacity-90 transition-opacity"
             >
               <svg
                 className="absolute -inset-x-[3px] inset-y-0 w-[calc(100%+6px)] h-full z-0 pointer-events-none select-none"

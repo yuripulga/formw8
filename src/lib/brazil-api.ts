@@ -1,10 +1,12 @@
 /**
- * Brazilian Public Data Integration (ViaCEP & BrasilAPI & Minha Receita)
+ * Brazilian Public Data Integration (ViaCEP & BrasilAPI & Minha Receita & CNPJ.ws)
  * Provides 100% free, client-side, CORS-enabled auto-fill for CEP and CNPJ.
+ * Zero-Data Architecture: Lookups execute directly in the user's browser.
  */
 
 export interface CepAddressResult {
   street?: string;
+  bairro?: string;
   city?: string;
   state?: string;
   zip?: string;
@@ -138,7 +140,7 @@ export function formatFullStreetAddress(
 ): string {
   const cleanLogr = logradouro ? logradouro.trim().replace(/,\s*$/, "") : "";
   let cleanNum = numero ? String(numero).trim() : "";
-  if (cleanNum.toUpperCase() === "SN" || cleanNum.toUpperCase() === "SEM NUMERO" || cleanNum.toUpperCase() === "S/N") {
+  if (!cleanNum || cleanNum.toUpperCase() === "SN" || cleanNum.toUpperCase() === "SEM NUMERO" || cleanNum.toUpperCase() === "S/N") {
     cleanNum = "S/N";
   }
   const cleanComp = complemento ? String(complemento).trim() : "";
@@ -146,12 +148,12 @@ export function formatFullStreetAddress(
 
   let result = cleanLogr;
 
-  // Append number if present
+  // Append number (defaults to S/N if empty and logradouro exists)
   if (cleanNum) {
     if (!result) {
       result = cleanNum;
     } else {
-      // Check if result already ends with exact number
+      // Check if result already ends with exact number or S/N
       const regexNum = new RegExp(`[,\\s]${cleanNum.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*$`, "i");
       if (!regexNum.test(result)) {
         result = `${result}, ${cleanNum}`;
@@ -173,27 +175,50 @@ export function formatFullStreetAddress(
 }
 
 /**
- * Fetches Brazilian postal address by CEP.
- * Primary provider: ViaCEP
- * Secondary provider: BrasilAPI (v1 & v2)
+ * Helper to fetch with a timeout and optional external signal
  */
-export async function fetchAddressByCep(cep: string): Promise<CepAddressResult | null> {
+async function fetchWithSignalTimeout(url: string, ms = 4500, externalSignal?: AbortSignal) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), ms);
+
+  if (externalSignal) {
+    externalSignal.addEventListener("abort", () => controller.abort(), { once: true });
+  }
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    return res;
+  } catch (e) {
+    clearTimeout(timeoutId);
+    throw e;
+  }
+}
+
+/**
+ * Fetches Brazilian postal address by CEP.
+ * Providers: ViaCEP -> BrasilAPI v1 -> BrasilAPI v2
+ */
+export async function fetchAddressByCep(
+  cep: string,
+  signal?: AbortSignal
+): Promise<CepAddressResult | null> {
   const digits = cep.replace(/\D/g, "");
   const rawCep = digits.length === 7 ? `0${digits}` : digits;
   if (rawCep.length !== 8) return null;
 
   // 1. Try ViaCEP
   try {
-    const res = await fetch(`https://viacep.com.br/ws/${rawCep}/json/`);
+    const res = await fetchWithSignalTimeout(`https://viacep.com.br/ws/${rawCep}/json/`, 4000, signal);
     if (res.ok) {
       const data = await res.json();
       if (!data.erro) {
         const logr = safeString(data.logradouro);
         const bairro = safeString(data.bairro);
-        const street = formatFullStreetAddress(logr || bairro, undefined, undefined, logr ? bairro : undefined);
 
         return {
-          street: street || undefined,
+          street: logr || undefined,
+          bairro: bairro || undefined,
           city: safeString(data.localidade) || undefined,
           state: safeString(data.uf).toUpperCase() || undefined,
           zip: formatCep(rawCep),
@@ -201,225 +226,146 @@ export async function fetchAddressByCep(cep: string): Promise<CepAddressResult |
       }
     }
   } catch {
-    // Failover to secondary provider
+    // Failover
   }
 
-  // 2. Fallback to BrasilAPI v1
-  try {
-    const res = await fetch(`https://brasilapi.com.br/api/cep/v1/${rawCep}`);
-    if (res.ok) {
-      const data = await res.json();
-      const logr = safeString(data.street);
-      const bairro = safeString(data.neighborhood);
-      const street = formatFullStreetAddress(logr || bairro, undefined, undefined, logr ? bairro : undefined);
+  // 2. Fallback to BrasilAPI (v1 or v2)
+  for (const version of ["v1", "v2"]) {
+    try {
+      const res = await fetchWithSignalTimeout(`https://brasilapi.com.br/api/cep/${version}/${rawCep}`, 4000, signal);
+      if (res.ok) {
+        const data = await res.json();
+        const logr = safeString(data.street);
+        const bairro = safeString(data.neighborhood);
 
-      return {
-        street: street || undefined,
-        city: safeString(data.city) || undefined,
-        state: safeString(data.state).toUpperCase() || undefined,
-        zip: formatCep(rawCep),
-      };
+        return {
+          street: logr || undefined,
+          bairro: bairro || undefined,
+          city: safeString(data.city) || undefined,
+          state: safeString(data.state).toUpperCase() || undefined,
+          zip: formatCep(rawCep),
+        };
+      }
+    } catch {
+      // Continue to next provider
     }
-  } catch {
-    // Both failed
-  }
-
-  // 3. Fallback to BrasilAPI v2
-  try {
-    const res = await fetch(`https://brasilapi.com.br/api/cep/v2/${rawCep}`);
-    if (res.ok) {
-      const data = await res.json();
-      const logr = safeString(data.street);
-      const bairro = safeString(data.neighborhood);
-      const street = formatFullStreetAddress(logr || bairro, undefined, undefined, logr ? bairro : undefined);
-
-      return {
-        street: street || undefined,
-        city: safeString(data.city) || undefined,
-        state: safeString(data.state).toUpperCase() || undefined,
-        zip: formatCep(rawCep),
-      };
-    }
-  } catch {
-    // All failed
   }
 
   return null;
 }
 
+interface RawCompanyPayload {
+  razao_social?: string;
+  nome_fantasia?: string;
+  cep?: string | number;
+  descricao_tipo_de_logradouro?: string;
+  tipo_logradouro?: string;
+  logradouro?: string;
+  numero?: string | number;
+  complemento?: string;
+  bairro?: string;
+  municipio?: string;
+  uf?: string;
+  estabelecimento?: {
+    razao_social?: string;
+    nome_fantasia?: string;
+    cep?: string | number;
+    tipo_logradouro?: string;
+    logradouro?: string;
+    numero?: string | number;
+    complemento?: string;
+    bairro?: string;
+    cidade?: { nome?: string };
+    estado?: { sigla?: string };
+  };
+}
+
+function parseCompanyData(data: RawCompanyPayload): CnpjCompanyResult | null {
+  const estab = data.estabelecimento;
+  const companyName = safeString(data.razao_social) || safeString(data.nome_fantasia) || safeString(estab?.razao_social) || safeString(estab?.nome_fantasia);
+  if (!companyName) return null;
+
+  const tradeName = safeString(data.nome_fantasia) || safeString(estab?.nome_fantasia) || undefined;
+  const rawCep = safeString(data.cep || estab?.cep).replace(/\D/g, "");
+
+  const type = safeString(data.descricao_tipo_de_logradouro || data.tipo_logradouro || estab?.tipo_logradouro);
+  const rawLogr = safeString(data.logradouro || estab?.logradouro);
+  const num = safeString(data.numero || estab?.numero);
+  const comp = safeString(data.complemento || estab?.complemento);
+  const bairro = safeString(data.bairro || estab?.bairro);
+  const city = safeString(data.municipio || estab?.cidade?.nome);
+  const state = safeString(data.uf || estab?.estado?.sigla).toUpperCase();
+
+  let baseStreet = "";
+  if (type && rawLogr && !rawLogr.toLowerCase().startsWith(type.toLowerCase())) {
+    baseStreet = `${type} ${rawLogr}`.trim();
+  } else if (rawLogr) {
+    baseStreet = rawLogr;
+  }
+
+  // Only assemble street if baseStreet exists
+  const fullStreet = baseStreet
+    ? formatFullStreetAddress(baseStreet, num, comp, bairro)
+    : undefined;
+
+  return {
+    companyName,
+    tradeName,
+    street: fullStreet || undefined,
+    city: city || undefined,
+    state: state || undefined,
+    zip: rawCep ? formatCep(rawCep) : undefined,
+  };
+}
+
 /**
  * Fetches Brazilian company legal data by CNPJ with multi-provider failover.
- * Primary: BrasilAPI
- * Fallback 1: Minha Receita
- * Fallback 2: CNPJ.ws
+ * Primary: BrasilAPI -> Fallback 1: Minha Receita -> Fallback 2: CNPJ.ws
  */
-export async function fetchCompanyByCnpj(cnpj: string): Promise<CnpjCompanyResult | null> {
+export async function fetchCompanyByCnpj(
+  cnpj: string,
+  signal?: AbortSignal
+): Promise<CnpjCompanyResult | null> {
   const rawCnpj = cnpj.replace(/\D/g, "");
   if (rawCnpj.length !== 14) return null;
 
-  // Helper with AbortController timeout
-  const fetchWithTimeout = async (url: string, ms = 4500) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), ms);
+  const providers = [
+    `https://brasilapi.com.br/api/cnpj/v1/${rawCnpj}`,
+    `https://minhareceita.org/${rawCnpj}`,
+    `https://publica.cnpj.ws/cnpj/${rawCnpj}`,
+  ];
+
+  for (const url of providers) {
     try {
-      const res = await fetch(url, { signal: controller.signal });
-      clearTimeout(timeoutId);
-      return res;
-    } catch (e) {
-      clearTimeout(timeoutId);
-      throw e;
-    }
-  };
-
-  // 1. Try BrasilAPI
-  try {
-    const res = await fetchWithTimeout(`https://brasilapi.com.br/api/cnpj/v1/${rawCnpj}`);
-    if (res.ok) {
-      const data = await res.json();
-      
-      const rawCepFromCnpj = data.cep ? String(data.cep).replace(/\D/g, "") : "";
-      const type = safeString(data.descricao_tipo_de_logradouro);
-      const rawLogr = safeString(data.logradouro);
-      const num = safeString(data.numero);
-      const comp = safeString(data.complemento);
-      const bairro = safeString(data.bairro);
-      
-      let baseStreet = "";
-      if (type && rawLogr && !rawLogr.toLowerCase().startsWith(type.toLowerCase())) {
-        baseStreet = `${type} ${rawLogr}`.trim();
-      } else if (rawLogr) {
-        baseStreet = rawLogr;
-      }
-
-      let city = safeString(data.municipio);
-      let state = safeString(data.uf).toUpperCase();
-
-      // Safe isolated CEP enrichment (never breaks CNPJ result on failure)
-      if (rawCepFromCnpj) {
-        try {
-          const cepResult = await fetchAddressByCep(rawCepFromCnpj);
-          if (cepResult) {
-            if (cepResult.street) baseStreet = cepResult.street;
-            if (cepResult.city) city = cepResult.city;
-            if (cepResult.state) state = cepResult.state;
+      const res = await fetchWithSignalTimeout(url, 4500, signal);
+      if (res.ok) {
+        const data = await res.json();
+        const parsed = parseCompanyData(data);
+        if (parsed) {
+          // If street is missing/empty but CEP is available, enrich with CEP lookup
+          if (parsed.zip && !parsed.street) {
+            try {
+              const cepResult = await fetchAddressByCep(parsed.zip, signal);
+              if (cepResult) {
+                const num = safeString(data.numero || data.estabelecimento?.numero);
+                const comp = safeString(data.complemento || data.estabelecimento?.complemento);
+                const bairro = safeString(data.bairro || data.estabelecimento?.bairro);
+                if (cepResult.street) {
+                  parsed.street = formatFullStreetAddress(cepResult.street, num, comp, bairro);
+                }
+                if (cepResult.city && !parsed.city) parsed.city = cepResult.city;
+                if (cepResult.state && !parsed.state) parsed.state = cepResult.state;
+              }
+            } catch {
+              // Ignore inner CEP failure
+            }
           }
-        } catch {
-          // Ignore inner CEP error
+          return parsed;
         }
       }
-
-      const fullStreet = formatFullStreetAddress(baseStreet || bairro, num, comp, baseStreet ? bairro : undefined);
-      const companyName = safeString(data.razao_social) || safeString(data.nome_fantasia);
-
-      if (companyName) {
-        return {
-          companyName,
-          tradeName: safeString(data.nome_fantasia) || undefined,
-          street: fullStreet || undefined,
-          city: city || undefined,
-          state: state || undefined,
-          zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
-        };
-      }
+    } catch {
+      // Failover to next provider
     }
-  } catch {
-    // Failover to secondary provider
-  }
-
-  // 2. Fallback to Minha Receita
-  try {
-    const res = await fetchWithTimeout(`https://minhareceita.org/${rawCnpj}`);
-    if (res.ok) {
-      const data = await res.json();
-      
-      const rawCepFromCnpj = data.cep ? String(data.cep).replace(/\D/g, "") : "";
-      const type = safeString(data.descricao_tipo_de_logradouro);
-      const rawLogr = safeString(data.logradouro);
-      const num = safeString(data.numero);
-      const comp = safeString(data.complemento);
-      const bairro = safeString(data.bairro);
-
-      let baseStreet = "";
-      if (type && rawLogr && !rawLogr.toLowerCase().startsWith(type.toLowerCase())) {
-        baseStreet = `${type} ${rawLogr}`.trim();
-      } else if (rawLogr) {
-        baseStreet = rawLogr;
-      }
-
-      let city = safeString(data.municipio);
-      let state = safeString(data.uf).toUpperCase();
-
-      // Safe isolated CEP enrichment
-      if (rawCepFromCnpj) {
-        try {
-          const cepResult = await fetchAddressByCep(rawCepFromCnpj);
-          if (cepResult) {
-            if (cepResult.street) baseStreet = cepResult.street;
-            if (cepResult.city) city = cepResult.city;
-            if (cepResult.state) state = cepResult.state;
-          }
-        } catch {
-          // Ignore inner CEP error
-        }
-      }
-
-      const fullStreet = formatFullStreetAddress(baseStreet || bairro, num, comp, baseStreet ? bairro : undefined);
-      const companyName = safeString(data.razao_social) || safeString(data.nome_fantasia);
-
-      if (companyName) {
-        return {
-          companyName,
-          tradeName: safeString(data.nome_fantasia) || undefined,
-          street: fullStreet || undefined,
-          city: city || undefined,
-          state: state || undefined,
-          zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
-        };
-      }
-    }
-  } catch {
-    // Failover to third provider
-  }
-
-  // 3. Fallback to CNPJ.ws
-  try {
-    const res = await fetchWithTimeout(`https://publica.cnpj.ws/cnpj/${rawCnpj}`);
-    if (res.ok) {
-      const data = await res.json();
-      const estab = data.estabelecimento || {};
-      const companyName = safeString(data.razao_social) || safeString(estab.nome_fantasia);
-
-      const rawCepFromCnpj = estab.cep ? String(estab.cep).replace(/\D/g, "") : "";
-      const type = safeString(estab.tipo_logradouro);
-      const rawLogr = safeString(estab.logradouro);
-      const num = safeString(estab.numero);
-      const comp = safeString(estab.complemento);
-      const bairro = safeString(estab.bairro);
-      const city = safeString(estab.cidade?.nome);
-      const state = safeString(estab.estado?.sigla).toUpperCase();
-
-      let baseStreet = "";
-      if (type && rawLogr && !rawLogr.toLowerCase().startsWith(type.toLowerCase())) {
-        baseStreet = `${type} ${rawLogr}`.trim();
-      } else if (rawLogr) {
-        baseStreet = rawLogr;
-      }
-
-      const fullStreet = formatFullStreetAddress(baseStreet || bairro, num, comp, baseStreet ? bairro : undefined);
-
-      if (companyName) {
-        return {
-          companyName,
-          tradeName: safeString(estab.nome_fantasia) || undefined,
-          street: fullStreet || undefined,
-          city: city || undefined,
-          state: state || undefined,
-          zip: rawCepFromCnpj ? formatCep(rawCepFromCnpj) : undefined,
-        };
-      }
-    }
-  } catch {
-    // All failed
   }
 
   return null;

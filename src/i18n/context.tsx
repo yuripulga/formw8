@@ -23,9 +23,6 @@ const dictionaries: Record<Locale, Dictionary> = {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
-const THEME_KEY = "formw8_theme";
-const LOCALE_KEY = "formw8_locale";
-
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(defaultLocale);
   const [theme, setThemeState] = useState<Theme>("light");
@@ -34,27 +31,22 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     setMounted(true);
 
-    // Auto-detect theme from localStorage or browser preferences
-    const savedTheme = localStorage.getItem(THEME_KEY) as Theme | null;
-    if (savedTheme === "dark" || savedTheme === "light") {
-      setThemeState(savedTheme);
-    } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    // Auto-detect theme from system preferences in memory (Zero localStorage / Zero cookies)
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setThemeState("dark");
     } else {
       setThemeState("light");
     }
 
-    // Auto-detect locale from localStorage or browser navigator.language
-    const savedLocale = localStorage.getItem(LOCALE_KEY) as Locale | null;
-    if (savedLocale && (savedLocale === "pt-BR" || savedLocale === "en-US")) {
-      setLocaleState(savedLocale);
+    // Auto-detect locale from browser navigator.language in memory
+    const browserLang =
+      (typeof navigator !== "undefined" &&
+        (navigator.language || (navigator.languages && navigator.languages[0]))) ||
+      "";
+    if (browserLang.toLowerCase().startsWith("pt")) {
+      setLocaleState("pt-BR");
     } else {
-      const browserLang = (typeof navigator !== "undefined" && (navigator.language || (navigator.languages && navigator.languages[0]))) || "";
-      if (browserLang.toLowerCase().startsWith("pt")) {
-        setLocaleState("pt-BR");
-      } else {
-        setLocaleState("en-US");
-      }
+      setLocaleState("en-US");
     }
   }, []);
 
@@ -66,15 +58,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem(THEME_KEY, theme);
   }, [theme, mounted]);
 
   useEffect(() => {
-    // Sync HTML lang attribute with locale state for WCAG AA Accessibility
+    // Sync HTML lang attribute with active locale for WCAG AA Accessibility
     document.documentElement.lang = locale;
-    localStorage.setItem(LOCALE_KEY, locale);
   }, [locale]);
-
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);

@@ -8,7 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/design-system",
     "/plataformas/deel",
     "/plataformas/rippling",
     "/plataformas/upwork",
