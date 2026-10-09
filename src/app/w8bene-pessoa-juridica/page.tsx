@@ -130,7 +130,7 @@ export default function W8BenEPessoaJuridicaPage() {
         </div>
 
         {/* Cross-Link Pillar & Platforms */}
-        <div className="pt-6 space-y-4 border-t border-theme/40">
+        <div className="pt-6 space-y-4">
           <div className="p-4 rounded-xl bg-card-surface border border-theme flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
             <div>
               <p className="font-bold text-heading-theme">Recebe como Pessoa Física (CPF)?</p>

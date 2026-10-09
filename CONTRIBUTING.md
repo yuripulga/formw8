@@ -1,76 +1,84 @@
-# Guia de Contribuição — FormW8
+# Contributing to FormW8
 
-Obrigado pelo seu interesse em contribuir com o **FormW8**! Este é um projeto open-source independente criado para simplificar formulários fiscais internacionais e proteger a privacidade dos prestadores de serviço brasileiros que trabalham para o exterior.
-
----
-
-## 🔒 Princípio Fundamental: Zero-Data Architecture
-Todas as funcionalidades no FormW8 operam sob uma regra estrita de privacidade:
-* **Nenhum dado pessoal** (Nome, CPF, CNPJ, Endereço, CEP) é salvo ou transmitido para servidores ou bancos de dados externos.
-* Toda sanitização, autopreenchimento e renderização de PDF ocorre **100% no navegador do usuário (Client-Side)**.
-* **Qualquer PR que adicione persistência de dados sensíveis em servidor será rejeitado.**
+Thank you for your interest in contributing to **FormW8**! This is an open-source, privacy-first utility built to help international contractors, software engineers, and creators generate compliant US tax forms (W-8BEN & W-8BEN-E) without confusion or unnecessary withholding.
 
 ---
 
-## 🚀 Como Começar Localmente
+## 🔒 Core Axiom: Zero-Data Architecture
+All features and contributions must adhere strictly to our Zero-Data architecture:
+* **No personal data** (Name, CPF, CNPJ, Address, Zip code) may ever be sent to or stored on backend servers or third-party databases.
+* Sanitization, data validation, and PDF compilation must happen **100% inside the user's browser runtime (Client-Side)**.
+* **Any PR introducing remote server data persistence for personal info will be rejected.**
 
-### 1. Pré-requisitos
-* Node.js `20.x` ou superior
-* npm, pnpm ou yarn
+---
 
-### 2. Instalação e Execução
+## 🚀 Getting Started Locally
+
+### 1. Prerequisites
+* Node.js `20.x` or higher
+* npm, pnpm, or yarn
+
+### 2. Setup and Installation
 ```bash
-# Clone o repositório
-git clone https://github.com/SEU-USUARIO/formw8.git
+# Clone your fork
+git clone https://github.com/YOUR-USERNAME/formw8.git
 
-# Acesse o diretório
+# Enter the project directory
 cd formw8
 
-# Instale as dependências
+# Install dependencies
 npm install
 
-# Inicie o servidor de desenvolvimento
+# Start development server
 npm run dev
 ```
 
-Abra [http://localhost:48721](http://localhost:48721) no seu navegador.
+Open [http://localhost:48721](http://localhost:48721) in your browser.
 
 ---
 
-## 📐 Padrões de Código & Design System
+## 📐 Code Standards & Design System
 
-1. **Internacionalização (i18n):**
-   * **Nunca hardcode strings ou números de interface.**
-   * Todas as mensagens, perguntas, rótulos e cópias devem ser adicionadas em `src/i18n/dictionaries/pt-BR.json` e `src/i18n/dictionaries/en-US.json`.
+1. **Mandatory Internationalization (i18n):**
+   * **Never hardcode user-facing strings or numbers.**
+   * All UI text, questions, labels, error messages, and guide copy must be synchronized in dictionary files:
+     - `src/i18n/dictionaries/pt-BR.json`
+     - `src/i18n/dictionaries/en-US.json`
+   * Both dictionaries must maintain 100% key parity.
 
-2. **Design System & Estilização:**
-   * Utilize as classes e tokens do Tailwind configurados em `tailwind.config.ts` e `src/app/globals.css`.
-   * Evite estilos CSS arbitrários ou soltos.
+2. **Design System & Styling:**
+   * Strictly utilize theme semantic tokens and Tailwind utilities configured in `tailwind.config.ts` and `src/app/globals.css`.
+   * Never introduce arbitrary horizontal dividers (`border-t`, `border-b`, `<hr>`) or unapproved ad-hoc styles.
 
-3. **Verificação Estática:**
-   Antes de abrir seu Pull Request, execute a checagem de tipos e lint:
+3. **Static Analysis & Type Safety:**
+   Before submitting your Pull Request, ensure that TypeScript and build checks pass cleanly:
    ```bash
    npx tsc --noEmit
-   npm run lint
+   npm run build
    ```
 
 ---
 
-## 🔀 Fluxo de Pull Request
+## 🔀 Pull Request Workflow
 
-1. Crie uma branch para a sua alteração:
+1. Create a dedicated feature branch from `main`:
    ```bash
-   git checkout -b feature/sua-melhoria # ou fix/seu-bugfix
+   git checkout -b feat/your-feature-name # or fix/your-bugfix
    ```
-2. Faça commits claros e objetivos no padrão [Conventional Commits](https://www.conventionalcommits.org/) (ex: `feat: adicionar suporte a X`, `fix: corrigir alinhamento no passo 3`).
-3. Envie para o seu fork e abra o Pull Request detalhando o que foi feito e como testar.
+2. Commit using [Conventional Commits](https://www.conventionalcommits.org/) format (e.g. `feat: add guide for Upwork`, `fix: address field alignment on step 3`).
+3. Push to your fork and submit a Pull Request referencing any relevant issues.
 
 ---
 
-## 💡 Ideias de Contribuição
-- Novos idiomas e refinamento de dicionários i18n.
-- Melhorias nos guias passo a passo de plataformas (Deel, Rippling, Upwork, etc.).
-- Aprimoramento de acessibilidade (WCAG AA).
-- Otimizações no motor de PDF (`pdf-lib`).
+<details>
+<summary><b>🇧🇷 Guia de Contribuição em Português</b></summary>
 
-Obrigado por ajudar a comunidade dev e remota brasileira! ❤️
+### 🔒 Princípio Fundamental: Zero-Data
+Nenhum dado pessoal (Nome, CPF, CNPJ, Endereço) pode ser persistido ou enviado a servidores externos. Todo o processamento ocorre no navegador do usuário.
+
+### 📐 Padrões de Código
+* **i18n Obrigatório:** Nunca utilize textos fixos na interface; utilize sempre os dicionários `pt-BR.json` e `en-US.json`.
+* **Design System:** Utilize as classes do Tailwind e variáveis de tema padronizadas.
+* **Verificação:** Rode `npx tsc --noEmit` e `npm run build` antes de abrir o PR.
+
+</details>

@@ -1,21 +1,36 @@
-# Política de Segurança — FormW8
+# Security Policy — FormW8
 
-## 🔒 Nosso Compromisso com a Privacidade
-O FormW8 foi projetado desde o primeiro dia com **Zero-Data Architecture**:
-* Nenhum dado preenchido (Nome, CPF, CNPJ, Endereço) é armazenado em banco de dados ou transmitido para servidores de terceiros.
-* Toda a lógica de sanitização e geração do arquivo PDF é executada de forma isolada na sandbox de JavaScript do navegador do usuário (`pdf-lib`).
+## 🔒 Zero-Data Privacy Pledge
+FormW8 is architected from the ground up on a strict **Zero-Data Client-Side Architecture**:
+* **No personal identifying data** (Name, CPF, CNPJ, Address, Postal Code) is ever collected, transmitted, or saved to remote servers, databases, or analytics providers.
+* All ASCII regex sanitization, ZIP/CNPJ autofill lookups, and PDF generation execute strictly inside the client's browser runtime memory (`pdf-lib`).
 
 ---
 
-## 🚨 Reportando Vulnerabilidades
-Se você descobrir uma potencial vulnerabilidade de segurança neste projeto (por exemplo, vazamento inadvertido de dados, falha de sanitização XSS ou vulnerabilidade de dependências), por favor **não abra uma issue pública**.
+## 🚨 Reporting a Vulnerability
+If you discover a potential security vulnerability (such as unintended data leakage, client-side XSS, or vulnerable dependency vectors), please **do not open a public GitHub issue**.
 
-Envie os detalhes da vulnerabilidade diretamente para o mantenedor através de mensagem privada ou abrindo um **Security Advisory** confidencial no repositório do GitHub.
+Please report vulnerabilities privately:
+1. Open a confidential **GitHub Security Advisory** on the repository, or
+2. Contact the maintainer directly via GitHub profile contact details.
 
-Inclua as seguintes informações:
-1. Descrição clara da vulnerabilidade.
-2. Passos para reproduzir o problema.
-3. Impacto potencial estimado.
-4. Possível sugestão de correção (se houver).
+### What to include in your report:
+- A clear description of the vulnerability.
+- Minimal reproduction steps or proof of concept.
+- Potential impact assessment.
+- Suggested fix or mitigation, if available.
 
-Responderemos e corrigiremos problemas críticos o mais rápido possível.
+We will review, acknowledge, and resolve critical vulnerabilities promptly.
+
+---
+
+<details>
+<summary><b>🇧🇷 Política de Segurança em Português</b></summary>
+
+### 🔒 Compromisso de Privacidade Zero-Data
+O FormW8 opera sob arquitetura 100% Client-Side: nenhum dado preenchido (Nome, CPF, CNPJ, Endereço) é armazenado em servidores ou bancos de dados externos.
+
+### 🚨 Como reportar vulnerabilidades
+Se você identificar qualquer falha de segurança, por favor não abra uma issue pública. Envie um **Security Advisory** confidencial através do repositório do GitHub.
+
+</details>

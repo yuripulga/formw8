@@ -1,30 +1,31 @@
 ---
-name: Relatório de Bug
-about: Crie um relatório para nos ajudar a identificar e corrigir um problema
+name: Bug report
+about: Create a report to help us improve FormW8
 title: '[BUG] '
 labels: bug
 assignees: ''
 ---
 
-**Descrição do Bug**
-Uma descrição clara e concisa do que aconteceu.
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-**Passos para Reproduzir**
-1. Acesse '...'
-2. Preencha a etapa '...'
-3. Clique em '....'
-4. Veja o erro ocorrido
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Fill step '...'
+3. Click on '....'
+4. See error
 
-**Comportamento Esperado**
-Uma descrição clara e concisa do que você esperava que acontecesse.
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-**Capturas de Tela (Opcional)**
-Se aplicável, adicione capturas de tela para ajudar a explicar o problema (lembre-se de nunca expor dados reais como CPF/CNPJ nas imagens).
+**Screenshots (Optional)**
+If applicable, add screenshots to help explain your problem (ensure NO real CPF, CNPJ, or personal data is shown).
 
-**Ambiente:**
- - Dispositivo: [ex: Desktop, iPhone 14]
- - Navegador: [ex: Chrome 120, Safari, Firefox]
- - Sistema Operacional: [ex: macOS, Windows, Linux, iOS, Android]
+**Environment:**
+ - Device: [e.g. Desktop PC, MacBook, iPhone 15]
+ - Browser: [e.g. Chrome 125, Safari 17, Firefox]
+ - OS: [e.g. macOS, Windows 11, Ubuntu, iOS, Android]
 
-**Contexto Adicional**
-Adicione qualquer outro contexto relevante sobre o problema aqui.
+**Additional context**
+Add any other context about the problem here.

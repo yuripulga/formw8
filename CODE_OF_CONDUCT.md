@@ -1,33 +1,54 @@
-# Código de Conduta do Contribuinte (Contributor Covenant)
+# Contributor Covenant Code of Conduct
 
-## Nosso Compromisso
-Como contribuidores e mantenedores deste projeto, comprometemo-nos a tornar a participação no **FormW8** uma experiência livre de assédio para todos, independentemente de idade, tamanho corporal, deficiência visível ou invisível, etnia, características sexuais, identidade e expressão de gênero, nível de experiência, educação, status socioeconômico, nacionalidade, aparência pessoal, raça, religião ou identidade e orientação sexual.
+## Our Pledge
+We as members, contributors, and leaders pledge to make participation in the **FormW8** community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, caste, color, religion, or sexual identity and orientation.
 
-Comprometemo-nos a agir e interagir de maneiras que contribuam para uma comunidade aberta, acolhedora, diversa, inclusiva e saudável.
-
----
-
-## Nossos Padrões
-Exemplos de comportamentos que contribuem para um ambiente positivo:
-* Demonstrar empatia e gentileza para com outras pessoas;
-* Respeitar pontos de vista, abordagens e experiências diferentes;
-* Dar e receber feedbacks construtivos de maneira profissional;
-* Assumir responsabilidade por erros cometidos e pedir desculpas aos afetados;
-* Focar no que é melhor para a comunidade de software livre e para a privacidade dos usuários.
-
-Exemplos de comportamentos inaceitáveis:
-* Uso de linguagem ou imagens sexualizadas e atenção sexual indesejada;
-* Trollagem, comentários insultuosos/depreciativos e ataques pessoais ou políticos;
-* Assédio público ou privado;
-* Publicação de informações privadas de terceiros sem autorização explícita;
-* Outras condutas que possam ser razoavelmente consideradas inadequadas em um ambiente profissional.
+We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
 ---
 
-## Aplicação das Diretrizes
-Casos de comportamento abusivo, ofensivo ou de qualquer forma inaceitável podem ser reportados aos mantenedores do projeto através de contato direto ou abrindo uma issue privada. Todas as denúncias serão analisadas e investigadas prontamente e de maneira justa.
+## Our Standards
+Examples of behavior that contributes to a positive environment for our community include:
+* Demonstrating empathy and kindness toward other people;
+* Being respectful of differing opinions, viewpoints, and experiences;
+* Giving and gracefully accepting constructive feedback;
+* Accepting responsibility and apologizing to those affected by our mistakes, and learning from the experience;
+* Focusing on what is best not just for us as individuals, but for the overall community.
+
+Examples of unacceptable behavior include:
+* The use of sexualized language or imagery, and sexual attention or advances of any kind;
+* Trolling, insulting or derogatory comments, and personal or political attacks;
+* Public or private harassment;
+* Publishing others' private information, such as a physical or email address, without their explicit permission;
+* Other conduct which could reasonably be considered inappropriate in a professional setting.
 
 ---
 
-## Atribuição
-Este Código de Conduta é adaptado do [Contributor Covenant](https://www.contributor-covenant.org), versão 2.1.
+## Enforcement Responsibilities
+Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
+
+---
+
+## Scope
+This Code of Conduct applies within all project spaces, and also applies when an individual is officially representing the community in public spaces.
+
+---
+
+## Attribution
+This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.1, available at [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).
+
+---
+
+<details>
+<summary><b>🇧🇷 Tradução em Português (Código de Conduta)</b></summary>
+
+### Nosso Compromisso
+Como membros, contribuidores e líderes, comprometemo-nos a tornar a participação no **FormW8** uma experiência livre de assédio para todos, independentemente de idade, tamanho corporal, deficiência visível ou invisível, etnia, características sexuais, identidade e expressão de gênero, nível de experiência, educação, status socioeconômico, nacionalidade, aparência pessoal, raça, religião ou identidade e orientação sexual.
+
+### Nossos Padrões
+* Demonstrar empatia e gentileza com todas as pessoas;
+* Respeitar pontos de vista e experiências diferentes;
+* Dar e receber feedbacks construtivos com profissionalismo;
+* Manter o foco na privacidade absoluta dos usuários e na integridade de código aberto.
+
+</details>

@@ -177,7 +177,7 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
 
         {/* Platform Specific FAQ */}
         {platform.faq.length > 0 && (
-          <div className="space-y-4 pt-4 border-t border-theme/40">
+          <div className="space-y-4 pt-4">
             <h2 className="text-lg font-bold text-heading-theme tracking-tight flex items-center gap-2">
               <HelpCircle className="w-4 h-4 text-muted-theme" />
               <span>Dúvidas Frequentes sobre {platform.name}</span>
@@ -201,7 +201,7 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
         )}
 
         {/* Other Platform Guides Links */}
-        <div className="pt-6 space-y-3 border-t border-theme/40">
+        <div className="pt-6 space-y-3">
           <h3 className="text-xs font-bold uppercase tracking-wider text-muted-theme text-center">
             Guias de Outras Plataformas Internacionais
           </h3>

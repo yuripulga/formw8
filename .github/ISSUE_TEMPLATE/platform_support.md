@@ -1,21 +1,21 @@
 ---
-name: Solicitação de Nova Plataforma Internacional
-about: Sugira a inclusão de um novo guia para plataformas de contratação/pagamento
-title: '[PLATAFORMA] '
+name: New International Platform Request
+about: Suggest adding a compliance guide for a new contractor or payout platform
+title: '[PLATFORM] '
 labels: content, enhancement
 assignees: ''
 ---
 
-**Nome da Plataforma:**
-Ex: Toptal, Braintrust, Workana, Patreon, Gumroad, etc.
+**Platform Name:**
+e.g. Toptal, Braintrust, Workana, Patreon, Gumroad, etc.
 
-**Link Oficial da Plataforma:**
+**Official Platform Payout / Tax Link:**
 https://...
 
-**Como a plataforma solicita o W-8 hoje?**
-- [ ] Formulário digital próprio (copiar e colar campos)
-- [ ] Upload de arquivo PDF assinado
-- [ ] Ambos
+**How does this platform collect the W-8 form?**
+- [ ] Digital in-app form (requires field-by-field copy & paste)
+- [ ] Signed PDF upload
+- [ ] Both
 
-**Campos específicos ou particularidades fiscais conhecidas:**
-Descreva se a plataforma possui alguma exigência incomum de Tax Treaty, endereço ou classificação fiscal.
+**Known platform-specific tax requirements or treaty prompts:**
+Describe any unique prompts or special instructions asked by this platform during tax onboarding.

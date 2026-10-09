@@ -1,22 +1,22 @@
 ---
-name: Sugestão de Nova Funcionalidade
-about: Sugira uma nova ideia, melhoria de UX ou novo formulário fiscal
+name: Feature request
+about: Suggest a new idea, UX improvement, or tax compliance capability
 title: '[FEAT] '
 labels: enhancement
 assignees: ''
 ---
 
-**Sua ideia está relacionada a um problema existente? Por favor, descreva.**
-Uma descrição clara e concisa do problema que você enfrenta. Ex: *Fico sempre em dúvida sobre como preencher X...*
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex: *I find it confusing when...*
 
-**Descreva a solução que você gostaria de ver**
-Uma descrição clara e concisa de como você gostaria que o FormW8 se comportasse.
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
 
-**Zero-Data Architecture Check**
-- [ ] Confirmo que esta funcionalidade pode ser implementada 100% no navegador (Client-Side), sem salvar dados pessoais em servidores.
+**Zero-Data Architecture Confirmation**
+- [ ] I confirm this feature can run 100% Client-Side in the browser without sending or storing personal data on remote servers.
 
-**Descreva alternativas que você considerou**
-Uma descrição de outras abordagens ou soluções alternativas que você avaliou.
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
 
-**Contexto Adicional**
-Adicione qualquer outro contexto, mockups ou capturas de tela conceituais aqui.
+**Additional context**
+Add any other context, mockups, or screenshots about the feature request here.

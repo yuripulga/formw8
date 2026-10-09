@@ -30,6 +30,9 @@
     "shortcutHint": "to navigate",
     "selectHint": "to open",
     "escHint": "to close",
+    "guideHomeDesc": "W-8BEN (Ind.) & W-8BEN-E (Entity) - Zero-Data Client-Side Engine",
+    "guidePfDesc": "Complete guide for independent contractors and freelancers with Foreign TIN",
+    "guidePjDesc": "Complete guide for corporations, LLCs, and LTDAs with Foreign TIN (Active NFFE)",
     "categories": {
       "platforms": "International Platforms",
       "guides": "Form Models & Tax Guides",
@@ -381,6 +384,40 @@
     "copyPixKey": "Copy Pix Key",
     "pixCopied": "Pix Key Copied!",
     "closeButton": "Continue"
+  },
+  "platformPage": {
+    "needFormReady": "Need your W-8 ready for {name}?",
+    "generateFast": "Generate your IRS compliant form in under 1 minute.",
+    "generateCta": "Generate W-8 Tax Form Now",
+    "stepByStepTitle": "Step-by-Step Onboarding for {name}",
+    "faqTitle": "Frequently Asked Questions for {name}",
+    "otherGuides": "Other International Platform Guides",
+    "backToGenerator": "Go to W-8BEN / W-8BEN-E Generator"
+  },
+  "pillarPages": {
+    "pfBadge": "Individual • Freelancers & Contractors",
+    "pfTitle": "W-8BEN Tax Form Guide for Individuals",
+    "pfSubtitle": "The W-8BEN form certifies that you reside outside the US and provide services internationally, securing a 0% US tax withholding rate.",
+    "pfCardTitle": "Receiving as an Individual (Foreign TIN / CPF)?",
+    "pfCardSubtitle": "Generate your pre-filled W-8BEN form in 1 minute.",
+    "pfCardCta": "Generate W-8BEN Form in 1 Minute",
+    "pfFieldsTitle": "Core W-8BEN Fields (Individual)",
+    "pfHasCompanyTitle": "Do you operate as an Entity / Company?",
+    "pfHasCompanyDesc": "Check the complete W-8BEN-E guide for international business entities.",
+    "pfViewPjGuide": "View W-8BEN-E Guide",
+    "pfPlatformGuides": "Platform Guides",
+    "pjBadge": "Entity • LLC, LTDA, Corporation & Startups",
+    "pjTitle": "W-8BEN-E Tax Form Guide for International Entities",
+    "pjSubtitle": "How international companies certify Corporation and Chapter 4 Active NFFE status to qualify for 0% US withholding.",
+    "pjCardTitle": "Does your company provide services to US clients?",
+    "pjCardSubtitle": "Generate an IRS-standard W-8BEN-E form in under 1 minute.",
+    "pjCardCta": "Generate W-8BEN-E Form in 1 Minute",
+    "pjFieldsTitle": "Core W-8BEN-E Fields (Entity)",
+    "pjIsIndividualTitle": "Receiving as an Individual (CPF / Foreign TIN)?",
+    "pjIsIndividualDesc": "Check the complete W-8BEN guide for individual contractors and freelancers.",
+    "pjViewPfGuide": "View W-8BEN Guide",
+    "pjPlatformGuides": "Platform Guides for Entities",
+    "backToGenerator": "Back to Main Generator"
   }
 }
 

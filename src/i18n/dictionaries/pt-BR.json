@@ -30,6 +30,9 @@
     "shortcutHint": "para navegar",
     "selectHint": "para abrir",
     "escHint": "para fechar",
+    "guideHomeDesc": "W-8BEN (PF) & W-8BEN-E (PJ) - Motor Client-Side Zero-Data",
+    "guidePfDesc": "Guia completo para profissionais autônomos e freelancers com CPF",
+    "guidePjDesc": "Guia completo para empresas SLU, LTDA e MEI com CNPJ (Corporation & Active NFFE)",
     "categories": {
       "platforms": "Plataformas Internacionais",
       "guides": "Modelos & Guias Fiscais",
@@ -383,6 +386,40 @@
     "copyPixKey": "Copiar Chave Pix",
     "pixCopied": "Chave Pix Copiada!",
     "closeButton": "Continuar"
+  },
+  "platformPage": {
+    "needFormReady": "Precisa do seu W-8 pronto para a {name}?",
+    "generateFast": "Gere o formulário preenchido nos padrões da IRS em menos de 1 minuto.",
+    "generateCta": "Gerar Formulário Fiscal W-8 Agora",
+    "stepByStepTitle": "Passo a Passo de Preenchimento na {name}",
+    "faqTitle": "Dúvidas Frequentes sobre {name}",
+    "otherGuides": "Guias de Outras Plataformas Internacionais",
+    "backToGenerator": "Ir para o Gerador W-8BEN / W-8BEN-E"
+  },
+  "pillarPages": {
+    "pfBadge": "Pessoa Física • Freelancers & Contratados",
+    "pfTitle": "Guia do Formulário W-8BEN para Pessoa Física no Brasil",
+    "pfSubtitle": "O formulário W-8BEN comprova que você mora no Brasil e presta serviços para fora, garantindo 0% de desconto de imposto nos EUA.",
+    "pfCardTitle": "Você recebe como Pessoa Física (CPF)?",
+    "pfCardSubtitle": "Gere seu formulário W-8BEN preenchido em 1 minuto.",
+    "pfCardCta": "Gerar Formulário W-8BEN em 1 Minuto",
+    "pfFieldsTitle": "Campos Principais do W-8BEN (Pessoa Física)",
+    "pfHasCompanyTitle": "Possui empresa (CNPJ)?",
+    "pfHasCompanyDesc": "Veja o guia completo do formulário W-8BEN-E para empresas brasileiras.",
+    "pfViewPjGuide": "Ver Guia W-8BEN-E",
+    "pfPlatformGuides": "Guias por Plataforma",
+    "pjBadge": "Pessoa Jurídica • SLU, LTDA, MEI & Startups",
+    "pjTitle": "Guia do Formulário W-8BEN-E para Empresas no Brasil",
+    "pjSubtitle": "Como empresas brasileiras (SLU, LTDA e MEI) preenchem o W-8BEN-E como Corporation e Active NFFE para reter 0% de imposto nos EUA.",
+    "pjCardTitle": "Sua empresa (CNPJ) presta serviços para o exterior?",
+    "pjCardSubtitle": "Gere o formulário W-8BEN-E preenchido nos padrões da IRS em menos de 1 minuto.",
+    "pjCardCta": "Gerar Formulário W-8BEN-E em 1 Minuto",
+    "pjFieldsTitle": "Campos Principais do W-8BEN-E (Pessoa Jurídica)",
+    "pjIsIndividualTitle": "Recebe como Pessoa Física (CPF)?",
+    "pjIsIndividualDesc": "Veja o guia completo do formulário W-8BEN para pessoas físicas e freelancers.",
+    "pjViewPfGuide": "Ver Guia W-8BEN",
+    "pjPlatformGuides": "Guias por Plataforma para PJ",
+    "backToGenerator": "Voltar ao Gerador Principal"
   }
 }
 
