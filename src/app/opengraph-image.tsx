@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_HOST } from "@/config/site";
 
 export const dynamic = "force-static";
 export const alt = "FormW8 - Gerador de Formulários Fiscais W-8BEN e W-8BEN-E";
@@ -107,7 +108,7 @@ export default function OpenGraphImage() {
               letterSpacing: "0.5px",
             }}
           >
-            formw8.com.br
+            {SITE_HOST}
           </div>
         </div>
 

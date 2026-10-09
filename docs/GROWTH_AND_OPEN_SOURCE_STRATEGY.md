@@ -101,7 +101,7 @@ Para o IRS (fisco americano), qualquer empresa brasileira (SLU ou LTDA) que pres
 - **Alíquota nos EUA:** 0% de Withholding Tax (o imposto é pago no Brasil pelo Simples Nacional com Fator R a ~6% com isenção de PIS/COFINS/ISS).
 
 ### Criamos o FormW8 (100% Open-Source e Zero-Data)
-Para resolver isso de uma vez por todas, construímos o **[FormW8](https://formw8.com.br)**:
+Para resolver isso de uma vez por todas, construímos o **[FormW8](https://formw8.quimera.biz)**:
 - **Fricção Zero:** Preenche os modelos autênticos do IRS (`fw8ben.pdf` e `fw8bene.pdf`) em menos de 1 minuto.
 - **Zero-Data Client-Side:** 100% do processamento roda localmente no navegador via `pdf-lib`. Nenhum CPF, CNPJ ou endereço é enviado para servidor nenhum.
 - **Gabarito para Copiar & Colar:** Além do PDF pronto, geramos a simulação exata tela por tela para Deel, Rippling, Upwork, Google AdSense, Steam, etc.
@@ -129,7 +129,7 @@ Para empresas brasileiras (SLU/LTDA de TI):
 2. O Chapter 4 FATCA deve ser **Active NFFE**.
 3. O Foreign Tax Identifying Number é simplesmente o seu **CNPJ** (ou CPF se for pessoa física).
 
-Para facilitar a vida de quem está nessa etapa, montei uma ferramenta gratuita e open-source: **[formw8.com.br](https://formw8.com.br)**.
+Para facilitar a vida de quem está nessa etapa, montei uma ferramenta gratuita e open-source: **[formw8.quimera.biz](https://formw8.quimera.biz)**.
 
 Ela roda 100% no navegador (Client-Side, nenhum dado de CPF/CNPJ sai do seu computador) e gera o PDF oficial do IRS preenchido e sanitizado em ASCII, além de um gabarito para copiar e colar nas telas das plataformas.
 

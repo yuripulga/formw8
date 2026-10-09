@@ -1,4 +1,4 @@
-# GUIA OFICIAL DE TOM DE VOZ E COPYWRITING (`formw8.com.br`)
+# GUIA OFICIAL DE TOM DE VOZ E COPYWRITING (`formw8.quimera.biz`)
 
 > **Objetivo:** Garantir que 100% dos textos da interface falem com o usuário como um parceiro amigável, acolhedor e especialista, eliminando qualquer medo ou barreira técnica.
 

@@ -4,7 +4,7 @@
   "description": "Zero-friction, zero-data open-source US tax form (W-8BEN & W-8BEN-E) translator, field guide, and PDF generator.",
   "author": "Yuri Pauluci & FormW8 Contributors",
   "license": "MIT",
-  "homepage": "https://formw8.com.br",
+  "homepage": "https://formw8.quimera.biz",
   "repository": {
     "type": "git",
     "url": "https://github.com/yuripulga/formw8.git"

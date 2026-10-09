@@ -4,19 +4,20 @@ import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ArrowRight, UserCheck, CheckCircle2 } from "lucide-react";
+import { SITE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Formulário W-8BEN para Pessoa Física (CPF) | Guia Brasil",
   description:
     "Aprenda como preencher o formulário W-8BEN individual com CPF para receber pagamentos do exterior sem desconto de 30% de imposto americano.",
   alternates: {
-    canonical: "https://formw8.com.br/w8ben-pessoa-fisica",
+    canonical: `${SITE_URL}/w8ben-pessoa-fisica`,
   },
   openGraph: {
     title: "Formulário W-8BEN para Pessoa Física (CPF) | Guia Brasil",
     description:
       "Tudo sobre o formulário W-8BEN para freelancers e contratados individuais que recebem do exterior via CPF.",
-    url: "https://formw8.com.br/w8ben-pessoa-fisica",
+    url: `${SITE_URL}/w8ben-pessoa-fisica`,
     type: "article",
   },
 };
@@ -30,7 +31,7 @@ export default function W8BenPessoaFisicaPage() {
     author: {
       "@type": "Organization",
       name: "FormW8",
-      url: "https://formw8.com.br",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",

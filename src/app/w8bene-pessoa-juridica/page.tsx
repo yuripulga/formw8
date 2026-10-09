@@ -4,19 +4,20 @@ import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, ArrowRight, Building2, CheckCircle2 } from "lucide-react";
+import { SITE_URL } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Formulário W-8BEN-E para Pessoa Jurídica (SLU / LTDA / CNPJ) | Guia Brasil",
   description:
     "Guia completo do formulário W-8BEN-E para empresas brasileiras (SLU, LTDA, EIRELI, ME) prestadoras de serviços internacionais com 0% de retenção nos EUA.",
   alternates: {
-    canonical: "https://formw8.com.br/w8bene-pessoa-juridica",
+    canonical: `${SITE_URL}/w8bene-pessoa-juridica`,
   },
   openGraph: {
     title: "Formulário W-8BEN-E para Pessoa Jurídica (SLU / LTDA / CNPJ) | Guia Brasil",
     description:
       "Tudo sobre o formulário W-8BEN-E para empresas brasileiras que exportam serviços para os Estados Unidos.",
-    url: "https://formw8.com.br/w8bene-pessoa-juridica",
+    url: `${SITE_URL}/w8bene-pessoa-juridica`,
     type: "article",
   },
 };
@@ -30,7 +31,7 @@ export default function W8BenEPessoaJuridicaPage() {
     author: {
       "@type": "Organization",
       name: "FormW8",
-      url: "https://formw8.com.br",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",

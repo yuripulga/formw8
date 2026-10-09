@@ -336,3 +336,10 @@
 
 
 
+
+---
+
+## 🌐 Fase 17: Origem Pública Configurável (CONCLUÍDO)
+- [x] **Domínio único em [`src/config/site.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/config/site.ts):**
+  - `SITE_URL` (padrão `https://formw8.quimera.biz`, sobrescrevível via `NEXT_PUBLIC_SITE_URL`) alimenta `metadataBase`, canonicals, Open Graph, JSON-LD, `sitemap.ts`, `robots.ts` e a imagem OG dinâmica.
+  - Documentado em `.env.example`; README, `package.json` e docs atualizados para o novo domínio de validação.
