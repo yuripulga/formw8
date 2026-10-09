@@ -1,7 +1,31 @@
 {
   "name": "formw8",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Zero-friction, zero-data open-source US tax form (W-8BEN & W-8BEN-E) translator, field guide, and PDF generator.",
+  "author": "Yuri Pauluci & FormW8 Contributors",
+  "license": "MIT",
+  "homepage": "https://formw8.com.br",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuripulga/formw8.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yuripulga/formw8/issues"
+  },
+  "keywords": [
+    "w8ben",
+    "w8bene",
+    "irs",
+    "tax-form",
+    "deel",
+    "rippling",
+    "upwork",
+    "remote-work",
+    "open-source",
+    "zero-data",
+    "pdf-generator",
+    "nextjs"
+  ],
   "scripts": {
     "dev": "next dev -p 48721",
     "build": "next build",
