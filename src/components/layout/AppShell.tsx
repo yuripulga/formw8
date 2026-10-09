@@ -11,7 +11,6 @@ import { ScreensaverFormBackground } from "@/components/ui/ScreensaverFormBackgr
 import { HighlighterPenDecoration } from "@/components/ui/HighlighterPenDecoration";
 import { LampPullCord } from "@/components/ui/LampPullCord";
 import { FAQSection } from "@/components/FAQSection";
-import { CookieBanner } from "@/components/CookieBanner";
 import { SearchModal } from "@/components/SearchModal";
 
 interface AppShellProps {
@@ -103,7 +102,6 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
 
       <HighlighterPenDecoration />
       <LampPullCord />
-      <CookieBanner />
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}

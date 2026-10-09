@@ -25,6 +25,17 @@ export function ProgrammaticAdSlot({
   useEffect(() => {
     if (client && slotId && typeof window !== "undefined") {
       try {
+        const existingScript = document.querySelector(
+          `script[src*="pagead2.googlesyndication.com"]`
+        );
+        if (!existingScript) {
+          const script = document.createElement("script");
+          script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${client}`;
+          script.async = true;
+          script.crossOrigin = "anonymous";
+          document.head.appendChild(script);
+        }
+
         // @ts-expect-error Google adsbygoogle global array push
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch {
@@ -36,10 +47,10 @@ export function ProgrammaticAdSlot({
   if (!client || !slotId) {
     return (
       <aside
-        aria-label="Espaço para Parcerias e Anúncios"
-        className={`w-full max-w-2xl mx-auto my-6 p-4 rounded-2xl bg-card-surface/60 border border-dashed border-theme/60 text-center space-y-1.5 ${className}`}
+        aria-label={t.ads.sponsorBadge}
+        className={`w-full max-w-2xl mx-auto my-6 p-4 rounded-2xl bg-card-surface border border-dashed border-theme text-center space-y-1.5 ${className}`}
       >
-        <span className="text-[10px] font-bold tracking-wider uppercase text-muted-theme/80 px-2 py-0.5 rounded bg-app-surface border border-theme/40">
+        <span className="text-xs font-bold tracking-wider uppercase text-muted-theme px-2 py-0.5 rounded bg-app-surface border border-theme">
           {t.ads.sponsorBadge}
         </span>
         <p className="text-xs text-muted-theme">
@@ -57,10 +68,10 @@ export function ProgrammaticAdSlot({
 
   return (
     <aside
-      aria-label="Anúncio Patrocinado"
-      className={`w-full max-w-2xl mx-auto my-6 overflow-hidden rounded-2xl bg-card-surface border border-theme/40 text-center ${className}`}
+      aria-label={t.ads.adLabel}
+      className={`w-full max-w-2xl mx-auto my-6 overflow-hidden rounded-2xl bg-card-surface border border-theme text-center ${className}`}
     >
-      <div className="py-1 px-3 bg-app-surface/60 text-[10px] text-muted-theme uppercase tracking-wider text-right">
+      <div className="py-1 px-3 bg-app-surface text-xs text-muted-theme uppercase tracking-wider text-right">
         {t.ads.adLabel}
       </div>
       <div className="min-h-[90px] flex items-center justify-center p-2">

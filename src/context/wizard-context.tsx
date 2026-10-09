@@ -9,7 +9,7 @@ interface WizardContextType {
   totalSteps: number;
   formData: Partial<W8FormData>;
   setUserName: (name: string) => void;
-  setEntityType: (type: EntityType) => void;
+  setEntityType: (type: EntityType, isMei?: boolean) => void;
   updateFormData: (data: Partial<W8FormData>) => void;
   nextStep: () => void;
   prevStep: () => void;
@@ -30,6 +30,7 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     countryOfIncorporation: "Brazil",
     chapter3Classification: "Corporation",
     chapter4Status: "ActiveNFFE",
+    isMei: false,
     claimTreaty: false,
     outputMode: "pdf",
   });
@@ -40,13 +41,19 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     setFormData((prev) => ({ ...prev, userName: name }));
   };
 
-  const setEntityType = (type: EntityType) => {
-    setFormData((prev) => ({
-      ...prev,
-      entityType: type,
-      chapter3Classification: type === "PJ" ? "Corporation" : "Individual",
-      chapter4Status: type === "PJ" ? "ActiveNFFE" : "Individual",
-    }));
+  const setEntityType = (type: EntityType, isMei: boolean = false) => {
+    setFormData((prev) => {
+      const isSwitching = prev.entityType !== type;
+      return {
+        ...prev,
+        entityType: type,
+        isMei,
+        taxId: isSwitching ? "" : prev.taxId,
+        companyName: type === "PF" ? undefined : (isSwitching ? "" : prev.companyName),
+        chapter3Classification: type === "PJ" ? "Corporation" : "Individual",
+        chapter4Status: type === "PJ" ? (prev.chapter4Status === "PassiveNFFE" ? "PassiveNFFE" : "ActiveNFFE") : "Individual",
+      };
+    });
   };
 
   const updateFormData = (data: Partial<W8FormData>) => {

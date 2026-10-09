@@ -172,7 +172,7 @@ export function LampPullCord() {
     <aside
       ref={containerRef}
       className="fixed top-0 right-14 sm:right-3 md:right-4 z-50 pointer-events-none select-none"
-      aria-label="Controle de Luz e Tema"
+      aria-label={t.common.lampAriaLabel}
     >
       <div className="relative w-14 sm:w-16 h-36 pointer-events-none">
         <svg
@@ -189,7 +189,7 @@ export function LampPullCord() {
             width="14"
             height="3"
             rx="0.5"
-            className="fill-slate-500 dark:fill-zinc-500 drop-shadow-2xs"
+            className="fill-slate-500 dark:fill-zinc-500 drop-shadow-sm"
           />
           {/* Collar / Eyelet Connector */}
           <rect

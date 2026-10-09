@@ -42,7 +42,7 @@ export default function W8BenEPessoaJuridicaPage() {
     <AppShell showFaq={false}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
 
       <div className="space-y-10 py-4 max-w-2xl mx-auto w-full">
@@ -117,7 +117,7 @@ export default function W8BenEPessoaJuridicaPage() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl bg-app-surface border border-theme/60 space-y-1 text-xs"
+                className="p-4 rounded-xl bg-app-surface border border-theme space-y-1 text-xs"
               >
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />

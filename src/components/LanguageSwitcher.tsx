@@ -10,7 +10,7 @@ export function LanguageSwitcher() {
     <div
       role="group"
       aria-label={t.common.switchLanguage}
-      className="flex items-center bg-white dark:bg-zinc-800 border border-slate-300 dark:border-zinc-700 rounded-xl p-1 shadow-xs"
+      className="flex items-center bg-white dark:bg-zinc-800 border border-slate-300 dark:border-zinc-700 rounded-xl p-1 shadow-sm"
     >
       <button
         type="button"
@@ -21,7 +21,7 @@ export function LanguageSwitcher() {
         }}
         className={`px-2.5 py-1 text-xs rounded-lg font-bold transition-transform active:scale-95 cursor-pointer ${
           locale === "pt-BR"
-            ? "text-slate-900 shadow-xs"
+            ? "text-slate-900 shadow-sm"
             : "text-slate-700 dark:text-zinc-200 hover:text-slate-950 dark:hover:text-white"
         }`}
       >
@@ -36,7 +36,7 @@ export function LanguageSwitcher() {
         }}
         className={`px-2.5 py-1 text-xs rounded-lg font-bold transition-transform active:scale-95 cursor-pointer ${
           locale === "en-US"
-            ? "text-slate-900 shadow-xs"
+            ? "text-slate-900 shadow-sm"
             : "text-slate-700 dark:text-zinc-200 hover:text-slate-950 dark:hover:text-white"
         }`}
       >

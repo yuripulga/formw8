@@ -42,7 +42,7 @@ function TypographySection() {
             className="p-4 sm:p-5 rounded-2xl border border-theme bg-card-surface flex flex-col sm:flex-row sm:items-center justify-between gap-3"
           >
             <div className="space-y-1 flex-1">
-              <span className="text-[11px] font-mono text-muted-theme uppercase tracking-wider block">
+              <span className="text-xs font-mono text-muted-theme uppercase tracking-wider block">
                 {w.name}
               </span>
               <p className={`text-base sm:text-lg text-heading-theme ${w.weight}`}>
@@ -66,9 +66,11 @@ export default function DesignSystemPage() {
   const inputWasSanitized = wasSanitized(testInput);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(sanitizedVal);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (!navigator?.clipboard) return;
+    navigator.clipboard.writeText(sanitizedVal).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }).catch(() => {});
   };
 
   return (

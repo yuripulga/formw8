@@ -48,7 +48,7 @@ export function PDFPreviewViewer({ formData }: PDFPreviewViewerProps) {
 
   const handleOpenInNewTab = () => {
     if (pdfUrl) {
-      window.open(pdfUrl, "_blank");
+      window.open(pdfUrl, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -59,7 +59,7 @@ export function PDFPreviewViewer({ formData }: PDFPreviewViewerProps) {
         <button
           type="button"
           onClick={handleOpenInNewTab}
-          className="absolute top-3 right-3 z-20 p-2 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white dark:bg-zinc-800/90 dark:hover:bg-zinc-700 shadow-md backdrop-blur-xs transition-transform active:scale-95 cursor-pointer flex items-center justify-center"
+          className="absolute top-3 right-3 z-20 p-2 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white dark:bg-zinc-800/90 dark:hover:bg-zinc-700 shadow-md backdrop-blur-sm transition-transform active:scale-95 cursor-pointer flex items-center justify-center"
           title={t.wizard.stepConfirmation.openInNewTab}
           aria-label={t.wizard.stepConfirmation.openInNewTab}
         >

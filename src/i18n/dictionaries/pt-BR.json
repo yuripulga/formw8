@@ -21,7 +21,12 @@
     "restart": "Começar novamente",
     "clearData": "Limpar meus dados do navegador",
     "dataClearedNotice": "Seus dados foram removidos da memória do navegador.",
-    "close": "Fechar"
+    "close": "Fechar",
+    "clearSearch": "Limpar busca",
+    "lampAriaLabel": "Controle de Luz e Tema",
+    "highlighterSelector": "Seletor de cor de destaque marca-texto",
+    "selectColor": "Selecionar cor {{name}}",
+    "activateColor": "Ativar destaque {{name}}"
   },
   "search": {
     "buttonText": "Buscar...",
@@ -39,12 +44,6 @@
       "faq": "Dúvidas Frequentes (FAQ)"
     }
   },
-  "cookies": {
-    "title": "Privacidade & Cookies",
-    "description": "Usamos cookies e métricas anônimas para manter a ferramenta gratuita e melhorar sua experiência.",
-    "accept": "Entendido",
-    "learnMore": "Saiba mais"
-  },
   "ads": {
     "adLabel": "Publicidade",
     "sponsorBadge": "Anuncie no FormW8",
@@ -52,6 +51,7 @@
     "contactUs": "Fale com nossa equipe"
   },
   "footer": {
+    "navLabel": "Guias e Documentos Oficiais",
     "tagline": "Gerador simplificado de formulários fiscais {bold}W-8BEN{/bold} e {bold}W-8BEN-E{/bold} da IRS.",
     "disclaimer": "Ferramenta gratuita sem vínculo com nenhuma instituição ou governo.",
     "openSourceAppeal": "Projeto {openSource}open-source{/openSource} feito para ajudar a todos. Se te ajudou, apoie com um Pix",
@@ -119,18 +119,29 @@
       "question": "Como você recebe pagamentos do exterior?",
       "subtitle": "",
       "optionPF": "Pessoa Física (CPF)",
-      "descriptionPF": "Formulário W-8BEN para quem não tem empresa.",
-      "optionPJ": "Empresa no Brasil (CNPJ)",
-      "descriptionPJ": "Formulário W-8BEN-E para quem tem CNPJ (SLU, LTDA, MEI).",
+      "descriptionPF": "Formulário W-8BEN para autônomos e freelancers sem CNPJ.",
+      "optionMei": "MEI (Microempreendedor Individual)",
+      "descriptionMei": "Formulário W-8BEN via CPF. Plataformas internacionais tratam MEI como pessoa física nos EUA.",
+      "optionPJ": "Empresa no Brasil (SLU, LTDA)",
+      "descriptionPJ": "Formulário W-8BEN-E para empresas com CNPJ.",
+      "segmentSectionTitle": "Classificação da Empresa (Chapter 4)",
+      "segmentHoldingTitle": "Holding / Receita Passiva",
+      "segmentHoldingSubtitle": "Mais de 50% da receita vem de investimentos, juros, dividendos ou aluguéis. Exige declaração de sócios americanos (Parte XXVI).",
+      "segmentServicesTitle": "Prestação de Serviços",
+      "segmentServicesSubtitle": "Desenvolvimento de software, design, marketing ou consultoria com receita operacional ativa. É o enquadramento padrão para Deel e Upwork.",
+      "passiveNffeAlert": "Atenção: Para Passive NFFE, o formulário W-8BEN-E do IRS exige atestar a presença ou ausência de sócios com cidadania/residência americana (Substantial U.S. Owners na Parte XXVI). O documento será gerado com o enquadramento de Passive NFFE marcado.",
+      "pjCorporationNotice": "Enquadramento automático como Corporation (padrão para empresas SLU e LTDA). Para outras estruturas societárias, consulte seu contador.",
       "helpLink": "Não sei essa resposta",
-      "helpTitle": "Qual a diferença de impostos no Brasil?",
-      "helpPF": "• Pessoa Física (CPF): Paga Carnê-Leão no Brasil com alíquota progressiva de até 27,5% sobre a receita bruta (geralmente viável apenas para faturamentos menores de até R$ 5.000 a R$ 10.000/mês).",
-      "helpPJ": "• Empresa (CNPJ): Paga imposto no Brasil pelo Simples Nacional (Anexo III com Fator R) ou Lucro Presumido, reduzindo a carga tributária efetiva para 6% a 15% com isenção total de PIS/COFINS na exportação de serviços.",
+      "helpTitle": "Qual a diferença entre PF, MEI e PJ?",
+      "helpPF": "• Pessoa Física (CPF): Paga Carnê-Leão no Brasil com alíquota progressiva de até 27,5% sobre a receita bruta (indicado para faturamentos menores).",
+      "helpMei": "• MEI: O IRS e plataformas como a Deel tratam o MEI como indivíduo nos EUA (W-8BEN com CPF). No Brasil, você continua emitindo sua NFS-e normalmente.",
+      "helpPJ": "• Empresa SLU / LTDA (CNPJ): Paga imposto no Brasil pelo Simples Nacional ou Lucro Presumido (6% a 15% na exportação). Gera o formulário W-8BEN-E como Corporation.",
       "explanation": ""
     },
     "stepSummary": {
       "thankYou": "Obrigado, {{name}}!",
       "selectionPF": "Você escolheu Pessoa Física (Formulário W-8BEN).",
+      "selectionMei": "Você escolheu MEI (Formulário W-8BEN via CPF).",
       "selectionPJ": "Você escolheu Empresa (Formulário W-8BEN-E)."
     },
     "stepTaxAndAddress": {
@@ -138,6 +149,7 @@
       "subtitle": "",
       "taxIdLabelPF": "Seu CPF",
       "taxIdPlaceholderPF": "000.000.000-00",
+      "meiTaxIdHelper": "Para MEI, informe o seu CPF — é o identificador aceito pelo IRS e pela Deel para titulares de MEI.",
       "taxIdOrCompanyLabelPJ": "CNPJ ou Razão Social da empresa",
       "taxIdOrCompanyPlaceholderPJ": "Digite o CNPJ ou o nome da empresa",
       "taxIdLabelPJ": "CNPJ da empresa",
@@ -157,11 +169,16 @@
       "cnpjSearching": "Buscando dados do CNPJ...",
       "cnpjFound": "Dados da empresa preenchidos!",
       "manualAddressToggle": "Preencher endereço manualmente",
-      "explanation": "O CPF ou CNPJ é inserido no campo Foreign Tax Identifying Number (FTIN)."
+      "privacyNotice": "Ao digitar CNPJ ou CEP, seu navegador consulta serviços públicos brasileiros (ViaCEP/BrasilAPI) para agilizar o preenchimento. Você também pode preencher tudo manualmente.",
+      "explanation": "O seu CPF ou CNPJ é inserido no campo Foreign Tax Identifying Number (FTIN), que na Deel e outras plataformas aparece como TIN ou Foreign TIN."
     },
     "stepConfirmation": {
       "question": "Pronto! Seu formulário está gerado",
       "subtitle": "Baixe o PDF preenchido ou consulte o mapa de campos abaixo.",
+      "meiInfoTitle": "Nota sobre o seu enquadramento MEI",
+      "meiInfoDesc": "O seu formulário W-8BEN foi gerado com o seu CPF. Plataformas internacionais (Deel, Upwork, Remote) tratam o MEI brasileiro como pessoa física (Disregarded Entity). No Brasil, você continua emitindo sua Nota Fiscal de Serviço (NFS-e) pelo seu CNPJ MEI normalmente.",
+      "passiveNffeInfoTitle": "Nota sobre o enquadramento Passive NFFE",
+      "passiveNffeInfoDesc": "O seu formulário W-8BEN-E foi preenchido com a certificação de Passive NFFE (Linha 5 e Parte XXVI). Se a sua empresa possuir sócios com cidadania ou residência americana (Substantial U.S. Owners), consulte seu contador para listar os dados na Parte XXX.",
       "pdfAction": "Baixar PDF Preenchido",
       "pdfActionDesc": "Documento pronto para assinar e enviar.",
       "previewTitle": "Visualização do PDF Preenchido",
@@ -170,6 +187,14 @@
       "officialFormLabel": "Modelo do Formulário",
       "formTypePF": "W-8BEN (Pessoa Física)",
       "formTypePJ": "W-8BEN-E (Pessoa Jurídica)",
+      "fatcaNoticeTitle": "Enquadramento Fiscal FATCA: Active NFFE",
+      "fatcaNoticeText": "Seu formulário W-8BEN-E foi configurado com a classificação padrão Chapter 4: Active NFFE (Empresa com mais de 50% de receita bruta ativa operacional em serviços/tecnologia). Caso sua empresa brasileira seja uma holding ou receba mais de 50% de receita passiva/investimentos, consulte seu contador para o enquadramento em Passive NFFE.",
+      "fatcaQuestionTitle": "Classificação FATCA da Empresa (Chapter 4)",
+      "fatcaQuestionSubtitle": "Confirme a natureza das receitas da sua empresa para o enquadramento correto no formulário:",
+      "fatcaOptionActiveTitle": "Active NFFE (Recomendado para TI, Serviços e Consultoria)",
+      "fatcaOptionActiveDesc": "Mais de 50% da receita bruta é proveniente da prestação ativa de serviços ou desenvolvimento de software.",
+      "fatcaOptionPassiveTitle": "Passive NFFE (Holdings e Rendimentos Financeiros)",
+      "fatcaOptionPassiveDesc": "Mais de 50% da receita é passiva (dividendos, juros, aplicações financeiras ou royalties de terceiros).",
       "mappingTitle": "Preencha manualmente o formulário {formType}",
       "mappingSubtitle": "",
       "showAllFields": "Ver tudo ({count})",
@@ -236,6 +261,9 @@
       "lineTreatyLabel": "{highlight}Part III.{/highlight} Claim of Tax Treaty Benefits",
       "lineTreatyMeaning": "Isenção fiscal (0% Withholding)",
       "lineTreatyPlatform": "Tax Treaty Benefits (N/A / None)",
+      "countryValue": "Brazil",
+      "chapter3Value": "Corporation",
+      "chapter4Value": "Active NFFE",
       "lineSignLabel": "{highlight}Part III / XXX.{/highlight} Certification & Signature",
       "lineSignMeaning": "Assinatura do responsável e data no formato americano (MM-DD-YYYY)",
       "lineSignPlatform": "Digital Signature & Date"
@@ -245,6 +273,8 @@
       "taxIdRequired": "Preencha o CPF ou CNPJ.",
       "taxIdInvalidPF": "CPF inválido. Verifique os números digitados.",
       "taxIdInvalidPJ": "CNPJ inválido. Verifique os números digitados.",
+      "taxIdCnpjInPfError": "Você inseriu um CNPJ. Para Pessoa Física ou MEI, informe seu CPF de 11 dígitos.",
+      "taxIdCpfInPjError": "Você inseriu um CPF. Para Empresa, informe o CNPJ de 14 dígitos.",
       "companyNameRequired": "Preencha a Razão Social da empresa.",
       "addressRequired": "Preencha o endereço (rua e número).",
       "cityRequired": "Preencha a cidade.",
@@ -324,7 +354,7 @@
       {
         "id": "privacy-security",
         "question": "O FormW8 armazena meus dados pessoais ou fiscais?",
-        "answer": "Não. O FormW8 é uma ferramenta com arquitetura 100% client-side (executada no seu navegador) e política Zero-Data. Nenhuma informação pessoal, CPF, CNPJ ou endereço é transmitida para servidores nem salva em bancos de dados. Todos os dados permanecem estritamente na memória temporária do seu navegador."
+        "answer": "Não. O FormW8 é uma ferramenta com arquitetura 100% client-side (executada no seu navegador) e política Zero-Data. Não possuímos servidores de armazenamento ou banco de dados. Toda a geração do PDF e higienização ocorrem localmente na memória do seu navegador. Apenas quando você opta por digitar um CNPJ ou CEP, seu navegador faz requisições diretas a APIs públicas abertas brasileiras (ViaCEP, BrasilAPI, Minha Receita) exclusivamente para preencher seu endereço. O preenchimento 100% manual e offline também está sempre disponível."
       },
       {
         "id": "payment-withheld-30",
