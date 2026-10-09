@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: PlatformPageProps): Promise<M
     };
   }
 
-  const url = `https://formw8.com.br/plataformas/${platform.slug}`;
+  const url = `${SITE_URL}/plataformas/${platform.slug}`;
 
   return {
     title: `${platform.title} | FormW8`,
@@ -53,6 +53,7 @@ export async function generateMetadata({ params }: PlatformPageProps): Promise<M
 }
 
 import ptBR from "@/i18n/dictionaries/pt-BR.json";
+import { SITE_URL } from "@/config/site";
 
 export default async function PlatformPage({ params }: PlatformPageProps) {
   const { slug } = await params;
@@ -75,19 +76,19 @@ export default async function PlatformPage({ params }: PlatformPageProps) {
             "@type": "ListItem",
             position: 1,
             name: "Início",
-            item: "https://formw8.com.br",
+            item: SITE_URL,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Guias de Plataformas",
-            item: "https://formw8.com.br/#platforms",
+            item: `${SITE_URL}/#platforms`,
           },
           {
             "@type": "ListItem",
             position: 3,
             name: platform.name,
-            item: `https://formw8.com.br/plataformas/${platform.slug}`,
+            item: `${SITE_URL}/plataformas/${platform.slug}`,
           },
         ],
       },

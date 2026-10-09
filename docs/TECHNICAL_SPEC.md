@@ -1,5 +1,5 @@
 # ESTUDO DE VIABILIDADE TÉCNICO-ECONÔMICA E DESIGN DE PRODUTO FISCAL
-**Domínio:** `formw8.com.br`  
+**Domínio:** `formw8.quimera.biz`  
 **Fase:** Especificação de Arquitetura, UX e Engenharia de Software  
 **Source of Truth:** Especificação técnica e conceitual atualizada com a arquitetura completa de produção.
 
@@ -64,7 +64,7 @@
 ## 4. Estratégia de Idioma, SEO e Conformidade Legal
 
 1. **HTML Estático Primário em pt-BR & Programmatic SEO (A5 & A6):**
-   * O produto e o domínio `formw8.com.br` destinam-se primariamente a profissionais brasileiros (PF e PJ) que exportam serviços para o exterior.
+   * O produto e o domínio `formw8.quimera.biz` destinam-se primariamente a profissionais brasileiros (PF e PJ) que exportam serviços para o exterior.
    * **Decisão de Produto:** A geração estática SSG inicial dos templates HTML, os 13 guias de plataformas (`platforms-data.ts`) e as páginas pilares (`/w8ben-pessoa-fisica`, `/w8bene-pessoa-juridica`) são estruturados em Português (`pt-BR`) por decisão estratégica de SEO focado no Google Brasil (termos de busca: *"como preencher w8ben na deel"*, *"w8bene slu"*).
    * O suporte internacional a `en-US` opera na aplicação principal e no Wizard via detecção de `navigator.language` ou alternância no rodapé, atualizando dinamicamente a árvore de UI e a tag `<html lang="...">`.
 2. **Classificação Fiscal (PF, MEI e PJ) & Chapter 3 Corporation:**

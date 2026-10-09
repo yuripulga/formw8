@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { I18nProvider } from "@/i18n/context";
 import { WizardProvider } from "@/context/wizard-context";
+import { SITE_URL } from "@/config/site";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -14,7 +15,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://formw8.com.br"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
     template: "%s | FormW8",
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     "Bitributação Brasil Estados Unidos",
     "Sanitizador ASCII W-8",
   ],
-  authors: [{ name: "FormW8", url: "https://formw8.com.br" }],
+  authors: [{ name: "FormW8", url: SITE_URL }],
   creator: "FormW8 / Quimera.biz",
   publisher: "FormW8",
   formatDetection: {
@@ -77,14 +78,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     alternateLocale: "en_US",
-    url: "https://formw8.com.br",
+    url: SITE_URL,
     siteName: "FormW8",
     title: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
     description:
       "Gere seu formulário fiscal da IRS preenchido e certificado em menos de 1 minuto. 100% gratuito, sem cadastro e com processamento local no navegador.",
     images: [
       {
-        url: "https://formw8.com.br/og-image.png",
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
@@ -97,7 +98,7 @@ export const metadata: Metadata = {
     title: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
     description:
       "Gere seu formulário fiscal da IRS preenchido e certificado em menos de 1 minuto. 100% client-side e seguro.",
-    images: ["https://formw8.com.br/og-image.png"],
+    images: [`${SITE_URL}/og-image.png`],
   },
   robots: {
     index: true,
@@ -123,9 +124,9 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "WebApplication",
-        "@id": "https://formw8.com.br/#app",
+        "@id": `${SITE_URL}/#app`,
         name: "FormW8",
-        url: "https://formw8.com.br",
+        url: SITE_URL,
         applicationCategory: "BusinessApplication",
         operatingSystem: "All",
         browserRequirements: "Requires JavaScript. Requires HTML5.",
@@ -139,14 +140,14 @@ export default function RootLayout({
       },
       {
         "@type": "Organization",
-        "@id": "https://formw8.com.br/#organization",
+        "@id": `${SITE_URL}/#organization`,
         name: "FormW8",
-        url: "https://formw8.com.br",
-        logo: "https://formw8.com.br/icon.png",
+        url: SITE_URL,
+        logo: `${SITE_URL}/icon.png`,
       },
       {
         "@type": "HowTo",
-        "@id": "https://formw8.com.br/#howto",
+        "@id": `${SITE_URL}/#howto`,
         name: "Como Gerar seu Formulário W-8BEN ou W-8BEN-E Preenchido",
         description:
           "Passo a passo rápido para emitir seu formulário fiscal da IRS pronto para assinar e enviar a clientes ou plataformas internacionais.",
