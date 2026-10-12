@@ -1,22 +1,6 @@
-export interface PlatformInfo {
-  slug: string;
-  name: string;
-  title: string;
-  metaDescription: string;
-  category: string;
-  defaultEntityType: "PF" | "PJ";
-  summary: string;
-  instructions: {
-    title: string;
-    description: string;
-  }[];
-  faq: {
-    question: string;
-    answer: string;
-  }[];
-}
+import type { PlatformInfo } from "./types";
 
-export const PLATFORMS_DATA: Record<string, PlatformInfo> = {
+export const PLATFORMS_PT_BR: Record<string, PlatformInfo> = {
   deel: {
     slug: "deel",
     name: "Deel",

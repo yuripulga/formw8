@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useI18n } from "@/i18n/context";
+import { route } from "@/lib/routes";
 import { SPONSOR_MAILTO } from "@/config/contact";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -32,7 +33,7 @@ function renderOpenSourceText(text: string) {
 }
 
 export function Footer() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [showSupportModal, setShowSupportModal] = useState(false);
   const currentYear = new Date().getFullYear();
 
@@ -44,7 +45,7 @@ export function Footer() {
           {/* Left: Brand & Disclaimer Post-it */}
           <div className="flex flex-col items-center sm:items-start gap-2.5">
             <Link
-              href="/"
+              href={route(locale, "home")}
               className="inline-flex items-center gap-3 cursor-pointer"
               aria-label={t.common.title}
             >
@@ -92,13 +93,13 @@ export function Footer() {
 
         {/* Form Models & Direct Documentation Links (Our Own Created Pages + Official IRS) */}
         <nav aria-label={t.footer.navLabel} className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-muted-theme">
-          <Link href="/" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
+          <Link href={route(locale, "home")} className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
             {t.footer.documents.generatorHome}
           </Link>
-          <Link href="/w8ben-pessoa-fisica" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
+          <Link href={route(locale, "individual")} className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
             {t.footer.documents.pfGuide}
           </Link>
-          <Link href="/w8bene-pessoa-juridica" className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
+          <Link href={route(locale, "entity")} className="hover:text-heading-theme hover:underline underline-offset-2 transition-colors">
             {t.footer.documents.pjGuide}
           </Link>
           <a

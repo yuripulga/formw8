@@ -7,7 +7,7 @@ export type HighlighterColorId = "yellow" | "green" | "pink" | "orange" | "cyan"
 
 interface PenColorConfig {
   id: HighlighterColorId;
-  name: string;
+  nameKey: "penColorYellow" | "penColorGreen" | "penColorPink" | "penColorOrange" | "penColorCyan";
   hex: string;
   tipLight: string;
   tipDark: string;
@@ -16,35 +16,35 @@ interface PenColorConfig {
 const HIGHLIGHTER_COLORS: PenColorConfig[] = [
   {
     id: "yellow",
-    name: "Amarelo Neon (Padrão)",
+    nameKey: "penColorYellow",
     hex: "#FFE600",
     tipLight: "#FFF04D",
     tipDark: "#E5CE00",
   },
   {
     id: "green",
-    name: "Verde Neon",
+    nameKey: "penColorGreen",
     hex: "#34E85C",
     tipLight: "#7BF89A",
     tipDark: "#1BB840",
   },
   {
     id: "pink",
-    name: "Rosa Neon Claro",
+    nameKey: "penColorPink",
     hex: "#FF7DB7",
     tipLight: "#FFB3D7",
     tipDark: "#E64A8D",
   },
   {
     id: "orange",
-    name: "Laranja Neon",
+    nameKey: "penColorOrange",
     hex: "#FFA048",
     tipLight: "#FFC48C",
     tipDark: "#E07018",
   },
   {
     id: "cyan",
-    name: "Ciano Neon",
+    nameKey: "penColorCyan",
     hex: "#00E5FF",
     tipLight: "#67E8F9",
     tipDark: "#0284C7",
@@ -273,8 +273,8 @@ export function HighlighterPenDecoration() {
             ? `${slotIndex * 30}ms`
             : `${(4 - slotIndex) * 20}ms`;
 
-          const selectLabel = t.common.selectColor.replace("{{name}}", pen.name);
-          const activateTitle = t.common.activateColor.replace("{{name}}", pen.name);
+          const selectLabel = t.common.selectColor.replace("{{name}}", t.common[pen.nameKey]);
+          const activateTitle = t.common.activateColor.replace("{{name}}", t.common[pen.nameKey]);
 
           return (
             <button
@@ -328,8 +328,8 @@ export function HighlighterPenDecoration() {
             ? "!translate-x-0 !opacity-100 z-30"
             : "translate-x-16 group-hover:translate-x-8 opacity-80 group-hover:opacity-95 z-10";
 
-          const selectLabel = t.common.selectColor.replace("{{name}}", pen.name);
-          const activateTitle = t.common.activateColor.replace("{{name}}", pen.name);
+          const selectLabel = t.common.selectColor.replace("{{name}}", t.common[pen.nameKey]);
+          const activateTitle = t.common.activateColor.replace("{{name}}", t.common[pen.nameKey]);
 
           return (
             <button

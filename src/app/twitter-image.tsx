@@ -1,13 +1,10 @@
-import OpenGraphImage from "./opengraph-image";
+import { OG_SIZE, ogAlt, renderOgImage } from "@/lib/og-image";
 
 export const dynamic = "force-static";
-export const alt = "FormW8 - Gerador de Formulários Fiscais W-8BEN e W-8BEN-E";
-export const size = {
-  width: 1200,
-  height: 630,
-};
+export const alt = ogAlt("pt-BR");
+export const size = OG_SIZE;
 export const contentType = "image/png";
 
-export default function TwitterImage() {
-  return OpenGraphImage();
+export default function Image() {
+  return renderOgImage("pt-BR");
 }

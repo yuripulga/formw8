@@ -12,6 +12,7 @@ import { HighlighterPenDecoration } from "@/components/ui/HighlighterPenDecorati
 import { LampPullCord } from "@/components/ui/LampPullCord";
 import { FAQSection } from "@/components/FAQSection";
 import { SearchModal } from "@/components/SearchModal";
+import { LanguageSuggestion } from "@/components/LanguageSuggestion";
 
 interface AppShellProps {
   children: ReactNode;
@@ -41,6 +42,8 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
 
   return (
     <div className="bg-app-surface text-body-theme flex flex-col relative overflow-x-hidden selection:bg-slate-900/10 selection:text-slate-900 dark:selection:bg-white/10 dark:selection:text-white">
+      <LanguageSuggestion />
+
       {/* Subtle Ambient Cloud Background (100% full screen) */}
       <CloudBackground />
 
@@ -58,7 +61,7 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
           <div className="w-full pt-4 sm:pt-8 pb-0 mt-auto hidden sm:block">
             <KeywordSlider
               items={t.footer.relatedSearches}
-              ariaLabel="Buscas relacionadas fiscais"
+              ariaLabel={t.common.relatedSearchesLabel}
             />
           </div>
         </Container>
@@ -69,7 +72,7 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
         <Container>
           <KeywordSlider
             items={t.footer.relatedSearches}
-            ariaLabel="Buscas relacionadas fiscais"
+            ariaLabel={t.common.relatedSearchesLabel}
           />
         </Container>
       </div>
@@ -88,7 +91,7 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
         <Container>
           <KeywordSlider
             items={t.footer.keywords}
-            ariaLabel="Palavras-chave de plataformas e conformidade"
+            ariaLabel={t.common.keywordsLabel}
           />
         </Container>
       </div>

@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useWizard } from "@/context/wizard-context";
+import { useI18n } from "@/i18n/context";
 
 /**
  * ScreensaverFormBackground
@@ -12,6 +13,7 @@ import { useWizard } from "@/context/wizard-context";
  */
 export function ScreensaverFormBackground() {
   const { step } = useWizard();
+  const { t } = useI18n();
   const imageSrc = "/forms/screensaver-form-sample.png";
   const isVisible = step === 1;
 
@@ -29,7 +31,7 @@ export function ScreensaverFormBackground() {
           <div className="w-[150px] sm:w-[180px] md:w-[200px] aspect-[229/257] relative rounded-xl border border-slate-300/70 dark:border-zinc-700/60 shadow-2xl overflow-hidden bg-white dark:bg-zinc-900 blur-[0.2px]">
             <Image
               src={imageSrc}
-              alt="Formulário Fiscal W-8BEN-E"
+              alt={t.common.screensaverFormAlt}
               fill
               sizes="(max-width: 768px) 150px, 200px"
               className="object-contain p-1.5"

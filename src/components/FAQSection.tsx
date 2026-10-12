@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useI18n } from "@/i18n/context";
 import { ChevronDown, ExternalLink, Search, X } from "lucide-react";
 import { HighlightedText } from "@/components/ui/HighlightedText";
+import { translatePath } from "@/lib/routes";
+import type { Locale } from "@/i18n/config";
 
 /**
  * Parses markdown-style links [Text](url) safely into JSX elements.
  * Supports both internal app routes (/plataformas/deel) and external websites (https://...).
  */
-function renderFaqAnswer(text: string) {
+function renderFaqAnswer(text: string, locale: Locale) {
   const parts: React.ReactNode[] = [];
   const regex = /\[(.*?)\]\(((\/|https?:\/\/)[^\s]+)\)/g;
   let lastIndex = 0;
@@ -27,7 +29,7 @@ function renderFaqAnswer(text: string) {
       parts.push(
         <Link
           key={match.index}
-          href={url}
+          href={translatePath(url, locale)}
           className="inline font-bold text-heading-theme underline underline-offset-2 decoration-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
         >
           {label}
@@ -58,7 +60,7 @@ function renderFaqAnswer(text: string) {
 }
 
 export function FAQSection() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
   const [faqSearchQuery, setFaqSearchQuery] = useState("");
 
@@ -197,7 +199,7 @@ export function FAQSection() {
                     isOpen ? "block animate-fadeIn" : "hidden"
                   }`}
                 >
-                  <p className="pt-2">{renderFaqAnswer(item.answer)}</p>
+                  <p className="pt-2">{renderFaqAnswer(item.answer, locale)}</p>
                 </div>
               </div>
             );

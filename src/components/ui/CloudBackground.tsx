@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useI18n } from "@/i18n/context";
 
 /**
  * AmbientBackground / CloudBackground
@@ -9,6 +10,8 @@ import Image from "next/image";
  * Modo Noturno: Imagem de céu estrelado à noite (/images/starry-night-bg.jpg).
  */
 export function CloudBackground() {
+  const { t } = useI18n();
+
   return (
     <div
       className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none"
@@ -18,7 +21,7 @@ export function CloudBackground() {
       <div className="w-full h-full relative opacity-35 dark:hidden transition-opacity duration-700">
         <Image
           src="/images/clouds-bg.jpg"
-          alt="Textura suave de nuvens no fundo"
+          alt={t.common.cloudsAlt}
           fill
           priority
           sizes="100vw"
@@ -32,7 +35,7 @@ export function CloudBackground() {
       <div className="w-full h-full relative hidden dark:block opacity-30 transition-opacity duration-700">
         <Image
           src="/images/starry-night-bg.jpg"
-          alt="Céu estrelado à noite no fundo"
+          alt={t.common.starryNightAlt}
           fill
           loading="lazy"
           sizes="100vw"

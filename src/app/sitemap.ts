@@ -1,35 +1,47 @@
 import { MetadataRoute } from "next";
-import { SITE_URL } from "@/config/site";
+import { locales } from "@/i18n/config";
+import { PLATFORM_SLUGS } from "@/content/platforms";
+import { absoluteUrl } from "@/lib/seo";
+import type { RouteName } from "@/lib/routes";
 
 export const dynamic = "force-static";
 
+interface PageEntry {
+  name: RouteName;
+  slug?: string;
+  priority: number;
+  changeFrequency: "daily" | "weekly";
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_URL;
   const currentDate = new Date();
 
-  const routes = [
-    "",
-    "/plataformas/deel",
-    "/plataformas/rippling",
-    "/plataformas/upwork",
-    "/plataformas/remote",
-    "/plataformas/google-adsense",
-    "/plataformas/apple-developer",
-    "/plataformas/steam",
-    "/plataformas/github-sponsors",
-    "/plataformas/stripe",
-    "/plataformas/payoneer",
-    "/plataformas/fiverr",
-    "/plataformas/turing",
-    "/plataformas/toptal",
-    "/w8ben-pessoa-fisica",
-    "/w8bene-pessoa-juridica",
+  const pages: PageEntry[] = [
+    { name: "home", priority: 1.0, changeFrequency: "daily" },
+    ...PLATFORM_SLUGS.map((slug): PageEntry => ({
+      name: "platform",
+      slug,
+      priority: 0.9,
+      changeFrequency: "weekly",
+    })),
+    { name: "individual", priority: 0.7, changeFrequency: "weekly" },
+    { name: "entity", priority: 0.7, changeFrequency: "weekly" },
   ];
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: currentDate,
-    changeFrequency: route === "" ? "daily" : "weekly",
-    priority: route === "" ? 1.0 : route.startsWith("/plataformas") ? 0.9 : 0.7,
-  }));
+  // One entry per page and locale, each listing every language version (hreflang).
+  return pages.flatMap((page) => {
+    const languages: Record<string, string> = {};
+    for (const code of locales) {
+      languages[code] = absoluteUrl(code, page.name, page.slug);
+    }
+    languages["x-default"] = absoluteUrl("pt-BR", page.name, page.slug);
+
+    return locales.map((code) => ({
+      url: absoluteUrl(code, page.name, page.slug),
+      lastModified: currentDate,
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+      alternates: { languages },
+    }));
+  });
 }

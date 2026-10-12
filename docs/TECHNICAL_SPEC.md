@@ -63,10 +63,15 @@
 
 ## 4. Estratégia de Idioma, SEO e Conformidade Legal
 
-1. **HTML Estático Primário em pt-BR & Programmatic SEO (A5 & A6):**
-   * O produto e o domínio `formw8.quimera.biz` destinam-se primariamente a profissionais brasileiros (PF e PJ) que exportam serviços para o exterior.
-   * **Decisão de Produto:** A geração estática SSG inicial dos templates HTML, os 13 guias de plataformas (`platforms-data.ts`) e as páginas pilares (`/w8ben-pessoa-fisica`, `/w8bene-pessoa-juridica`) são estruturados em Português (`pt-BR`) por decisão estratégica de SEO focado no Google Brasil (termos de busca: *"como preencher w8ben na deel"*, *"w8bene slu"*).
-   * O suporte internacional a `en-US` opera na aplicação principal e no Wizard via detecção de `navigator.language` ou alternância no rodapé, atualizando dinamicamente a árvore de UI e a tag `<html lang="...">`.
+1. **Site multilíngue com URLs por idioma (SEO):**
+   * O produto é focado no Brasil, mas atende também quem mora e recebe no Brasil e não fala português. O site inteiro existe em **pt-BR** (raiz, sem mudar as URLs originais) e **en-US** (prefixo `/en`); **es** é a próxima fase.
+   * Rotas por idioma centralizadas em `src/lib/routes.ts` (`route`, `parseRoute`, `translatePath`): `/`, `/w8ben-pessoa-fisica`, `/w8bene-pessoa-juridica`, `/plataformas/[slug]` em pt-BR; `/en`, `/en/w8ben-individual`, `/en/w8bene-company`, `/en/platforms/[slug]` em inglês.
+   * O idioma vem da **URL** (`usePathname` no `I18nProvider`), então o HTML estático de cada página já nasce no idioma certo. O seletor de idioma (`<select>`) navega para a página equivalente e o progresso do wizard é preservado (o estado fica acima das páginas).
+   * **Conteúdo por idioma** em módulos tipados: `src/content/platforms` (13 guias), `src/content/pillars` (páginas pilares), `src/content/site` (metadados e JSON-LD) e `src/i18n/dictionaries` (interface). Testes (`src/content/content.test.ts`) exigem as mesmas chaves, guias e estrutura em todos os idiomas, e o teste E2E `e2e/i18n-coverage.spec.ts` percorre páginas, passos do wizard (inclusive erros), modais, FAQ, mobile e modo escuro de `/en` e falha se qualquer texto em português vazar (texto visível, atributos de acessibilidade e metadados).
+   * **SEO:** canonical por página, `hreflang` (inclusive `x-default` = pt-BR) nos metadados e no `sitemap.xml`, imagens OG por idioma (`app/en/opengraph-image.tsx`), `<html lang>` ajustado antes da hidratação por script inline (`htmlLangScript`).
+   * **Sem redirecionamento forçado:** quem acessa com o navegador em outro idioma vê um aviso discreto com link para a página equivalente (`LanguageSuggestion`); nada é gravado e ninguém é redirecionado.
+   * A página 404 também é localizada: o conteúdo segue o prefixo da URL que não existiu (`/en/...` mostra inglês).
+   * Limitação conhecida: o `<html lang>` do HTML estático das páginas `/en` ainda é `pt-BR` (o layout raiz é único); o script inline corrige no navegador, e os buscadores usam `hreflang` e o conteúdo.
 2. **Classificação Fiscal (PF, MEI e PJ) & Chapter 3 Corporation:**
    * **Pessoa Física:** Formulário W-8BEN com CPF para autônomos e freelancers.
    * **MEI (Microempreendedor Individual):** Formulário W-8BEN com CPF, alinhado com o tratamento de *Disregarded Entity* das plataformas internacionais (Deel, Upwork), com notas explicativas para emissão da NFS-e no Brasil.

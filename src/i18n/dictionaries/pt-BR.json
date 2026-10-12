@@ -26,6 +26,22 @@
     "lampAriaLabel": "Controle de Luz e Tema",
     "highlighterSelector": "Seletor de cor de destaque marca-texto",
     "selectColor": "Selecionar cor {{name}}",
+    "searchTooltip": "Buscar (⌘K)",
+    "relatedSearchesLabel": "Buscas relacionadas fiscais",
+    "keywordsLabel": "Palavras-chave de plataformas e conformidade",
+    "languageSuggestion": "Esta página também está disponível em português.",
+    "languageSuggestionDismiss": "Fechar aviso de idioma",
+    "notFoundTitle": "Página não encontrada",
+    "notFoundDescription": "O endereço que você acessou não existe ou foi movido. Volte ao gerador para preencher seu formulário W-8.",
+    "notFoundBack": "Voltar ao gerador",
+    "cloudsAlt": "Textura suave de nuvens no fundo",
+    "starryNightAlt": "Céu estrelado à noite no fundo",
+    "screensaverFormAlt": "Formulário Fiscal W-8BEN-E",
+    "penColorYellow": "Amarelo Neon (Padrão)",
+    "penColorGreen": "Verde Neon",
+    "penColorPink": "Rosa Neon Claro",
+    "penColorOrange": "Laranja Neon",
+    "penColorCyan": "Ciano Neon",
     "activateColor": "Ativar destaque {{name}}"
   },
   "search": {
@@ -448,7 +464,11 @@
     "stepByStepTitle": "Passo a Passo de Preenchimento na {name}",
     "faqTitle": "Dúvidas Frequentes sobre {name}",
     "otherGuides": "Guias de Outras Plataformas Internacionais",
-    "backToGenerator": "Ir para o Gerador W-8BEN / W-8BEN-E"
+    "backToGenerator": "Ir para o Gerador W-8BEN / W-8BEN-E",
+    "breadcrumbHome": "Início",
+    "breadcrumbGuides": "Guias de Plataformas",
+    "notFoundTitle": "Plataforma não encontrada",
+    "fallbackBadge": "Guia Fiscal {name}"
   },
   "pillarPages": {
     "pfBadge": "Pessoa Física • Freelancers & Contratados",

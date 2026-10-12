@@ -362,3 +362,16 @@
 - [ ] **Pendente (ação do responsável):** criar o banco Firestore em `southamerica-east1`, publicar `firestore.rules`, definir `NEXT_PUBLIC_FIREBASE_PROJECT_ID` e `NEXT_PUBLIC_FIREBASE_API_KEY` no build de produção.
 - [ ] **Pendente:** revisão contábil dos guias de AdSense, GitHub Sponsors e Steam; domínio definitivo.
 - Descartado por decisão do responsável: assinatura no PDF (o IRS não aceita nome digitado), salvar dados em arquivo e modo offline.
+
+---
+
+## 🌍 Fase 19: Site Completo em Inglês (CONCLUÍDO) e Preparação para Espanhol
+- [x] **Rotas por idioma** ([`src/lib/routes.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/routes.ts)): pt-BR na raiz (URLs originais preservadas) e en-US sob `/en`; idioma derivado da URL.
+- [x] **Seletor de idioma em `<select>`** ([`LanguageSwitcher.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/LanguageSwitcher.tsx)) que leva à página equivalente e mantém o progresso do wizard.
+- [x] **Conteúdo em inglês:** 13 guias de plataforma (`src/content/platforms/en-US.ts`), 2 páginas pilares (`src/content/pillars`), metadados, keywords e JSON-LD (`src/content/site`), imagens OG (`app/en/opengraph-image.tsx`) e textos soltos (alt, aria-label, nomes das cores) movidos para os dicionários.
+- [x] **SEO multilíngue:** canonical, `hreflang` e `sitemap.xml` com as duas versões; `<html lang>` ajustado antes da hidratação.
+- [x] **Aviso de idioma** discreto para navegadores em outro idioma (sem redirecionamento e sem armazenamento).
+- [x] **Testes:** rotas, paridade de conteúdo entre idiomas, 5 testes E2E de `/en` e 4 testes de cobertura de tradução (`e2e/i18n-coverage.spec.ts`) que falham se texto em português vazar para `/en`.
+- [x] **Página 404 localizada** e metadados padrão neutros (keywords, Open Graph e Twitter não vazam mais em português para outros idiomas).
+- [ ] **Próxima fase (espanhol):** adicionar `es` aos dicionários, `src/content/*`, `routes.ts` (prefixo `/es`), seletor, OG e testes; revisar o vocabulário fiscal com alguém que domine o termo.
+- [ ] **Pendente:** revisão da tradução fiscal em inglês por um contador/tradutor antes de divulgar.

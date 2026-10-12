@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useI18n } from "@/i18n/context";
-import { PLATFORMS_DATA } from "@/lib/platforms-data";
+import { getPlatforms } from "@/content/platforms";
+import { route } from "@/lib/routes";
 import {
   Search,
   X,
@@ -28,7 +29,7 @@ interface SearchResultItem {
 }
 
 export function SearchModal({ isOpen, onClose }: SearchModalProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -57,29 +58,29 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       category: "guides",
       title: t.footer.documents.generatorHome,
       description: t.search.guideHomeDesc,
-      url: "/",
+      url: route(locale, "home"),
     },
     {
       id: "guide-pf",
       category: "guides",
       title: t.footer.documents.pfGuide,
       description: t.search.guidePfDesc,
-      url: "/w8ben-pessoa-fisica",
+      url: route(locale, "individual"),
     },
     {
       id: "guide-pj",
       category: "guides",
       title: t.footer.documents.pjGuide,
       description: t.search.guidePjDesc,
-      url: "/w8bene-pessoa-juridica",
+      url: route(locale, "entity"),
     },
     // Platform Guides
-    ...Object.values(PLATFORMS_DATA).map((p) => ({
+    ...Object.values(getPlatforms(locale)).map((p) => ({
       id: `platform-${p.slug}`,
       category: "platforms" as const,
       title: p.name,
       description: p.summary || p.category,
-      url: `/plataformas/${p.slug}`,
+      url: route(locale, "platform", p.slug),
     })),
     // FAQ Items
     ...t.faq.items.map((item) => ({
@@ -87,7 +88,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       category: "faq" as const,
       title: item.question,
       description: item.answer.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").slice(0, 120) + "...",
-      url: `/#faq-btn-${item.id}`,
+      url: `${route(locale, "home")}#faq-btn-${item.id}`,
     })),
   ];
 
@@ -104,15 +105,14 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const handleSelect = React.useCallback(
     (url: string) => {
       onClose();
-      if (url.startsWith("/#")) {
-        const targetId = url.replace("/#", "");
-        if (targetId.startsWith("faq-")) {
-          const faqId = targetId.replace("faq-", "");
+      const hashIndex = url.indexOf("#");
+      if (hashIndex !== -1 && url.slice(0, hashIndex) === route(locale, "home")) {
+        const targetId = url.slice(hashIndex + 1);
+        if (targetId.startsWith("faq-btn-")) {
+          const faqId = targetId.replace("faq-btn-", "");
           window.dispatchEvent(new CustomEvent("open-faq-item", { detail: { id: faqId } }));
         }
-        const elem =
-          document.getElementById(targetId) ||
-          document.getElementById(`faq-btn-${targetId.replace("faq-", "")}`);
+        const elem = document.getElementById(targetId);
         if (elem) {
           elem.scrollIntoView({ behavior: "smooth" });
           elem.click();
@@ -123,7 +123,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         router.push(url);
       }
     },
-    [onClose, router]
+    [onClose, router, locale]
   );
 
   // Handle keyboard navigation

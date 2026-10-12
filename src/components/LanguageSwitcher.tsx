@@ -1,48 +1,35 @@
 "use client";
 
 import React from "react";
+import { ChevronDown, Languages } from "lucide-react";
 import { useI18n } from "@/i18n/context";
+import { Locale, locales, localeLabels } from "@/i18n/config";
 
 export function LanguageSwitcher() {
   const { locale, setLocale, t } = useI18n();
 
   return (
-    <div
-      role="group"
-      aria-label={t.common.switchLanguage}
-      className="flex items-center bg-white dark:bg-zinc-800 border border-slate-300 dark:border-zinc-700 rounded-xl p-1 shadow-sm"
-    >
-      <button
-        type="button"
-        onClick={() => setLocale("pt-BR")}
-        aria-pressed={locale === "pt-BR"}
-        style={{
-          backgroundColor: locale === "pt-BR" ? "var(--brand-highlight, #FFE600)" : "transparent",
-        }}
-        className={`px-2.5 py-1 text-xs rounded-lg font-bold transition-transform active:scale-95 cursor-pointer ${
-          locale === "pt-BR"
-            ? "text-slate-900 shadow-sm"
-            : "text-slate-700 dark:text-zinc-200 hover:text-slate-950 dark:hover:text-white"
-        }`}
+    <div className="relative inline-flex items-center">
+      <Languages
+        aria-hidden="true"
+        className="pointer-events-none absolute left-2.5 w-3.5 h-3.5 text-slate-700 dark:text-zinc-200"
+      />
+      <select
+        value={locale}
+        onChange={(event) => setLocale(event.target.value as Locale)}
+        aria-label={t.common.switchLanguage}
+        className="appearance-none cursor-pointer rounded-xl border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 py-1.5 pl-8 pr-7 text-xs font-bold text-slate-900 dark:text-zinc-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
       >
-        PT
-      </button>
-      <button
-        type="button"
-        onClick={() => setLocale("en-US")}
-        aria-pressed={locale === "en-US"}
-        style={{
-          backgroundColor: locale === "en-US" ? "var(--brand-highlight, #FFE600)" : "transparent",
-        }}
-        className={`px-2.5 py-1 text-xs rounded-lg font-bold transition-transform active:scale-95 cursor-pointer ${
-          locale === "en-US"
-            ? "text-slate-900 shadow-sm"
-            : "text-slate-700 dark:text-zinc-200 hover:text-slate-950 dark:hover:text-white"
-        }`}
-      >
-        EN
-      </button>
-
+        {locales.map((code) => (
+          <option key={code} value={code}>
+            {localeLabels[code]}
+          </option>
+        ))}
+      </select>
+      <ChevronDown
+        aria-hidden="true"
+        className="pointer-events-none absolute right-2 w-3.5 h-3.5 text-slate-700 dark:text-zinc-200"
+      />
     </div>
   );
 }

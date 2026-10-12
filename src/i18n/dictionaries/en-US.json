@@ -26,6 +26,22 @@
     "lampAriaLabel": "Light and Theme Switcher",
     "highlighterSelector": "Highlighter Color Picker",
     "selectColor": "Select color {{name}}",
+    "searchTooltip": "Search (⌘K)",
+    "relatedSearchesLabel": "Related tax searches",
+    "keywordsLabel": "Platform and compliance keywords",
+    "languageSuggestion": "This page is also available in English.",
+    "languageSuggestionDismiss": "Dismiss the language notice",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The address you opened does not exist or has moved. Go back to the generator to fill out your W-8 form.",
+    "notFoundBack": "Back to the generator",
+    "cloudsAlt": "Soft cloud texture in the background",
+    "starryNightAlt": "Starry night sky in the background",
+    "screensaverFormAlt": "W-8BEN-E tax form",
+    "penColorYellow": "Neon Yellow (Default)",
+    "penColorGreen": "Neon Green",
+    "penColorPink": "Light Neon Pink",
+    "penColorOrange": "Neon Orange",
+    "penColorCyan": "Neon Cyan",
     "activateColor": "Activate highlight {{name}}"
   },
   "search": {
@@ -448,7 +464,11 @@
     "stepByStepTitle": "Step-by-Step Onboarding for {name}",
     "faqTitle": "Frequently Asked Questions for {name}",
     "otherGuides": "Other International Platform Guides",
-    "backToGenerator": "Go to W-8BEN / W-8BEN-E Generator"
+    "backToGenerator": "Go to W-8BEN / W-8BEN-E Generator",
+    "breadcrumbHome": "Home",
+    "breadcrumbGuides": "Platform Guides",
+    "notFoundTitle": "Platform not found",
+    "fallbackBadge": "{name} Tax Guide"
   },
   "pillarPages": {
     "pfBadge": "Individual • Freelancers & Contractors",

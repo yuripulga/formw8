@@ -121,3 +121,50 @@ test("Holding questions drive the Active/Passive NFFE classification", async ({ 
   await page.getByRole("switch").nth(1).click();
   await expect(page.getByText(/enquadrada como Passive NFFE|classified as Passive NFFE/i)).toBeVisible();
 });
+
+test.describe("English version (/en)", () => {
+  test("home renders the English wizard and sets the document language", async ({ page }) => {
+    await page.goto("/en");
+    await expect(page.getByText(/Hello, what is your/i)).toBeVisible();
+    await expect(page.locator("html")).toHaveAttribute("lang", "en-US");
+    await expect(page).toHaveTitle(/Form Generator for Brazil/i);
+  });
+
+  test("language selector switches to the equivalent page and keeps wizard progress", async ({ page }) => {
+    await page.goto("/");
+    const input = await fillName(page, "Maria Teste Silva");
+    await input.press("Enter");
+    await expect(stepIs(page, 2)).toBeVisible();
+
+    await page.getByRole("combobox").selectOption("en-US");
+    await expect(page).toHaveURL(/\/en$/);
+    // Wizard state lives above the pages, so the step is preserved when the language changes.
+    await expect(stepIs(page, 2)).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/How do you receive international payments\?/i);
+  });
+
+  test("platform guide in English links to the English generator and exposes hreflang", async ({ page }) => {
+    await page.goto("/en/platforms/deel");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/How to Fill Out Form W-8 on Deel/i);
+    await expect(page.locator('link[rel="alternate"][hreflang="pt-BR"]')).toHaveAttribute(
+      "href",
+      /\/plataformas\/deel$/
+    );
+    await page.getByRole("link", { name: /Generate/i }).first().click();
+    await expect(page).toHaveURL(/\/en$/);
+  });
+
+  test("pillar page in English cross-links to the English company guide", async ({ page }) => {
+    await page.goto("/en/w8ben-individual");
+    await page.getByRole("link", { name: "View the W-8BEN-E Guide" }).click();
+    await expect(page).toHaveURL(/\/en\/w8bene-company$/);
+  });
+
+  test("an English browser sees a link to the English page on the Portuguese site", async ({ browser }) => {
+    const context = await browser.newContext({ locale: "en-US" });
+    const page = await context.newPage();
+    await page.goto("/");
+    await expect(page.getByRole("link", { name: /also available in English/i })).toHaveAttribute("href", "/en");
+    await context.close();
+  });
+});

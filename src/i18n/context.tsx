@@ -1,7 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { Locale, defaultLocale } from "./config";
+import { usePathname, useRouter } from "next/navigation";
+import { Locale } from "./config";
+import { parseRoute, translatePath } from "@/lib/routes";
 import ptBR from "./dictionaries/pt-BR.json";
 import enUS from "./dictionaries/en-US.json";
 
@@ -24,7 +26,11 @@ const dictionaries: Record<Locale, Dictionary> = {
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
+  // The locale comes from the URL (pt-BR at the root, /en for English), so the
+  // server-rendered HTML already has the right language for every page.
+  const pathname = usePathname() || "/";
+  const router = useRouter();
+  const locale: Locale = parseRoute(pathname).locale;
   const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
@@ -36,17 +42,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       setThemeState("dark");
     } else {
       setThemeState("light");
-    }
-
-    // Auto-detect locale from browser navigator.language in memory
-    const browserLang =
-      (typeof navigator !== "undefined" &&
-        (navigator.language || (navigator.languages && navigator.languages[0]))) ||
-      "";
-    if (browserLang.toLowerCase().startsWith("pt")) {
-      setLocaleState("pt-BR");
-    } else {
-      setLocaleState("en-US");
     }
   }, []);
 
@@ -66,8 +61,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, [locale]);
 
   const setLocale = (newLocale: Locale) => {
-    setLocaleState(newLocale);
+    if (newLocale !== locale) {
+      router.push(translatePath(pathname, newLocale));
+    }
   };
+
 
   const setTheme = (newTheme: Theme) => {
     if (typeof document !== "undefined") {
