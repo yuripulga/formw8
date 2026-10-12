@@ -12,6 +12,11 @@ const OG_LOCALES: Record<Locale, string> = {
   "en-US": "en_US",
 };
 
+/** Social preview image: the static PNG for Portuguese, the generated image for other locales. */
+export function ogImageUrl(locale: Locale): string {
+  return locale === "pt-BR" ? `${SITE_URL}/og-image.png` : `${SITE_URL}${route(locale, "home") === "/" ? "" : route(locale, "home")}/opengraph-image`;
+}
+
 /** Absolute URL of a page. */
 export function absoluteUrl(locale: Locale, name: RouteName, slug?: string): string {
   const path = route(locale, name, slug);
@@ -41,11 +46,13 @@ export function pillarMetadata(locale: Locale, kind: PillarKind): Metadata {
       url: absoluteUrl(locale, name),
       type: "article",
       locale: OG_LOCALES[locale],
+      images: [{ url: ogImageUrl(locale), width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: content.metaTitle,
       description: content.ogDescription,
+      images: [ogImageUrl(locale)],
     },
   };
 }
@@ -69,11 +76,13 @@ export function platformMetadata(locale: Locale, slug: string): Metadata {
       url,
       type: "article",
       locale: OG_LOCALES[locale],
+      images: [{ url: ogImageUrl(locale), width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: platform.title,
       description: platform.metaDescription,
+      images: [ogImageUrl(locale)],
     },
   };
 }
