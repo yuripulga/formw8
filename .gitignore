@@ -41,3 +41,9 @@ next-env.d.ts
 
 # Firebase cache
 .firebase/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/.next-e2e/

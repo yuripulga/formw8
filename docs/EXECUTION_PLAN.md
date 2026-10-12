@@ -343,3 +343,18 @@
 - [x] **Domínio único em [`src/config/site.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/config/site.ts):**
   - `SITE_URL` (padrão `https://formw8.quimera.biz`, sobrescrevível via `NEXT_PUBLIC_SITE_URL`) alimenta `metadataBase`, canonicals, Open Graph, JSON-LD, `sitemap.ts`, `robots.ts` e a imagem OG dinâmica.
   - Documentado em `.env.example`; README, `package.json` e docs atualizados para o novo domínio de validação.
+
+---
+
+## 🔍 Fase 18: Revisão Final de Código, UX e Validação de Negócio (CONCLUÍDO)
+- [x] **Bug do Enter no passo 1:** `preventDefault` em [`page.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/app/page.tsx) impede que o mesmo toque selecione "Pessoa Física" automaticamente no passo 2.
+- [x] **Validação unificada em Zod:** `validateStep` em [`src/lib/validation.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/validation.ts) substitui ~60 linhas manuais; testes dedicados.
+- [x] **Navegação e UX:** botão Voltar/Avançar do navegador entre passos e aviso `beforeunload` ([`wizard-context.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/context/wizard-context.tsx)); `WizardNavigation.tsx` remove a duplicação mobile/desktop de `page.tsx`.
+- [x] **Performance:** `pdf-lib` carregada sob demanda e template cacheado; First Load JS da home caiu de 338 kB para 177 kB.
+- [x] **PDF:** aviso visível quando há campos incompletos ou truncados (`pdfWarningNotice`).
+- [x] **Texto fiscal Active/Passive:** testes de receita **e** de ativos (menos de 50% passivo), em pt-BR e en-US.
+- [x] **Transparência de afiliados:** aviso "Publicidade" no passo 4 (`exchangeDisclosure`) e rótulos neutros no lugar de superlativos sem fonte.
+- [x] **Monitor do IRS:** workflow semanal compara os templates com irs.gov (templates conferidos idênticos em 12/10/2026).
+- [x] **Testes E2E (Playwright)** integrados ao CI.
+- [x] **Documentação de negócio:** [`BUSINESS_VALIDATION.md`](BUSINESS_VALIDATION.md) criado; avisos de verificação em `RESEARCH_CPA_EXCHANGE_PLATFORMS.md`; definição de Active NFFE corrigida em `DEEP_DIVE_MARKET_AND_TAX_RESEARCH.md`.
+- [ ] **Pendente de decisão/entrada do responsável:** ferramenta de medição anônima, assinatura local, revisão contábil dos guias, domínio definitivo.

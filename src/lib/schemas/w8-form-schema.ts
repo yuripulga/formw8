@@ -21,45 +21,55 @@ export const Step2Schema = z.object({
   entityType: EntityTypeEnum,
 });
 
+const digitsOnly = (val: string) => val.replace(/\D/g, "");
+
+/** Foreign TIN for individuals (CPF). Messages are i18n keys under wizard.validation. */
+const cpfField = z.string().superRefine((val, ctx) => {
+  const digits = digitsOnly(val);
+  if (!digits) {
+    ctx.addIssue({ code: "custom", message: "taxIdRequired" });
+  } else if (digits.length > 11 || val.includes("/")) {
+    ctx.addIssue({ code: "custom", message: "taxIdCnpjInPfError" });
+  } else if (digits.length !== 11 || !isValidCpf(digits)) {
+    ctx.addIssue({ code: "custom", message: "taxIdInvalidPF" });
+  }
+});
+
+/** Foreign TIN for entities (CNPJ). */
+const cnpjField = z.string().superRefine((val, ctx) => {
+  const digits = digitsOnly(val);
+  if (!digits) {
+    ctx.addIssue({ code: "custom", message: "taxIdRequired" });
+  } else if (digits.length === 11) {
+    ctx.addIssue({ code: "custom", message: "taxIdCpfInPjError" });
+  } else if (digits.length !== 14 || !isValidCnpj(digits)) {
+    ctx.addIssue({ code: "custom", message: "taxIdInvalidPJ" });
+  }
+});
+
+const addressFields = {
+  addressZip: z.string().superRefine((val, ctx) => {
+    const digits = digitsOnly(val);
+    if (!digits) ctx.addIssue({ code: "custom", message: "zipRequired" });
+    else if (digits.length !== 8) ctx.addIssue({ code: "custom", message: "zipInvalid" });
+  }),
+  addressStreet: z.string().trim().min(1, { message: "addressRequired" }),
+  addressCity: z.string().trim().min(1, { message: "cityRequired" }),
+  addressState: z.string().trim().superRefine((val, ctx) => {
+    if (!val) ctx.addIssue({ code: "custom", message: "stateRequired" });
+    else if (val.length !== 2) ctx.addIssue({ code: "custom", message: "stateInvalid" });
+  }),
+};
+
 export const Step3SchemaPF = z.object({
-  taxId: z
-    .string()
-    .trim()
-    .refine((val) => {
-      const digits = val.replace(/\D/g, "");
-      return digits.length === 11 && isValidCpf(digits);
-    }, { message: "taxIdInvalidPF" }),
-  addressZip: z
-    .string()
-    .trim()
-    .refine((val) => val.replace(/\D/g, "").length === 8, { message: "zipInvalid" }),
-  addressStreet: z.string().trim().min(3, { message: "addressRequired" }),
-  addressCity: z.string().trim().min(2, { message: "cityRequired" }),
-  addressState: z
-    .string()
-    .trim()
-    .refine((val) => val.length === 2, { message: "stateInvalid" }),
+  taxId: cpfField,
+  ...addressFields,
 });
 
 export const Step3SchemaPJ = z.object({
-  taxId: z
-    .string()
-    .trim()
-    .refine((val) => {
-      const digits = val.replace(/\D/g, "");
-      return digits.length === 14 && isValidCnpj(digits);
-    }, { message: "taxIdInvalidPJ" }),
-  companyName: z.string().trim().min(2, { message: "companyNameRequired" }),
-  addressZip: z
-    .string()
-    .trim()
-    .refine((val) => val.replace(/\D/g, "").length === 8, { message: "zipInvalid" }),
-  addressStreet: z.string().trim().min(3, { message: "addressRequired" }),
-  addressCity: z.string().trim().min(2, { message: "cityRequired" }),
-  addressState: z
-    .string()
-    .trim()
-    .refine((val) => val.length === 2, { message: "stateInvalid" }),
+  taxId: cnpjField,
+  companyName: z.string().trim().min(1, { message: "companyNameRequired" }),
+  ...addressFields,
 });
 
 export const W8FormSchema = z.object({

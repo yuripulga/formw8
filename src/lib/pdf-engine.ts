@@ -18,7 +18,18 @@ export interface PDFGenerationResult {
 /**
  * Universally loads the official PDF template bytes (supports both browser fetch and Node/Vitest tests).
  */
+const templateCache = new Map<string, ArrayBuffer>();
+
 async function loadTemplateBytes(templatePath: string): Promise<ArrayBuffer> {
+  const cached = templateCache.get(templatePath);
+  if (cached) return cached.slice(0);
+
+  const bytes = await fetchTemplateBytes(templatePath);
+  templateCache.set(templatePath, bytes);
+  return bytes.slice(0);
+}
+
+async function fetchTemplateBytes(templatePath: string): Promise<ArrayBuffer> {
   if (typeof window === "undefined") {
     const fs = await import("fs/promises");
     const path = await import("path");

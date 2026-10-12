@@ -79,3 +79,14 @@
    * Radio groups com navegação por teclado (`↑`, `↓`, `←`, `→`, `Enter`, `Space`).
 
 
+
+## 5. Qualidade, Validação e Testes
+1. **Validação única (Zod):** os schemas por etapa em `src/lib/schemas/w8-form-schema.ts` (`Step1Schema`, `Step3SchemaPF`, `Step3SchemaPJ`) são a única fonte de regras de validação; `src/lib/validation.ts` (`validateStep`) devolve uma chave de i18n por campo inválido, traduzida em `page.tsx`.
+2. **Navegação do wizard:** cada passo é uma entrada do histórico do navegador (`wizard-context.tsx`), então Voltar/Avançar do navegador percorrem os passos; os dados continuam apenas em memória. Um aviso `beforeunload` protege contra perda acidental ao recarregar com dados digitados. O Enter nos campos usa `preventDefault` para não acionar o controle que recebe foco no passo seguinte.
+3. **Motor de PDF:** `pdf-lib` é carregada sob demanda (`import()` dinâmico) apenas no passo 4; os bytes do template do IRS são cacheados em memória. O motor devolve `warnings` (campo ausente ou truncado) e o preview mostra um aviso quando existem.
+4. **Testes:**
+   * Unitários (Vitest, `npm test`): sanitizador, schemas, validação por etapa, APIs brasileiras e geração dos PDFs (PF, MEI, PJ Active e PJ Passive).
+   * Ponta a ponta (Playwright, `npm run test:e2e`): fluxos PF e PJ até o download do PDF, regressão do Enter no nome, Voltar/Avançar do navegador e validação do passo 1. As consultas públicas de CEP/CNPJ são bloqueadas para manter os testes herméticos. O servidor de teste usa a porta 48730 e a pasta `.next-e2e` (`NEXT_DIST_DIR`), sem colidir com `npm run dev`.
+5. **Monitor de revisão do IRS:** `.github/workflows/irs-form-monitor.yml` compara semanalmente os PDFs oficiais com os de `public/forms` e abre uma issue se divergirem.
+6. **CI:** typecheck, lint, testes unitários, build e testes E2E em cada push/PR.
+7. **Transparência comercial:** a seção de câmbio do passo 4 exibe aviso de publicidade e usa rótulos neutros; detalhes em [`BUSINESS_VALIDATION.md`](BUSINESS_VALIDATION.md).

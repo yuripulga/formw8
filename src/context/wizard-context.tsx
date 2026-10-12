@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
 import { W8FormData, EntityType } from "@/lib/schemas/w8-form-schema";
 import { sanitizeASCII } from "@/lib/sanitizer";
 
@@ -36,6 +36,51 @@ export function WizardProvider({ children }: { children: ReactNode }) {
   });
 
   const sanitizedUserName = sanitizeASCII(formData.userName || "");
+
+  // Browser history integration: each wizard step is a history entry, so the
+  // browser Back/Forward buttons move between steps instead of leaving the page.
+  // The form data itself never leaves memory (zero-data architecture).
+  const isPopNavigation = useRef(false);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    const onPopState = (event: PopStateEvent) => {
+      const target = Number(event.state?.wizardStep);
+      if (Number.isInteger(target) && target >= 1 && target <= totalSteps) {
+        isPopNavigation.current = true;
+        setStep(target);
+      }
+    };
+    window.history.replaceState({ ...window.history.state, wizardStep: 1 }, "");
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (isPopNavigation.current) {
+      isPopNavigation.current = false;
+      return;
+    }
+    window.history.pushState({ ...window.history.state, wizardStep: step }, "");
+  }, [step]);
+
+  // Warn before leaving/reloading the page while there is unsaved typed data.
+  const hasTypedData = Boolean(
+    formData.userName?.trim() || formData.taxId?.trim() || formData.addressStreet?.trim()
+  );
+  useEffect(() => {
+    if (!hasTypedData) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [hasTypedData]);
 
   const setUserName = (name: string) => {
     setFormData((prev) => ({ ...prev, userName: name }));

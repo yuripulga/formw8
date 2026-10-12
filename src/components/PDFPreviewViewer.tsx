@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { W8FormData } from "@/lib/schemas/w8-form-schema";
-import { generateW8PDF } from "@/lib/pdf-engine";
 import { useI18n } from "@/i18n/context";
 import { Loader2, ExternalLink, FileText } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -15,6 +14,7 @@ export function PDFPreviewViewer({ formData }: PDFPreviewViewerProps) {
   const { t } = useI18n();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [warnings, setWarnings] = useState<string[]>([]);
 
   useEffect(() => {
     let active = true;
@@ -23,8 +23,10 @@ export function PDFPreviewViewer({ formData }: PDFPreviewViewerProps) {
     async function loadPdf() {
       try {
         setIsLoading(true);
+        const { generateW8PDF } = await import("@/lib/pdf-engine");
         const result = await generateW8PDF(formData);
         if (!active) return;
+        setWarnings(result.warnings);
         
         const blob = new Blob([result.pdfBytes as unknown as BlobPart], { type: "application/pdf" });
         createdUrl = URL.createObjectURL(blob);
@@ -99,6 +101,15 @@ export function PDFPreviewViewer({ formData }: PDFPreviewViewerProps) {
           </div>
         </object>
       ) : null}
+
+      {warnings.length > 0 && (
+        <p
+          role="alert"
+          className="absolute bottom-0 inset-x-0 z-10 px-3 py-2 text-xs font-medium text-amber-900 bg-amber-100 dark:text-amber-100 dark:bg-amber-900/80"
+        >
+          {t.wizard.stepConfirmation.pdfWarningNotice}
+        </p>
+      )}
     </div>
   );
 }

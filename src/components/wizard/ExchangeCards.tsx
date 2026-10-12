@@ -39,6 +39,9 @@ export function ExchangeCards() {
         <p className="text-xs sm:text-sm text-muted-theme leading-relaxed">
           {t.wizard.stepConfirmation.exchangeSubtitle}
         </p>
+        <p className="text-xs text-muted-theme leading-relaxed italic">
+          {t.wizard.stepConfirmation.exchangeDisclosure}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

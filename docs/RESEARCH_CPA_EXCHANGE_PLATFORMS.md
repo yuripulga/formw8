@@ -2,6 +2,8 @@
 
 Este documento mapeia os modelos de afiliação, parcerias de indicação (CPA / Revenue Share) e integrações de câmbio e contabilidade internacional para desenvolvedores, designers e prestadores de serviços brasileiros que recebem em moeda estrangeira (USD/EUR).
 
+> ⚠️ **Status de verificação (outubro/2026):** os valores de CPA, revenue share e bônus abaixo vieram de pesquisa inicial e **não foram confirmados em fonte pública ou no portal de parceiros**. Uma busca em outubro/2026 não encontrou confirmação pública do programa de afiliados da Husky (R$ 100 de CPA e 10% por 12 meses). Confirme os termos direto com cada empresa antes de contar com eles. Além disso, a **Nomad comprou a Husky em 2022** ([FinSiders](https://finsidersbrasil.com.br/noticias-sobre-fintechs/nomad-compra-husky-para-aumentar-receita-e-atingir-novos-publicos)), então as duas pertencem ao mesmo grupo. A simulação de receita da seção 4 é um **teto otimista**, não uma previsão.
+
 ---
 
 ## 🎯 1. Oportunidade de Monetização Indireta (Engineering as Marketing)

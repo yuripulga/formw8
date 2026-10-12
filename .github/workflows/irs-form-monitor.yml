@@ -1,0 +1,51 @@
+name: IRS Form Monitor
+
+# Weekly check: the official IRS PDFs bundled in public/forms must stay identical
+# to the ones published by the IRS. When the IRS publishes a new revision, this job
+# opens an issue so the field mapping in src/lib/pdf-engine.ts can be reviewed.
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: Compare bundled templates with irs.gov
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Download current IRS forms and compare
+        id: compare
+        run: |
+          changed=""
+          check() {
+            local name="$1" bundled="$2"
+            curl -fsSL --retry 3 -o "/tmp/$name.pdf" "https://www.irs.gov/pub/irs-pdf/$name.pdf"
+            if ! cmp -s "/tmp/$name.pdf" "$bundled"; then
+              changed="$changed $name"
+            fi
+          }
+          check fw8ben public/forms/fw8ben-rev10-2021.pdf
+          check fw8bene public/forms/fw8bene-rev10-2021.pdf
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+      - name: Open an issue when a form changed
+        if: steps.compare.outputs.changed != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHANGED: ${{ steps.compare.outputs.changed }}
+        run: |
+          title="IRS form changed:${CHANGED}"
+          existing=$(gh issue list --state open --search "\"IRS form changed\" in:title" --json number --jq 'length')
+          if [ "$existing" = "0" ]; then
+            gh issue create --title "$title" --body "The file(s) published at https://www.irs.gov/pub/irs-pdf differ from the bundled template(s) in \`public/forms\`:${CHANGED}.
+
+          Check whether the IRS published a new revision, then update the template, the field names in \`src/lib/pdf-engine.ts\` and the tests in \`src/lib/pdf-engine.test.ts\`."
+          fi

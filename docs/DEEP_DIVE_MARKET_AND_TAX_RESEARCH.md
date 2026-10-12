@@ -31,7 +31,7 @@ A análise dos relatos no Reddit expôs uma falha conceitual grave nas IAs gener
   2. A Deel ou Rippling detecta que o contrato PJ foi emitido com um formulário de *Disregarded Entity* sem ITIN e **rejeita o documento**, bloqueando o saque do primeiro salário.
 * **A Regra Contábil Correta (Resolvida pelo FormW8):**
   * Toda **SLU (Sociedade Limitada Unipessoal)** ou **LTDA** brasileira possui personalidade jurídica própria separada dos sócios.
-  * No padrão IRS, ela se enquadra como **Corporation** (Chapter 3) e **Active NFFE** (Chapter 4 FATCA - empresa não financeira com mais de 50% de receita operacional de serviços).
+  * No padrão IRS, ela se enquadra como **Corporation** (Chapter 3) e **Active NFFE** (Chapter 4 FATCA - empresa não financeira em que menos de 50% da receita bruta é passiva **e** menos de 50% dos ativos geram renda passiva; caso contrário, Passive NFFE).
   * O **Foreign TIN** é preenchido com o **CNPJ** da empresa.
 
 ---
