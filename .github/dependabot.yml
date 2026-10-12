@@ -9,6 +9,13 @@ updates:
       dependencies:
         patterns:
           - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # Major upgrades (Next, React, Zod, TypeScript, ESLint, Tailwind, Vitest) are done manually.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
