@@ -357,4 +357,8 @@
 - [x] **Monitor do IRS:** workflow semanal compara os templates com irs.gov (templates conferidos idênticos em 12/10/2026).
 - [x] **Testes E2E (Playwright)** integrados ao CI.
 - [x] **Documentação de negócio:** [`BUSINESS_VALIDATION.md`](BUSINESS_VALIDATION.md) criado; avisos de verificação em `RESEARCH_CPA_EXCHANGE_PLATFORMS.md`; definição de Active NFFE corrigida em `DEEP_DIVE_MARKET_AND_TAX_RESEARCH.md`.
-- [ ] **Pendente de decisão/entrada do responsável:** ferramenta de medição anônima, assinatura local, revisão contábil dos guias, domínio definitivo.
+- [x] **Passive NFFE com 2 perguntas:** ao escolher "Holding", perguntas de receita e de ativos definem Active/Passive ([`fatca.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/fatca.ts)); testes unitários e E2E.
+- [x] **Contadores anônimos (código):** [`metrics.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/metrics.ts), eventos ligados ao fluxo, `firestore.rules` testadas no emulador, CSP e textos de privacidade atualizados.
+- [ ] **Pendente (ação do responsável):** criar o banco Firestore em `southamerica-east1`, publicar `firestore.rules`, definir `NEXT_PUBLIC_FIREBASE_PROJECT_ID` e `NEXT_PUBLIC_FIREBASE_API_KEY` no build de produção.
+- [ ] **Pendente:** revisão contábil dos guias de AdSense, GitHub Sponsors e Steam; domínio definitivo.
+- Descartado por decisão do responsável: assinatura no PDF (o IRS não aceita nome digitado), salvar dados em arquivo e modo offline.

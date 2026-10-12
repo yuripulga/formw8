@@ -1,0 +1,55 @@
+rules_version = '2';
+
+// Anonymous usage counters only. Nobody can read; clients can only add exactly +1 to
+// one allowed event counter per request inside a daily document (daily/YYYY-MM-DD).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function allowedEvents() {
+      return [
+        'visit', 'wizard_step_2', 'wizard_step_3', 'wizard_step_4',
+        'entity_pf', 'entity_mei', 'entity_pj_active', 'entity_pj_passive',
+        'pdf_download', 'field_copy',
+        'affiliate_husky', 'affiliate_higlobe', 'affiliate_wise'
+      ];
+    }
+
+    function validDay(day) {
+      return day.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+    }
+
+    // True when every counter that changed went up by exactly 1.
+    function incrementedByOne(key) {
+      return !(key in request.resource.data.diff(resource.data).affectedKeys())
+        || request.resource.data[key] == resource.data.get(key, 0) + 1;
+    }
+
+    function allIncrementsAreOne() {
+      return incrementedByOne('visit')
+        && incrementedByOne('wizard_step_2') && incrementedByOne('wizard_step_3')
+        && incrementedByOne('wizard_step_4')
+        && incrementedByOne('entity_pf') && incrementedByOne('entity_mei')
+        && incrementedByOne('entity_pj_active') && incrementedByOne('entity_pj_passive')
+        && incrementedByOne('pdf_download') && incrementedByOne('field_copy')
+        && incrementedByOne('affiliate_husky') && incrementedByOne('affiliate_higlobe')
+        && incrementedByOne('affiliate_wise');
+    }
+
+    match /daily/{day} {
+      allow read: if false;
+      allow delete: if false;
+
+      // First event of the day: the new document has one allowed key set to 1.
+      allow create: if validDay(day)
+        && request.resource.data.keys().size() == 1
+        && request.resource.data.keys().hasOnly(allowedEvents())
+        && request.resource.data[request.resource.data.keys()[0]] == 1;
+
+      // Later events: exactly one allowed counter changes, by +1.
+      allow update: if validDay(day)
+        && request.resource.data.diff(resource.data).affectedKeys().size() == 1
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowedEvents())
+        && allIncrementsAreOne();
+    }
+  }
+}

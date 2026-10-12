@@ -40,7 +40,8 @@ Ferramenta gratuita de comunidade que **se paga** (custos de hospedagem/domínio
 | Termos de afiliados não confirmados | Ver aviso em `RESEARCH_CPA_EXCHANGE_PLATFORMS.md`; confirmar nos portais de parceiros |
 
 ## 6. Plano de validação com dados (sem violar o zero-data)
-Medir **somente eventos agregados e anônimos, sem cookies e sem dados do formulário**:
+Decisão: **sem ferramentas pagas nem novos pacotes**. Contadores anônimos próprios no Firestore (plano gratuito, região São Paulo), mais Google Search Console e os painéis dos parceiros. Medir **somente eventos agregados e anônimos, sem cookies e sem dados do formulário** (ver `src/lib/metrics.ts`). Limite conhecido: quem tiver a chave pública pode inflar os contadores; as regras só aceitam +1 por requisição e o Search Console/painéis dos parceiros servem de checagem cruzada.
+
 1. visitas por página (home, guias de plataforma);
 2. conclusão: passo 1 → passo 4 e PDF baixado;
 3. uso do gabarito (campo copiado) por plataforma;

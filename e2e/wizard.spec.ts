@@ -98,3 +98,26 @@ test("PJ flow (CNPJ) produces a W-8BEN-E file name", async ({ page }) => {
   ]);
   expect(download.suggestedFilename()).toMatch(/^W-8BEN-E_.*\.pdf$/);
 });
+
+test("Holding questions drive the Active/Passive NFFE classification", async ({ page }) => {
+  const input = await fillName(page, "Maria Teste Silva");
+  await input.press("Enter");
+
+  await page.getByRole("radio").nth(2).click(); // Empresa SLU / LTDA
+  await page.getByRole("radio", { name: /Holding/i }).click();
+
+  // Both answers start as "no" -> Active NFFE
+  await expect(page.getByText(/se enquadra como Active NFFE|qualifies as Active NFFE/i)).toBeVisible();
+
+  // Passive income at least 50% -> Passive NFFE
+  await page.getByRole("switch").first().click();
+  await expect(page.getByText(/enquadrada como Passive NFFE|classified as Passive NFFE/i)).toBeVisible();
+
+  // Turning it off again goes back to Active NFFE
+  await page.getByRole("switch").first().click();
+  await expect(page.getByText(/se enquadra como Active NFFE|qualifies as Active NFFE/i)).toBeVisible();
+
+  // Passive assets at least 50% also leads to Passive NFFE
+  await page.getByRole("switch").nth(1).click();
+  await expect(page.getByText(/enquadrada como Passive NFFE|classified as Passive NFFE/i)).toBeVisible();
+});

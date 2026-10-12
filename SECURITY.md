@@ -4,6 +4,7 @@
 
 FormW8 is architected on a strict **Zero-Data Client-Side Foundation**:
 * **Zero Backend Storage:** No personal data (Full Legal Name, CPF, CNPJ, Address, Zip Code, Tax Information) is ever sent to, processed by, or stored on FormW8 servers or third-party tracking databases.
+* **Anonymous Usage Counters:** The site only increments anonymous counters (e.g. "reached step 4", "downloaded the PDF") in a Firestore document per day. No cookies, no identifiers, no browser storage and no form data are involved; the browser's Do Not Track setting is respected, and counting is disabled in development and in forks unless explicitly configured.
 * **In-Browser Processing:** All ASCII character sanitization, FATCA rule validation, field mapping, and official IRS PDF generation happen 100% inside your browser runtime memory via `pdf-lib`.
 * **Public Directory Lookups (Optional / Transparent):** Automated address lookup (by CEP) and corporate name lookup (by CNPJ) are optional convenience features. When utilized, your browser directly queries open Brazilian public data providers (BrasilAPI, Minha Receita, CNPJ.ws, ViaCEP) without passing through or logging to FormW8 infrastructure. You can fill in all fields manually and operate entirely offline at any time.
 
@@ -32,6 +33,7 @@ We commit to acknowledging receipt within 24 hours and releasing verified patche
 
 ### 🔒 Arquitetura Zero-Data e Privacidade 100% no Navegador
 * **Zero Armazenamento em Servidores:** O FormW8 não possui backend de coleta e não armazena nenhuma informação pessoal (Nome, CPF, CNPJ, Endereço ou Dados Fiscais).
+* **Contadores Anônimos de Uso:** o site apenas soma contadores anônimos (ex.: "chegou ao passo 4", "baixou o PDF") em um documento por dia. Sem cookies, sem identificadores, sem armazenamento no navegador e sem nenhum dado do formulário; a configuração Do Not Track do navegador é respeitada.
 * **Processamento 100% no Dispositivo:** Todas as transformações de texto, validação de regras fiscais americanas e geração dos PDFs oficiais da IRS acontecem exclusivamente na memória do navegador do usuário (`pdf-lib`).
 * **Consultas Públicas Transparentes de CEP e CNPJ:** As consultas automáticas de CEP e CNPJ são feitas diretamente pelo navegador para serviços públicos abertos (BrasilAPI, Minha Receita, CNPJ.ws, ViaCEP). Nenhum dado passa por servidores do FormW8, e o usuário pode optar a qualquer momento por preencher todos os dados manualmente de forma offline.
 

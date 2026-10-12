@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
 import { W8FormData, EntityType } from "@/lib/schemas/w8-form-schema";
 import { sanitizeASCII } from "@/lib/sanitizer";
+import { deriveChapter4Status } from "@/lib/fatca";
 
 interface WizardContextType {
   step: number;
@@ -96,7 +97,7 @@ export function WizardProvider({ children }: { children: ReactNode }) {
         taxId: isSwitching ? "" : prev.taxId,
         companyName: type === "PF" ? undefined : (isSwitching ? "" : prev.companyName),
         chapter3Classification: type === "PJ" ? "Corporation" : "Individual",
-        chapter4Status: type === "PJ" ? (prev.chapter4Status === "PassiveNFFE" ? "PassiveNFFE" : "ActiveNFFE") : "Individual",
+        chapter4Status: type === "PJ" ? deriveChapter4Status(prev) : "Individual",
       };
     });
   };
@@ -128,6 +129,9 @@ export function WizardProvider({ children }: { children: ReactNode }) {
       countryOfIncorporation: "Brazil",
       chapter3Classification: "Corporation",
       chapter4Status: "ActiveNFFE",
+      isHolding: false,
+      passiveIncomeAtLeast50: false,
+      passiveAssetsAtLeast50: false,
       claimTreaty: false,
       outputMode: "pdf",
     });

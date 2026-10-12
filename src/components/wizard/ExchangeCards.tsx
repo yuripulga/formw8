@@ -4,6 +4,7 @@ import React from "react";
 import { useI18n } from "@/i18n/context";
 import { ExternalLink } from "lucide-react";
 import { AFFILIATE_CONFIG } from "@/config/affiliates";
+import { trackEvent } from "@/lib/metrics";
 
 const partners: Array<"husky" | "higlobe" | "wise"> = ["husky", "higlobe", "wise"];
 
@@ -74,6 +75,7 @@ export function ExchangeCards() {
                 href={config.url}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
+                onClick={() => trackEvent(`affiliate_${partnerKey}`)}
                 className={`inline-flex items-center justify-center gap-1.5 text-xs font-bold py-2 px-3 rounded-xl transition-all cursor-pointer active:scale-95 ${
                   config.isAffiliate ? "btn-brand-primary" : "btn-brand-outline"
                 }`}

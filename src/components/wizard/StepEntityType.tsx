@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/i18n/context";
 import { useWizard } from "@/context/wizard-context";
 import { OptionCard } from "@/components/ui/OptionCard";
+import { deriveChapter4Status } from "@/lib/fatca";
 import { User, Store, Building2, HelpCircle, AlertCircle } from "lucide-react";
 
 interface StepEntityTypeProps {
@@ -46,6 +47,14 @@ export function StepEntityType({ onSelect }: StepEntityTypeProps) {
     setSelectedOption("PF");
     setEntityType("PF", false);
     onSelect("PF", false);
+  };
+
+  const setHoldingState = (next: {
+    isHolding: boolean;
+    passiveIncomeAtLeast50: boolean;
+    passiveAssetsAtLeast50: boolean;
+  }) => {
+    updateFormData({ ...next, chapter4Status: deriveChapter4Status(next) });
   };
 
   const handleSelectMEI = () => {
@@ -184,10 +193,16 @@ export function StepEntityType({ onSelect }: StepEntityTypeProps) {
             <button
               type="button"
               role="radio"
-              aria-checked={formData.chapter4Status === "PassiveNFFE"}
-              onClick={() => updateFormData({ chapter4Status: "PassiveNFFE" })}
+              aria-checked={Boolean(formData.isHolding)}
+              onClick={() =>
+                setHoldingState({
+                  isHolding: true,
+                  passiveIncomeAtLeast50: Boolean(formData.passiveIncomeAtLeast50),
+                  passiveAssetsAtLeast50: Boolean(formData.passiveAssetsAtLeast50),
+                })
+              }
               className={`p-3 sm:p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-                formData.chapter4Status === "PassiveNFFE"
+                formData.isHolding
                   ? "border-emerald-600 dark:border-emerald-500 bg-emerald-500/[0.04] shadow-sm"
                   : "border-theme bg-app-surface opacity-80 hover:opacity-100"
               }`}
@@ -204,10 +219,16 @@ export function StepEntityType({ onSelect }: StepEntityTypeProps) {
             <button
               type="button"
               role="radio"
-              aria-checked={formData.chapter4Status !== "PassiveNFFE"}
-              onClick={() => updateFormData({ chapter4Status: "ActiveNFFE" })}
+              aria-checked={!formData.isHolding}
+              onClick={() =>
+                setHoldingState({
+                  isHolding: false,
+                  passiveIncomeAtLeast50: false,
+                  passiveAssetsAtLeast50: false,
+                })
+              }
               className={`p-3 sm:p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between gap-1.5 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
-                formData.chapter4Status !== "PassiveNFFE"
+                !formData.isHolding
                   ? "border-emerald-600 dark:border-emerald-500 bg-emerald-500/[0.04] shadow-sm"
                   : "border-theme bg-app-surface opacity-80 hover:opacity-100"
               }`}
@@ -220,6 +241,68 @@ export function StepEntityType({ onSelect }: StepEntityTypeProps) {
               </p>
             </button>
           </div>
+
+          {formData.isHolding && (
+            <div className="space-y-2.5 pt-1 animate-fadeIn">
+              <p className="text-xs text-muted-theme leading-relaxed">
+                {t.wizard.stepEntityType.holdingQuestionsHint}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {(
+                  [
+                    ["passiveIncomeAtLeast50", t.wizard.stepEntityType.holdingIncomeQuestion],
+                    ["passiveAssetsAtLeast50", t.wizard.stepEntityType.holdingAssetsQuestion],
+                  ] as const
+                ).map(([field, question]) => {
+                  const on = Boolean(formData[field]);
+                  return (
+                    <div
+                      key={field}
+                      className="p-3 sm:p-3.5 rounded-xl border border-theme bg-app-surface flex flex-col justify-between gap-2.5"
+                    >
+                      <p className="text-xs sm:text-sm text-heading-theme font-medium leading-relaxed">
+                        {question}
+                      </p>
+                      <button
+                        type="button"
+                        role="switch"
+                        aria-checked={on}
+                        aria-label={question}
+                        onClick={() =>
+                          setHoldingState({
+                            isHolding: true,
+                            passiveIncomeAtLeast50: Boolean(formData.passiveIncomeAtLeast50),
+                            passiveAssetsAtLeast50: Boolean(formData.passiveAssetsAtLeast50),
+                            [field]: !on,
+                          })
+                        }
+                        className={`self-end inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/20 ${
+                          on
+                            ? "border-emerald-600 dark:border-emerald-500 bg-emerald-500/10 text-heading-theme"
+                            : "border-theme text-muted-theme"
+                        }`}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className={`w-2.5 h-2.5 rounded-full ${
+                            on ? "bg-emerald-600 dark:bg-emerald-400" : "bg-slate-400"
+                          }`}
+                        />
+                        {on
+                          ? t.wizard.stepEntityType.holdingAnswerYes
+                          : t.wizard.stepEntityType.holdingAnswerNo}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+              <p role="status" aria-live="polite" className="text-xs font-semibold text-heading-theme">
+                {formData.chapter4Status === "PassiveNFFE"
+                  ? t.wizard.stepEntityType.holdingResultPassive
+                  : t.wizard.stepEntityType.holdingResultActive}
+              </p>
+            </div>
+          )}
 
           <p className="text-xs text-muted-theme leading-relaxed pt-0.5">
             {t.wizard.stepEntityType.pjCorporationNotice}

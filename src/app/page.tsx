@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useI18n } from "@/i18n/context";
 import { useWizard } from "@/context/wizard-context";
 import { validateStep } from "@/lib/validation";
+import { trackEvent } from "@/lib/metrics";
 import { AppShell } from "@/components/layout/AppShell";
 import { SupportModal } from "@/components/SupportModal";
 import { StepName } from "@/components/wizard/StepName";
@@ -30,6 +31,25 @@ export default function Home() {
   const [direction, setDirection] = useState<"next" | "prev">("next");
 
   const isPJ = formData.entityType === "PJ";
+
+  // Anonymous counters: one visit per page load and one hit per wizard step reached.
+  useEffect(() => {
+    trackEvent("visit");
+  }, []);
+
+  useEffect(() => {
+    if (step === 2) trackEvent("wizard_step_2");
+    if (step === 3) trackEvent("wizard_step_3");
+    if (step === 4) {
+      trackEvent("wizard_step_4");
+      if (formData.entityType === "PJ") {
+        trackEvent(formData.chapter4Status === "PassiveNFFE" ? "entity_pj_passive" : "entity_pj_active");
+      } else {
+        trackEvent(formData.isMei ? "entity_mei" : "entity_pf");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
 
   const handleNextStep = () => {
     if (step === 2 && !formData.entityType) {

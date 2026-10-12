@@ -129,6 +129,13 @@
       "segmentHoldingSubtitle": "Se 50% ou mais da receita bruta ou dos ativos da empresa for passivo (investimentos, juros, dividendos, aluguéis). Exige informar sócios americanos (Parte XXVI).",
       "segmentServicesTitle": "Prestação de Serviços",
       "segmentServicesSubtitle": "Desenvolvimento de software, design, marketing ou consultoria com receita operacional ativa. É o enquadramento padrão para Deel e Upwork.",
+      "holdingQuestionsHint": "Considere o último ano fiscal da empresa e responda as duas perguntas:",
+      "holdingIncomeQuestion": "50% ou mais da receita bruta veio de rendimentos passivos (dividendos, juros, aluguéis ou royalties)?",
+      "holdingAssetsQuestion": "50% ou mais dos ativos (patrimônio) são investimentos ou bens que geram esse tipo de rendimento?",
+      "holdingAnswerYes": "Sim",
+      "holdingAnswerNo": "Não",
+      "holdingResultPassive": "Com essas respostas, sua empresa será enquadrada como Passive NFFE.",
+      "holdingResultActive": "Com essas respostas, sua empresa se enquadra como Active NFFE.",
       "passiveNffeAlert": "Atenção: Para Passive NFFE, o formulário W-8BEN-E do IRS exige atestar a presença ou ausência de sócios com cidadania/residência americana (Substantial U.S. Owners na Parte XXVI). O documento será gerado com o enquadramento de Passive NFFE marcado.",
       "pjCorporationNotice": "Enquadramento automático como Corporation (padrão para empresas SLU e LTDA). Para outras estruturas societárias, consulte seu contador.",
       "helpLink": "Não sei essa resposta",
@@ -356,7 +363,7 @@
       {
         "id": "privacy-security",
         "question": "O FormW8 armazena meus dados pessoais ou fiscais?",
-        "answer": "Não. O FormW8 é uma ferramenta com arquitetura 100% client-side (executada no seu navegador) e política Zero-Data. Não possuímos servidores de armazenamento ou banco de dados. Toda a geração do PDF e higienização ocorrem localmente na memória do seu navegador. Apenas quando você opta por digitar um CNPJ ou CEP, seu navegador faz requisições diretas a APIs públicas abertas brasileiras (ViaCEP, BrasilAPI, Minha Receita) exclusivamente para preencher seu endereço. O preenchimento 100% manual e offline também está sempre disponível."
+        "answer": "Não. O FormW8 é uma ferramenta com arquitetura 100% client-side (executada no seu navegador) e política Zero-Data. Não guardamos nenhum dado do formulário: não há servidor que receba seu nome, CPF, CNPJ ou endereço. Mantemos apenas contadores anônimos de uso (por exemplo, quantas pessoas chegaram ao último passo), sem cookies e sem identificar ninguém. Toda a geração do PDF e higienização ocorrem localmente na memória do seu navegador. Apenas quando você opta por digitar um CNPJ ou CEP, seu navegador faz requisições diretas a APIs públicas abertas brasileiras (ViaCEP, BrasilAPI, Minha Receita) exclusivamente para preencher seu endereço. O preenchimento 100% manual e offline também está sempre disponível."
       },
       {
         "id": "payment-withheld-30",

@@ -6,6 +6,7 @@ import { useWizard } from "@/context/wizard-context";
 import { PDFPreviewViewer } from "@/components/PDFPreviewViewer";
 import { ExchangeCards } from "./ExchangeCards";
 import { Button } from "@/components/ui/Button";
+import { trackEvent } from "@/lib/metrics";
 import { HighlightedText } from "@/components/ui/HighlightedText";
 import {
   Download,
@@ -37,6 +38,7 @@ export function StepConfirmation({ onOpenSupportModal }: StepConfirmationProps) 
   const handleCopy = (key: string, val: string) => {
     if (!val || !navigator.clipboard) return;
     navigator.clipboard.writeText(val).then(() => {
+      trackEvent("field_copy");
       setCopiedField(key);
       setTimeout(() => {
         setCopiedField((current) => (current === key ? null : current));
@@ -60,6 +62,7 @@ export function StepConfirmation({ onOpenSupportModal }: StepConfirmationProps) 
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
+      trackEvent("pdf_download");
       onOpenSupportModal();
     } catch (err) {
       console.error("PDF generation failed:", err);

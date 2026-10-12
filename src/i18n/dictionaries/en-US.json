@@ -129,6 +129,13 @@
       "segmentHoldingSubtitle": "If 50% or more of the company’s gross income or assets is passive (investments, interest, dividends, rent). Requires declaring U.S. owners (Part XXVI).",
       "segmentServicesTitle": "Service Provider",
       "segmentServicesSubtitle": "Software development, design, marketing, or consulting with active operational revenue. Standard classification for Deel & Upwork.",
+      "holdingQuestionsHint": "Consider the company’s last fiscal year and answer both questions:",
+      "holdingIncomeQuestion": "Is 50% or more of gross income passive (dividends, interest, rent or royalties)?",
+      "holdingAssetsQuestion": "Are 50% or more of the assets investments or property that produce that kind of income?",
+      "holdingAnswerYes": "Yes",
+      "holdingAnswerNo": "No",
+      "holdingResultPassive": "With these answers, your company will be classified as Passive NFFE.",
+      "holdingResultActive": "With these answers, your company qualifies as Active NFFE.",
       "passiveNffeAlert": "Important: For Passive NFFE, IRS Form W-8BEN-E requires certifying whether the company has Substantial U.S. Owners (Part XXVI). The document will be generated with Passive NFFE selected.",
       "pjCorporationNotice": "Automatic classification as Corporation (standard for Brazilian SLU and LTDA entities). For other corporate structures, consult your accountant.",
       "helpLink": "I don't know this answer",
@@ -356,7 +363,7 @@
       {
         "id": "privacy-security",
         "question": "Does FormW8 store my personal or tax data on servers?",
-        "answer": "No. FormW8 is built on a 100% client-side, Zero-Data architecture. We operate zero storage servers and zero databases. All PDF generation and ASCII sanitization happen strictly in your browser memory. Only when you choose to input a CNPJ or ZIP code, your browser queries public Brazilian open directories (ViaCEP, BrasilAPI, Minha Receita) to autocomplete your address. 100% manual, offline filling is always available."
+        "answer": "No. FormW8 is built on a 100% client-side, Zero-Data architecture. We never store any form data: no server receives your name, CPF, CNPJ or address. We only keep anonymous usage counters (for example, how many people reached the last step), with no cookies and no way to identify anyone. All PDF generation and ASCII sanitization happen strictly in your browser memory. Only when you choose to input a CNPJ or ZIP code, your browser queries public Brazilian open directories (ViaCEP, BrasilAPI, Minha Receita) to autocomplete your address. 100% manual, offline filling is always available."
       },
       {
         "id": "payment-withheld-30",

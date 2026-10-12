@@ -83,6 +83,10 @@ export const W8FormSchema = z.object({
   // Step 2: Entity Type Selection (PF = W-8BEN, PJ = W-8BEN-E)
   entityType: EntityTypeEnum,
   isMei: z.boolean().optional(),
+  // PJ holding questionnaire (Chapter 4: Active vs Passive NFFE)
+  isHolding: z.boolean().optional(),
+  passiveIncomeAtLeast50: z.boolean().optional(),
+  passiveAssetsAtLeast50: z.boolean().optional(),
   companyName: z.string().optional(),
 
   // Step 3: Tax Identification & Address
