@@ -4,9 +4,9 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "FormW8 - Gerador de Formulários W-8BEN e W-8BEN-E",
+    name: "FormW8 - W-8BEN / W-8BEN-E",
     short_name: "FormW8",
-    description: "Gerador e tradutor fiscal simplificado para formulários W-8BEN e W-8BEN-E da IRS.",
+    description: "IRS W-8BEN / W-8BEN-E",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

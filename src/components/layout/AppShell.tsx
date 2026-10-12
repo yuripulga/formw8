@@ -12,7 +12,6 @@ import { HighlighterPenDecoration } from "@/components/ui/HighlighterPenDecorati
 import { LampPullCord } from "@/components/ui/LampPullCord";
 import { FAQSection } from "@/components/FAQSection";
 import { SearchModal } from "@/components/SearchModal";
-import { LanguageSuggestion } from "@/components/LanguageSuggestion";
 
 interface AppShellProps {
   children: ReactNode;
@@ -42,8 +41,6 @@ export function AppShell({ children, className = "", showFaq = true }: AppShellP
 
   return (
     <div className="bg-app-surface text-body-theme flex flex-col relative overflow-x-hidden selection:bg-slate-900/10 selection:text-slate-900 dark:selection:bg-white/10 dark:selection:text-white">
-      <LanguageSuggestion />
-
       {/* Subtle Ambient Cloud Background (100% full screen) */}
       <CloudBackground />
 

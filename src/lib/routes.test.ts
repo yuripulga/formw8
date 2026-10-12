@@ -34,6 +34,8 @@ describe("routes", () => {
     expect(translatePath("/w8ben-pessoa-fisica", "en-US")).toBe("/en/w8ben-individual");
     expect(translatePath("/en", "pt-BR")).toBe("/");
     expect(translatePath("/", "en-US")).toBe("/en");
+    expect(translatePath("/design-system", "en-US")).toBe("/en/design-system");
+    expect(translatePath("/en/design-system", "pt-BR")).toBe("/design-system");
   });
 });
 

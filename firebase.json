@@ -83,6 +83,81 @@
         "source": "/toptal",
         "destination": "/plataformas/toptal",
         "type": 301
+      },
+      {
+        "source": "/en/w8ben",
+        "destination": "/en/w8ben-individual",
+        "type": 301
+      },
+      {
+        "source": "/en/w8bene",
+        "destination": "/en/w8bene-company",
+        "type": 301
+      },
+      {
+        "source": "/en/deel",
+        "destination": "/en/platforms/deel",
+        "type": 301
+      },
+      {
+        "source": "/en/rippling",
+        "destination": "/en/platforms/rippling",
+        "type": 301
+      },
+      {
+        "source": "/en/upwork",
+        "destination": "/en/platforms/upwork",
+        "type": 301
+      },
+      {
+        "source": "/en/remote",
+        "destination": "/en/platforms/remote",
+        "type": 301
+      },
+      {
+        "source": "/en/google-adsense",
+        "destination": "/en/platforms/google-adsense",
+        "type": 301
+      },
+      {
+        "source": "/en/apple-developer",
+        "destination": "/en/platforms/apple-developer",
+        "type": 301
+      },
+      {
+        "source": "/en/steam",
+        "destination": "/en/platforms/steam",
+        "type": 301
+      },
+      {
+        "source": "/en/github-sponsors",
+        "destination": "/en/platforms/github-sponsors",
+        "type": 301
+      },
+      {
+        "source": "/en/stripe",
+        "destination": "/en/platforms/stripe",
+        "type": 301
+      },
+      {
+        "source": "/en/payoneer",
+        "destination": "/en/platforms/payoneer",
+        "type": 301
+      },
+      {
+        "source": "/en/fiverr",
+        "destination": "/en/platforms/fiverr",
+        "type": 301
+      },
+      {
+        "source": "/en/turing",
+        "destination": "/en/platforms/turing",
+        "type": 301
+      },
+      {
+        "source": "/en/toptal",
+        "destination": "/en/platforms/toptal",
+        "type": 301
       }
     ],
     "headers": [

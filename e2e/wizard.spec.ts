@@ -159,12 +159,62 @@ test.describe("English version (/en)", () => {
     await page.getByRole("link", { name: "View the W-8BEN-E Guide" }).click();
     await expect(page).toHaveURL(/\/en\/w8bene-company$/);
   });
+});
 
-  test("an English browser sees a link to the English page on the Portuguese site", async ({ browser }) => {
+test.describe("Automatic language detection (first load only)", () => {
+  test("an English browser opening the Portuguese home lands on /en", async ({ browser }) => {
     const context = await browser.newContext({ locale: "en-US" });
     const page = await context.newPage();
     await page.goto("/");
-    await expect(page.getByRole("link", { name: /also available in English/i })).toHaveAttribute("href", "/en");
+    await expect(page).toHaveURL(/\/en$/);
+    await expect(page.getByText(/Hello, what is your/i)).toBeVisible();
+    await context.close();
+  });
+
+  test("it goes to the equivalent page, not just the home", async ({ browser }) => {
+    const context = await browser.newContext({ locale: "en-US" });
+    const page = await context.newPage();
+    await page.goto("/plataformas/deel");
+    await expect(page).toHaveURL(/\/en\/platforms\/deel$/);
+    await context.close();
+  });
+
+  test("a Portuguese browser stays on the Portuguese pages", async ({ page }) => {
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.getByText(/qual é o seu nome|Olá, qual/i)).toBeVisible();
+  });
+
+  test("choosing Português in the selector is not overridden", async ({ browser }) => {
+    const context = await browser.newContext({ locale: "en-US" });
+    const page = await context.newPage();
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/en$/);
+    await page.getByRole("combobox").selectOption("pt-BR");
+    await expect(page).toHaveURL(/\/$/);
+    await page.waitForTimeout(800);
+    await expect(page).toHaveURL(/\/$/);
+    await context.close();
+  });
+
+  test("crawlers always get the default page", async ({ browser }) => {
+    const context = await browser.newContext({
+      locale: "en-US",
+      userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    });
+    const page = await context.newPage();
+    await page.goto("/");
+    await page.waitForTimeout(800);
+    await expect(page).toHaveURL(/\/$/);
+    await context.close();
+  });
+
+  test("an English browser opening /en stays there", async ({ browser }) => {
+    const context = await browser.newContext({ locale: "en-US" });
+    const page = await context.newPage();
+    await page.goto("/en");
+    await page.waitForTimeout(800);
+    await expect(page).toHaveURL(/\/en$/);
     await context.close();
   });
 });

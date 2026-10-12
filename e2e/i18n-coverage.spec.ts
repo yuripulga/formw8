@@ -73,6 +73,7 @@ test.describe("English coverage (/en has no Portuguese UI text)", () => {
       "/en",
       "/en/w8ben-individual",
       "/en/w8bene-company",
+      "/en/design-system",
       ...PLATFORMS.map((slug) => `/en/platforms/${slug}`),
       "/en/this-page-does-not-exist",
     ];

@@ -1,8 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Locale } from "./config";
+import { Locale, defaultLocale } from "./config";
+import { pickLocale, isCrawler } from "./detect";
 import { parseRoute, translatePath } from "@/lib/routes";
 import ptBR from "./dictionaries/pt-BR.json";
 import enUS from "./dictionaries/en-US.json";
@@ -33,6 +34,21 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const locale: Locale = parseRoute(pathname).locale;
   const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
+  const didAutoDetect = useRef(false);
+
+  // First load only: a visitor whose browser is in another supported language is taken to the
+  // equivalent page in that language. Choosing a language in the selector afterwards (client-side
+  // navigation) is never overridden, and crawlers always get the default page. Nothing is stored.
+  useEffect(() => {
+    if (didAutoDetect.current) return;
+    didAutoDetect.current = true;
+    if (locale !== defaultLocale || isCrawler(navigator.userAgent)) return;
+    const browserLocale = pickLocale(navigator.languages?.length ? navigator.languages : [navigator.language]);
+    if (browserLocale && browserLocale !== locale) {
+      router.replace(translatePath(pathname, browserLocale));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setMounted(true);

@@ -15,12 +15,13 @@ import { ArrowRight, Check, Copy, Sparkles, AlertCircle, User, Building2, Type, 
 import Link from "next/link";
 
 function TypographySection() {
+  const { t } = useI18n();
   const weights = [
-    { name: "Regular 400", weight: "font-normal", sample: "Formulários fiscais da IRS preenchidos de forma simples e rápida." },
-    { name: "Medium 500", weight: "font-medium", sample: "Isenção de retenção de 30% na fonte para prestadores de serviços internacionais." },
-    { name: "SemiBold 600", weight: "font-semibold", sample: "Linha 6a: Foreign Tax Identifying Number (FTIN / CPF ou CNPJ)." },
-    { name: "Bold 700", weight: "font-bold", sample: "Gere seu formulário fiscal W-8BEN ou W-8BEN-E em menos de 1 minuto." },
-    { name: "ExtraBold 800", weight: "font-extrabold", sample: "Olá, qual o seu nome completo?" },
+    { name: "Regular 400", weight: "font-normal", sample: t.designSystem.typographySample1 },
+    { name: "Medium 500", weight: "font-medium", sample: t.designSystem.typographySample2 },
+    { name: "SemiBold 600", weight: "font-semibold", sample: t.designSystem.typographySample3 },
+    { name: "Bold 700", weight: "font-bold", sample: t.designSystem.typographySample4 },
+    { name: "ExtraBold 800", weight: "font-extrabold", sample: t.designSystem.typographySample5 },
   ];
 
   return (
@@ -28,10 +29,10 @@ function TypographySection() {
       <div>
         <h2 className="text-xl font-bold text-heading-theme flex items-center gap-2">
           <Type className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-          <span>Tipografia Oficial: Space Grotesk</span>
+          <span>{t.designSystem.typographyHeading}</span>
         </h2>
         <p className="text-xs text-muted-theme mt-1">
-          Grotesca geométrica contemporânea com personalidade, alto contraste e proporções amplas.
+          {t.designSystem.typographyDescription}
         </p>
       </div>
 

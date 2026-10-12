@@ -370,8 +370,8 @@
 - [x] **Seletor de idioma em `<select>`** ([`LanguageSwitcher.tsx`](file:///Users/yuripauluci/Documents/git/formw8/src/components/LanguageSwitcher.tsx)) que leva à página equivalente e mantém o progresso do wizard.
 - [x] **Conteúdo em inglês:** 13 guias de plataforma (`src/content/platforms/en-US.ts`), 2 páginas pilares (`src/content/pillars`), metadados, keywords e JSON-LD (`src/content/site`), imagens OG (`app/en/opengraph-image.tsx`) e textos soltos (alt, aria-label, nomes das cores) movidos para os dicionários.
 - [x] **SEO multilíngue:** canonical, `hreflang` e `sitemap.xml` com as duas versões; `<html lang>` ajustado antes da hidratação.
-- [x] **Aviso de idioma** discreto para navegadores em outro idioma (sem redirecionamento e sem armazenamento).
 - [x] **Testes:** rotas, paridade de conteúdo entre idiomas, 5 testes E2E de `/en` e 4 testes de cobertura de tradução (`e2e/i18n-coverage.spec.ts`) que falham se texto em português vazar para `/en`.
+- [x] **Detecção automática do idioma do navegador** (primeiro acesso, sem redirecionar buscadores) e **atalhos curtos em inglês** (`/en/deel`, `/en/w8ben`...), com testes.
 - [x] **Página 404 localizada** e metadados padrão neutros (keywords, Open Graph e Twitter não vazam mais em português para outros idiomas).
 - [ ] **Próxima fase (espanhol):** adicionar `es` aos dicionários, `src/content/*`, `routes.ts` (prefixo `/es`), seletor, OG e testes; revisar o vocabulário fiscal com alguém que domine o termo.
 - [ ] **Pendente:** revisão da tradução fiscal em inglês por um contador/tradutor antes de divulgar.
