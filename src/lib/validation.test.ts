@@ -66,4 +66,36 @@ describe("validateStep", () => {
     expect(validateStep(2, {})).toEqual({});
     expect(validateStep(4, {})).toEqual({});
   });
+
+  it("step 3 PF accepts a foreign national with a valid country", () => {
+    expect(
+      validateStep(3, {
+        entityType: "PF",
+        taxId: "529.982.247-25",
+        isForeignNational: true,
+        citizenshipCountry: "CH",
+        ...address,
+      })
+    ).toEqual({});
+  });
+
+  it("step 3 PF requires a valid, supported country for a foreign national", () => {
+    const base = { entityType: "PF" as const, taxId: "529.982.247-25", isForeignNational: true, ...address };
+    expect(validateStep(3, { ...base }).citizenshipCountry).toBe("citizenshipRequired");
+    expect(validateStep(3, { ...base, citizenshipCountry: "XX" }).citizenshipCountry).toBe("citizenshipInvalid");
+    // US citizens use Form W-9, not the W-8BEN
+    expect(validateStep(3, { ...base, citizenshipCountry: "US" }).citizenshipCountry).toBe("citizenshipInvalid");
+  });
+
+  it("ignores the citizenship fields when the person is Brazilian", () => {
+    expect(
+      validateStep(3, {
+        entityType: "PF",
+        taxId: "529.982.247-25",
+        isForeignNational: false,
+        citizenshipCountry: "XX",
+        ...address,
+      })
+    ).toEqual({});
+  });
 });

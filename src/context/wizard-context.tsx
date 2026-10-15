@@ -95,6 +95,9 @@ export function WizardProvider({ children }: { children: ReactNode }) {
         entityType: type,
         isMei,
         taxId: isSwitching ? "" : prev.taxId,
+        // The citizenship question only exists for individuals (PF/MEI).
+        isForeignNational: type === "PJ" ? false : prev.isForeignNational,
+        citizenshipCountry: type === "PJ" ? undefined : prev.citizenshipCountry,
         companyName: type === "PF" ? undefined : (isSwitching ? "" : prev.companyName),
         chapter3Classification: type === "PJ" ? "Corporation" : "Individual",
         chapter4Status: type === "PJ" ? deriveChapter4Status(prev) : "Individual",
@@ -132,6 +135,8 @@ export function WizardProvider({ children }: { children: ReactNode }) {
       isHolding: false,
       passiveIncomeAtLeast50: false,
       passiveAssetsAtLeast50: false,
+      isForeignNational: false,
+      citizenshipCountry: undefined,
       claimTreaty: false,
       outputMode: "pdf",
     });

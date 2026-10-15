@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { useI18n } from "@/i18n/context";
 import { useWizard } from "@/context/wizard-context";
 import { sanitizeASCII, wasSanitized } from "@/lib/sanitizer";
@@ -17,7 +17,9 @@ import {
   maskCep,
 } from "@/lib/brazil-api";
 import { Input } from "@/components/ui/Input";
-import { Building2, MapPin, Loader2, ChevronDown } from "lucide-react";
+import { SegmentedControl } from "@/components/ui/SegmentedControl";
+import { Building2, MapPin, Loader2, ChevronDown, Info } from "lucide-react";
+import { countryName, countryOptions, findCountryCode } from "@/lib/countries";
 
 interface StepTaxAddressProps {
   errors: Record<string, string>;
@@ -34,12 +36,17 @@ export function StepTaxAddress({
   showManualAddress,
   setShowManualAddress,
 }: StepTaxAddressProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { formData, updateFormData } = useWizard();
 
   const [isSearchingCep, setIsSearchingCep] = useState<boolean>(false);
   const [isSearchingCnpj, setIsSearchingCnpj] = useState<boolean>(false);
   const [highlightedFields, setHighlightedFields] = useState<Record<string, boolean>>({});
+  const [showPrivacyInfo, setShowPrivacyInfo] = useState<boolean>(false);
+  const [citizenshipText, setCitizenshipText] = useState<string>(
+    formData.citizenshipCountry ? countryName(formData.citizenshipCountry, locale) : ""
+  );
+  const countries = useMemo(() => countryOptions(locale), [locale]);
 
   const cnpjAbortController = useRef<AbortController | null>(null);
   const cepAbortController = useRef<AbortController | null>(null);
@@ -311,6 +318,7 @@ export function StepTaxAddress({
           </div>
         ) : (
           /* For PF: CPF Input */
+          <div className="space-y-2.5">
           <Input
             label={t.wizard.stepTaxAndAddress.taxIdLabelPF}
             placeholder={t.wizard.stepTaxAndAddress.taxIdPlaceholderPF}
@@ -327,12 +335,75 @@ export function StepTaxAddress({
             highlighted={highlightedFields.taxId}
             autoFocus
           />
+
+          {/* Citizenship (W-8BEN line 2): Brazilian by default; foreign nationals living in Brazil can change it */}
+          <SegmentedControl
+            label={t.wizard.stepTaxAndAddress.citizenshipGroupLabel}
+            value={formData.isForeignNational ? "foreign" : "brazilian"}
+            options={[
+              { value: "brazilian", label: t.wizard.stepTaxAndAddress.brazilianLink },
+              { value: "foreign", label: t.wizard.stepTaxAndAddress.notBrazilianLink },
+            ]}
+            onChange={(choice) => {
+              const foreign = choice === "foreign";
+              if (foreign === Boolean(formData.isForeignNational)) return;
+              updateFormData({ isForeignNational: foreign, citizenshipCountry: undefined });
+              setCitizenshipText("");
+              if (errors.citizenshipCountry) setErrors((prev) => ({ ...prev, citizenshipCountry: "" }));
+            }}
+          />
+
+          {formData.isForeignNational ? (
+            <div className="space-y-2.5 animate-fadeIn">
+              <Input
+                label={t.wizard.stepTaxAndAddress.citizenshipLabel}
+                placeholder={t.wizard.stepTaxAndAddress.citizenshipPlaceholder}
+                list="citizenship-countries"
+                autoComplete="off"
+                value={citizenshipText}
+                onChange={(e) => {
+                  setCitizenshipText(e.target.value);
+                  updateFormData({
+                    citizenshipCountry:
+                      findCountryCode(e.target.value, locale, { includeUnsupported: true }) ?? undefined,
+                  });
+                  if (errors.citizenshipCountry) setErrors((prev) => ({ ...prev, citizenshipCountry: "" }));
+                }}
+                helperText={t.wizard.stepTaxAndAddress.citizenshipHelper}
+                error={errors.citizenshipCountry}
+              />
+              <datalist id="citizenship-countries">
+                {countries.map((country) => (
+                  <option key={country.code} value={country.name} />
+                ))}
+              </datalist>
+              <p className="text-xs text-muted-theme leading-normal">
+                {t.wizard.stepTaxAndAddress.citizenshipNotice}
+              </p>
+            </div>
+          ) : null}
+          </div>
         )}
 
         {/* Address Section */}
         <div className="pt-2 space-y-3">
           <Input
             label={t.wizard.stepTaxAndAddress.addressZipLabel}
+            labelAddon={
+              t.wizard.stepTaxAndAddress.privacyNotice ? (
+                <button
+                  type="button"
+                  onClick={() => setShowPrivacyInfo((open) => !open)}
+                  aria-expanded={showPrivacyInfo}
+                  aria-controls="privacy-info"
+                  aria-label={t.wizard.stepTaxAndAddress.privacyInfoLabel}
+                  title={t.wizard.stepTaxAndAddress.privacyInfoLabel}
+                  className="p-1 -m-1 text-muted-theme hover:text-heading-theme transition-colors cursor-pointer"
+                >
+                  <Info className="w-3.5 h-3.5" />
+                </button>
+              ) : undefined
+            }
             placeholder={t.wizard.stepTaxAndAddress.addressZipPlaceholder}
             value={formData.addressZip || ""}
             onChange={(e) => handleCepChange(e.target.value)}
@@ -353,6 +424,13 @@ export function StepTaxAddress({
             onKeyDown={onKeyDown}
             highlighted={highlightedFields.addressZip}
           />
+
+          {/* Privacy & transparency note, opened by the info button next to the label */}
+          {showPrivacyInfo && (
+            <p id="privacy-info" role="note" className="text-xs text-muted-theme leading-normal animate-fadeIn">
+              {t.wizard.stepTaxAndAddress.privacyNotice}
+            </p>
+          )}
 
           {/* Collapsible / Auto-revealed Address Details */}
           {hasAddressFilled && (
@@ -429,12 +507,6 @@ export function StepTaxAddress({
             </div>
           )}
 
-          {/* Privacy & Transparency Note */}
-          {t.wizard.stepTaxAndAddress.privacyNotice && (
-            <p className="text-xs text-muted-theme leading-normal pt-1">
-              {t.wizard.stepTaxAndAddress.privacyNotice}
-            </p>
-          )}
         </div>
       </div>
     </div>

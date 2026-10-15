@@ -131,4 +131,45 @@ describe("pdf-engine official IRS templates", () => {
     expect(form.getCheckBox("topmostSubform[0].Page1[0].Col2[0].c1_3[14]").isChecked()).toBe(true);
     expect(form.getCheckBox("topmostSubform[0].Page7[0].c7_7[0]").isChecked()).toBe(true);
   });
+
+  it("uses the English country name for a foreign national living in Brazil (W-8BEN line 2)", async () => {
+    const result = await generateW8PDF({
+      userName: "Hans Muller",
+      entityType: "PF",
+      taxId: "529.982.247-25",
+      isForeignNational: true,
+      citizenshipCountry: "CH",
+      addressStreet: "Avenida Paulista, 1000",
+      addressCity: "Sao Paulo",
+      addressState: "SP",
+      addressZip: "01310-100",
+    });
+
+    const form = (await PDFDocument.load(result.pdfBytes)).getForm();
+    expect(form.getTextField("topmostSubform[0].Page1[0].f_2[0]").getText()).toBe("Switzerland");
+    // Address and Foreign TIN stay Brazilian (the person lives in Brazil and uses a CPF).
+    expect(form.getTextField("topmostSubform[0].Page1[0].f_5[0]").getText()).toBe("Brazil");
+    expect(form.getTextField("topmostSubform[0].Page1[0].f_10[0]").getText()).toBe("52998224725");
+  });
+
+  it("falls back to Brazil when the foreign-national flag is off or the country is not supported", async () => {
+    for (const extra of [
+      { isForeignNational: false, citizenshipCountry: "CH" },
+      { isForeignNational: true, citizenshipCountry: "US" },
+      { isForeignNational: true, citizenshipCountry: undefined },
+    ]) {
+      const result = await generateW8PDF({
+        userName: "Maria Silva",
+        entityType: "PF",
+        taxId: "529.982.247-25",
+        addressStreet: "Avenida Paulista, 1000",
+        addressCity: "Sao Paulo",
+        addressState: "SP",
+        addressZip: "01310-100",
+        ...extra,
+      });
+      const form = (await PDFDocument.load(result.pdfBytes)).getForm();
+      expect(form.getTextField("topmostSubform[0].Page1[0].f_2[0]").getText()).toBe("Brazil");
+    }
+  });
 });

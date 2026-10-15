@@ -36,6 +36,8 @@ export function validateStep(step: number, data: Partial<W8FormData>): Validatio
       addressStreet: data.addressStreet ?? "",
       addressCity: data.addressCity ?? "",
       addressState: data.addressState ?? "",
+      isForeignNational: data.isForeignNational,
+      citizenshipCountry: data.citizenshipCountry,
     };
     const schema = data.entityType === "PJ" ? Step3SchemaPJ : Step3SchemaPF;
     const result = schema.safeParse(input);

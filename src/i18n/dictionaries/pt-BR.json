@@ -142,7 +142,7 @@
       "segmentHoldingTitle": "Holding / Receita Passiva",
       "segmentHoldingSubtitle": "Se 50% ou mais da receita bruta ou dos ativos da empresa for passivo (investimentos, juros, dividendos, aluguéis). Exige informar sócios americanos (Parte XXVI).",
       "segmentServicesTitle": "Prestação de Serviços",
-      "segmentServicesSubtitle": "Desenvolvimento de software, design, marketing ou consultoria com receita operacional ativa. É o enquadramento padrão para Deel e Upwork.",
+      "segmentServicesSubtitle": "Desenvolvimento de software, design, marketing ou consultoria com receita operacional ativa. É o enquadramento padrão para quem presta serviços a clientes e plataformas dos EUA.",
       "holdingQuestionsHint": "Considere o último ano fiscal da empresa e responda as duas perguntas:",
       "holdingIncomeQuestion": "50% ou mais da receita bruta veio de rendimentos passivos (dividendos, juros, aluguéis ou royalties)?",
       "holdingAssetsQuestion": "50% ou mais dos ativos (patrimônio) são investimentos ou bens que geram esse tipo de rendimento?",
@@ -155,7 +155,7 @@
       "helpLink": "Não sei essa resposta",
       "helpTitle": "Qual a diferença entre PF, MEI e PJ?",
       "helpPF": "• Pessoa Física (CPF): Paga Carnê-Leão no Brasil com alíquota progressiva de até 27,5% sobre a receita bruta (indicado para faturamentos menores).",
-      "helpMei": "• MEI: O IRS e plataformas como a Deel tratam o MEI como indivíduo nos EUA (W-8BEN com CPF). No Brasil, você continua emitindo sua NFS-e normalmente.",
+      "helpMei": "• MEI: O IRS e as plataformas internacionais tratam o MEI como indivíduo nos EUA (W-8BEN com CPF). No Brasil, você continua emitindo sua NFS-e normalmente.",
       "helpPJ": "• Empresa SLU / LTDA (CNPJ): Paga imposto no Brasil pelo Simples Nacional ou Lucro Presumido (6% a 15% na exportação). Gera o formulário W-8BEN-E como Corporation.",
       "explanation": ""
     },
@@ -170,7 +170,7 @@
       "subtitle": "",
       "taxIdLabelPF": "Seu CPF",
       "taxIdPlaceholderPF": "000.000.000-00",
-      "meiTaxIdHelper": "Para MEI, informe o seu CPF — é o identificador aceito pelo IRS e pela Deel para titulares de MEI.",
+      "meiTaxIdHelper": "Para MEI, informe o seu CPF: é o identificador aceito pelo IRS e pelas plataformas para titulares de MEI.",
       "taxIdOrCompanyLabelPJ": "CNPJ ou Razão Social da empresa",
       "taxIdOrCompanyPlaceholderPJ": "Digite o CNPJ ou o nome da empresa",
       "taxIdLabelPJ": "CNPJ da empresa",
@@ -190,14 +190,22 @@
       "cnpjSearching": "Buscando dados do CNPJ...",
       "cnpjFound": "Dados da empresa preenchidos!",
       "manualAddressToggle": "Preencher endereço manualmente",
+      "notBrazilianLink": "Não sou brasileiro",
+      "citizenshipGroupLabel": "Cidadania",
+      "brazilianLink": "Sou brasileiro",
+      "citizenshipLabel": "País de cidadania",
+      "citizenshipPlaceholder": "Digite para buscar o país",
+      "citizenshipHelper": "Aparece na linha 2 do formulário. O seu CPF continua sendo o número fiscal.",
+      "citizenshipNotice": "Esta ferramenta é para quem mora no Brasil e tem CPF. Se você mora em outro país, ainda não oferecemos suporte. Cidadãos dos EUA usam o formulário W-9, não o W-8BEN.",
+      "privacyInfoLabel": "Por que consultamos o CEP e o CNPJ?",
       "privacyNotice": "Ao digitar CNPJ ou CEP, seu navegador consulta serviços públicos brasileiros (ViaCEP/BrasilAPI) para agilizar o preenchimento. Você também pode preencher tudo manualmente.",
-      "explanation": "O seu CPF ou CNPJ é inserido no campo Foreign Tax Identifying Number (FTIN), que na Deel e outras plataformas aparece como TIN ou Foreign TIN."
+      "explanation": "O seu CPF ou CNPJ é inserido no campo Foreign Tax Identifying Number (FTIN ou TIN ou Foreign TIN)."
     },
     "stepConfirmation": {
       "question": "Pronto! Seu formulário está gerado",
       "subtitle": "Baixe o PDF preenchido ou consulte o mapa de campos abaixo.",
       "meiInfoTitle": "Nota sobre o seu enquadramento MEI",
-      "meiInfoDesc": "O seu formulário W-8BEN foi gerado com o seu CPF. Plataformas internacionais (Deel, Upwork, Remote) tratam o MEI brasileiro como pessoa física (Disregarded Entity). No Brasil, você continua emitindo sua Nota Fiscal de Serviço (NFS-e) pelo seu CNPJ MEI normalmente.",
+      "meiInfoDesc": "O seu formulário W-8BEN foi gerado com o seu CPF. Plataformas internacionais tratam o MEI brasileiro como pessoa física (Disregarded Entity). No Brasil, você continua emitindo sua Nota Fiscal de Serviço (NFS-e) pelo seu CNPJ MEI normalmente.",
       "passiveNffeInfoTitle": "Nota sobre o enquadramento Passive NFFE",
       "passiveNffeInfoDesc": "O seu formulário W-8BEN-E foi preenchido com a certificação de Passive NFFE (Linha 5 e Parte XXVI). Se a sua empresa possuir sócios com cidadania ou residência americana (Substantial U.S. Owners), consulte seu contador para listar os dados na Parte XXX.",
       "pdfAction": "Baixar PDF Preenchido",
@@ -250,7 +258,7 @@
       "exchangeSubtitle": "Algumas das plataformas de câmbio usadas pela comunidade tech brasileira para receber pagamentos internacionais. Compare taxas e condições antes de escolher:",
       "exchangeDisclosure": "Publicidade: alguns links desta seção são de indicação e o FormW8 pode receber uma comissão, sem custo extra para você. A escolha é sua e as condições podem mudar; confira no site de cada empresa.",
       "exchangeHuskyTag": "Foco em PJ",
-      "exchangeHuskyDesc": "Abertura rápida de conta PJ em dólar, integração nativa com Deel/Rippling e conversão instantânea via Pix.",
+      "exchangeHuskyDesc": "Abertura rápida de conta PJ em dólar, integração com plataformas de contratação e conversão instantânea via Pix.",
       "exchangeHiglobeTag": "Taxa fixa",
       "exchangeHiglobeDesc": "Taxa fixa reduzida por transferência, recebimento via ACH nos EUA e liquidação Pix 24/7 sem burocracia.",
       "exchangeWiseTag": "Foco em Pessoa Física",
@@ -303,6 +311,8 @@
       "cityRequired": "Preencha a cidade.",
       "stateRequired": "Preencha o estado (UF).",
       "stateInvalid": "Informe uma UF válida com 2 letras (ex: SP).",
+      "citizenshipRequired": "Escolha o seu país de cidadania na lista.",
+      "citizenshipInvalid": "Escolha um país da lista. Cidadãos dos EUA usam o formulário W-9.",
       "zipRequired": "Preencha o CEP.",
       "zipInvalid": "CEP inválido. Deve conter 8 dígitos."
     }
@@ -423,6 +433,11 @@
         "id": "special-rates-conditions",
         "question": "O que preencher em 'Special rates and conditions' (Part III do W-8BEN-E ou Part II do W-8BEN)?",
         "answer": "Para prestadores de serviços de tecnologia e desenvolvimento que residem e trabalham no Brasil, a Part III (W-8BEN-E) e Part II (W-8BEN) podem ser deixadas em branco. Como o serviço é executado integralmente fora do território dos EUA, trata-se de 'Foreign Source Income' (renda de fonte estrangeira), a qual não sofre incidência de imposto de renda americano por definição legal do IRS."
+      },
+      {
+        "id": "outside-brazil",
+        "question": "Moro fora do Brasil ou não tenho CPF. Posso usar o FormW8?",
+        "answer": "Ainda não. O FormW8 foi feito para quem mora no Brasil e tem CPF (ou CNPJ): ele é o número fiscal estrangeiro do formulário e o endereço precisa ser brasileiro. Se você é estrangeiro e mora no Brasil, use o link 'Não sou brasileiro' no passo 3 para informar o seu país de cidadania. Quem mora em outro país precisa de outros campos (número fiscal e benefícios de tratado do seu país), que ainda não são atendidos. Cidadãos dos EUA não usam o W-8BEN: o formulário correto é o W-9."
       }
     ]
   },
@@ -442,6 +457,11 @@
     "buttonsTitle": "Botões Principais e Secundários",
     "badgesTitle": "Alertas e Notificações",
     "optionCardsTitle": "Cartões Selecionáveis (OptionCards)",
+    "segmentedControlTitle": "Controle Segmentado (SegmentedControl)",
+    "segmentedControlDescription": "Grupo de opções compacto com navegação por teclado (setas) e semântica de rádio para seleções binárias ou terciárias.",
+    "segmentedControlGroupLabel": "Exemplo de Cidadania",
+    "segmentedControlOptionA": "Sou brasileiro",
+    "segmentedControlOptionB": "Não sou brasileiro",
     "drawersTitle": "Gaveta Didática de Contexto",
     "sanitizerTitle": "Sanitizador ASCII em Tempo Real",
     "sanitizerDescription": "Digite um endereço ou nome com acentos em português para visualizar a conversão instantânea para o padrão aceito no W-8 americano:",

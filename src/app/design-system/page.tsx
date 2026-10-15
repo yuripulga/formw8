@@ -10,6 +10,7 @@ import { Card, CardBody } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ContextDrawer } from "@/components/ui/Drawer";
 import { OptionCard } from "@/components/ui/OptionCard";
+import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import { HighlightedText } from "@/components/ui/HighlightedText";
 import { ArrowRight, Check, Copy, Sparkles, AlertCircle, User, Building2, Type, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -62,6 +63,7 @@ export default function DesignSystemPage() {
   const [testInput, setTestInput] = useState("São Paulo, Conceição do Araguaia");
   const [copied, setCopied] = useState(false);
   const [selectedDemoOption, setSelectedDemoOption] = useState<string>("option1");
+  const [selectedSegment, setSelectedSegment] = useState<string>("optionA");
 
   const sanitizedVal = sanitizeASCII(testInput);
   const inputWasSanitized = wasSanitized(testInput);
@@ -188,6 +190,23 @@ export default function DesignSystemPage() {
                     onClick={() => setSelectedDemoOption("option2")}
                   />
                 </div>
+              </div>
+
+              {/* SegmentedControl Section */}
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs text-muted-theme font-semibold">{t.designSystem.segmentedControlTitle}</div>
+                  <p className="text-xs text-muted-theme mt-0.5">{t.designSystem.segmentedControlDescription}</p>
+                </div>
+                <SegmentedControl
+                  label={t.designSystem.segmentedControlGroupLabel}
+                  value={selectedSegment}
+                  options={[
+                    { value: "optionA", label: t.designSystem.segmentedControlOptionA },
+                    { value: "optionB", label: t.designSystem.segmentedControlOptionB },
+                  ]}
+                  onChange={setSelectedSegment}
+                />
               </div>
             </CardBody>
           </Card>

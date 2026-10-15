@@ -375,3 +375,12 @@
 - [x] **Página 404 localizada** e metadados padrão neutros (keywords, Open Graph e Twitter não vazam mais em português para outros idiomas).
 - [ ] **Próxima fase (espanhol):** adicionar `es` aos dicionários, `src/content/*`, `routes.ts` (prefixo `/es`), seletor, OG e testes; revisar o vocabulário fiscal com alguém que domine o termo.
 - [ ] **Pendente:** revisão da tradução fiscal em inglês por um contador/tradutor antes de divulgar.
+
+---
+
+## 🧭 Fase 20: Cidadania para Estrangeiros no Brasil e Textos sem Marcas (CONCLUÍDO)
+- [x] **Grupo "Cidadania" compacto (passo 3, PF/MEI):** "Sou brasileiro" pré-selecionado e "Não sou brasileiro", que revela um campo digitável de país de cidadania; o PDF e o gabarito usam o nome em inglês (W-8BEN linha 2); EUA excluídos (W-9). Aviso de que quem mora fora do Brasil ainda não é atendido, no passo e no FAQ.
+- [x] **Aviso de privacidade do CEP/CNPJ** movido para um botão "ⓘ" ao lado do rótulo.
+- [x] **Textos dos passos sem nomes de marcas** (explicação do FTIN, MEI, Prestação de Serviços, cartão de câmbio).
+- [x] **Componente `<SegmentedControl>` no Catálogo:** adicionado à página [`/design-system`](src/app/design-system/page.tsx) com 100% de paridade i18n (`pt-BR.json` e `en-US.json`).
+- [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.

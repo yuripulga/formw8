@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { isValidCpf, isValidCnpj } from "../brazil-api";
+import { isSelectableCountry } from "../countries";
 
 /**
  * Zod validation schemas for FormW8 wizard data.
@@ -61,10 +62,26 @@ const addressFields = {
   }),
 };
 
-export const Step3SchemaPF = z.object({
-  taxId: cpfField,
-  ...addressFields,
-});
+/** Citizenship is Brazilian unless the person says otherwise; US citizens use Form W-9. */
+const citizenshipFields = {
+  isForeignNational: z.boolean().optional(),
+  citizenshipCountry: z.string().optional(),
+};
+
+export const Step3SchemaPF = z
+  .object({
+    taxId: cpfField,
+    ...citizenshipFields,
+    ...addressFields,
+  })
+  .superRefine((data, ctx) => {
+    if (!data.isForeignNational) return;
+    if (!data.citizenshipCountry) {
+      ctx.addIssue({ code: "custom", path: ["citizenshipCountry"], message: "citizenshipRequired" });
+    } else if (!isSelectableCountry(data.citizenshipCountry)) {
+      ctx.addIssue({ code: "custom", path: ["citizenshipCountry"], message: "citizenshipInvalid" });
+    }
+  });
 
 export const Step3SchemaPJ = z.object({
   taxId: cnpjField,
@@ -83,6 +100,9 @@ export const W8FormSchema = z.object({
   // Step 2: Entity Type Selection (PF = W-8BEN, PJ = W-8BEN-E)
   entityType: EntityTypeEnum,
   isMei: z.boolean().optional(),
+  // PF/MEI who are not Brazilian citizens (W-8BEN line 2); ISO 3166-1 alpha-2 code
+  isForeignNational: z.boolean().optional(),
+  citizenshipCountry: z.string().length(2).optional(),
   // PJ holding questionnaire (Chapter 4: Active vs Passive NFFE)
   isHolding: z.boolean().optional(),
   passiveIncomeAtLeast50: z.boolean().optional(),

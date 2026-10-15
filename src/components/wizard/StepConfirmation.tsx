@@ -7,6 +7,7 @@ import { PDFPreviewViewer } from "@/components/PDFPreviewViewer";
 import { ExchangeCards } from "./ExchangeCards";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/metrics";
+import { englishCountryName, isSelectableCountry } from "@/lib/countries";
 import { HighlightedText } from "@/components/ui/HighlightedText";
 import {
   Download,
@@ -193,7 +194,11 @@ export function StepConfirmation({ onOpenSupportModal }: StepConfirmationProps) 
                 id: "country",
                 line: t.wizard.stepConfirmation.line2Label,
                 meaning: t.wizard.stepConfirmation.line2Meaning,
-                value: t.wizard.stepConfirmation.countryValue || "Brazil",
+                // Country of citizenship (individuals) or incorporation (companies); it is an English form.
+                value:
+                  !isPJ && formData.isForeignNational && isSelectableCountry(formData.citizenshipCountry)
+                    ? englishCountryName(formData.citizenshipCountry)
+                    : t.wizard.stepConfirmation.countryValue || "Brazil",
               },
               ...(isPJ
                 ? [

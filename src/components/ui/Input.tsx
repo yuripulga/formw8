@@ -3,6 +3,8 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  /** Small control shown next to the label (e.g. an info button). */
+  labelAddon?: ReactNode;
   helperText?: string;
   error?: string;
   icon?: ReactNode;
@@ -16,6 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label,
+      labelAddon,
       helperText,
       error,
       icon,
@@ -36,12 +39,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="space-y-1 w-full">
         {label && (
-          <label
-            htmlFor={inputId}
-            className="block text-xs font-bold uppercase tracking-wider text-muted-theme cursor-pointer"
-          >
-            {label}
-          </label>
+          <div className="flex items-center gap-1.5">
+            <label
+              htmlFor={inputId}
+              className="block text-xs font-bold uppercase tracking-wider text-muted-theme cursor-pointer"
+            >
+              {label}
+            </label>
+            {labelAddon}
+          </div>
         )}
         <div className="relative flex items-center">
           {icon && (

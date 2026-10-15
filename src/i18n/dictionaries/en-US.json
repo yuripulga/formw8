@@ -142,7 +142,7 @@
       "segmentHoldingTitle": "Holding / Passive Income",
       "segmentHoldingSubtitle": "If 50% or more of the company’s gross income or assets is passive (investments, interest, dividends, rent). Requires declaring U.S. owners (Part XXVI).",
       "segmentServicesTitle": "Service Provider",
-      "segmentServicesSubtitle": "Software development, design, marketing, or consulting with active operational revenue. Standard classification for Deel & Upwork.",
+      "segmentServicesSubtitle": "Software development, design, marketing, or consulting with active operational revenue. Standard classification for those who provide services to US clients and platforms.",
       "holdingQuestionsHint": "Consider the company’s last fiscal year and answer both questions:",
       "holdingIncomeQuestion": "Is 50% or more of gross income passive (dividends, interest, rent or royalties)?",
       "holdingAssetsQuestion": "Are 50% or more of the assets investments or property that produce that kind of income?",
@@ -155,7 +155,7 @@
       "helpLink": "I don't know this answer",
       "helpTitle": "What is the difference between Individual, MEI, and Company?",
       "helpPF": "• Individual (CPF): Taxes via Carnê-Leão in Brazil at progressive rates up to 27.5% on gross revenue (recommended for lower revenue).",
-      "helpMei": "• MEI: The IRS and platforms like Deel treat MEI as an individual in the US (W-8BEN with CPF). In Brazil, you continue issuing your municipal invoice normally.",
+      "helpMei": "• MEI: The IRS and international platforms treat MEI as an individual in the US (W-8BEN with CPF). In Brazil, you continue issuing your municipal invoice normally.",
       "helpPJ": "• Company SLU / LTDA (CNPJ): Taxes in Brazil via Simples Nacional or Lucro Presumido (6% to 15% on exports). Generates Form W-8BEN-E as Corporation.",
       "explanation": ""
     },
@@ -170,7 +170,7 @@
       "subtitle": "",
       "taxIdLabelPF": "Your CPF",
       "taxIdPlaceholderPF": "000.000.000-00",
-      "meiTaxIdHelper": "For MEI, enter your CPF — this is the identifier accepted by the IRS and Deel for MEI owners.",
+      "meiTaxIdHelper": "For MEI, enter your CPF: this is the identifier accepted by the IRS and by platforms for MEI owners.",
       "taxIdOrCompanyLabelPJ": "Company CNPJ or Legal Name",
       "taxIdOrCompanyPlaceholderPJ": "Enter company CNPJ or registered name",
       "taxIdLabelPJ": "Company CNPJ",
@@ -190,14 +190,22 @@
       "cnpjSearching": "Fetching CNPJ data...",
       "cnpjFound": "Company data autofilled!",
       "manualAddressToggle": "Enter address manually",
+      "notBrazilianLink": "I'm not Brazilian",
+      "citizenshipGroupLabel": "Citizenship",
+      "brazilianLink": "I'm Brazilian",
+      "citizenshipLabel": "Country of citizenship",
+      "citizenshipPlaceholder": "Type to search for the country",
+      "citizenshipHelper": "Appears on line 2 of the form. Your CPF remains your tax number.",
+      "citizenshipNotice": "This tool is for people who live in Brazil and have a CPF. If you live in another country, we do not support it yet. US citizens use Form W-9, not the W-8BEN.",
+      "privacyInfoLabel": "Why do we look up the ZIP code and CNPJ?",
       "privacyNotice": "When entering CNPJ or ZIP code, your browser queries public Brazilian APIs (ViaCEP/BrasilAPI) to autocomplete your address. 100% manual entry is always supported.",
-      "explanation": "Your CPF or CNPJ goes into the Foreign Tax Identifying Number (FTIN) field, labeled as TIN or Foreign TIN on platforms like Deel."
+      "explanation": "Your CPF or CNPJ goes into the Foreign Tax Identifying Number (FTIN, TIN or Foreign TIN) field."
     },
     "stepConfirmation": {
       "question": "All done! Your form is ready",
       "subtitle": "Download the filled PDF or check the field mapping below.",
       "meiInfoTitle": "Note regarding your MEI status",
-      "meiInfoDesc": "Your Form W-8BEN was generated with your CPF. International platforms (Deel, Upwork, Remote) treat Brazilian MEI as an individual (Disregarded Entity). In Brazil, you can continue issuing your invoices through your MEI CNPJ normally.",
+      "meiInfoDesc": "Your Form W-8BEN was generated with your CPF. International platforms treat Brazilian MEI as an individual (Disregarded Entity). In Brazil, you can continue issuing your invoices through your MEI CNPJ normally.",
       "passiveNffeInfoTitle": "Note regarding Passive NFFE status",
       "passiveNffeInfoDesc": "Your Form W-8BEN-E was filled with Passive NFFE certification (Line 5 and Part XXVI). If your company has Substantial U.S. Owners, consult your accountant to list their details in Part XXX.",
       "pdfAction": "Download Filled PDF",
@@ -250,7 +258,7 @@
       "exchangeSubtitle": "Some of the FX providers used by Brazilian tech contractors to receive international payments. Compare fees and terms before you choose:",
       "exchangeDisclosure": "Advertising: some links in this section are referral links and FormW8 may earn a commission at no extra cost to you. The choice is yours and terms may change; check each provider’s website.",
       "exchangeHuskyTag": "Focus on businesses",
-      "exchangeHuskyDesc": "Fast USD business account opening, native Deel/Rippling integration, and instant conversion to local currency via Pix.",
+      "exchangeHuskyDesc": "Fast USD business account opening, integration with hiring platforms, and instant conversion to local currency via Pix.",
       "exchangeHiglobeTag": "Flat fee",
       "exchangeHiglobeDesc": "Low flat fee per transfer, US ACH account receipt, and 24/7 instant local payouts.",
       "exchangeWiseTag": "Focus on individuals",
@@ -303,6 +311,8 @@
       "cityRequired": "Enter your city.",
       "stateRequired": "Enter your state.",
       "stateInvalid": "Enter a valid 2-letter state code (e.g. SP).",
+      "citizenshipRequired": "Choose your country of citizenship from the list.",
+      "citizenshipInvalid": "Choose a country from the list. US citizens use Form W-9.",
       "zipRequired": "Enter your postal code (CEP).",
       "zipInvalid": "Invalid ZIP code. Must contain 8 digits."
     }
@@ -423,6 +433,11 @@
         "id": "special-rates-conditions",
         "question": "What should be filled in 'Special rates and conditions' (Part III of W-8BEN-E or Part II of W-8BEN)?",
         "answer": "For international contractors and developers performing services entirely outside the US, Part III (W-8BEN-E) and Part II (W-8BEN) can be left blank. Because the work is physically executed in Brazil or another foreign territory, the income constitutes non-US 'Foreign Source Income' and is exempt from US federal tax withholding by IRS statutory definition."
+      },
+      {
+        "id": "outside-brazil",
+        "question": "I live outside Brazil or I don't have a CPF. Can I use FormW8?",
+        "answer": "Not yet. FormW8 is built for people who live in Brazil and have a CPF (or CNPJ): it is the foreign tax number on the form and the address must be Brazilian. If you are a foreign national living in Brazil, use the \"I'm not Brazilian\" link in step 3 to enter your country of citizenship. People who live in another country need different fields (their country's tax number and treaty benefits), which are not supported yet. US citizens do not use the W-8BEN: the correct form is the W-9."
       }
     ]
   },
@@ -442,6 +457,11 @@
     "buttonsTitle": "Primary & Secondary Buttons",
     "badgesTitle": "Alerts & Notifications",
     "optionCardsTitle": "Selectable Option Cards",
+    "segmentedControlTitle": "Segmented Control (SegmentedControl)",
+    "segmentedControlDescription": "Compact option group with arrow-key keyboard navigation and accessible radio semantics for binary or ternary choices.",
+    "segmentedControlGroupLabel": "Citizenship Example",
+    "segmentedControlOptionA": "I'm Brazilian",
+    "segmentedControlOptionB": "I'm not Brazilian",
     "drawersTitle": "Didactic Context Drawer",
     "sanitizerTitle": "Real-Time ASCII Sanitizer",
     "sanitizerDescription": "Type an address or name with Portuguese accents to preview real-time conversion to US standard ASCII:",

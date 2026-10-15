@@ -1,6 +1,7 @@
 import { PDFDocument } from "pdf-lib";
 import { W8FormData } from "@/lib/schemas/w8-form-schema";
 import { sanitizeASCII } from "@/lib/sanitizer";
+import { englishCountryName, isSelectableCountry } from "@/lib/countries";
 
 /**
  * Client-Side Official IRS PDF Engine for FormW8
@@ -174,8 +175,12 @@ export async function generateW8PDF(data: Partial<W8FormData>): Promise<PDFGener
     // Line 1: Name of individual
     safeSetTextField(form, "topmostSubform[0].Page1[0].f_1[0]", legalName, warnings);
 
-    // Line 2: Country of citizenship
-    safeSetTextField(form, "topmostSubform[0].Page1[0].f_2[0]", "Brazil", warnings);
+    // Line 2: Country of citizenship (Brazil unless the person is a foreign national living in Brazil)
+    const citizenship =
+      data.isForeignNational && isSelectableCountry(data.citizenshipCountry)
+        ? sanitizeASCII(englishCountryName(data.citizenshipCountry))
+        : "Brazil";
+    safeSetTextField(form, "topmostSubform[0].Page1[0].f_2[0]", citizenship, warnings);
 
     // Line 3: Permanent residence address
     safeSetTextField(form, "topmostSubform[0].Page1[0].f_3[0]", street, warnings);

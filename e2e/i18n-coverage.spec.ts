@@ -134,6 +134,21 @@ test.describe("English coverage (/en has no Portuguese UI text)", () => {
     }
   });
 
+  test("foreign-national path and privacy info on step 3", async ({ page }) => {
+    await page.goto("/en");
+    const name = page.locator("#user-name-input");
+    await name.fill("Hans Muller");
+    await name.press("Enter");
+    await page.getByRole("radio").first().click();
+    await page.getByRole("button", { name: /Why do we look up/i }).click();
+    expect(await leaks(page), "step 3 privacy info").toEqual([]);
+    await page.getByRole("radio", { name: "I'm not Brazilian" }).click();
+    expect(await leaks(page), "step 3 foreign national").toEqual([]);
+    await page.getByLabel(/Country of citizenship/i).fill("Narnia");
+    await page.getByRole("button", { name: /next/i }).first().click();
+    expect(await leaks(page), "step 3 citizenship error").toEqual([]);
+  });
+
   test("support modal, search modal and the expanded FAQ", async ({ page }) => {
     await page.goto("/en");
     await page.getByRole("button", { name: /support|pix/i }).first().click();

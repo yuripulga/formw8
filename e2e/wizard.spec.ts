@@ -218,3 +218,103 @@ test.describe("Automatic language detection (first load only)", () => {
     await context.close();
   });
 });
+
+test.describe("Step 3: foreign nationals and privacy info", () => {
+  async function toStep3AsIndividual(page: Page) {
+    const input = await fillName(page, "Hans Muller");
+    await input.press("Enter");
+    await page.getByRole("radio").first().click();
+    await expect(stepIs(page, 3)).toBeVisible();
+  }
+
+  test("the CEP/CNPJ privacy note is behind an info button, not always on screen", async ({ page }) => {
+    await toStep3AsIndividual(page);
+    const note = page.getByText(/seu navegador consulta serviços públicos/i);
+    await expect(note).toHaveCount(0);
+    await page.getByRole("button", { name: /Por que consultamos/i }).click();
+    await expect(note).toBeVisible();
+    await page.getByRole("button", { name: /Por que consultamos/i }).click();
+    await expect(note).toHaveCount(0);
+  });
+
+  test("citizenship is a compact radio group with 'Sou brasileiro' selected by default", async ({ page }) => {
+    await toStep3AsIndividual(page);
+    const brazilian = page.getByRole("radio", { name: "Sou brasileiro", exact: true });
+    const foreign = page.getByRole("radio", { name: "Não sou brasileiro", exact: true });
+    await expect(page.getByRole("radiogroup", { name: "Cidadania" })).toBeVisible();
+    await expect(brazilian).toHaveAttribute("aria-checked", "true");
+    await expect(foreign).toHaveAttribute("aria-checked", "false");
+    await expect(page.getByLabel(/País de cidadania/i)).toHaveCount(0);
+
+    // Arrow keys move between the options, like any radio group.
+    await brazilian.focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(foreign).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByLabel(/País de cidadania/i)).toBeVisible();
+    await page.keyboard.press("ArrowLeft");
+    await expect(brazilian).toHaveAttribute("aria-checked", "true");
+    await expect(page.getByLabel(/País de cidadania/i)).toHaveCount(0);
+  });
+
+  test("'Não sou brasileiro' reveals a typeable country field and validates it", async ({ page }) => {
+    await toStep3AsIndividual(page);
+    await expect(page.getByLabel(/País de cidadania/i)).toHaveCount(0);
+
+    await page.getByRole("radio", { name: "Não sou brasileiro", exact: true }).click();
+    const country = page.getByLabel(/País de cidadania/i);
+    await expect(country).toBeVisible();
+    await expect(page.getByText(/ainda não oferecemos suporte/i)).toBeVisible();
+
+    await page.getByPlaceholder(/000\.000\.000-00/).fill(CPF);
+    await country.fill("Suíç");
+    await page.getByRole("button", { name: /Próximo|Next step/i }).first().click();
+    await expect(page.getByText(/Escolha o seu país de cidadania na lista/i)).toBeVisible();
+
+    // The United States is not offered: US citizens use Form W-9.
+    await country.fill("Estados Unidos");
+    await page.getByRole("button", { name: /Próximo|Next step/i }).first().click();
+    await expect(page.getByText(/Cidadãos dos EUA usam o formulário W-9/i).first()).toBeVisible();
+
+    await page.getByRole("radio", { name: "Sou brasileiro", exact: true }).click();
+    await expect(page.getByLabel(/País de cidadania/i)).toHaveCount(0);
+  });
+
+  test("a foreign national gets the country on the gabarito and a normal PDF download", async ({ page }) => {
+    await toStep3AsIndividual(page);
+    await page.getByRole("radio", { name: "Não sou brasileiro", exact: true }).click();
+    await page.getByLabel(/País de cidadania/i).fill("Suíça");
+    await page.getByPlaceholder(/000\.000\.000-00/).fill(CPF);
+    await fillAddressManually(page);
+    await page.getByRole("button", { name: /Próximo|Next step/i }).first().click();
+
+    await expect(page.getByText("Switzerland").first()).toBeVisible({ timeout: 20_000 });
+    const [download] = await Promise.all([
+      page.waitForEvent("download"),
+      page.getByRole("button", { name: /Download|Baixar/i }).first().click(),
+    ]);
+    expect(download.suggestedFilename()).toMatch(/^W-8BEN_.*\.pdf$/);
+  });
+
+  test("MEI also gets the option and it reaches the last step", async ({ page }) => {
+    const input = await fillName(page, "Hans Muller");
+    await input.press("Enter");
+    await page.getByRole("radio").nth(1).click(); // MEI
+    await expect(stepIs(page, 3)).toBeVisible();
+    await page.getByRole("radio", { name: "Não sou brasileiro", exact: true }).click();
+    await page.getByLabel(/País de cidadania/i).fill("Alemanha");
+    await page.getByPlaceholder(/000\.000\.000-00/).fill(CPF);
+    await fillAddressManually(page);
+    await page.getByRole("button", { name: /Próximo|Next step/i }).first().click();
+    await expect(page.getByText("Germany").first()).toBeVisible({ timeout: 20_000 });
+  });
+
+  test("the option does not exist for companies (CNPJ)", async ({ page }) => {
+    const input = await fillName(page, "Maria Teste Silva");
+    await input.press("Enter");
+    await page.getByRole("radio").nth(2).click();
+    await expect(stepIs(page, 2)).toBeVisible();
+    await page.getByRole("radio").nth(2).click();
+    await expect(stepIs(page, 3)).toBeVisible();
+    await expect(page.getByRole("radio", { name: "Não sou brasileiro", exact: true })).toHaveCount(0);
+  });
+});
