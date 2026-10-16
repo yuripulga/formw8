@@ -46,6 +46,7 @@ describe("htmlLangScript", () => {
     const script = htmlLangScript();
     expect(script).toContain('"/en"');
     expect(script).toContain('"en-US"');
+    expect(script).toContain('"pt-BR"');
     expect(script).toContain("document.documentElement.lang");
   });
 });

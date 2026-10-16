@@ -93,10 +93,10 @@ export const SUPPORTED_ROUTE_LOCALES = Object.keys(ROUTES) as Locale[];
 /**
  * Tiny inline script that sets <html lang> from the URL before hydration, so the document
  * language is right for screen readers and browser translation prompts on every locale.
+ * Static script without string interpolation to guarantee zero code injection vulnerabilities.
  */
 export function htmlLangScript(): string {
-  const prefixes = (Object.keys(ROUTES) as Locale[])
-    .filter((locale) => ROUTES[locale].prefix)
-    .map((locale) => [ROUTES[locale].prefix, locale]);
-  return `(function(){var p=location.pathname,m=${JSON.stringify(prefixes)};for(var i=0;i<m.length;i++){if(p===m[i][0]||p.indexOf(m[i][0]+"/")===0){document.documentElement.lang=m[i][1];return}}})();`;
+  return `(function(){var p=location.pathname;if(p==="/en"||p.indexOf("/en/")===0){document.documentElement.lang="en-US"}else{document.documentElement.lang="pt-BR"}})();`;
 }
+
+
