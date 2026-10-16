@@ -59,6 +59,7 @@
     "vitest": "^4.1.11"
   },
   "overrides": {
-    "postcss": "^8.5.3"
+    "postcss": "^8.5.3",
+    "postcss-selector-parser": "^7.1.6"
   }
 }
