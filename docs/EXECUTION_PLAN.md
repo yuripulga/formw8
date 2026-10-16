@@ -388,5 +388,10 @@
 - [x] **Resolução de Alertas CodeQL / Code Scanning:**
   - **Alerta 1 (Actions Workflow Permissions):** Inclusão de bloco explícito `permissions: contents: read` no workflow [`.github/workflows/ci.yml`](file:///Users/yuripauluci/Documents/git/formw8/.github/workflows/ci.yml), restringindo o escopo do `GITHUB_TOKEN` ao mínimo privilégio.
   - **Alerta 2 (Bad Code Sanitization - CWE-79/94):** Substituição de injeção dinâmica de prefixos por script inline 100% estático em [`htmlLangScript`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/routes.ts), eliminando qualquer superfície de concatenação de código ou risco de script breakout, com testes em [`src/lib/routes.test.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/routes.test.ts).
+- [x] **Auditoria e Validação de Performance / SEO Pós-Deploy:**
+  - **Lighthouse Desktop:** Performance **97%**, Accessibility **96%**, Best Practices **92%**, SEO **100%**, Agentic Browsing **100%** (FCP: 0.5s, LCP: 0.8s, TBT: 0ms, CLS: 0).
+  - **Lighthouse Mobile:** Performance **92%**, Accessibility **100%**, Best Practices **92%**, SEO **100%**, Agentic Browsing **100%** (FCP: 1.7s, LCP: 2.8s, TBT: 80ms, CLS: 0).
+  - **Eficiência de Cache (`cache-insight`):** Pontuação máxima 1.0 (100%), eliminando os alertas anteriores do Pingdom e PageSpeed sobre chunks e assets estáticos.
+  - **Segurança & Qualidade:** 0 alertas CodeQL, 0 vulnerabilidades Dependabot, 0 issues abertas.
 - [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.
 
