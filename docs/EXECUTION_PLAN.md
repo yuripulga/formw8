@@ -383,4 +383,5 @@
 - [x] **Aviso de privacidade do CEP/CNPJ** movido para um botão "ⓘ" ao lado do rótulo.
 - [x] **Textos dos passos sem nomes de marcas** (explicação do FTIN, MEI, Prestação de Serviços, cartão de câmbio).
 - [x] **Componente `<SegmentedControl>` no Catálogo:** adicionado à página [`/design-system`](src/app/design-system/page.tsx) com 100% de paridade i18n (`pt-BR.json` e `en-US.json`).
+- [x] **Correção e Polimento das Imagens de Preview Social (OG / Twitter):** Substituição de glifos unicode por ícones SVG nativos nos badges (eliminando caracteres quebrados `▯`), layout do título dividido em linhas flex para eliminar colisão e sobreposição de texto, 100% de paridade i18n nos badges em inglês e redirecionamento de metadados em `src/lib/seo.ts` para `/opengraph-image` e `/en/opengraph-image`.
 - [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.

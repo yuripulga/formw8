@@ -12,9 +12,10 @@ const OG_LOCALES: Record<Locale, string> = {
   "en-US": "en_US",
 };
 
-/** Social preview image: the static PNG for Portuguese, the generated image for other locales. */
+/** Social preview image URL: uses the generated 1200x630 image for the locale. */
 export function ogImageUrl(locale: Locale): string {
-  return locale === "pt-BR" ? `${SITE_URL}/og-image.png` : `${SITE_URL}${route(locale, "home") === "/" ? "" : route(locale, "home")}/opengraph-image`;
+  const prefix = locale === "pt-BR" ? "" : "/en";
+  return `${SITE_URL}${prefix}/opengraph-image`;
 }
 
 /** Absolute URL of a page. */
@@ -103,24 +104,21 @@ export function homeMetadata(locale: Locale): Metadata {
       siteName: "FormW8",
       title: site.ogTitle,
       description: site.ogDescription,
-      // English falls back to the generated app/en/opengraph-image.
-      ...(locale === "pt-BR" && {
-        images: [
-          {
-            url: `${SITE_URL}/og-image.png`,
-            width: 1200,
-            height: 630,
-            alt: site.ogTitle,
-            type: "image/png",
-          },
-        ],
-      }),
+      images: [
+        {
+          url: ogImageUrl(locale),
+          width: 1200,
+          height: 630,
+          alt: site.ogTitle,
+          type: "image/png",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: site.ogTitle,
       description: site.twitterDescription,
-      ...(locale === "pt-BR" && { images: [`${SITE_URL}/og-image.png`] }),
+      images: [ogImageUrl(locale)],
     },
   };
 }
