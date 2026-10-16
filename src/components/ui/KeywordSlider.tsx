@@ -40,7 +40,7 @@ export function KeywordSlider({
 
   return (
     <div
-      className={`w-full py-2 sm:py-2.5 overflow-hidden relative select-none opacity-100 sm:opacity-30 sm:hover:opacity-85 transition-opacity duration-300 ${className}`}
+      className={`w-full py-2 sm:py-2.5 overflow-hidden relative select-none ${className}`}
       aria-label={ariaLabel}
       style={{
         maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",

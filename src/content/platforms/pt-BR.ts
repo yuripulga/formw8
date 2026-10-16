@@ -49,7 +49,7 @@ export const PLATFORMS_PT_BR: Record<string, PlatformInfo> = {
     metaDescription: "Aprenda a preencher o formulário fiscal W-8BEN / W-8BEN-E na Rippling para prestadores de serviços internacionais no Brasil com 0% de retenção.",
     category: "Contratos Internacionais & Folha Global",
     defaultEntityType: "PJ",
-    summary: "A Rippling utiliza um fluxo guiado de compliance fiscal para contractors internacionais. Ao completar o formulário com dados válidos, você garante 0% de withholding tax na fonte.",
+    summary: "A Rippling utiliza um fluxo guiado de compliance fiscal para contractors internacionais. Ao completar o formulário com dados válidos, você evita a retenção de 30% na fonte.",
     instructions: [
       {
         title: "1. Acesse o onboarding fiscal na Rippling",

@@ -393,5 +393,14 @@
   - **Lighthouse Mobile:** Performance **92%**, Accessibility **100%**, Best Practices **92%**, SEO **100%**, Agentic Browsing **100%** (FCP: 1.7s, LCP: 2.8s, TBT: 80ms, CLS: 0).
   - **Eficiência de Cache (`cache-insight`):** Pontuação máxima 1.0 (100%), eliminando os alertas anteriores do Pingdom e PageSpeed sobre chunks e assets estáticos.
   - **Segurança & Qualidade:** 0 alertas CodeQL, 0 vulnerabilidades Dependabot, 0 issues abertas.
+- [x] **Otimizações Finais para Maximização de Scores (Best Practices & Acessibilidade 100%):**
+  - **Fontes locais com zero CSP (`next/font/google`):** Migração de `Space Grotesk` para download e empacotamento estático local via Next.js (`_next/static/media/`), eliminando links externos para Google Fonts e o erro de CSP no console (`errors-in-console` $\to$ Best Practices 100%).
+  - **Acessibilidade Desktop 100%:** Isolamento do `BrandLogo` dentro do link inicial em [`Header.tsx`](src/components/Header.tsx) com `aria-hidden` no slogan para paridade estrita do accessible name, e remoção de opacidade artificial no [`KeywordSlider.tsx`](src/components/ui/KeywordSlider.tsx) para conformidade de contraste WCAG AA ($\ge 4.5:1$).
+  - **LCP Discovery & Otimização do Screensaver:** Conversão do preview flutuante do formulário para WebP (`screensaver-form-sample.webp`, 17 KB) e adição de `priority` no [`ScreensaverFormBackground.tsx`](src/components/ui/ScreensaverFormBackground.tsx), eliminando lazy-load e aplicando `fetchpriority="high"` no elemento LCP.
+- [x] **Refinamentos Fiscais, Jurídicos e de Integridade do PDF (Auditoria Sênior):**
+  - **Eliminação de Fallback Silencioso de Cidadania:** Em [`src/lib/pdf-engine.ts`](src/lib/pdf-engine.ts), se `isForeignNational` for verdadeiro e o país de cidadania for inválido ou omitido, o gerador de PDF agora lança erro impeditivo formal em vez de atribuir "Brazil" silenciosamente na Linha 2 do W-8BEN.
+  - **Validação de Schema no Boundary do PDF (`generateW8PDF`):** Validação estrita de campos fundamentais (nome, tipo de entidade, documento fiscal e endereço) antes da compilação do documento, com retorno confiável de `readOnly`.
+  - **Aviso de Assinatura no Passo 4:** Inclusão de lembrete conciso e natural (`pdfActionDesc`) abaixo do modelo de formulário reforçando que o documento gerado deve ser assinado e datado antes do envio à plataforma contratante.
+  - **Lapidação de Copywriting Fiscal:** Substituição de promessas absolutas ("garantindo 0%") por linguagem precisa e conversacional ("liberando 0% de retenção de imposto" e "evitando a retenção de 30% na fonte") nos pilares e guias.
 - [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.
 

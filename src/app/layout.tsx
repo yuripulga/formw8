@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
 import { I18nProvider } from "@/i18n/context";
 import { WizardProvider } from "@/context/wizard-context";
 import { SITE_URL } from "@/config/site";
@@ -58,16 +66,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" className={spaceGrotesk.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: htmlLangScript() }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
       </head>
 
       <body className="antialiased min-h-screen flex flex-col bg-app-surface text-body-theme">

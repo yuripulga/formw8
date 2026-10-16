@@ -14,7 +14,7 @@ export const PILLARS_PT_BR: Record<PillarKind, PillarContent> = {
     badge: "Pessoa Física • Freelancers & Contratados",
     title: "Guia do Formulário W-8BEN para Pessoa Física no Brasil",
     intro:
-      "O formulário W-8BEN comprova que você mora no Brasil e presta serviços para fora, garantindo 0% de desconto de imposto nos EUA.",
+      "O formulário W-8BEN comprova que você mora no Brasil e presta serviços para fora, liberando 0% de retenção de imposto nos EUA.",
     actionTitle: "Você recebe como Pessoa Física (CPF)?",
     actionSubtitle: "Gere seu formulário W-8BEN preenchido em 1 minuto.",
     actionButton: "Gerar Formulário W-8BEN em 1 Minuto",
@@ -58,7 +58,7 @@ export const PILLARS_PT_BR: Record<PillarKind, PillarContent> = {
     badge: "Pessoa Jurídica • Empresas (SLU / LTDA / ME)",
     title: "Guia do Formulário W-8BEN-E para Empresas no Brasil",
     intro:
-      "O formulário W-8BEN-E comprova que a sua empresa é do Brasil e presta serviços para fora, garantindo 0% de desconto de imposto nos EUA.",
+      "O formulário W-8BEN-E comprova que a sua empresa é do Brasil e presta serviços para fora, liberando 0% de retenção de imposto nos EUA.",
     actionTitle: "Você recebe por Empresa (CNPJ)?",
     actionSubtitle: "Gere seu formulário W-8BEN-E preenchido em 1 minuto.",
     actionButton: "Gerar Formulário W-8BEN-E em 1 Minuto",

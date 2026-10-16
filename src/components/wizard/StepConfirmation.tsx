@@ -99,7 +99,7 @@ export function StepConfirmation({ onOpenSupportModal }: StepConfirmationProps) 
                 {formModelName}
               </span>
               <p className="text-xs text-muted-theme">
-                {t.wizard.stepConfirmation.previewSubtitle}
+                {t.wizard.stepConfirmation.pdfActionDesc}
               </p>
             </div>
 
