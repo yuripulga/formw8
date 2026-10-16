@@ -103,7 +103,25 @@ function formatIRSDate(d = new Date()): string {
  * Generates an official, certified IRS PDF document pre-filled with user data.
  */
 export async function generateW8PDF(data: Partial<W8FormData>): Promise<PDFGenerationResult> {
+  if (!data.entityType || !["PF", "PJ"].includes(data.entityType)) {
+    throw new Error("Cannot generate W-8 PDF: entityType must be 'PF' or 'PJ'.");
+  }
+
   const isPJ = data.entityType === "PJ";
+  const legalName = sanitizeASCII(isPJ ? (data.companyName || data.userName || "") : (data.userName || ""));
+  if (!legalName || legalName.trim().length === 0) {
+    throw new Error("Cannot generate W-8 PDF: Legal name is required.");
+  }
+
+  const rawTaxId = (data.taxId || "").replace(/\D/g, "");
+  if (!rawTaxId) {
+    throw new Error(`Cannot generate W-8 PDF: Tax identification (${isPJ ? "CNPJ" : "CPF"}) is required.`);
+  }
+
+  if (!data.addressStreet || !data.addressCity) {
+    throw new Error("Cannot generate W-8 PDF: Complete address (street and city) is required.");
+  }
+
   // Versioned IRS template filenames to prevent stale browser cache on IRS revisions
   const pdfTemplatePath = isPJ
     ? "/forms/fw8bene-rev10-2021.pdf"
@@ -114,9 +132,7 @@ export async function generateW8PDF(data: Partial<W8FormData>): Promise<PDFGener
   const form = pdfDoc.getForm();
   const warnings: string[] = [];
 
-  const legalName = sanitizeASCII(isPJ ? (data.companyName || data.userName || "") : (data.userName || ""));
   const signerName = sanitizeASCII(data.userName || legalName);
-  const rawTaxId = (data.taxId || "").replace(/\D/g, "");
   const formattedTaxId = sanitizeASCII(data.taxId || rawTaxId);
   const street = sanitizeASCII(data.addressStreet || "");
   const city = sanitizeASCII(data.addressCity || "");
@@ -176,10 +192,15 @@ export async function generateW8PDF(data: Partial<W8FormData>): Promise<PDFGener
     safeSetTextField(form, "topmostSubform[0].Page1[0].f_1[0]", legalName, warnings);
 
     // Line 2: Country of citizenship (Brazil unless the person is a foreign national living in Brazil)
-    const citizenship =
-      data.isForeignNational && isSelectableCountry(data.citizenshipCountry)
-        ? sanitizeASCII(englishCountryName(data.citizenshipCountry))
-        : "Brazil";
+    let citizenship = "Brazil";
+    if (data.isForeignNational) {
+      if (!data.citizenshipCountry || !isSelectableCountry(data.citizenshipCountry)) {
+        throw new Error(
+          `Invalid or unsupported country of citizenship: "${data.citizenshipCountry || ""}". A valid country must be provided when isForeignNational is true.`
+        );
+      }
+      citizenship = sanitizeASCII(englishCountryName(data.citizenshipCountry));
+    }
     safeSetTextField(form, "topmostSubform[0].Page1[0].f_2[0]", citizenship, warnings);
 
     // Line 3: Permanent residence address
@@ -197,19 +218,24 @@ export async function generateW8PDF(data: Partial<W8FormData>): Promise<PDFGener
   }
 
   let flattened = false;
+  let allFieldsLocked = false;
   try {
     form.flatten({ updateFieldAppearances: false });
     flattened = true;
+    allFieldsLocked = true;
   } catch {
     // IRS official forms containing dynamic XFA structures cannot be fully flattened by pdf-lib.
     // Fallback: lock all form fields to read-only so the generated document is tamper-resistant.
-    for (const field of form.getFields()) {
+    let lockFailures = 0;
+    const fields = form.getFields();
+    for (const field of fields) {
       try {
         field.enableReadOnly();
       } catch {
-        // ignore per-field lock errors
+        lockFailures++;
       }
     }
+    allFieldsLocked = fields.length > 0 && lockFailures === 0;
   }
 
   const pdfBytes = await pdfDoc.save();
@@ -219,7 +245,7 @@ export async function generateW8PDF(data: Partial<W8FormData>): Promise<PDFGener
     pdfBytes,
     fileName: `${isPJ ? "W-8BEN-E" : "W-8BEN"}_${safeName}.pdf`,
     flattened,
-    readOnly: true,
+    readOnly: flattened || allFieldsLocked,
     warnings,
   };
 }

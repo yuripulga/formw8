@@ -14,7 +14,7 @@ import { useI18n } from "@/i18n/context";
 export function ScreensaverFormBackground() {
   const { step } = useWizard();
   const { t } = useI18n();
-  const imageSrc = "/forms/screensaver-form-sample.png";
+  const imageSrc = "/forms/screensaver-form-sample.webp";
   const isVisible = step === 1;
 
   return (
@@ -33,9 +33,9 @@ export function ScreensaverFormBackground() {
               src={imageSrc}
               alt={t.common.screensaverFormAlt}
               fill
+              priority
               sizes="(max-width: 768px) 150px, 200px"
               className="object-contain p-1.5"
-              loading="lazy"
             />
           </div>
         </div>

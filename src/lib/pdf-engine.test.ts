@@ -152,24 +152,36 @@ describe("pdf-engine official IRS templates", () => {
     expect(form.getTextField("topmostSubform[0].Page1[0].f_10[0]").getText()).toBe("52998224725");
   });
 
-  it("falls back to Brazil when the foreign-national flag is off or the country is not supported", async () => {
-    for (const extra of [
-      { isForeignNational: false, citizenshipCountry: "CH" },
-      { isForeignNational: true, citizenshipCountry: "US" },
-      { isForeignNational: true, citizenshipCountry: undefined },
-    ]) {
-      const result = await generateW8PDF({
-        userName: "Maria Silva",
-        entityType: "PF",
-        taxId: "529.982.247-25",
-        addressStreet: "Avenida Paulista, 1000",
-        addressCity: "Sao Paulo",
-        addressState: "SP",
-        addressZip: "01310-100",
-        ...extra,
-      });
-      const form = (await PDFDocument.load(result.pdfBytes)).getForm();
-      expect(form.getTextField("topmostSubform[0].Page1[0].f_2[0]").getText()).toBe("Brazil");
+  it("uses Brazil when foreign-national flag is off", async () => {
+    const result = await generateW8PDF({
+      userName: "Maria Silva",
+      entityType: "PF",
+      taxId: "529.982.247-25",
+      addressStreet: "Avenida Paulista, 1000",
+      addressCity: "Sao Paulo",
+      addressState: "SP",
+      addressZip: "01310-100",
+      isForeignNational: false,
+    });
+    const form = (await PDFDocument.load(result.pdfBytes)).getForm();
+    expect(form.getTextField("topmostSubform[0].Page1[0].f_2[0]").getText()).toBe("Brazil");
+  });
+
+  it("throws an error when foreign-national flag is on but citizenship is invalid or unsupported", async () => {
+    for (const invalidCountry of ["US", undefined, "XX"]) {
+      await expect(
+        generateW8PDF({
+          userName: "Maria Silva",
+          entityType: "PF",
+          taxId: "529.982.247-25",
+          addressStreet: "Avenida Paulista, 1000",
+          addressCity: "Sao Paulo",
+          addressState: "SP",
+          addressZip: "01310-100",
+          isForeignNational: true,
+          citizenshipCountry: invalidCountry,
+        })
+      ).rejects.toThrow(/Invalid or unsupported country of citizenship/);
     }
   });
 });

@@ -17,19 +17,20 @@ export function Header({ onOpenSearch }: HeaderProps) {
 
   return (
     <header className="flex items-center justify-center pb-6 sm:pb-8 w-full">
-      <div className="inline-flex items-center gap-2 max-w-full">
+      <div className="inline-flex items-center gap-3 max-w-full">
         <Link
           href={route(locale, "home")}
-          className="inline-flex items-center gap-3 group transition-opacity opacity-100 sm:hover:opacity-90 cursor-pointer min-w-0"
+          className="inline-flex items-center group transition-opacity opacity-100 sm:hover:opacity-90 cursor-pointer shrink-0"
           aria-label={t.common.title}
         >
-          <BrandLogo size="md" className="shrink-0" />
-          <div className="hidden lg:block min-w-0">
-            <p className="text-xs text-muted-theme font-medium truncate whitespace-nowrap">
-              <HighlightedText text={t.common.subtitle} />
-            </p>
-          </div>
+          <BrandLogo size="md" />
         </Link>
+
+        <div className="hidden lg:block min-w-0" aria-hidden="true">
+          <p className="text-xs text-muted-theme font-medium truncate whitespace-nowrap">
+            <HighlightedText text={t.common.subtitle} />
+          </p>
+        </div>
 
         {onOpenSearch && (
           <button
