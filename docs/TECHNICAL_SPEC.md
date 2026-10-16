@@ -102,5 +102,5 @@
 11. **Aviso de consulta de CEP/CNPJ:** o texto de transparência fica atrás de um botão "ⓘ" ao lado do rótulo do CEP (`Input.labelAddon`), com `aria-expanded`, em vez de ocupar espaço fixo no passo 3.
 12. **Segurança de Código e CI (CodeQL / GitHub Advanced Security):**
     * Workflows do GitHub Actions operando com privilégio mínimo explícito (`permissions: contents: read`), blindando o `GITHUB_TOKEN`.
-    * Sanitização defensiva contra injeção de código e quebra de `<script>` em tags geradas dinamicamente via `escapeUnsafeChars` (`src/lib/routes.ts`), em conformidade estrita com CWE-79, CWE-94 e CWE-116.
+    * Eliminação total de superfície de injeção de código e script breakout via script inline 100% estático em `htmlLangScript` (`src/lib/routes.ts`), em conformidade estrita com CWE-79, CWE-94 e CWE-116.
 

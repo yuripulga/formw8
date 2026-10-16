@@ -39,22 +39,14 @@ describe("routes", () => {
   });
 });
 
-import { escapeUnsafeChars, htmlLangScript } from "./routes";
+import { htmlLangScript } from "./routes";
 
 describe("htmlLangScript", () => {
   it("sets the document language from the locale prefixes", () => {
     const script = htmlLangScript();
     expect(script).toContain('"/en"');
     expect(script).toContain('"en-US"');
+    expect(script).toContain('"pt-BR"');
     expect(script).toContain("document.documentElement.lang");
-  });
-
-  it("escapes dangerous HTML characters to prevent script breakout", () => {
-    const malicious = '<script>alert(1)</script>';
-    const escaped = escapeUnsafeChars(JSON.stringify(malicious));
-    expect(escaped).not.toContain("<script>");
-    expect(escaped).not.toContain("</script>");
-    expect(escaped).toContain("\\u003C");
-    expect(escaped).toContain("\\u003E");
   });
 });

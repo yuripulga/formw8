@@ -90,33 +90,13 @@ export function translatePath(pathname: string, target: Locale): string {
 
 export const SUPPORTED_ROUTE_LOCALES = Object.keys(ROUTES) as Locale[];
 
-const CHAR_MAP: Record<string, string> = {
-  "<": "\\u003C",
-  ">": "\\u003E",
-  "\\": "\\\\",
-  "\b": "\\b",
-  "\f": "\\f",
-  "\n": "\\n",
-  "\r": "\\r",
-  "\t": "\\t",
-  "\0": "\\0",
-  "\u2028": "\\u2028",
-  "\u2029": "\\u2029",
-};
-
-export function escapeUnsafeChars(str: string): string {
-  return str.replace(/[<>\b\f\n\r\t\0\u2028\u2029]/g, (x) => CHAR_MAP[x] || x);
-}
-
 /**
  * Tiny inline script that sets <html lang> from the URL before hydration, so the document
  * language is right for screen readers and browser translation prompts on every locale.
+ * Static script without string interpolation to guarantee zero code injection vulnerabilities.
  */
 export function htmlLangScript(): string {
-  const prefixes = (Object.keys(ROUTES) as Locale[])
-    .filter((locale) => ROUTES[locale].prefix)
-    .map((locale) => [ROUTES[locale].prefix, locale]);
-  const serialized = escapeUnsafeChars(JSON.stringify(prefixes));
-  return `(function(){var p=location.pathname,m=${serialized};for(var i=0;i<m.length;i++){if(p===m[i][0]||p.indexOf(m[i][0]+"/")===0){document.documentElement.lang=m[i][1];return}}})();`;
+  return `(function(){var p=location.pathname;if(p==="/en"||p.indexOf("/en/")===0){document.documentElement.lang="en-US"}else{document.documentElement.lang="pt-BR"}})();`;
 }
+
 
