@@ -20,7 +20,7 @@ export function CloudBackground() {
       {/* 1. Modo Claro: Imagem de nuvens suaves */}
       <div className="w-full h-full relative opacity-35 dark:hidden transition-opacity duration-700">
         <Image
-          src="/images/clouds-bg.jpg"
+          src="/images/clouds-bg.webp"
           alt={t.common.cloudsAlt}
           fill
           priority
@@ -34,7 +34,7 @@ export function CloudBackground() {
       {/* 2. Modo Noturno: Imagem estática de céu estrelado à noite */}
       <div className="w-full h-full relative hidden dark:block opacity-30 transition-opacity duration-700">
         <Image
-          src="/images/starry-night-bg.jpg"
+          src="/images/starry-night-bg.webp"
           alt={t.common.starryNightAlt}
           fill
           loading="lazy"

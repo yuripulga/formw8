@@ -358,8 +358,7 @@
 - [x] **Testes E2E (Playwright)** integrados ao CI.
 - [x] **Documentação de negócio:** [`BUSINESS_VALIDATION.md`](BUSINESS_VALIDATION.md) criado; avisos de verificação em `RESEARCH_CPA_EXCHANGE_PLATFORMS.md`; definição de Active NFFE corrigida em `DEEP_DIVE_MARKET_AND_TAX_RESEARCH.md`.
 - [x] **Passive NFFE com 2 perguntas:** ao escolher "Holding", perguntas de receita e de ativos definem Active/Passive ([`fatca.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/fatca.ts)); testes unitários e E2E.
-- [x] **Contadores anônimos (código):** [`metrics.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/metrics.ts), eventos ligados ao fluxo, `firestore.rules` testadas no emulador, CSP e textos de privacidade atualizados.
-- [ ] **Pendente (ação do responsável):** criar o banco Firestore em `southamerica-east1`, publicar `firestore.rules`, definir `NEXT_PUBLIC_FIREBASE_PROJECT_ID` e `NEXT_PUBLIC_FIREBASE_API_KEY` no build de produção.
+- [x] **Contadores anônimos (código e infraestrutura):** [`metrics.ts`](file:///Users/yuripauluci/Documents/git/formw8/src/lib/metrics.ts), eventos ligados ao fluxo, `firestore.rules` ativas no Firestore `formw8-4796e`, contadores operacionais e gravando eventos anônimos diários em `daily/AAAA-MM-DD`.
 - [ ] **Pendente:** revisão contábil dos guias de AdSense, GitHub Sponsors e Steam; domínio definitivo.
 - Descartado por decisão do responsável: assinatura no PDF (o IRS não aceita nome digitado), salvar dados em arquivo e modo offline.
 
@@ -385,5 +384,6 @@
 - [x] **Componente `<SegmentedControl>` no Catálogo:** adicionado à página [`/design-system`](src/app/design-system/page.tsx) com 100% de paridade i18n (`pt-BR.json` e `en-US.json`).
 - [x] **Correção e Polimento das Imagens de Preview Social (OG / Twitter):** Substituição de glifos unicode por ícones SVG nativos nos badges (eliminando caracteres quebrados `▯`), layout do título dividido em linhas flex para eliminar colisão e sobreposição de texto, 100% de paridade i18n nos badges em inglês e redirecionamento de metadados em `src/lib/seo.ts` para `/opengraph-image` e `/en/opengraph-image`.
 - [x] **Resolução de Vulnerabilidade de Dependência (`postcss-selector-parser`):** Adicionado override para `^7.1.6` em `package.json` e `package-lock.json`, neutralizando a vulnerabilidade de ReDoS/segurança apontada pelo Dependabot sem breaking changes para o Tailwind CSS v3.4.19 (72 testes unitários e typecheck 100% verdes).
+- [x] **Otimização de Performance e Assets (WebP & Cache-Control):** Conversão das imagens de fundo `clouds-bg.jpg` e `starry-night-bg.jpg` para WebP de alta qualidade (economia de ~71% no peso, reduzindo 115 KB no carregamento inicial da home) e extensão dos headers de `Cache-Control` no [`firebase.json`](file:///Users/yuripauluci/Documents/git/formw8/firebase.json) para 30 dias (`max-age=2592000`) em imagens, fontes e formulários IRS.
 - [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.
 

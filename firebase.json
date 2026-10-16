@@ -204,16 +204,16 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=86400, stale-while-revalidate=604800"
+            "value": "public, max-age=2592000, stale-while-revalidate=604800"
           }
         ]
       },
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|ico)",
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|ico|woff|woff2)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=86400, stale-while-revalidate=604800"
+            "value": "public, max-age=2592000, stale-while-revalidate=604800"
           }
         ]
       }
