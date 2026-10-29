@@ -493,7 +493,10 @@
     "breadcrumbHome": "Home",
     "breadcrumbGuides": "Platform Guides",
     "notFoundTitle": "Platform not found",
-    "fallbackBadge": "{name} Tax Guide"
+    "fallbackBadge": "{name} Tax Guide",
+    "partnerBadge": "Official Partner",
+    "partnerDesc": "Open your account with {name} through the official partner link to receive foreign payments with exclusive perks.",
+    "partnerCta": "Create Account on {name}"
   },
   "pillarPages": {
     "pfBadge": "Individual • Freelancers & Contractors",

@@ -483,4 +483,94 @@ export const PLATFORMS_EN_US: Record<string, PlatformInfo> = {
       },
     ],
   },
+  husky: {
+    slug: "husky",
+    name: "Husky (Nomad PJ)",
+    title: "How to Complete Form W-8BEN-E to Receive via Husky (Husky Guide)",
+    metaDescription: "Step-by-step guide to filling Form W-8BEN-E (Company) to receive USD payments via Husky without 30% US backup withholding.",
+    category: "Exchange & International Accounts",
+    defaultEntityType: "PJ",
+    summary: "Husky (Nomad PJ) provides US receiving bank details for remote contractors and international companies receiving payouts from Deel, Rippling, and Upwork. Form W-8BEN-E must be submitted to your US payer to certify your non-US business status and avoid 30% IRS backup withholding.",
+    instructions: [
+      {
+        title: "1. Open your Husky business account and obtain US bank details",
+        description: "Register your Brazilian business on Husky to get local USD receiving account details (ACH Routing Number and Account Number) under your company's name.",
+      },
+      {
+        title: "2. Generate Form W-8BEN-E for your client or paying platform",
+        description: "Use FormW8 to generate a pre-filled W-8BEN-E classified as 'Corporation' (Chapter 3) and 'Active NFFE' (Chapter 4 FATCA) for software services and consulting.",
+      },
+      {
+        title: "3. Enter your Husky bank details in the paying platform",
+        description: "Add your Husky ACH routing number and account number in the payment payout settings of Deel, Rippling, Upwork, or your direct US client.",
+      },
+      {
+        title: "4. Complete exchange and receive local currency via Pix",
+        description: "Once the USD transfer arrives in Husky, convert to local currency at commercial rates and receive funds instantly via Pix into your Brazilian business account.",
+      },
+      {
+        title: "5. Issue your foreign export service invoice",
+        description: "Download the exchange contract receipt provided by Husky and issue your municipal electronic service invoice with zero PIS/COFINS/ISS export exemption.",
+      },
+    ],
+    faq: [
+      {
+        question: "Does Husky require Form W-8BEN or W-8BEN-E directly?",
+        answer: "Husky is the licensed foreign exchange provider and only requires your Brazilian business documentation. Form W-8BEN-E is required by your US payer or contracting platform (such as Deel, Rippling, or direct clients) before they disburse USD to your Husky account.",
+      },
+      {
+        question: "Can sole proprietors or MEI receive payments via Husky?",
+        answer: "Yes. Brazilian MEI and sole proprietors can receive foreign payments via Husky. For US tax compliance, the IRS treats sole proprietorships as disregarded entities, requiring Form W-8BEN with the owner's personal foreign tax ID.",
+      },
+      {
+        question: "What is the tax benefit of Form W-8BEN-E when using Husky?",
+        answer: "Without a certified W-8BEN-E on file, US payers are legally mandated to deduct a 30% withholding tax. Providing a valid form certifying that services are performed abroad reduces US withholding to 0%.",
+      },
+    ],
+  },
+  wise: {
+    slug: "wise",
+    name: "Wise",
+    title: "How to Complete Form W-8BEN to Receive via Wise (Wise Guide)",
+    metaDescription: "Learn how to complete Form W-8BEN (Individual) to receive USD payments via Wise without 30% US backup withholding.",
+    category: "Exchange & International Accounts",
+    defaultEntityType: "PF",
+    summary: "Wise gives solo professionals and remote contractors local US bank account details in US Dollars (USD). US clients and hiring platforms paying into your Wise account require a signed Form W-8BEN to certify your foreign tax residency and prevent mandatory 30% IRS backup withholding.",
+    instructions: [
+      {
+        title: "1. Create your Wise multi-currency account and activate USD balance",
+        description: "Open your personal Wise account and activate USD receiving details to obtain your local US ACH and Wire routing number and account number.",
+      },
+      {
+        title: "2. Generate your certified Form W-8BEN as an individual",
+        description: "Use FormW8 to generate your official IRS form containing your full legal name, national tax ID in Line 6 (Foreign TIN), and sanitized address.",
+      },
+      {
+        title: "3. Provide your Wise bank details and signed W-8BEN to your US payer",
+        description: "Send your US bank details along with the signed Form W-8BEN PDF to the client or organization issuing your payment.",
+      },
+      {
+        title: "4. Receive USD and convert to local currency via Pix",
+        description: "Once payment arrives in your Wise balance, hold USD, use your international card, or convert to BRL at mid-market rates and disburse via Pix.",
+      },
+      {
+        title: "5. Report foreign freelance income to your local tax authority",
+        description: "As an individual contractor, track monthly foreign earnings and report them in accordance with your home country's personal income tax requirements.",
+      },
+    ],
+    faq: [
+      {
+        question: "Does Wise require Form W-8BEN directly to open an account?",
+        answer: "No. Wise does not require Form W-8BEN to open or hold personal balances. Form W-8BEN is requested by your US client, hiring company, or platform disbursing funds to your Wise account under US Internal Revenue Code regulations.",
+      },
+      {
+        question: "Should I submit Form W-8BEN or W-8BEN-E with Wise?",
+        answer: "If you use a personal Wise account receiving funds as an individual contractor, use Form W-8BEN. If you maintain a Wise Business account registered under your legal corporate entity, use Form W-8BEN-E.",
+      },
+      {
+        question: "Why do US clients request Form W-8BEN even when paying into a US Wise account?",
+        answer: "Even though Wise provides US routing numbers, US tax law determines tax liability based on the beneficial owner's residency. Form W-8BEN certifies your foreign residency, proving services were performed outside the US and exempting payments from 30% withholding.",
+      },
+    ],
+  },
 };
