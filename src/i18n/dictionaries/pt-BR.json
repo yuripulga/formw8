@@ -493,7 +493,10 @@
     "breadcrumbHome": "Início",
     "breadcrumbGuides": "Guias de Plataformas",
     "notFoundTitle": "Plataforma não encontrada",
-    "fallbackBadge": "Guia Fiscal {name}"
+    "fallbackBadge": "Guia Fiscal {name}",
+    "partnerBadge": "Parceiro Oficial",
+    "partnerDesc": "Abra sua conta na {name} pelo link oficial para receber seus pagamentos em moeda estrangeira com benefícios exclusivos.",
+    "partnerCta": "Criar Conta na {name}"
   },
   "pillarPages": {
     "pfBadge": "Pessoa Física • Freelancers & Contratados",

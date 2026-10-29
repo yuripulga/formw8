@@ -4,8 +4,9 @@ import Link from "next/link";
 import { AppShell } from "@/components/layout/AppShell";
 import { Button } from "@/components/ui/Button";
 import { ProgrammaticAdSlot } from "@/components/ui/ProgrammaticAdSlot";
-import { ArrowLeft, ArrowRight, ShieldCheck, HelpCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck, HelpCircle, ExternalLink } from "lucide-react";
 import { getPlatforms } from "@/content/platforms";
+import { AFFILIATE_CONFIG, type AffiliateKey } from "@/config/affiliates";
 import { getDictionary } from "@/i18n/server";
 import type { Locale } from "@/i18n/config";
 import { route } from "@/lib/routes";
@@ -25,6 +26,7 @@ export function PlatformPage({ locale, slug }: PlatformPageProps) {
   }
 
   const t = getDictionary(locale).platformPage;
+  const affiliate = slug in AFFILIATE_CONFIG ? AFFILIATE_CONFIG[slug as AffiliateKey] : undefined;
 
   // Structured Data (BreadcrumbList + HowTo + FAQPage for this specific platform)
   const platformSchema = {
@@ -106,6 +108,32 @@ export function PlatformPage({ locale, slug }: PlatformPageProps) {
             </Button>
           </Link>
         </div>
+
+        {/* Partner Box for Affiliate Platforms (Husky, Wise) */}
+        {affiliate && affiliate.isAffiliate && (
+          <div className="p-5 rounded-2xl bg-card-surface border border-theme flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm hover:border-emerald-500/50 transition-colors">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-sm text-heading-theme">{affiliate.name}</span>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                  {t.partnerBadge}
+                </span>
+              </div>
+              <p className="text-xs text-muted-theme leading-relaxed">
+                {t.partnerDesc.replace("{name}", affiliate.name)}
+              </p>
+            </div>
+            <a
+              href={affiliate.url}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="inline-flex items-center justify-center gap-1.5 text-xs font-bold py-2.5 px-4 rounded-xl btn-brand-primary transition-all whitespace-nowrap cursor-pointer active:scale-95 shrink-0"
+            >
+              <span>{t.partnerCta.replace("{name}", affiliate.name)}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        )}
 
         {/* Step-by-Step Instructions */}
         <div className="space-y-4">

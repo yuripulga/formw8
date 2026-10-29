@@ -85,6 +85,16 @@
         "type": 301
       },
       {
+        "source": "/husky",
+        "destination": "/plataformas/husky",
+        "type": 301
+      },
+      {
+        "source": "/wise",
+        "destination": "/plataformas/wise",
+        "type": 301
+      },
+      {
         "source": "/en/w8ben",
         "destination": "/en/w8ben-individual",
         "type": 301
@@ -157,6 +167,16 @@
       {
         "source": "/en/toptal",
         "destination": "/en/platforms/toptal",
+        "type": 301
+      },
+      {
+        "source": "/en/husky",
+        "destination": "/en/platforms/husky",
+        "type": 301
+      },
+      {
+        "source": "/en/wise",
+        "destination": "/en/platforms/wise",
         "type": 301
       }
     ],

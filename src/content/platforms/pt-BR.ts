@@ -398,4 +398,94 @@ export const PLATFORMS_PT_BR: Record<string, PlatformInfo> = {
       },
     ],
   },
+  husky: {
+    slug: "husky",
+    name: "Husky (Nomad PJ)",
+    title: "Como Preencher o Formulário W-8BEN-E para Receber pela Husky (Guia Nomad PJ)",
+    metaDescription: "Guia prático para preencher o formulário W-8BEN-E (CNPJ) para receber pagamentos em dólar pela Husky sem retenção de 30% de imposto nos EUA.",
+    category: "Câmbio & Contas Internacionais",
+    defaultEntityType: "PJ",
+    summary: "A Husky (Nomad PJ) oferece dados de conta bancária americana para profissionais de tecnologia e empresas brasileiras receberem pagamentos internacionais de plataformas como Deel, Rippling e Upwork. O formulário fiscal W-8BEN-E deve ser enviado ao pagador nos EUA para certificar sua condição de empresa estrangeira e isentar o repasse da retenção compulsória de 30% do IRS.",
+    instructions: [
+      {
+        title: "1. Abra sua conta PJ na Husky e obtenha os dados bancários nos EUA",
+        description: "Cadastre seu CNPJ na Husky para ter acesso aos dados bancários em dólar (Routing Number ACH e Account Number) vinculados à sua empresa.",
+      },
+      {
+        title: "2. Gere o formulário fiscal W-8BEN-E para seu cliente ou plataforma pagadora",
+        description: "Utilize o FormW8 para gerar o W-8BEN-E preenchido com a classificação 'Corporation' (Chapter 3) e 'Active NFFE' (Chapter 4 FATCA) para a prestação de serviços de TI e consultoria.",
+      },
+      {
+        title: "3. Cadastre os dados bancários da Husky na plataforma contratante",
+        description: "Insira os dados de roteamento ACH e número de conta fornecidos pela Husky nas configurações de pagamento da Deel, Rippling, Upwork ou cliente direto.",
+      },
+      {
+        title: "4. Feche o câmbio e transfira em Reais para sua conta jurídica no Brasil",
+        description: "Assim que a transferência em dólar for confirmada na Husky, converta para Reais com taxa comercial e liquide instantaneamente via Pix na sua conta bancária PJ brasileira.",
+      },
+      {
+        title: "5. Emita a Nota Fiscal de Exportação de Serviços (NFS-e)",
+        description: "Baixe o Comprovante de Câmbio emitido pela Husky e emita a Nota Fiscal de Serviços eletrônica na sua prefeitura com isenção de ISS, PIS e COFINS para exportação.",
+      },
+    ],
+    faq: [
+      {
+        question: "A Husky me pede o formulário W-8BEN ou W-8BEN-E?",
+        answer: "A Husky em si é a intermediária de câmbio autorizada pelo Banco Central e solicita apenas os documentos da sua empresa (Contrato Social e CNPJ). Quem exige o W-8BEN-E é a empresa ou plataforma americana que contrata seus serviços (como Deel, Rippling ou cliente direto nos EUA), antes de enviar o pagamento em dólares para a sua conta Husky.",
+      },
+      {
+        question: "Quem tem MEI pode receber pela Husky?",
+        answer: "Sim. O MEI pode receber pagamentos internacionais pela Husky. No entanto, para fins tributários dos Estados Unidos, o MEI brasileiro é tratado como entidade desconsiderada (Disregarded Entity) pelo IRS, devendo utilizar o formulário W-8BEN com o seu CPF pessoal.",
+      },
+      {
+        question: "Qual o benefício fiscal do formulário W-8BEN-E para quem recebe pela Husky?",
+        answer: "Sem o formulário W-8BEN-E em arquivo, o cliente ou plataforma nos EUA é obrigado pela lei fiscal americana a reter 30% do valor bruto do pagamento. Ao apresentar o formulário atestando que os serviços são prestados fora do território dos EUA, a retenção na fonte passa a ser de 0%.",
+      },
+    ],
+  },
+  wise: {
+    slug: "wise",
+    name: "Wise",
+    title: "Como Preencher o Formulário W-8BEN para Receber Pagamentos pela Wise (Guia Wise PF)",
+    metaDescription: "Aprenda a preencher o formulário fiscal W-8BEN (Pessoa Física com CPF) para receber transferências em dólar pela Wise com 0% de retenção de imposto nos EUA.",
+    category: "Câmbio & Contas Internacionais",
+    defaultEntityType: "PF",
+    summary: "A Wise permite que profissionais autônomos e freelancers no Brasil tenham dados de conta bancária local nos Estados Unidos em dólar (USD). Clientes e empresas americanas que transferem para a sua conta Wise exigem o formulário W-8BEN assinado para comprovar sua residência fiscal no Brasil e não aplicar a retenção compulsória de 30% do IRS.",
+    instructions: [
+      {
+        title: "1. Crie sua conta multimoeda na Wise e ative o saldo em USD",
+        description: "Abra sua conta pessoal na Wise e solicite a ativação dos dados bancários em dólar para obter seu Routing Number (ACH/Wire) e Account Number americanos.",
+      },
+      {
+        title: "2. Gere seu formulário fiscal W-8BEN como Pessoa Física (CPF)",
+        description: "Use o gerador gratuito FormW8 para emitir seu formulário oficial da IRS com seu nome completo, CPF no campo Foreign Tax ID e endereço brasileiro sem caracteres especiais.",
+      },
+      {
+        title: "3. Forneça os dados de conta Wise e o W-8BEN ao pagador dos EUA",
+        description: "Envie seus dados bancários locais em dólar da Wise junto com o PDF do W-8BEN assinado para a empresa ou cliente internacional responsável pelo pagamento.",
+      },
+      {
+        title: "4. Receba os dólares e transfira para o Brasil via Pix",
+        description: "Quando o pagamento em dólares cair na Wise, você pode mantê-lo em USD, gastar no cartão internacional ou converter para Reais com spread reduzido e enviar via Pix para seu banco brasileiro.",
+      },
+      {
+        title: "5. Registre os rendimentos no Carnê-Leão da Receita Federal",
+        description: "Como autônomo recebendo pelo CPF, declare mensalmente os valores recebidos do exterior no sistema Carnê-Leão Web para apuração do Imposto de Renda Pessoa Física (IRPF).",
+      },
+    ],
+    faq: [
+      {
+        question: "A Wise exige o formulário W-8BEN para abrir conta?",
+        answer: "Não. A Wise não exige o envio do W-8BEN para abrir ou manter sua conta pessoal. Quem exige o formulário é o cliente, empresa ou marketplace sediado nos EUA que realiza pagamentos para a sua conta Wise, cumprindo as regras do Código Tributário Americano (IRC Capítulo 3).",
+      },
+      {
+        question: "Devo preencher o W-8BEN ou o W-8BEN-E na Wise?",
+        answer: "Se você utiliza a conta pessoal da Wise e recebe como Pessoa Física (CPF), o formulário correto é o W-8BEN. Se você possui uma conta Wise Business registrada no CNPJ da sua empresa brasileira, o formulário adequado é o W-8BEN-E.",
+      },
+      {
+        question: "Por que clientes dos EUA pedem o W-8BEN mesmo eu recebendo pela Wise?",
+        answer: "Mesmo que a Wise forneça dados bancários americanos (ACH Routing e Account Number), a lei fiscal dos EUA considera a residência fiscal do beneficiário efetivo (você). O W-8BEN comprova que o serviço foi prestado no exterior por um residente fiscal no Brasil, evitando a dedução de 30% na fonte.",
+      },
+    ],
+  },
 };

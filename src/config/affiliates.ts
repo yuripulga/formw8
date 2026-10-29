@@ -43,12 +43,10 @@ export const AFFILIATE_CONFIG = {
   },
   wise: {
     name: "Wise",
-    url: process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL || "https://wise.com",
-    isAffiliate: Boolean(
-      process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL &&
-        process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL !== "https://wise.com" &&
-        process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL !== "https://wise.com/"
-    ),
+    url:
+      process.env.NEXT_PUBLIC_WISE_AFFILIATE_URL ||
+      "https://wise.com/invite/dic/yurip752",
+    isAffiliate: true,
     couponCode: process.env.NEXT_PUBLIC_WISE_COUPON || "",
     taglineKey: "platforms.exchangeComparison.wiseTagline",
     spreadKey: "platforms.exchangeComparison.wiseSpread",

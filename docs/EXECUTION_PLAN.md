@@ -402,5 +402,13 @@
   - **Validação de Schema no Boundary do PDF (`generateW8PDF`):** Validação estrita de campos fundamentais (nome, tipo de entidade, documento fiscal e endereço) antes da compilação do documento, com retorno confiável de `readOnly`.
   - **Aviso de Assinatura no Passo 4:** Inclusão de lembrete conciso e natural (`pdfActionDesc`) abaixo do modelo de formulário reforçando que o documento gerado deve ser assinado e datado antes do envio à plataforma contratante.
   - **Lapidação de Copywriting Fiscal:** Substituição de promessas absolutas ("garantindo 0%") por linguagem precisa e conversacional ("liberando 0% de retenção de imposto" e "evitando a retenção de 30% na fonte") nos pilares e guias.
+- [x] **Integração do Link de Afiliado Wise & Tratamento no Card Final:**
+  - Atualização de `AFFILIATE_CONFIG.wise` em [`src/config/affiliates.ts`](src/config/affiliates.ts) com o link de indicação `https://wise.com/invite/dic/yurip752` e flag `isAffiliate: true`.
+  - No card de recomendação do Passo 4 ([`src/components/wizard/ExchangeCards.tsx`](src/components/wizard/ExchangeCards.tsx)), a Wise agora é renderizada com badge esmeralda (`bg-emerald-500/10 text-emerald-600 dark:text-emerald-400`) "Foco em PF" e botão principal preenchido (`btn-brand-primary`), mantendo rastreamento anônimo `affiliate_wise` e `rel="noopener noreferrer sponsored"`.
+  - Sincronização de [`.env.example`](.env.example) e [`.env.local`](.env.local).
+- [x] **Criação de Páginas Guias de Câmbio & Contas Internacionais (SEO) para Husky e Wise:**
+  - Adição de novos guias detalhados em [`src/content/platforms/pt-BR.ts`](src/content/platforms/pt-BR.ts) e [`src/content/platforms/en-US.ts`](src/content/platforms/en-US.ts) para `/plataformas/husky` (foco W-8BEN-E / PJ) e `/plataformas/wise` (foco W-8BEN / PF), com 100% de paridade i18n, 5 passos estruturados e 3 perguntas frequentes em cada.
+  - Implementação de Card de Parceiro Oficial em [`src/components/pages/PlatformPage.tsx`](src/components/pages/PlatformPage.tsx) para plataformas com afiliação ativa, renderizando botão direto com link de indicação (`rel="noopener noreferrer sponsored"`).
+  - Configuração de redirecionamentos curtos 301 no [`firebase.json`](firebase.json) (`/husky`, `/wise`, `/en/husky`, `/en/wise`) e geração estática de 50 páginas validadas no build.
 - [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.
 
