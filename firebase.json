@@ -95,6 +95,16 @@
         "type": 301
       },
       {
+        "source": "/micro1",
+        "destination": "/plataformas/micro1",
+        "type": 301
+      },
+      {
+        "source": "/mercor",
+        "destination": "/plataformas/mercor",
+        "type": 301
+      },
+      {
         "source": "/en/w8ben",
         "destination": "/en/w8ben-individual",
         "type": 301
@@ -177,6 +187,16 @@
       {
         "source": "/en/wise",
         "destination": "/en/platforms/wise",
+        "type": 301
+      },
+      {
+        "source": "/en/micro1",
+        "destination": "/en/platforms/micro1",
+        "type": 301
+      },
+      {
+        "source": "/en/mercor",
+        "destination": "/en/platforms/mercor",
         "type": 301
       }
     ],
