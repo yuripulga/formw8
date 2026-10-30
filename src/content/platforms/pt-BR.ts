@@ -488,4 +488,94 @@ export const PLATFORMS_PT_BR: Record<string, PlatformInfo> = {
       },
     ],
   },
+  micro1: {
+    slug: "micro1",
+    name: "Micro1",
+    title: "Como Preencher o Formulário W-8 na Micro1 (Guia Micro1)",
+    metaDescription: "Guia completo para preencher o formulário W-8BEN (CPF) ou W-8BEN-E (CNPJ) na Micro1 para desenvolvedores de software com 0% de retenção nos EUA.",
+    category: "Inteligência Artificial & Redes de Talentos",
+    defaultEntityType: "PJ",
+    summary: "A Micro1 conecta desenvolvedores e engenheiros de software remotos do Brasil a startups e empresas de tecnologia dos EUA. Para liberar pagamentos em dólares sem retenção na fonte de 30% do IRS, a Micro1 exige a certificação do formulário fiscal W-8BEN (Pessoa Física) ou W-8BEN-E (Pessoa Jurídica).",
+    instructions: [
+      {
+        title: "1. Acesse o painel de pagamentos da Micro1",
+        description: "No portal do desenvolvedor da Micro1, acesse as configurações de perfil ou a aba 'Payouts & Compliance' e localize a pendência de documentação fiscal dos EUA.",
+      },
+      {
+        title: "2. Escolha entre Pessoa Física (CPF) ou Jurídica (CNPJ)",
+        description: "Se o seu contrato de prestação de serviços for firmado como autônomo, utilize o W-8BEN. Se você atua por empresa própria brasileira (SLU/LTDA), utilize o W-8BEN-E.",
+      },
+      {
+        title: "3. Informe seu Foreign Tax ID brasileiro",
+        description: "Insira seu CPF (para W-8BEN) ou o CNPJ da sua empresa (para W-8BEN-E) no campo Foreign Tax Identifying Number. Não é necessário solicitar ITIN ou EIN americano.",
+      },
+      {
+        title: "4. Classificação de serviços e Chapter 4 FATCA (para PJ)",
+        description: "Se estiver preenchendo o W-8BEN-E como empresa de tecnologia, selecione 'Corporation' no Chapter 3 e 'Active NFFE' no Chapter 4 FATCA, atestando receita operacional ativa.",
+      },
+      {
+        title: "5. Assine e faça upload do documento gerado",
+        description: "Gere seu formulário PDF formatado no padrão oficial pelo FormW8, assine eletronicamente e envie pelo sistema da Micro1 para aprovação imediata.",
+      },
+    ],
+    faq: [
+      {
+        question: "Por que a Micro1 exige o formulário fiscal W-8?",
+        answer: "Como empresa sediada nos Estados Unidos, a Micro1 é obrigada pela legislação tributária americana (Internal Revenue Code) a manter em arquivo a certificação de que o desenvolvedor é residente fiscal no exterior, cancelando a retenção de 30% na fonte.",
+      },
+      {
+        question: "Desenvolvedores brasileiros podem receber como PJ na Micro1?",
+        answer: "Sim. A Micro1 aceita tanto profissionais atuando como Pessoa Física (W-8BEN com CPF) quanto empresas brasileiras constituídas como SLU, LTDA ou ME (W-8BEN-E com CNPJ).",
+      },
+      {
+        question: "Quanto tempo dura a validade do formulário W-8 na Micro1?",
+        answer: "O formulário W-8BEN e W-8BEN-E tem validade legal de 3 anos civis completos a partir do ano de assinatura, necessitando renovação somente após esse período.",
+      },
+    ],
+  },
+  mercor: {
+    slug: "mercor",
+    name: "Mercor",
+    title: "Como Preencher o Formulário W-8 na Mercor (Guia Mercor)",
+    metaDescription: "Aprenda a preencher o formulário fiscal W-8BEN / W-8BEN-E na Mercor para engenheiros e especialistas em IA receberem em dólar sem retenção fiscal.",
+    category: "Inteligência Artificial & Redes de Talentos",
+    defaultEntityType: "PJ",
+    summary: "A Mercor é uma plataforma de contratação impulsionada por inteligência artificial que conecta engenheiros de software, pesquisadores de Machine Learning e especialistas técnicos a clientes globais. Antes de repassar pagamentos internacionais em dólar, a Mercor solicita a comprovação fiscal do formulário W-8 da IRS.",
+    instructions: [
+      {
+        title: "1. Acesse a seção de pagamentos e compliance da Mercor",
+        description: "No dashboard de contratado da Mercor, navegue até 'Earnings & Tax Info' e abra a solicitação de preenchimento do formulário tributário dos EUA.",
+      },
+      {
+        title: "2. Selecione o modelo adequado (W-8BEN ou W-8BEN-E)",
+        description: "Selecione W-8BEN se você recebe como pessoa física através do CPF, ou W-8BEN-E se você contratou com seu CNPJ (SLU / LTDA de desenvolvimento ou consultoria).",
+      },
+      {
+        title: "3. Preencha seus dados de identificação e Foreign TIN",
+        description: "Insira seu nome legal completo ou Razão Social sem caracteres especiais e digite o número do seu documento fiscal nacional (CPF ou CNPJ).",
+      },
+      {
+        title: "4. Confirme que os serviços são prestados fora dos EUA",
+        description: "Declare seu endereço no Brasil para certificar que a prestação de serviços ocorre integralmente no exterior (renda de fonte não americana).",
+      },
+      {
+        title: "5. Envie o formulário assinado na plataforma",
+        description: "Faça o download do PDF oficial gerado pelo FormW8, assine no campo correspondente e anexe na Mercor para liberar seus saques e transferências.",
+      },
+    ],
+    faq: [
+      {
+        question: "A Mercor desconta imposto se eu não enviar o W-8?",
+        answer: "Sim. Sem um formulário W-8BEN ou W-8BEN-E aprovado, os pagadores americanos são legalmente obrigados a aplicar a retenção automática de 30% (backup withholding) sobre todos os repasses brutos.",
+      },
+      {
+        question: "Posso receber da Mercor por conta bancária PJ no Brasil?",
+        answer: "Sim. Você pode receber os pagamentos internacionais por contas PJ de câmbio (como Husky ou Nomad PJ) ou contas em dólar, desde que a titularidade coincida com o seu contrato e W-8BEN-E.",
+      },
+      {
+        question: "Como funciona a assinatura do documento na Mercor?",
+        answer: "O documento pode ser assinado digitalmente por ferramentas como Adobe Acrobat, DocuSign ou impresso, assinado de próprio punho e digitalizado em PDF.",
+      },
+    ],
+  },
 };

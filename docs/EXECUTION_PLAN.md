@@ -410,5 +410,10 @@
   - Adição de novos guias detalhados em [`src/content/platforms/pt-BR.ts`](src/content/platforms/pt-BR.ts) e [`src/content/platforms/en-US.ts`](src/content/platforms/en-US.ts) para `/plataformas/husky` (foco W-8BEN-E / PJ) e `/plataformas/wise` (foco W-8BEN / PF), com 100% de paridade i18n, 5 passos estruturados e 3 perguntas frequentes em cada.
   - Implementação de Card de Parceiro Oficial em [`src/components/pages/PlatformPage.tsx`](src/components/pages/PlatformPage.tsx) para plataformas com afiliação ativa, renderizando botão direto com link de indicação (`rel="noopener noreferrer sponsored"`).
   - Configuração de redirecionamentos curtos 301 no [`firebase.json`](firebase.json) (`/husky`, `/wise`, `/en/husky`, `/en/wise`) e geração estática de 50 páginas validadas no build.
+- [x] **Integração de Plataformas de Vagas e Contratos Internacionais (Micro1, Mercor e Toptal):**
+  - Criação do componente `<TalentCards>` em [`src/components/wizard/TalentCards.tsx`](src/components/wizard/TalentCards.tsx) integrado no Passo 4 do Wizard (abaixo de câmbio e acima do rodapé), exibindo cards com links de indicação para Micro1, Mercor e Toptal com conformidade visual estrita e 100% de paridade i18n.
+  - Criação de novos guias SEO detalhados em [`src/content/platforms/pt-BR.ts`](src/content/platforms/pt-BR.ts) e [`src/content/platforms/en-US.ts`](src/content/platforms/en-US.ts) para `/plataformas/micro1` e `/plataformas/mercor`, além da ativação do card de parceiro oficial para `/plataformas/toptal`.
+  - Configuração de links de indicação em [`src/config/affiliates.ts`](src/config/affiliates.ts), `.env.example` e `.env.local`.
+  - Configuração de redirecionamentos 301 no [`firebase.json`](firebase.json) (`/micro1`, `/mercor`, `/en/micro1`, `/en/mercor`) e expansão do build para 54 páginas estáticas.
 - [ ] **Futuro (outros países):** "pacotes por país" (número fiscal, endereço, benefícios de tratado, guias), com revisão contábil local. Fora do escopo atual.
 

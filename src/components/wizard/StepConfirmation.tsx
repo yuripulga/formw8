@@ -5,6 +5,7 @@ import { useI18n } from "@/i18n/context";
 import { useWizard } from "@/context/wizard-context";
 import { PDFPreviewViewer } from "@/components/PDFPreviewViewer";
 import { ExchangeCards } from "./ExchangeCards";
+import { TalentCards } from "./TalentCards";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/metrics";
 import { englishCountryName, isSelectableCountry } from "@/lib/countries";
@@ -359,6 +360,9 @@ export function StepConfirmation({ onOpenSupportModal }: StepConfirmationProps) 
 
           {/* Post-Completion Exchange Comparison */}
           <ExchangeCards />
+
+          {/* Remote Talent & AI Opportunities */}
+          <TalentCards />
         </div>
       </div>
     </div>
